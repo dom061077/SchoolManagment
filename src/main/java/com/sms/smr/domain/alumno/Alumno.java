@@ -1,4 +1,4 @@
-package com.sms.smr.domain;
+package com.sms.smr.domain.alumno;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
