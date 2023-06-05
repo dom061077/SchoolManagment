@@ -20,9 +20,9 @@ public class Alumno {
     boolean trabaja=false;
     String apellidoTutor;
     String nombreTutor;
-    //EstudioEnum estudioPrimarioTutor;
-    //EstudioEnum estudioSecundarioTutor;
-    //EstudioEnum estudioTerUnivTutor;
+    EstudioEnum estudioPrimarioTutor;
+    EstudioEnum estudioSecundarioTutor;
+    EstudioEnum estudioTerUnivTutor;
     
     int dniTutor;
     String cuilTutor;
