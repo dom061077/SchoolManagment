@@ -1,4 +1,4 @@
-package com.sms.smr.domain;
+package com.sms.smr.domain.alumno;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +20,9 @@ public class Alumno {
     boolean trabaja=false;
     String apellidoTutor;
     String nombreTutor;
-    EstudioEnum estudioPrimarioTutor;
-    EstudioEnum estudioSecundarioTutor;
-    EstudioEnum estudioTerUnivTutor;
+    //EstudioEnum estudioPrimarioTutor;
+    //EstudioEnum estudioSecundarioTutor;
+    //EstudioEnum estudioTerUnivTutor;
     
     int dniTutor;
     String cuilTutor;
