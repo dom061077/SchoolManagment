@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.alumno.Alumno;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
+import com.sms.smr.mapstruct.dtos.AlumnoDto;
 //https://auth0.com/blog/how-to-automatically-map-jpa-entities-into-dtos-in-spring-boot-using-mapstruct/
 @RestController
 @RequestMapping(value = "alumno")
@@ -19,7 +20,7 @@ public class AlumnoApi {
     AlumnoInputPort alumnoInputPort;
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
-    public Alumno create( @RequestParam String customerId, @RequestParam BigDecimal total ) {
+    public AlumnoDto create( @RequestParam String customerId, @RequestParam BigDecimal total ) {
         return alumnoInputPort.createAlumno (customerId);
     }
 }
