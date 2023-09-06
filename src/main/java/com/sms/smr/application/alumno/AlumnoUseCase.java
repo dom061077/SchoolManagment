@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.sms.smr.domain.alumno.Alumno;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
-import com.sms.smr.mapstruct.dtos.AlumnoDtoPost;
+import com.sms.smr.mapstruct.dtos.AlumnoDtoAfterPost;
 
 public class AlumnoUseCase implements AlumnoInputPort{
 
     @Override
-    public AlumnoDtoPost createAlumno(String name, String country) {
+    public AlumnoDtoAfterPost createAlumno(String name, String country) {
         // TODO Auto-generated method stub
         return null;
     }
