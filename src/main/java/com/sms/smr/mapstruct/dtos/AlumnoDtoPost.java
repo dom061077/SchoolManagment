@@ -5,7 +5,11 @@ import com.sms.smr.domain.alumno.Alumno.EstudioEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import javax.validation.constraints.NotNull; 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+
+
 
 
 @Getter
@@ -16,33 +20,53 @@ public class AlumnoDtoPost{
     private Long id;
     
     @JsonProperty("apellido")
+    @NotBlank
     private String apellido;
+
     @JsonProperty("nombre")
+    @NotBlank
     private String nombre;
+
     @JsonProperty("fechaNacimiento")
+    @NotNull
     private java.sql.Date fechaNacimiento;
+
     @JsonProperty("dni")
+    @NotNull
     private int dni;
+
     @JsonProperty("cuil")
+    @NotBlank
     private String cuil;
+
     @JsonProperty("direccion")
+    @NotBlank
     private String direccion;
+
     @JsonProperty("planSocial")
     private boolean planSocial=false;
+
     @JsonProperty("trabaja")
     private boolean trabaja=false;
+
     @JsonProperty("apellidoTutor")
     private String apellidoTutor;
+
     @JsonProperty("nombreTutor")
     private String nombreTutor;
+
     @JsonProperty("estudioPrimarioTutor")
     private EstudioEnum estudioPrimarioTutor;
+
     @JsonProperty("estudioSecundarioTutor")
     private EstudioEnum estudioSecundarioTutor;
+
     @JsonProperty("estudioTerUnivTutor")
     private EstudioEnum estudioTerUnivTutor;
+
     @JsonProperty("dniTutor")
     private int dniTutor;
+
     @JsonProperty("cuilTutor")
     private String cuilTutor;
     
@@ -57,8 +81,10 @@ public class AlumnoDtoPost{
     
     @JsonProperty("constanciaCuil")
     private boolean constanciaCuil=false;
+
     @JsonProperty("constancia6grado")
     private boolean constancia6grado=false;
+    
     @JsonProperty("actaNacimiento")
     private boolean actaNacimiento=false;
     
