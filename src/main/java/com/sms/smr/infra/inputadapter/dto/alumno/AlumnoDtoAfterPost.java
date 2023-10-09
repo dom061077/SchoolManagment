@@ -1,4 +1,4 @@
-package com.sms.smr.mapstruct.dtos;
+package com.sms.smr.infra.inputadapter.dto.alumno;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

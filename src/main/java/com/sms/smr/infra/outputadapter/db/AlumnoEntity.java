@@ -1,8 +1,15 @@
-package com.sms.smr.domain.alumno;
+package com.sms.smr.infra.outputadapter.db;
 
+import jakarta.persistence.Entity;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Alumno {
-
+@Entity
+@Builder
+@Getter
+@Setter
+public class AlumnoEntity {
     private Long id;
     String apellido;
     String nombre;
@@ -56,46 +63,5 @@ public class Alumno {
         }
         
     
-    }
-     
-    /*String apellido
-    String nombre
-    String apellidoNombre
-    java.sql.Date fechaNacimiento
-
-    int dni
-    String cuil
-    String direccion
-    boolean planSocial=false
-    boolean trabaja=false
-    
-    String apellidoTutor
-    String nombreTutor
-    EstudioEnum estudioPrimarioTutor
-    EstudioEnum estudioSecundarioTutor
-    EstudioEnum estudioTerUnivTutor
-    
-    int dniTutor
-    String cuilTutor
-    String telefono1
-    String telefono2
-    boolean fotoDni=false
-    boolean constanciaCuil=false
-    boolean constancia6grado=false
-    boolean actaNacimiento=false
-    boolean constanciaRegular=false
-    boolean foto4x4=false
-    boolean fotoCarnetVac=false
-    boolean fichaMedica=false
-    boolean aptitudFisica=false
-    boolean grupoSanguineo=false
-    boolean fichaInscripcion=false
-    boolean libreta6grado=false
-    boolean fotocopiaLibroMatriz=false
-    boolean fotocopiaDniTutor=false
-    boolean constanciaCuilTutor=false
-    
-    Localidad localidad
-    ParentescoTutor parentescoTutor
-    */    
+    }    
 }

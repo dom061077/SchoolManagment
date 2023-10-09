@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.alumno.Alumno;
+import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
+import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoPost;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
-import com.sms.smr.mapstruct.dtos.AlumnoDtoAfterPost;
-import com.sms.smr.mapstruct.dtos.AlumnoDtoPost;
 
 @Component
 public class AlumnoUseCase implements AlumnoInputPort{
