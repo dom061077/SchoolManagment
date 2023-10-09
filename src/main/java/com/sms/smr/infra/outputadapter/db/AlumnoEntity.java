@@ -1,6 +1,8 @@
 package com.sms.smr.infra.outputadapter.db;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +11,9 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
+@Table(name="alumno")
 public class AlumnoEntity {
+    @Id
     private Long id;
     String apellido;
     String nombre;
