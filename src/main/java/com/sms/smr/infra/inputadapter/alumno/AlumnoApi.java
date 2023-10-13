@@ -1,5 +1,7 @@
 package com.sms.smr.infra.inputadapter.alumno;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,11 +24,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AlumnoApi {
     
+    
     private final AlumnoInputPort alumnoInputPort;
-    private final AlumnoMapper alumnoMapper;
+    
+    private final  AlumnoMapper alumnoMapper;
+    private static final Logger logger = LoggerFactory.getLogger(AlumnoApi.class);
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
     public AlumnoDtoAfterPost create( @RequestBody @Valid AlumnoDtoPost alumnoDtoPost ) {
+        logger.info("DTO recibido: "+alumnoDtoPost.getApellido());
         return alumnoMapper.alumnoToAlumnoDtoAfterPost(alumnoInputPort.createAlumno (alumnoMapper.alumnoPostDtoToAlumno(alumnoDtoPost)));
     }
 }

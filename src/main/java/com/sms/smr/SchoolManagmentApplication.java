@@ -3,7 +3,9 @@ package com.sms.smr;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+
+@SpringBootApplication()
+
 public class SchoolManagmentApplication {
 
 	public static void main(String[] args) {

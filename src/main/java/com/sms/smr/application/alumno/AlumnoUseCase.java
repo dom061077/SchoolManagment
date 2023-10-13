@@ -2,31 +2,31 @@ package com.sms.smr.application.alumno;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.alumno.Alumno;
-import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
-import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoPost;
+import com.sms.smr.infra.inputadapter.alumno.AlumnoApi;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.alumno.SpringDataAlumnoRepository;
 import com.sms.smr.infra.outputadapter.mapper.AlumnoEntityMapper;
+import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-
 public class AlumnoUseCase implements AlumnoInputPort{
-
-    private  SpringDataAlumnoRepository sdAlumnoRepository;
-    @Autowired
-    private AlumnoEntityMapper alumnoEntMapper;
+    private static final Logger logger = LoggerFactory.getLogger(AlumnoApi.class);
+    private final @Qualifier("alumnoRepository") EntityRepository entityRepository;
+    
+    private final  AlumnoEntityMapper alumnoEntMapper;
 
     @Override
     public Alumno createAlumno(Alumno alumno) {
-        
-        return alumnoEntMapper.toDomain(sdAlumnoRepository.save(alumnoEntMapper.toDbo(alumno)));
+        logger.info("Apellido de alumno: "+alumno.getApellido());
+        return alumnoEntMapper.toDomain(entityRepository.save(alumnoEntMapper.toDbo(alumno)));
     }
 
     @Override

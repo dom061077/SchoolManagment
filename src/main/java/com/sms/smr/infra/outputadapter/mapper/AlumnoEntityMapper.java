@@ -8,6 +8,7 @@ import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 @Mapper(
         componentModel = "spring"
 )
+
 public interface AlumnoEntityMapper {
 
     Alumno toDomain(AlumnoEntity alumnoEntity);
