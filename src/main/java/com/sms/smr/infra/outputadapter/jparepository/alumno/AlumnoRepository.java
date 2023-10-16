@@ -24,13 +24,13 @@ public class AlumnoRepository implements EntityRepository{
     }
 
     @Override
-    public <T> T getById(String id, Class<T> clazz) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+    public <T> T getById(Long id) {
+        
+        return (T) sDataAlumnoRepository.getReferenceById(id);
     }
 
     @Override
-    public <T> List<T> getAll(Class<T> clazz) {
+    public <T> List<T> getAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }

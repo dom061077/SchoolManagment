@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.sms.smr.domain.alumno.Alumno;
 import com.sms.smr.infra.inputadapter.alumno.AlumnoApi;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
+import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 import com.sms.smr.infra.outputadapter.mapper.AlumnoEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
@@ -37,8 +38,8 @@ public class AlumnoUseCase implements AlumnoInputPort{
 
     @Override
     public Alumno getById(Long alumnoId) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        return alumnoEntMapper.toDomain(entityRepository.getById(alumnoId));
     }
     
 }

@@ -14,7 +14,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class AlumnoDtoPost{
+public class AlumnoDto{
 
     @JsonProperty("id")
     private Long id;

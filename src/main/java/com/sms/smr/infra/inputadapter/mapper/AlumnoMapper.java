@@ -4,16 +4,16 @@ import org.mapstruct.Mapper;
 
 import com.sms.smr.domain.alumno.Alumno;
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
-import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoPost;
+import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDto;
 
 @Mapper(
         componentModel = "spring"
 )
 public interface AlumnoMapper {
 
-        AlumnoDtoPost alumnoToAlumnoPostDto(Alumno alumno);
+        AlumnoDto alumnoToAlumnoDto(Alumno alumno);
 
-        Alumno alumnoPostDtoToAlumno(AlumnoDtoPost alumnoDtoPost);
+        Alumno alumnoPostDtoToAlumno(AlumnoDto alumnoDtoPost);
 
         AlumnoDtoAfterPost alumnoToAlumnoDtoAfterPost(Alumno alumno);
     
