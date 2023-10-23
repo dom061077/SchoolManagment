@@ -8,5 +8,5 @@ public interface EntityRepository {
 
     public <T> T getById( Long id );
 
-    public <T> List<T> getAll(  );    
+    public <T> List<T> getAll( int offset, int limit );    
 }

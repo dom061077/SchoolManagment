@@ -1,5 +1,7 @@
 package com.sms.smr.infra.inputadapter.alumno;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +42,10 @@ public class AlumnoApi {
     public AlumnoDto getAlumno(@PathVariable("id") Long id) {
         logger.info("ID de alumno a buscar: "+id);
         return alumnoMapper.alumnoToAlumnoDto(alumnoInputPort.getById(id));
+    }
+
+    @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
+    public List<AlumnoDto> getAll(int offset, int limit) {
+        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit));
     }
 }

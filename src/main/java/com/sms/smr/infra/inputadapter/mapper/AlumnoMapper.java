@@ -1,5 +1,7 @@
 package com.sms.smr.infra.inputadapter.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 
 import com.sms.smr.domain.alumno.Alumno;
@@ -16,5 +18,7 @@ public interface AlumnoMapper {
         Alumno alumnoPostDtoToAlumno(AlumnoDto alumnoDtoPost);
 
         AlumnoDtoAfterPost alumnoToAlumnoDtoAfterPost(Alumno alumno);
+
+        List<AlumnoDto> getAlumnoDtos(List<Alumno> alumnos);
     
 }

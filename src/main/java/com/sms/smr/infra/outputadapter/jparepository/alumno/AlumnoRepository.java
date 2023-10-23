@@ -15,24 +15,29 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AlumnoRepository implements EntityRepository{
 
-    private final SpringDataAlumnoRepository sDataAlumnoRepository;
+    //private final SpringDataAlumnoRepository sDataAlumnoRepository;
+    
+    private final SpringDataAlumnoRepositoryImpl sDataAlumoRepositoryImpl;
+
+
 
     @Override
     public <T> T save(T reg) {
-        // TODO Auto-generated method stub
-        return (T) sDataAlumnoRepository.save((AlumnoEntity)reg);
+       
+        //return (T) sDataAlumnoRepository.save((AlumnoEntity)reg);
+        return null;
     }
 
     @Override
     public <T> T getById(Long id) {
         
-        return (T) sDataAlumnoRepository.getReferenceById(id);
+        //return (T) sDataAlumnoRepository.getReferenceById(id);
+        return null;
     }
 
     @Override
-    public <T> List<T> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    public <T> List<T> getAll(int offset, int limit) {
+        return (List<T>)sDataAlumoRepositoryImpl.getAll(offset, limit);
     }
 
 }

@@ -9,5 +9,5 @@ public interface AlumnoInputPort {
 
     public Alumno getById(Long alumnoId);
 
-    public List<Alumno> getAll();    
+    public List<Alumno> getAll(int offset, int limit);    
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.sms.smr.domain.alumno.Alumno;
 import com.sms.smr.infra.inputadapter.alumno.AlumnoApi;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
-import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 import com.sms.smr.infra.outputadapter.mapper.AlumnoEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
@@ -31,9 +30,9 @@ public class AlumnoUseCase implements AlumnoInputPort{
     }
 
     @Override
-    public List<Alumno> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Alumno> getAll(int offset, int limit) {
+    
+        return alumnoEntMapper.getAlumnos(entityRepository.getAll(offset, limit));
     }
 
     @Override
