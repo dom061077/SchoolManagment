@@ -1,6 +1,8 @@
 package com.sms.smr.infra.inputport.alumno;
 
 import com.sms.smr.domain.alumno.Alumno;
+
+import java.util.HashMap;
 import java.util.List;
 
 public interface AlumnoInputPort {
@@ -9,5 +11,5 @@ public interface AlumnoInputPort {
 
     public Alumno getById(Long alumnoId);
 
-    public List<Alumno> getAll(int offset, int limit);    
+    public List<Alumno> getAll(int offset, int limit, HashMap hashMap);    
 }

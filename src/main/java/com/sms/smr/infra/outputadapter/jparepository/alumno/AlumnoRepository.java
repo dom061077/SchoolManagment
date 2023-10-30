@@ -1,5 +1,6 @@
 package com.sms.smr.infra.outputadapter.jparepository.alumno;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,8 +37,8 @@ public class AlumnoRepository implements EntityRepository{
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit) {
-        return (List<T>)sDataAlumoRepositoryImpl.getAll(offset, limit);
+    public <T> List<T> getAll(int offset, int limit, HashMap hashMap) {
+        return (List<T>)sDataAlumoRepositoryImpl.getAll(offset, limit, hashMap);
     }
 
 }

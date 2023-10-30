@@ -1,5 +1,6 @@
 package com.sms.smr.application.alumno;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -30,9 +31,9 @@ public class AlumnoUseCase implements AlumnoInputPort{
     }
 
     @Override
-    public List<Alumno> getAll(int offset, int limit) {
+    public List<Alumno> getAll(int offset, int limit, HashMap hashMap) {
     
-        return alumnoEntMapper.getAlumnos(entityRepository.getAll(offset, limit));
+        return alumnoEntMapper.getAlumnos(entityRepository.getAll(offset, limit,  hashMap));
     }
 
     @Override

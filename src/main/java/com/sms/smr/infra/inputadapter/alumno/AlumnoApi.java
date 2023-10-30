@@ -1,5 +1,6 @@
 package com.sms.smr.infra.inputadapter.alumno;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class AlumnoApi {
     }
 
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public List<AlumnoDto> getAll(int offset, int limit) {
-        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit));
+    public List<AlumnoDto> getAll(int offset, int limit, HashMap hashMap) {
+        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, hashMap));
     }
 }
