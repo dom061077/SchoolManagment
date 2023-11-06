@@ -18,19 +18,21 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
 @Component
-public class SpringDataAlumnoRepositoryImpl implements QueryRepository{
+public class SpringDataAlumnoRepositoryImpl/*  implements SpringDataAlumnoRepository*/{
     @PersistenceContext
     private  EntityManager em;
 
 
 
-    @Override
-    public <T> List<T> getAll(int offset, int limit,Map<String,Object> params){
+    //@Override
+    public <T> List<T> getAll(int offset, int limit,Map<T,Object> params){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<AlumnoEntity> criteriaQuery = cb.createQuery(AlumnoEntity.class);
         Root<AlumnoEntity> root = criteriaQuery.from(AlumnoEntity.class);
         criteriaQuery.select(root);
+
     
+
         List<AlumnoEntity> result =
             em
                 .createQuery(criteriaQuery)
