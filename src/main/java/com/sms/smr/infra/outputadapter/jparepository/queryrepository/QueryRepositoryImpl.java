@@ -1,17 +1,21 @@
 package com.sms.smr.infra.outputadapter.jparepository.queryrepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.management.Query;
 
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 
-import jakarta.el.Expression;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
@@ -26,18 +30,28 @@ public class QueryRepositoryImpl implements QueryRepository {
     public QueryRepositoryImpl(){
         cb = em.getCriteriaBuilder();
     }
+
+    @Override
+    public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, Map<String, Object> params) {
+        List <T> result = null;
+
+        return result;
+    }
     
     @Override
-    public <T> List<T> getAll(Class<T> clazz, int offset, int limit, Map<T, Object> params) {
+    public <T> List<T> getAllAnd(Class<T> clazz, int offset, int limit, Map<String, Object> params) {
+        
         CriteriaQuery<T> criteriaQuery = cb.createQuery(clazz);
         Root<T> root = criteriaQuery.from(clazz);
+        
+        //Parameter<String> userInputParameter = criteriaBuilder.parameter(String.class);
+
         criteriaQuery.select(root);
 
-        root.get("");
+        List<Predicate> predicates = getPredicates(params);
+        Predicate predicate = cb.and(predicates.toArray(new Predicate[0]));
 
-        params.entrySet().stream().forEach(entry->{
-            
-        });     
+        criteriaQuery.where(predicate);
         
         List<T> result =
             em
@@ -45,22 +59,37 @@ public class QueryRepositoryImpl implements QueryRepository {
                 .setMaxResults(limit)
                 .setFirstResult(offset)
                 .getResultList();
-    
+        
+
         return (List<T>) result;      
     }
 
-    private Predicate getPredicate(Root<Object> root,QueryFilterEnum filter,Object value){
+    private List<Predicate> getPredicates( Map <String, Object> params,Root root) {
+        List<Predicate> predicates = new ArrayList();
         
-        if(filter == QueryFilterEnum.EQUAL){
-            return cb.equal(null, value);
+        params.entrySet().forEach(entry->{
+            String[] splitted=entry.getKey().split(":");
+            if ( splitted.length !=2)
+                throw new IllegalArgumentException("Parameter type filter is not correct. Example of correct filter typ --> gt:PropertyName");
+            if (QueryFilterEnum.valueOf(splitted[0]) == QueryFilterEnum.EQUAL )
+                predicates.add(cb.equal(root.get(splitted[1]), entry.getValue()));
+            if (QueryFilterEnum.valueOf(splitted[0])== QueryFilterEnum.GREATER_THAN)
+                predicates.add(cb.gt(new Expression(),18));
+        });
+        /*if(filter == QueryFilterEnum.EQUAL){
+            return cb.equal(ex, value);
         }
         if(filter == QueryFilterEnum.GREATER_THAN){
-            return cb.greaterThan( root.get(filter.getFieldValue()), value.toString());
+            if (value instanceof Number)
+                return cb.gt( ex,(Number)value);
+
         }
+        
         if(filter == QueryFilterEnum.LIKE){
-            return cb.like(root.get(filter.getFieldValue()), value);
-        }
-        return null;
+            if (value instanceof String)
+                return cb.like(ex, value.toString());
+        }*/
+        return predicates;
     }
     
 }

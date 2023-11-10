@@ -5,5 +5,6 @@ import java.util.Map;
 
 public interface QueryRepository {
     // Define custom query methods if needed
-    public <T> List<T> getAll(Class<T> clazz,int offset,int limit,Map<T,Object> params);
+    public <T> List<T> getAllAnd(Class<T> clazz,int offset,int limit,Map<String,Object> params);
+    public <T> List<T> getAllOr(Class<T> clazz,int offset,int limit,Map<String,Object> params);
 }
