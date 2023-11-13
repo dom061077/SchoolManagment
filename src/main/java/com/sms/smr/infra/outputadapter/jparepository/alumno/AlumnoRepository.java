@@ -42,7 +42,7 @@ public class AlumnoRepository implements EntityRepository{
     public <T> List<T> getAll(int offset, int limit, HashMap hashMap) {
         //return (List<T>)sDataAlumnoRepository.findAll();
         
-        return (List<T> )queryRepository.getAll(AlumnoEntity.class, offset, limit, hashMap);
+        return (List<T> )queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, hashMap);
     }
 
 }

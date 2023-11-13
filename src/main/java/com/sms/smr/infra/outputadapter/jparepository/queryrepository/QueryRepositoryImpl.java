@@ -4,19 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.management.Query;
-
 import org.springframework.stereotype.Component;
-
-import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
-
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Expression;
-import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
@@ -27,9 +20,7 @@ public class QueryRepositoryImpl implements QueryRepository {
 
     private CriteriaBuilder cb;
 
-    public QueryRepositoryImpl(){
-        cb = em.getCriteriaBuilder();
-    }
+
 
     @Override
     public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, Map<String, Object> params) {
@@ -45,10 +36,10 @@ public class QueryRepositoryImpl implements QueryRepository {
         Root<T> root = criteriaQuery.from(clazz);
         
         //Parameter<String> userInputParameter = criteriaBuilder.parameter(String.class);
-
+        cb = em.getCriteriaBuilder();
         criteriaQuery.select(root);
 
-        List<Predicate> predicates = getPredicates(params);
+        List<Predicate> predicates = getPredicates(params,root);
         Predicate predicate = cb.and(predicates.toArray(new Predicate[0]));
 
         criteriaQuery.where(predicate);
@@ -74,7 +65,7 @@ public class QueryRepositoryImpl implements QueryRepository {
             if (QueryFilterEnum.valueOf(splitted[0]) == QueryFilterEnum.EQUAL )
                 predicates.add(cb.equal(root.get(splitted[1]), entry.getValue()));
             if (QueryFilterEnum.valueOf(splitted[0])== QueryFilterEnum.GREATER_THAN)
-                predicates.add(cb.gt(new Expression(),18));
+                predicates.add(cb.gt(root.get(""),(Integer)entry.getValue()));
         });
         /*if(filter == QueryFilterEnum.EQUAL){
             return cb.equal(ex, value);

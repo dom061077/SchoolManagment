@@ -2,6 +2,7 @@ package com.sms.smr.infra.inputadapter.alumno;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDto;
@@ -46,7 +48,8 @@ public class AlumnoApi {
     }
 
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public List<AlumnoDto> getAll(int offset, int limit, HashMap hashMap) {
-        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, hashMap));
+    public /*List<AlumnoDto>*/ Map getAll( @RequestParam int offset,@RequestParam  int limit,@RequestParam Map<String,String> hashMap) {
+        return hashMap;
+        //return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, hashMap));
     }
 }
