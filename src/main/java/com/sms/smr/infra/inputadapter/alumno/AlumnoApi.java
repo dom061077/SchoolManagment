@@ -1,8 +1,11 @@
 package com.sms.smr.infra.inputadapter.alumno;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.management.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDto;
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
+import com.sms.smr.infra.inputadapter.dto.query.QueryFilter;
 import com.sms.smr.infra.inputadapter.mapper.AlumnoMapper;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
 import jakarta.validation.Valid;
@@ -48,8 +54,20 @@ public class AlumnoApi {
     }
 
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public /*List<AlumnoDto>*/ Map getAll( @RequestParam int offset,@RequestParam  int limit,@RequestParam Map<String,String> hashMap) {
-        return hashMap;
+    public  List<QueryFilter> getAll( @RequestParam int offset,@RequestParam  int limit,@RequestParam String filters) {
+        logger.info("Filters: "+filters);
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<QueryFilter> queryFilters = new ArrayList();
+        try{
+            JsonNode jsonArray = objectMapper.readTree(filters);
+            for(JsonNode element : jsonArray){
+                QueryFilter queryFilter = objectMapper.treeToValue(element, QueryFilter.class);
+                queryFilters.add(queryFilter);
+            }
+        }catch(Exception e){
+
+        }
+        return queryFilters ;
         //return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, hashMap));
     }
 }
