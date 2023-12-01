@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.sms.smr.infra.inputadapter.dto.query.QueryFilter;
 import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputport.EntityRepository;
@@ -39,10 +40,10 @@ public class AlumnoRepository implements EntityRepository{
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, HashMap hashMap) {
+    public <T> List<T> getAll(int offset, int limit, List<QueryFilter> queryFilters) {
         //return (List<T>)sDataAlumnoRepository.findAll();
         
-        return (List<T> )queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, hashMap);
+        return (List<T> )queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters);
     }
 
 }

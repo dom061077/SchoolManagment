@@ -54,12 +54,12 @@ public class AlumnoApi {
     }
 
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public  List<QueryFilter> getAll( @RequestParam int offset,@RequestParam  int limit,@RequestParam String filters) {
-        logger.info("Filters: "+filters);
+    public  List<AlumnoDto> getAll( @RequestParam int offset,@RequestParam  int limit,@RequestParam String qfilters) {
+        logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryFilter> queryFilters = new ArrayList();
         try{
-            JsonNode jsonArray = objectMapper.readTree(filters);
+            JsonNode jsonArray = objectMapper.readTree(qfilters);
             for(JsonNode element : jsonArray){
                 QueryFilter queryFilter = objectMapper.treeToValue(element, QueryFilter.class);
                 queryFilters.add(queryFilter);
@@ -67,7 +67,7 @@ public class AlumnoApi {
         }catch(Exception e){
 
         }
-        return queryFilters ;
-        //return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, hashMap));
+        //return queryFilters ;
+        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, queryFilters));
     }
 }
