@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilter;
+import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -20,18 +22,18 @@ public class QueryRepositoryImpl implements QueryRepository {
     @PersistenceContext
     private  EntityManager em;
 
-
+    private static final Logger logger = LoggerFactory.getLogger(QueryRepositoryImpl.class); 
 
 
     @Override
-    public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, List<QueryFilter> queryFilters) {
+    public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters) {
         List <T> result = null;
 
         return result;
     }
     
     @Override
-    public <T> List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilter> queryFilters) {
+    public <T> List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = cb.createQuery(clazz);
         Root<T> root = criteriaQuery.from(clazz);
@@ -56,20 +58,24 @@ public class QueryRepositoryImpl implements QueryRepository {
         return (List<T>) result;      
     }
 
-    private List<Predicate> getPredicates( List<QueryFilter> queryFilters,Root root) {
+    private List<Predicate> getPredicates( List<QueryFilterDto> queryFilters,Root root) {
+        logger.info("Ingresando a getPredicates");
         List<Predicate> predicates = new ArrayList();
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         queryFilters.forEach(q->{
+            
             String[] splitted = q.getProperty().split(":");
+            logger.info("splitted[0]: "+splitted[0]);
+            logger.info("splitted[1]: "+splitted[1]);
             if(splitted.length != 2){
                 throw new IllegalArgumentException("Parameter type filter is not correct. Example of correct filter --> gt:PropertyName");
             }
-            if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.EQUAL){
+            if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.eq){
                 predicates.add(cb.equal(root.get(splitted[0]), q.getValue()));
             }
-            if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.LIKE){
-                predicates.add(cb.like(root.get(splitted[0]), "%"+q.getValue()+"%"));
+            if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.like){
+                predicates.add(cb.like(cb.upper( root.get(splitted[0])), "%"+q.getValue().toUpperCase()+"%"));
             }
         });
 

@@ -2,7 +2,7 @@ package com.sms.smr.infra.outputport;
 
 import java.util.List;
 
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilter;
+import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 
 public interface EntityRepository {
     
@@ -10,5 +10,5 @@ public interface EntityRepository {
 
     public <T> T getById( Long id );
 
-    public <T> List<T> getAll( int offset, int limit, List<QueryFilter> queryFilters );    
+    public <T> List<T> getAll( int offset, int limit, List<QueryFilterDto> queryFilters );    
 }
