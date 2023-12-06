@@ -17,6 +17,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
+
+/* Esta clase está deprecated */
 @Component
 public class SpringDataAlumnoRepositoryImpl/*  implements SpringDataAlumnoRepository*/{
     @PersistenceContext
