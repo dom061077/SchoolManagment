@@ -122,6 +122,17 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>			
 		</plugins>
 	</build>
 
