@@ -21,14 +21,14 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class AlumnoUseCase implements AlumnoInputPort{
     private static final Logger logger = LoggerFactory.getLogger(AlumnoApi.class);
-    //private final @Qualifier("alumnoRepository") EntityRepository entityRepository;
+    private final @Qualifier("alumnoRepository") EntityRepository entityRepository;
     
     private final  AlumnoEntityMapper alumnoEntMapper;
 
     @Override
     public Alumno createAlumno(Alumno alumno) {
         logger.info("Apellido de alumno: "+alumno.getApellido());
-        return null;//return alumnoEntMapper.toDomain(entityRepository.save(alumnoEntMapper.toDbo(alumno)));
+       return alumnoEntMapper.toDomain(entityRepository.save(alumnoEntMapper.toDbo(alumno)));
     }
 
     @Override

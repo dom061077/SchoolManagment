@@ -8,11 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -35,13 +37,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @RequiredArgsConstructor
 @RunWith(SpringRunner.class)
+@ComponentScan(basePackages = { "com.sms.smr.*" })
+//@EntityScan("com.sms.smr*")   
 public class AlumnoUseCaseTest {
 
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0");
 
-
+    @Autowired
     private AlumnoInputPort alumnoInputPort;
 
     @Test
@@ -52,8 +56,11 @@ public class AlumnoUseCaseTest {
     
     @Test
     void createAlumno(){
-        Alumno alumno = alumnoInputPort.createAlumno(Alumno.builder().apellido("milei javier").build());
-        Object a,b= new Object(),c=new Object();
-        assertEquals("",b,c);
+       Alumno alumno = alumnoInputPort.createAlumno(Alumno.builder().apellido("milei javier").build());
+       
+        
+     
+    
+        assertEquals("Nombre de alumno coincide con el persistido",(Object)"milei javier",(Object)alumno.getApellido());
     }
 }

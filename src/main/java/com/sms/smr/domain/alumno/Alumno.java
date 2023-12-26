@@ -1,5 +1,7 @@
 package com.sms.smr.domain.alumno;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +9,10 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
+
 public class Alumno {
 
+    
     private Long id;
     String apellido;
     String nombre;

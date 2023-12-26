@@ -28,8 +28,8 @@ public class AlumnoRepository implements EntityRepository{
     @Override
     public <T> T save(T reg) {
        
-        //return (T) sDataAlumnoRepository.save((AlumnoEntity)reg);
-        return null;
+        return (T) sDataAlumnoRepository.save((AlumnoEntity)reg);
+       
     }
 
     @Override
