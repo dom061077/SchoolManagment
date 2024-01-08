@@ -2,6 +2,7 @@ package com.sms.smr.domain.alumno;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ public class Alumno {
     
     private Long id;
     String apellido;
+    @NotNull
     String nombre;
     java.sql.Date fechaNacimiento;
     int dni;

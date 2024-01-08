@@ -1,9 +1,13 @@
 package com.sms.smr.infra.outputadapter.db;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +22,11 @@ public class AlumnoEntity {
     @GeneratedValue
     private Long id;
     String apellido;
+    //@Column(nullable = false)
+    @NotEmpty
     String nombre;
+
+    @NotNull
     java.sql.Date fechaNacimiento;
     int dni;
     String cuil;
