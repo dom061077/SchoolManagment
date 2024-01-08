@@ -16,6 +16,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -35,8 +36,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Testcontainers
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional
 @RequiredArgsConstructor
 @RunWith(SpringRunner.class)
+
 @ComponentScan(basePackages = { "com.sms.smr.*" })
 //@EntityScan("com.sms.smr*")   
 public class AlumnoUseCaseTest {
@@ -56,9 +59,9 @@ public class AlumnoUseCaseTest {
     
     @Test
     void createAlumno(){
-       Alumno alumno = alumnoInputPort.createAlumno(Alumno.builder().apellido("milei javier").build());
+       Alumno alumnoBuild = Alumno.builder().apellido("milei javier").build();
+       Alumno alumno = alumnoInputPort.createAlumno(alumnoBuild);
        
-        
      
     
         assertEquals("Nombre de alumno coincide con el persistido",(Object)"milei javier",(Object)alumno.getApellido());
