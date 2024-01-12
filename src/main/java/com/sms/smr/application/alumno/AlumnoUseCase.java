@@ -20,8 +20,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Component
 public class AlumnoUseCase implements AlumnoInputPort{
-    private static final Logger logger = LoggerFactory.getLogger(AlumnoApi.class);
-    private final @Qualifier("alumnoRepository") EntityRepository entityRepository;
+    private static final Logger logger = LoggerFactory.getLogger(AlumnoUseCase.class);
+     @Qualifier("alumnoRepository")
+    private final EntityRepository entityRepository;
     
     private final  AlumnoEntityMapper alumnoEntMapper;
 
@@ -34,13 +35,13 @@ public class AlumnoUseCase implements AlumnoInputPort{
     @Override
     public List<Alumno> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
     
-        return null; //return alumnoEntMapper.getAlumnos(entityRepository.getAll(offset, limit,  queryFilters));
+        return alumnoEntMapper.getAlumnos(entityRepository.getAll(offset, limit,  queryFilters));
     }
 
     @Override
     public Alumno getById(Long alumnoId) {
         
-        return null;//return alumnoEntMapper.toDomain(entityRepository.getById(alumnoId));
+        return alumnoEntMapper.toDomain(entityRepository.getById(alumnoId));
     }
     
 }

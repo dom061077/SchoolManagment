@@ -8,7 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.sms.smr.domain.alumno.Alumno;
+import com.sms.smr.domain.person.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
+import com.sms.smr.infra.outputadapter.db.PersonEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,6 +29,14 @@ public class QueryRepositoryImpl implements QueryRepository {
     private static final Logger logger = LoggerFactory.getLogger(QueryRepositoryImpl.class); 
 
 
+    private Class getEntityClass(Class clazz){
+        if (clazz.equals(Person.class))
+            return PersonEntity.class;
+        if (clazz.equals(Alumno.class))
+            return AlumnoEntity.class;
+        return null;
+    }
+
     @Override
     public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters) {
         List <T> result = null;
@@ -34,6 +46,9 @@ public class QueryRepositoryImpl implements QueryRepository {
     
     @Override
     public <T> List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters) {
+
+        clazz = getEntityClass(clazz);
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = cb.createQuery(clazz);
         Root<T> root = criteriaQuery.from(clazz);
