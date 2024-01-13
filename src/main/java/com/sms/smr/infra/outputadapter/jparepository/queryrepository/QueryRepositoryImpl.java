@@ -30,9 +30,9 @@ public class QueryRepositoryImpl implements QueryRepository {
 
 
     private Class getEntityClass(Class clazz){
-        if (clazz.equals(Person.class))
+        if (clazz.equals(PersonEntity.class)==true)
             return PersonEntity.class;
-        if (clazz.equals(Alumno.class))
+        if (clazz.equals(AlumnoEntity.class)==true)
             return AlumnoEntity.class;
         return null;
     }

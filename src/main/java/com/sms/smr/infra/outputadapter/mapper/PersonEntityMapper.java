@@ -11,6 +11,7 @@ import com.sms.smr.infra.outputadapter.db.PersonEntity;
         componentModel = "spring"
 )
 public interface PersonEntityMapper {
+    
     Person toDomain(PersonEntity personEntity);
 
     PersonEntity toDbo(Person person);

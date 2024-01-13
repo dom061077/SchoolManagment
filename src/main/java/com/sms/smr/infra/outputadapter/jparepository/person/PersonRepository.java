@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-@Component(value="personRepository")
+@Component(value = "personRepository")
 public class PersonRepository implements EntityRepository {
 
     private final SpringDataPersonRepository sDataPersonRepository;
@@ -40,7 +40,7 @@ public class PersonRepository implements EntityRepository {
     @Override
     public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
         // TODO Auto-generated method stub
-        return (List<T>) queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters);
+        return (List<T>) queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters);
     }
     
 }

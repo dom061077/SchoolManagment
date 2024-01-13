@@ -9,6 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Person {
+
+    private Long id;
     
     String apellido;
     String nombre;

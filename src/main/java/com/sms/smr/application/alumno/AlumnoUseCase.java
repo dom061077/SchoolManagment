@@ -1,6 +1,5 @@
 package com.sms.smr.application.alumno;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.alumno.Alumno;
-import com.sms.smr.infra.inputadapter.alumno.AlumnoApi;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
 import com.sms.smr.infra.outputadapter.mapper.AlumnoEntityMapper;
@@ -21,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class AlumnoUseCase implements AlumnoInputPort{
     private static final Logger logger = LoggerFactory.getLogger(AlumnoUseCase.class);
-     @Qualifier("alumnoRepository")
+     @Qualifier(value = "alumnoRepository")
     private final EntityRepository entityRepository;
     
     private final  AlumnoEntityMapper alumnoEntMapper;

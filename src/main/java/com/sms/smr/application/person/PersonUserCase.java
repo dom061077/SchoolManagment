@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.annotations.Comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import com.sms.smr.domain.person.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
 import com.sms.smr.infra.inputport.person.PersonInputPort;
+import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
@@ -25,11 +27,17 @@ import lombok.RequiredArgsConstructor;
 public class PersonUserCase implements PersonInputPort{
 
     private static final Logger logger = LoggerFactory.getLogger(PersonUserCase.class);
-    @Qualifier("personJpaRepository")
+    @Qualifier(value="personRepository")
+    @Autowired
     private final  EntityRepository entityRepository;
     private final PersonEntityMapper personEntityMapper;
     private final QueryRepository queryRepository;
 
+    /*public PersonUserCase(QueryRepository queryRepository, PersonEntityMapper personEntityMapper,@Qualifier(value="personJpaRepository") EntityRepository entityRepository){
+        this.personEntityMapper = personEntityMapper;
+        this.entityRepository = entityRepository;
+        this.queryRepository = queryRepository;
+    }*/
 
     @Override
     public Person createPerson(Person person) {
@@ -43,7 +51,7 @@ public class PersonUserCase implements PersonInputPort{
 
     @Override
     public List<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
-        return queryRepository.getAllAnd(Person.class, offset, limit, queryFilters);
+        return personEntityMapper.getPersons(queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters));
     }
     
 }
