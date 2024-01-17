@@ -1,4 +1,4 @@
-package com.sms.smr.domain.alumno;
+package com.sms.smr.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

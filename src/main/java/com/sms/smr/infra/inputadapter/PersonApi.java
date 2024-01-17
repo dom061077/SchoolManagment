@@ -1,4 +1,4 @@
-package com.sms.smr.infra.inputadapter.person;
+package com.sms.smr.infra.inputadapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sms.smr.domain.person.Person;
-import com.sms.smr.infra.inputadapter.dto.person.PersonDto;
+import com.sms.smr.domain.Person;
+import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
-import com.sms.smr.infra.inputport.person.PersonInputPort;
+import com.sms.smr.infra.inputport.PersonInputPort;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

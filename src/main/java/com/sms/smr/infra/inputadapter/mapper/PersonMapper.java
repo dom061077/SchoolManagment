@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.sms.smr.domain.person.Person;
-import com.sms.smr.infra.inputadapter.dto.person.PersonDto;
+import com.sms.smr.domain.Person;
+import com.sms.smr.infra.inputadapter.dto.PersonDto;
 
 
 @Mapper(
         componentModel = "spring"
 )
-public interface PersonMapper{
+public interface PersonMapper{ 
 
     PersonDto personToPersonDto(Person person);
 

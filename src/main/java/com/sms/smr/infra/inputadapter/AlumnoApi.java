@@ -1,4 +1,4 @@
-package com.sms.smr.infra.inputadapter.alumno;
+package com.sms.smr.infra.inputadapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDto;
+import com.sms.smr.infra.inputadapter.dto.AlumnoDto;
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputadapter.mapper.AlumnoMapper;
-import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
+import com.sms.smr.infra.inputport.AlumnoInputPort;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 //https://auth0.com/blog/how-to-automatically-map-jpa-entities-into-dtos-in-spring-boot-using-mapstruct/

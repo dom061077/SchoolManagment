@@ -1,6 +1,6 @@
-package com.sms.smr.infra.inputport.alumno;
+package com.sms.smr.infra.inputport;
 
-import com.sms.smr.domain.alumno.Alumno;
+import com.sms.smr.domain.Alumno;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 
 import java.util.HashMap;

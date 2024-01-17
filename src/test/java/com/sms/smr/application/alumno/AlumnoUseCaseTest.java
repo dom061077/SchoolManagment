@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import com.sms.smr.domain.alumno.Alumno;
-import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
+import com.sms.smr.domain.Alumno;
+import com.sms.smr.infra.inputport.AlumnoInputPort;
 
 import lombok.RequiredArgsConstructor;
 

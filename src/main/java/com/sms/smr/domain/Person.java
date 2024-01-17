@@ -1,24 +1,17 @@
-package com.sms.smr.infra.outputadapter.db;
+package com.sms.smr.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Entity
+@Builder
 @Getter
 @Setter
-@NoArgsConstructor
-@Table(name="person")
-public class PersonEntity {
+public class Person {
 
-    @Id
-    @GeneratedValue
     private Long id;
+    
     String apellido;
     String nombre;
     int dni;
@@ -38,6 +31,5 @@ public class PersonEntity {
     String apellidoMatrimonio;
     String nombreMatrimonio;
     String otrasNotas;
-    
-    
+
 }

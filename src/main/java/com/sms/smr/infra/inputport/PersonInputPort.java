@@ -1,9 +1,9 @@
-package com.sms.smr.infra.inputport.person;
+package com.sms.smr.infra.inputport;
 
 import java.util.List;
 
-import com.sms.smr.domain.alumno.Alumno;
-import com.sms.smr.domain.person.Person;
+import com.sms.smr.domain.Alumno;
+import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 
 public interface PersonInputPort {

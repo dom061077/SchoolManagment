@@ -1,4 +1,4 @@
-package com.sms.smr.infra.inputadapter.dto.person;
+package com.sms.smr.infra.inputadapter.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.sms.smr.application.person;
+package com.sms.smr.application;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.alumno.Alumno;
-import com.sms.smr.domain.person.Person;
+import com.sms.smr.domain.Alumno;
+import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
-import com.sms.smr.infra.inputport.person.PersonInputPort;
+import com.sms.smr.infra.inputport.PersonInputPort;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;

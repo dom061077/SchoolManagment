@@ -1,4 +1,4 @@
-package com.sms.smr.application.alumno;
+package com.sms.smr.application;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.alumno.Alumno;
+import com.sms.smr.domain.Alumno;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
-import com.sms.smr.infra.inputport.alumno.AlumnoInputPort;
+import com.sms.smr.infra.inputport.AlumnoInputPort;
 import com.sms.smr.infra.outputadapter.mapper.AlumnoEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 

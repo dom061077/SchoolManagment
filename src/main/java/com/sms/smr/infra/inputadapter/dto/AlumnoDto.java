@@ -1,8 +1,8 @@
-package com.sms.smr.infra.inputadapter.dto.alumno;
-
-import com.sms.smr.domain.alumno.Alumno.EstudioEnum;
+package com.sms.smr.infra.inputadapter.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sms.smr.domain.Alumno.EstudioEnum;
+
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.validation.constraints.NotBlank;

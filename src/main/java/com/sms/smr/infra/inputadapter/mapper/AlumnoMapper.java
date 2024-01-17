@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.sms.smr.domain.alumno.Alumno;
+import com.sms.smr.infra.inputadapter.dto.AlumnoDto;
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
-import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDto;
+import com.sms.smr.domain.Alumno;
 
 @Mapper(
         componentModel = "spring"
