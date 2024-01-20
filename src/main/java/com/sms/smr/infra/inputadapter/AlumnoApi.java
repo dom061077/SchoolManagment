@@ -23,7 +23,7 @@ import com.sms.smr.infra.inputport.AlumnoInputPort;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-//https://auth0.com/blog/how-to-automatically-map-jpa-entities-into-dtos-in-spring-boot-using-mapstruct/
+//https://manerajona.medium.com/mapping-bidirectional-object-associations-using-mapstruct-ce49b1857604
 //https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection
 @RestController
 @RequestMapping(value = "alumno")

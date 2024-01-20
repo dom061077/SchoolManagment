@@ -2,17 +2,14 @@ package com.sms.smr.application;
 
 import java.util.List;
 
-import org.hibernate.annotations.Comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.Alumno;
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
-import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
 import com.sms.smr.infra.inputport.PersonInputPort;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;

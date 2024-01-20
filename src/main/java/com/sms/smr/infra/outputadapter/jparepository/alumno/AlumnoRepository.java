@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-//@Primary
 @Component(value = "alumnoRepository")
 public class AlumnoRepository implements EntityRepository{
 

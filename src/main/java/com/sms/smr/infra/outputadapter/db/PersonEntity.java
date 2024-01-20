@@ -38,6 +38,8 @@ public class PersonEntity {
     String apellidoMatrimonio;
     String nombreMatrimonio;
     String otrasNotas;
+
+    
     
     
 }

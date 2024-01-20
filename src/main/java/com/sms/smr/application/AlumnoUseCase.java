@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.sms.smr.domain.Alumno;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputport.AlumnoInputPort;
+import com.sms.smr.infra.outputadapter.jparepository.alumno.AlumnoRepository;
 import com.sms.smr.infra.outputadapter.mapper.AlumnoEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
@@ -19,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class AlumnoUseCase implements AlumnoInputPort{
     private static final Logger logger = LoggerFactory.getLogger(AlumnoUseCase.class);
-     @Qualifier(value = "alumnoRepository")
-    private final EntityRepository entityRepository;
+
+    private final AlumnoRepository entityRepository;
     
     private final  AlumnoEntityMapper alumnoEntMapper;
 
