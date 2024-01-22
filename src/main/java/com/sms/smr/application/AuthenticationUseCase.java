@@ -16,11 +16,13 @@ import com.sms.smr.domain.AuthenticationResponse;
 import com.sms.smr.domain.RegisterRequest;
 import com.sms.smr.domain.Token;
 import com.sms.smr.domain.TokenType;
-import com.sms.smr.domain.User;
+
+import com.sms.smr.infra.outputadapter.db.TokenEntity;
+import com.sms.smr.infra.outputadapter.db.UserEntity;
 import com.sms.smr.infra.outputadapter.jparepository.user.TokenRepository;
 import com.sms.smr.infra.outputadapter.jparepository.user.UserRepository;
-import com.sms.smr.infra.outputadapter.mapper.TokenEntityMapper;
-import com.sms.smr.infra.outputadapter.mapper.UserEntityMapper;
+//import com.sms.smr.infra.outputadapter.mapper.TokenEntityMapper;
+//import com.sms.smr.infra.outputadapter.mapper.UserEntityMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,21 +37,21 @@ public class AuthenticationUseCase {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;   
-    private final TokenEntityMapper tokenEntMapper;
-    private final UserEntityMapper userEntMapper;
+    //private final TokenEntityMapper tokenEntMapper;
+    //private final UserEntityMapper userEntMapper;
     
   public AuthenticationResponse register(RegisterRequest request) {
-    var user = User.builder()
+    var user = UserEntity.builder()
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(request.getRole())
         .build();
-    var savedUser = userRepository.save( userEntMapper.toDbo(user));
+    var savedUser = userRepository.save( user);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
-    saveUserToken(userEntMapper.toDomain( savedUser), jwtToken);
+    saveUserToken((UserEntity)savedUser, jwtToken); 
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
             .refreshToken(refreshToken)
@@ -67,26 +69,26 @@ public class AuthenticationUseCase {
         .orElseThrow();
     var jwtToken = jwtService.generateToken((UserDetails)user);
     var refreshToken = jwtService.generateRefreshToken((UserDetails)user);
-    revokeAllUserTokens((User)user);
-    saveUserToken((User)user, jwtToken);
+    revokeAllUserTokens((UserEntity)user);
+    saveUserToken((UserEntity)user, jwtToken);
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
             .refreshToken(refreshToken)
         .build();
   }
 
-  private void saveUserToken(User user, String jwtToken) {
-    var token = Token.builder()
+  private void saveUserToken(UserEntity user, String jwtToken) {
+    var token = TokenEntity.builder()
         .user(user)
         .token(jwtToken)
         .tokenType(TokenType.BEARER)
         .expired(false)
         .revoked(false)
         .build();
-    tokenRepository.save( tokenEntMapper.toDbo( token));
+    tokenRepository.save( token);
   }
 
-  private void revokeAllUserTokens(User user) {
+  private void revokeAllUserTokens(UserEntity user) {
     var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
     if (validUserTokens.isEmpty())
       return;
@@ -118,8 +120,8 @@ public class AuthenticationUseCase {
               .orElseThrow();
       if (jwtService.isTokenValid(refreshToken, (UserDetails)user)) {
         var accessToken = jwtService.generateToken((UserDetails)user);
-        revokeAllUserTokens((User)user);
-        saveUserToken((User)user, accessToken);
+        revokeAllUserTokens((UserEntity)user);
+        saveUserToken((UserEntity)user, accessToken);
         var authResponse = AuthenticationResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)

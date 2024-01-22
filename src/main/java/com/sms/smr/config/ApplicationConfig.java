@@ -15,7 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.sms.smr.security.auditing.ApplicationAuditAware;
 
 import com.sms.smr.infra.outputadapter.jparepository.user.UserRepository;
-import com.sms.smr.domain.User;
+import com.sms.smr.infra.outputadapter.db.UserEntity;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -25,7 +26,7 @@ public class ApplicationConfig {
 
   @Bean
   public UserDetailsService userDetailsService() {
-    return username -> (User)repository.findByEmail(username)
+    return username -> (UserEntity)repository.findByEmail(username)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 

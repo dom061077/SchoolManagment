@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping(value="person")
+@RequestMapping(value="/api/v1/person")
 @RequiredArgsConstructor
 public class PersonApi {
     private final PersonInputPort personInputPort;

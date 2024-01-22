@@ -24,7 +24,7 @@ public class TokenRepository implements EntityRepository {
 
     @Override
     public <T> T save(T reg) {
-        if(reg instanceof PersonEntity)
+        if(reg instanceof TokenEntity)
             return (T)sDataTokenRepository.save((TokenEntity)reg);
         else
             return null;

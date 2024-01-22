@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper; 
 
-import com.sms.smr.domain.Person;
+import com.sms.smr.domain.Person; 
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 
 @Mapper(

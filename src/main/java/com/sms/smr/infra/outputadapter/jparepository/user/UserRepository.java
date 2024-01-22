@@ -30,7 +30,7 @@ public class UserRepository implements EntityRepository{
 
     @Override
     public <T> T save(T reg) {
-        if(reg instanceof PersonEntity)
+        if(reg instanceof UserEntity)
             return (T)sDataUserRepository.save((UserEntity)reg);
         else
             return null;

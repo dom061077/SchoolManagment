@@ -7,7 +7,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.sms.smr.domain.User;
+import com.sms.smr.infra.outputadapter.db.UserEntity;
 
 public class ApplicationAuditAware implements AuditorAware<Long> {
     @Override
@@ -23,7 +23,7 @@ public class ApplicationAuditAware implements AuditorAware<Long> {
             return Optional.empty();
         }
 
-        User userPrincipal = (User) authentication.getPrincipal();
+        UserEntity userPrincipal = (UserEntity) authentication.getPrincipal();
         return Optional.ofNullable(userPrincipal.getId());
         
     }
