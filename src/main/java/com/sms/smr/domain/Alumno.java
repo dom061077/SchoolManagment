@@ -1,7 +1,5 @@
 package com.sms.smr.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;

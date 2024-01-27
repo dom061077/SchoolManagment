@@ -6,9 +6,6 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.sms.smr.infra.outputadapter.db.TokenEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,5 @@
 package com.sms.smr.infra.outputadapter.db;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

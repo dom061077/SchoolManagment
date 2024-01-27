@@ -2,14 +2,11 @@ package com.sms.smr.infra.outputadapter.jparepository.queryrepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.Alumno;
-import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;

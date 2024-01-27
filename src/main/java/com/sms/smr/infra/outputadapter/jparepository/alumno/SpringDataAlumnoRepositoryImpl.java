@@ -3,13 +3,9 @@ package com.sms.smr.infra.outputadapter.jparepository.alumno;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

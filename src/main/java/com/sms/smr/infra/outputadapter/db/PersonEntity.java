@@ -2,6 +2,7 @@ package com.sms.smr.infra.outputadapter.db;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -25,6 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="person")
+@Audited
 public class PersonEntity {
 
     @Id
