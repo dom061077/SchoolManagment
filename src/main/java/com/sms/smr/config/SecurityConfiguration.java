@@ -13,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
+import com.sms.smr.infra.inputadapter.GlobalExceptionHandler;
+
 import static com.sms.smr.domain.Permission.ADMIN_CREATE;
 import static com.sms.smr.domain.Permission.ADMIN_DELETE;
 import static com.sms.smr.domain.Permission.ADMIN_READ;
@@ -35,7 +37,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private static final String[] WHITE_LIST_URL = {"/**","/api/v1/auth/register",
+    private static final String[] WHITE_LIST_URL = {"/api/v1/auth/register",
             "/error",
             "/api/v1/auth/authenticate", 
             "/v2/api-docs",
@@ -69,14 +71,13 @@ public class SecurityConfiguration {
                                 .authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-                .authenticationProvider(authenticationProvider)
+                .authenticationProvider(authenticationProvider)             
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout ->
                         logout.logoutUrl("/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                )
-        ;
+                );
 
         return http.build();
     }

@@ -93,8 +93,8 @@ public class AuthenticationUseCase {
     if (validUserTokens.isEmpty())
       return;
     validUserTokens.forEach(token -> {
-      ((Token)token).setExpired(true);
-      ((Token)token).setRevoked(true);
+      ((TokenEntity)token).setExpired(true);
+      ((TokenEntity)token).setRevoked(true);
     });
     //List<Token> tokens = (List<Token>)validUserTokens;
     

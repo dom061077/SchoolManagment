@@ -17,6 +17,7 @@ import com.sms.smr.infra.outputadapter.jparepository.user.TokenRepository;
 
 import java.io.IOException;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,6 +46,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final String authHeader = request.getHeader("Authorization");
     final String jwt;
     final String userEmail;
+    try {
+
+
     if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
       filterChain.doFilter(request, response);
       return;
@@ -69,5 +73,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       }
     }
     filterChain.doFilter(request, response);
+
+     }catch (io.jsonwebtoken.ExpiredJwtException e) {
+        final String expiredMsg = e.getMessage();
+
+
+        final String msg = (expiredMsg != null) ? expiredMsg : "Unauthorized";
+        //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
+        response.sendError(HttpServletResponse.SC_FORBIDDEN, msg);
+    }
   }
 }
