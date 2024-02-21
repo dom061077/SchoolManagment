@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Role {
 
-  USER(Collections.emptySet()),
+  
   ADMIN(
           Set.of(
                   Permission.ADMIN_READ,
@@ -33,6 +33,14 @@ public enum Role {
                   Permission.MANAGER_DELETE,
                   Permission.MANAGER_CREATE
           )
+  ),
+  USER(
+        Set.of(
+                Permission.USER_READ,
+                Permission.USER_UPDATE,
+                Permission.USER_DELETE,
+                Permission.USER_CREATE
+        )
   );
 
   @Getter

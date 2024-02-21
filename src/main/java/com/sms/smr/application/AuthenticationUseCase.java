@@ -69,11 +69,13 @@ public class AuthenticationUseCase {
         .orElseThrow();
     var jwtToken = jwtService.generateToken((UserDetails)user);
     var refreshToken = jwtService.generateRefreshToken((UserDetails)user);
+    var role = ((UserEntity)user).getRole();
     revokeAllUserTokens((UserEntity)user);
     saveUserToken((UserEntity)user, jwtToken);
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
-            .refreshToken(refreshToken)
+        .refreshToken(refreshToken)
+        .role(role)
         .build();
   }
 
