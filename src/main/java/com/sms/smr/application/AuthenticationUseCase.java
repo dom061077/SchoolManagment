@@ -73,6 +73,9 @@ public class AuthenticationUseCase {
     revokeAllUserTokens((UserEntity)user);
     saveUserToken((UserEntity)user, jwtToken);
     return AuthenticationResponse.builder()
+        .id(((UserEntity)user).getId())
+        .firstname(((UserEntity)user).getFirstname())
+        .lastname(((UserEntity)user).getLastname())
         .accessToken(jwtToken)
         .refreshToken(refreshToken)
         .role(role)

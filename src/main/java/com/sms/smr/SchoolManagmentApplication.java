@@ -39,7 +39,7 @@ public class SchoolManagmentApplication {
         };
     }
 
-	@Bean
+	/*@Bean
 	public WebMvcConfigurer corsConfigurer(){
 		return new WebMvcConfigurer() {
 			@Override
@@ -47,5 +47,5 @@ public class SchoolManagmentApplication {
 				registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("*");
 			}
 		};
-	}
+	}*/
 }
