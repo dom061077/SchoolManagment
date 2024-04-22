@@ -49,20 +49,32 @@ public class AlumnoApi {
     }
 
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public  List<AlumnoDto> getAll( @RequestParam int offset,@RequestParam  int limit,@RequestParam String qfilters) {
+    public  List<AlumnoDto> getAll( @RequestParam int offset,@RequestParam  int limit
+        ,@RequestParam String qfilters, @RequestParam String sorts) {
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryFilterDto> queryFilters = new ArrayList();
+        JsonNode jsonArray;
         try{
-            JsonNode jsonArray = objectMapper.readTree(qfilters);
+            jsonArray = objectMapper.readTree(qfilters);
             for(JsonNode element : jsonArray){
                 QueryFilterDto queryFilter = objectMapper.treeToValue(element, QueryFilterDto.class);
                 queryFilters.add(queryFilter);
             }
         }catch(Exception e){
-
+            logger.error("Error al parsear filters JSON: "+e.getMessage());
+        }
+        List<QueryFilterDto> sortFilters = new ArrayList();
+        try{
+            jsonArray = objectMapper.readTree(sorts);
+            for(JsonNode element : jsonArray){
+                QueryFilterDto sortFilter = objectMapper.treeToValue(element, QueryFilterDto.class);
+                sortFilters.add(sortFilter); 
+            }
+        }catch(Exception e){
+            logger.error("Error al pasear sorts JSON: "+e.getMessage());
         }
         //return queryFilters ;
-        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, queryFilters));
+        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, queryFilters,sortFilters));
     }
 }

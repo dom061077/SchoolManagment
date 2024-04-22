@@ -36,9 +36,9 @@ public class TokenRepository implements EntityRepository {
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
+    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sorts) {
         // TODO Auto-generated method stub
-        return (List<T>) queryRepository.getAllAnd(TokenEntity.class, offset, limit, queryFilters);
+        return (List<T>) queryRepository.getAllAnd(TokenEntity.class, offset, limit, queryFilters, sorts);
     }
 
 

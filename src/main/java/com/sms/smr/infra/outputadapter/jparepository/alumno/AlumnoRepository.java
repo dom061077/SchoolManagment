@@ -41,10 +41,10 @@ public class AlumnoRepository implements EntityRepository{
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
+    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sorts) {
         //return (List<T>)sDataAlumnoRepository.findAll();
         
-        return (List<T> )queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters);
+        return (List<T> )queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters,sorts);
     }
 
 }

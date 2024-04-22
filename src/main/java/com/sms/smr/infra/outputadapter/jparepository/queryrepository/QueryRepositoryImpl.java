@@ -42,16 +42,15 @@ public class QueryRepositoryImpl implements QueryRepository {
     }
     
     @Override
-    public <T> List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters) {
+    public <T> List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortingFilters) {
 
         clazz = getEntityClass(clazz);
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = cb.createQuery(clazz);
         Root<T> root = criteriaQuery.from(clazz);
+        addSortings(criteriaQuery, cb, root, sortingFilters);
         
-        //Parameter<String> userInputParameter = criteriaBuilder.parameter(String.class);
-        //cb = em.getCriteriaBuilder();
         criteriaQuery.select(root);
 
         List<Predicate> predicates = getPredicates(queryFilters,root);
@@ -64,10 +63,22 @@ public class QueryRepositoryImpl implements QueryRepository {
                 .createQuery(criteriaQuery)
                 .setMaxResults(limit)
                 .setFirstResult(offset)
-                .getResultList();
+                .getResultList()
+                
+                ;
         
 
         return (List<T>) result;      
+    }
+
+    private void addSortings(CriteriaQuery cq,CriteriaBuilder cb, Root root, List<QueryFilterDto> sortingFilters){
+        sortingFilters.forEach(s->{
+
+            if(s.getValue().toUpperCase().compareTo("ASC")==0){
+                cq.orderBy(cb.asc(root.get(s.getProperty())));
+            }
+
+        });
     }
 
     private List<Predicate> getPredicates( List<QueryFilterDto> queryFilters,Root root) {

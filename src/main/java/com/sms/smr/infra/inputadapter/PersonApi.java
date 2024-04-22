@@ -43,26 +43,37 @@ public class PersonApi {
 
      @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)   
     public PersonDto create(@RequestBody @Valid PersonDto personDto){
-       return personMapper.personToPersonDto(personInputPort.createPerson(personMapper.personDtoToPerson(personDto)));
+      return personMapper.personToPersonDto(personInputPort.createPerson(personMapper.personDtoToPerson(personDto)));
       
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> getAll(int offset, int limit, String qfilters){
+    public List<Person> getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryFilterDto> queryFilters = new ArrayList();
+        JsonNode jsonArray;
         try{
-            JsonNode jsonArray = objectMapper.readTree(qfilters);
+            jsonArray = objectMapper.readTree(qfilters);
             for(JsonNode element : jsonArray){
                 QueryFilterDto queryFilter = objectMapper.treeToValue(element, QueryFilterDto.class);
                 queryFilters.add(queryFilter);
             }
         }catch(Exception e){
-
+            logger.error("Error al parsear filters JSON: "+e.getMessage());
+        }
+        List<QueryFilterDto> sortFilters = new ArrayList();
+        try{
+            jsonArray = objectMapper.readTree(sorts);
+            for(JsonNode element : jsonArray){
+                QueryFilterDto sortFilter = objectMapper.treeToValue(element, QueryFilterDto.class);
+                sortFilters.add(sortFilter); 
+            }
+        }catch(Exception e){
+            logger.error("Error al pasear sorts JSON: "+e.getMessage());
         }
         //return queryFilters ;
-        return personInputPort.getAll(offset, limit, queryFilters);      
+        return personInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 
 }

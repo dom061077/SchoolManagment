@@ -38,9 +38,9 @@ public class PersonRepository implements EntityRepository {
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
+    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sortFilters) {
         // TODO Auto-generated method stub
-        return (List<T>) queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters);
+        return (List<T>) queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sortFilters);
     }
     
 }

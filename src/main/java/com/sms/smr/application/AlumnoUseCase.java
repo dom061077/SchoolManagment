@@ -32,9 +32,9 @@ public class AlumnoUseCase implements AlumnoInputPort{
     }
 
     @Override
-    public List<Alumno> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
+    public List<Alumno> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sorts) {
     
-        return alumnoEntMapper.getAlumnos(entityRepository.getAll(offset, limit,  queryFilters));
+        return alumnoEntMapper.getAlumnos(entityRepository.getAll(offset, limit,  queryFilters, sorts));
     }
 
     @Override

@@ -11,6 +11,6 @@ public interface PersonInputPort {
 
     public Person getById(Long personId);
 
-    public List<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters);    
+    public List<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortings);    
     
 }

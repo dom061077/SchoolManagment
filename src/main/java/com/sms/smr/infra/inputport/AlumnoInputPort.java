@@ -12,5 +12,5 @@ public interface AlumnoInputPort {
 
     public Alumno getById(Long alumnoId);
 
-    public List<Alumno> getAll(int offset, int limit, List<QueryFilterDto> queryFilters);    
+    public List<Alumno> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sorts);    
 }

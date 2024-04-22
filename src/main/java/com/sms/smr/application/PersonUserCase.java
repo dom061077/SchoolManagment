@@ -47,8 +47,8 @@ public class PersonUserCase implements PersonInputPort{
     }
 
     @Override
-    public List<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters) {
-        return personEntityMapper.getPersons(queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters));
+    public List<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sorts) {
+        return personEntityMapper.getPersons(queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sorts));
     }
     
 }
