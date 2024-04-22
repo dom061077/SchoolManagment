@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
@@ -48,7 +49,7 @@ public class PersonApi {
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> getAll(int offset, int limit, String qfilters, String sorts){
+    public ObjectNode /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryFilterDto> queryFilters = new ArrayList();
@@ -70,10 +71,14 @@ public class PersonApi {
                 sortFilters.add(sortFilter); 
             }
         }catch(Exception e){
-            logger.error("Error al pasear sorts JSON: "+e.getMessage());
+            logger.error("Error al parsear sorts JSON: "+e.getMessage());
         }
         //return queryFilters ;
-        return personInputPort.getAll(offset, limit, queryFilters,sortFilters);      
+        ObjectNode objectNode = objectMapper.createObjectNode();
+        JsonNode dataNode = objectMapper.valueToTree(personInputPort.getAll(offset, limit, queryFilters,sortFilters));
+        objectNode.put("total",10);
+        objectNode.set("data", dataNode);
+        return objectNode;      
     }
 
 }
