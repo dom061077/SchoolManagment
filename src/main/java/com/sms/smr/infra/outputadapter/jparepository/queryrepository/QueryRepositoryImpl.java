@@ -19,7 +19,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 @Component
-public class QueryRepositoryImpl implements QueryRepository {
+public class QueryRepositoryImpl<T> implements QueryRepository {
     @PersistenceContext
     private  EntityManager em;
 
@@ -42,7 +42,7 @@ public class QueryRepositoryImpl implements QueryRepository {
     }
     
     @Override
-    public <T> List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortingFilters) {
+    public <T>   QueryResult getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortingFilters) {
 
         clazz = getEntityClass(clazz);
 
@@ -63,12 +63,12 @@ public class QueryRepositoryImpl implements QueryRepository {
                 .createQuery(criteriaQuery)
                 .setMaxResults(limit)
                 .setFirstResult(offset)
-                .getResultList()
-                
-                ;
-        
+                .getResultList();
+        QueryResult qResult = new QueryResult<>();
+        qResult.setData(result);
+        qResult.setTotal(10);
 
-        return (List<T>) result;      
+        return qResult;      
     }
 
     private void addSortings(CriteriaQuery cq,CriteriaBuilder cb, Root root, List<QueryFilterDto> sortingFilters){

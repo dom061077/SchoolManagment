@@ -13,6 +13,7 @@ import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputport.PersonInputPort;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
@@ -47,8 +48,10 @@ public class PersonUserCase implements PersonInputPort{
     }
 
     @Override
-    public List<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sorts) {
-        return personEntityMapper.getPersons(queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sorts));
+    public  QueryResult getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sorts) {
+        QueryResult qResult = queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sorts);
+        qResult.setData(personEntityMapper.getPersons(qResult.getData()));
+        return qResult;
     }
     
 }
