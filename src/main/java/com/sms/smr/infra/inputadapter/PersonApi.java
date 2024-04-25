@@ -13,6 +13,7 @@ import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
 import com.sms.smr.infra.inputport.PersonInputPort;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,7 @@ public class PersonApi {
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ObjectNode /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
+    public QueryResult /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryFilterDto> queryFilters = new ArrayList();
@@ -73,12 +74,8 @@ public class PersonApi {
         }catch(Exception e){
             logger.error("Error al parsear sorts JSON: "+e.getMessage());
         }
-        //return queryFilters ;
-        ObjectNode objectNode = objectMapper.createObjectNode();
-        JsonNode dataNode = objectMapper.valueToTree(personInputPort.getAll(offset, limit, queryFilters,sortFilters));
-        objectNode.put("total",10);
-        objectNode.set("data", dataNode);
-        return objectNode;      
+ 
+        return personInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 
 }
