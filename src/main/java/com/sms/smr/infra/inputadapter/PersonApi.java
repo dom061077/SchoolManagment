@@ -78,4 +78,23 @@ public class PersonApi {
         return personInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public long count(String qfilters){
+        logger.info("Filters: "+qfilters);
+        long recordCount = 0L;
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<QueryFilterDto> queryFilters = new ArrayList();
+        JsonNode jsonArray;
+        try{
+            jsonArray = objectMapper.readTree(qfilters);
+            for(JsonNode element : jsonArray){
+                QueryFilterDto queryFilter = objectMapper.treeToValue(element, QueryFilterDto.class);
+                queryFilters.add(queryFilter);
+            }
+        }catch(Exception e){
+            logger.error("Error al parsear filtros JSON: "+e.getMessage());
+        }
+        return recordCount;
+    }
+
 }

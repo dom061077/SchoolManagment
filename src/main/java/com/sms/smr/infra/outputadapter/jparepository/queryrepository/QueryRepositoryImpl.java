@@ -13,6 +13,7 @@ import com.sms.smr.infra.outputadapter.db.PersonEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -113,6 +114,22 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         });*/
 
         return predicates;
+    }
+
+    @Override
+    public <T> long getCount(Class<T> clazz, List<QueryFilterDto> queryFilters) {
+        logger.info("Ingresando a getCount");
+        long count = 0;
+        clazz = getEntityClass(clazz);
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = cb.createQuery(Long.class); 
+        Root<T> root = criteriaQuery.from(clazz);
+
+        criteriaQuery.select(cb.count(root));
+        TypedQuery<Long> query = em.createQuery(criteriaQuery);
+        count = query.getSingleResult();
+
+        return count;
     }
     
 }
