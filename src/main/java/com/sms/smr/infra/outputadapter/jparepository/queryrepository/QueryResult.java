@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QueryResult<T> {
-    private int total;
+    private long total;
     private List<T> data;
     
 }

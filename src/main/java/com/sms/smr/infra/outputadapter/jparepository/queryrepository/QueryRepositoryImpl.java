@@ -67,7 +67,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
                 .getResultList();
         QueryResult qResult = new QueryResult<>();
         qResult.setData(result);
-        qResult.setTotal(10);
+        long count = this.getCount(clazz, queryFilters);
+        qResult.setTotal(count);
 
         return qResult;      
     }
