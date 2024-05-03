@@ -92,15 +92,17 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
             
             String[] splitted = q.getProperty().split(":");
             logger.info("splitted[0]: "+splitted[0]);
-            logger.info("splitted[1]: "+splitted[1]);
+  
             if(splitted.length != 2){
                 throw new IllegalArgumentException("Parameter type filter is not correct. Example of correct filter --> gt:PropertyName");
             }
-            if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.eq){
-                predicates.add(cb.equal(root.get(splitted[0]), q.getValue()));
-            }
-            if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.like){
-                predicates.add(cb.like(cb.upper( root.get(splitted[0])), "%"+q.getValue().toUpperCase()+"%"));
+            if(q.getValue()!=null){
+                if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.eq){
+                    predicates.add(cb.equal(root.get(splitted[0]), q.getValue()));
+                }
+                if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.like){
+                    predicates.add(cb.like(cb.upper( root.get(splitted[0])), "%"+q.getValue().toUpperCase()+"%"));
+                }
             }
         });
 
