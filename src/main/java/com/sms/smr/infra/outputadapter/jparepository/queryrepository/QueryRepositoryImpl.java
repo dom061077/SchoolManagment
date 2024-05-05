@@ -50,7 +50,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = cb.createQuery(clazz);
         Root<T> root = criteriaQuery.from(clazz);
-        addSortings(criteriaQuery, cb, root, sortingFilters);
+        if(sortingFilters!=null)
+            addSortings(criteriaQuery, cb, root, sortingFilters);
         
         criteriaQuery.select(root);
 
@@ -78,6 +79,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
 
             if(s.getValue().toUpperCase().compareTo("ASC")==0){
                 cq.orderBy(cb.asc(root.get(s.getProperty())));
+            }else{
+                cq.orderBy(cb.desc(root.get(s.getProperty())));
             }
 
         });

@@ -14,6 +14,6 @@ public interface PersonInputPort {
 
     public QueryResult getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortings);    
     
-    public long getCount(List<QueryFilterDto> queryFilters);
+
     
 }

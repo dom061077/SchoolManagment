@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="church_certificate" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0eee129b-84dd-4734-b604-bc5315ab1956">
+	<field name="dni" class="java.lang.Integer"/>
+	<field name="fechaBautismo" class="java.sql.Date"/>
+	<field name="fechaConfirmacion" class="java.sql.Date"/>
+	<field name="fechaMatrimonio" class="java.sql.Date"/>
+	<field name="fechaNacimiento" class="java.sql.Date"/>
+	<field name="nroFolio" class="java.lang.Integer"/>
+	<field name="nroLibro" class="java.lang.Integer"/>
+	<field name="apellido" class="java.lang.String"/>
+	<field name="apellidoMatrimonio" class="java.lang.String"/>
+	<field name="apellidoPadrinoBaut" class="java.lang.String"/>
+	<field name="apellidoPadrinoConf" class="java.lang.String"/>
+	<field name="madre" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="nombreMatrimonio" class="java.lang.String"/>
+	<field name="nombrePadrinoBaut" class="java.lang.String"/>
+	<field name="nombrePadrinoConf" class="java.lang.String"/>
+	<field name="otrasNotas" class="java.lang.String"/>
+	<field name="padre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="28" width="575" height="30" uuid="1374f393-1438-4878-adb6-08a6cd64e03c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="16"/>
+				</textElement>
+				<text><![CDATA[Parroquia Ntra. Sra. De Guadalupe – Arquidiócesis de Tucumán]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="133" y="0" width="100" height="30" uuid="34d62e8d-f00d-4611-9f72-18d8fe5b8f4e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ab9a691b-c636-4d94-8e1d-853a1dcc595d"/>
+				</reportElement>
+				<text><![CDATA[apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="0" width="100" height="30" uuid="918d6358-276b-4513-9091-9233229ec032">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8259a32b-9445-4e4c-8556-7c5364194de6"/>
+				</reportElement>
+				<text><![CDATA[nombre]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="20" width="90" height="14" uuid="98a82115-76ee-4392-9837-23245ab3eae3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Se certifica que]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="20" width="100" height="14" uuid="fc44ef0a-c5e6-4cb7-91fb-44a90a4e45c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ab9a691b-c636-4d94-8e1d-853a1dcc595d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="20" width="100" height="14" uuid="e38909e5-e1fc-44e9-adee-2d3abd4d23b7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8259a32b-9445-4e4c-8556-7c5364194de6"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
