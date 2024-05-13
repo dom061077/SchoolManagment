@@ -41,6 +41,14 @@ public enum Role {
                 Permission.USER_DELETE,
                 Permission.USER_CREATE
         )
+  ),
+  PERSON(
+        Set.of(
+                Permission.PERSON_READ,
+                Permission.PERSON_UPDATE,
+                Permission.PERSON_DELETE,
+                Permission.PERSON_CREATE
+        )
   );
 
   @Getter

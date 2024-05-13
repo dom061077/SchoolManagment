@@ -27,6 +27,8 @@ import com.sms.smr.infra.outputadapter.jparepository.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RequiredArgsConstructor
 @Component
@@ -39,6 +41,7 @@ public class AuthenticationUseCase {
     private final AuthenticationManager authenticationManager;   
     //private final TokenEntityMapper tokenEntMapper;
     //private final UserEntityMapper userEntMapper;
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationUseCase.class);
     
   public AuthenticationResponse register(RegisterRequest request) {
     var user = UserEntity.builder()
@@ -72,6 +75,11 @@ public class AuthenticationUseCase {
     var role = ((UserEntity)user).getRole();
     revokeAllUserTokens((UserEntity)user);
     saveUserToken((UserEntity)user, jwtToken);
+    var collectionAuth = ((UserEntity)user).getAuthorities();
+    collectionAuth.forEach(item->{
+      logger.info("Permission: "+item);
+    });
+    
     return AuthenticationResponse.builder()
         .id(((UserEntity)user).getId())
         .firstname(((UserEntity)user).getFirstname())

@@ -12,24 +12,24 @@ public class Person {
 
     private Long id;
     
-    String apellido;
-    String nombre;
-    int dni;
-    String padre;
-    String madre;
-    java.sql.Date fechaNacimiento;
-    java.sql.Date fechaBautismo;
-    java.sql.Date fechaConfirmacion;
-    java.sql.Date fechaMatrimonio;
+    private String apellido;
+    private String nombre;
+    private int dni;
+    private String padre;
+    private String madre;
+    private java.sql.Date fechaNacimiento;
+    private java.sql.Date fechaBautismo;
+    private java.sql.Date fechaConfirmacion;
+    private java.sql.Date fechaMatrimonio;
 
-    int nroLibro;
-    int nroFolio;
-    String apellidoPadrinoBaut;
-    String nombrePadrinoBaut;
-    String apellidoPadrinoConf;
-    String nombrePadrinoConf;
-    String apellidoMatrimonio;
-    String nombreMatrimonio;
-    String otrasNotas;
+    private int nroLibro;
+    private int nroFolio;
+    private String apellidoPadrinoBaut;
+    private String nombrePadrinoBaut;
+    private String apellidoPadrinoConf;
+    private String nombrePadrinoConf;
+    private String apellidoMatrimonio;
+    private String nombreMatrimonio;
+    private String otrasNotas;
 
 }
