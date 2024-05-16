@@ -54,10 +54,15 @@ public class AuthenticationUseCase {
     var savedUser = userRepository.save( user);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
+
     saveUserToken((UserEntity)savedUser, jwtToken); 
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
-            .refreshToken(refreshToken)
+        .refreshToken(refreshToken)
+        .firstname(savedUser.getFirstname())
+        .lastname(savedUser.getLastname())
+        .email(savedUser.getEmail())
+        .role(savedUser.getRole())
         .build();
   }
 

@@ -17,8 +17,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.sms.smr.infra.inputadapter.GlobalExceptionHandler;
-
 import static com.sms.smr.domain.Permission.ADMIN_CREATE;
 import static com.sms.smr.domain.Permission.ADMIN_DELETE;
 import static com.sms.smr.domain.Permission.ADMIN_READ;
@@ -29,13 +27,13 @@ import static com.sms.smr.domain.Permission.MANAGER_READ;
 import static com.sms.smr.domain.Permission.MANAGER_UPDATE;
 import static com.sms.smr.domain.Role.ADMIN;
 import static com.sms.smr.domain.Role.MANAGER;
+import static com.sms.smr.domain.Role.PERSON;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,6 +74,10 @@ public class SecurityConfiguration {
                                 .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
                                 .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
                                 .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
+
+                                .requestMatchers("/api/v1/person/**").hasAnyRole(ADMIN.name(),PERSON.name())
+                                
+
                                 .anyRequest()
                                 .authenticated()
                 )
