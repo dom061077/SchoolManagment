@@ -24,6 +24,8 @@ public class AuthenticationResponse {
   private String email;
   
   private Role role;
-  private List<String> authorities;
+  private List<String> authorities;//puede que esta propiedad no tenga uso
+  @JsonProperty("menu_list")
+  private List<String> menuList;
 }
 

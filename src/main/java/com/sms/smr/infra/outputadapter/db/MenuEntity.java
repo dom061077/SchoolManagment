@@ -26,6 +26,7 @@ public class MenuEntity {
     @GeneratedValue
     private Long id;
     private String description;
+    private String code;
     @Enumerated(EnumType.STRING)
     private Role role;
 }
