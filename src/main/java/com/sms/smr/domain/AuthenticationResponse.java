@@ -26,6 +26,6 @@ public class AuthenticationResponse {
   private Role role;
   private List<String> authorities;//puede que esta propiedad no tenga uso
   @JsonProperty("menu_list")
-  private List<String> menuList;
+  private List<Menu> menuList;
 }
 

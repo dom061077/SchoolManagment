@@ -23,12 +23,14 @@ import com.sms.smr.infra.outputadapter.jparepository.user.TokenRepository;
 import com.sms.smr.infra.outputadapter.jparepository.user.UserRepository;
 //import com.sms.smr.infra.outputadapter.mapper.TokenEntityMapper;
 //import com.sms.smr.infra.outputadapter.mapper.UserEntityMapper;
+import com.sms.smr.infra.outputport.EntityRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.sms.smr.domain.Role;;
 
 @RequiredArgsConstructor
 @Component
@@ -36,9 +38,11 @@ public class AuthenticationUseCase {
 
     private final TokenRepository tokenRepository;
     private final UserRepository userRepository;
+    private final EntityRepository menuRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;   
+
     //private final TokenEntityMapper tokenEntMapper;
     //private final UserEntityMapper userEntMapper;
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationUseCase.class);
@@ -84,6 +88,8 @@ public class AuthenticationUseCase {
     collectionAuth.forEach(item->{
       logger.info("Permission: "+item);
     });
+    
+    
     
     return AuthenticationResponse.builder()
         .id(((UserEntity)user).getId())
@@ -147,5 +153,11 @@ public class AuthenticationUseCase {
         new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
       }
     }
-  }    
+  }  
+  
+  public List<Role> findByRole(String code){
+
+    return null;
+  }
+
 }
