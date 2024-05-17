@@ -11,5 +11,5 @@ import com.sms.smr.infra.outputadapter.db.MenuEntity;
 
 @Component
 public interface SpringDataMenuRepository extends JpaRepository<MenuEntity,Long>{
-    Optional<List<Role>>  findByRole(String code);
+    
 }

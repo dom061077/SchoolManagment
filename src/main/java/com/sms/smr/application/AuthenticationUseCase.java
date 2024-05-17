@@ -11,15 +11,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sms.smr.domain.AuthenticationRequest;
 import com.sms.smr.domain.AuthenticationResponse;
+import com.sms.smr.domain.Menu;
 import com.sms.smr.domain.RegisterRequest;
 import com.sms.smr.domain.Token;
 import com.sms.smr.domain.TokenType;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.outputadapter.db.MenuEntity;
+import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.TokenEntity;
 import com.sms.smr.infra.outputadapter.db.UserEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
@@ -48,6 +51,7 @@ public class AuthenticationUseCase {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;   
     private final QueryRepository queryRepository;
+    private final MenuEntityMapper menuEntityMapper;
 
     //private final TokenEntityMapper tokenEntMapper;
     //private final UserEntityMapper userEntMapper;
@@ -70,7 +74,16 @@ public class AuthenticationUseCase {
                   .value(savedUser.getRole().name())
                   .build();
     var qfDtoList = List.of(qfDto);
-    var menus = MenuEntityMapper queryRepository.getAllAnd(MenuEntity.class, 0, 1, qfDtoList, null);
+    var menuRoleEntityList = queryRepository.getAllAnd(MenuRoleEntity.class, 0, 1, qfDtoList, null).getData();
+    
+    List<Menu> menus = (List<Menu>)menuRoleEntityList.stream()
+    //.filter(item -> item instanceof MenuRoleEntity) // Filter out elements that are not MenuRoleEntity
+    .map(item -> {
+        //MenuRoleEntity menuRoleEntity = (MenuRoleEntity) item;
+        return menuEntityMapper.toDomain(((MenuRoleEntity)item).getMenu());
+    })
+    .collect(Collectors.toList());
+
     saveUserToken((UserEntity)savedUser, jwtToken); 
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
@@ -98,10 +111,19 @@ public class AuthenticationUseCase {
     revokeAllUserTokens((UserEntity)user);
     saveUserToken((UserEntity)user, jwtToken);
     var collectionAuth = ((UserEntity)user).getAuthorities();
-    collectionAuth.forEach(item->{
-      logger.info("Permission: "+item);
-    });
-    
+    var qfDto = QueryFilterDto.builder()
+                  .property("role:eq")
+                  .value(((UserEntity)user).getRole().name())
+                  .build();
+    var qfDtoList = List.of(qfDto);    
+    var menuRoleEntityList = queryRepository.getAllAnd(MenuRoleEntity.class, 0, 1, qfDtoList, null).getData();
+    List<Menu> menus = (List<Menu>)menuRoleEntityList.stream()
+    //.filter(item -> item instanceof MenuRoleEntity) // Filter out elements that are not MenuRoleEntity
+    .map(item -> {
+        //MenuRoleEntity menuRoleEntity = (MenuRoleEntity) item;
+        return menuEntityMapper.toDomain(((MenuRoleEntity)item).getMenu());
+    })
+    .collect(Collectors.toList());
     
     
     return AuthenticationResponse.builder()
@@ -111,6 +133,7 @@ public class AuthenticationUseCase {
         .accessToken(jwtToken)
         .refreshToken(refreshToken)
         .role(role)
+        .menuList(menus)
         .build();
   }
 

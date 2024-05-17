@@ -12,6 +12,6 @@ public class Menu {
     private Long id;
     private String description;
     private String code;
-    private Role role;    
+  
     
 }

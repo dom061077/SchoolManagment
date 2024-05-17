@@ -102,7 +102,7 @@ public class PersonApi {
         File file = ResourceUtils.getFile("classpath:church_certificate.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         ArrayList<QueryFilterDto> queryFilters = new ArrayList<QueryFilterDto>();
-        QueryFilterDto qFilterDto = new QueryFilterDto();
+        QueryFilterDto qFilterDto = QueryFilterDto.builder().build();
         qFilterDto.setProperty("id:eq");
         qFilterDto.setValue(personId.toString());
         queryFilters.add(qFilterDto);
