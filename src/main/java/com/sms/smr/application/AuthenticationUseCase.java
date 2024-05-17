@@ -8,6 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,11 +18,14 @@ import com.sms.smr.domain.AuthenticationResponse;
 import com.sms.smr.domain.RegisterRequest;
 import com.sms.smr.domain.Token;
 import com.sms.smr.domain.TokenType;
-
+import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.outputadapter.db.MenuEntity;
 import com.sms.smr.infra.outputadapter.db.TokenEntity;
 import com.sms.smr.infra.outputadapter.db.UserEntity;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.user.TokenRepository;
 import com.sms.smr.infra.outputadapter.jparepository.user.UserRepository;
+import com.sms.smr.infra.outputadapter.mapper.MenuEntityMapper;
 //import com.sms.smr.infra.outputadapter.mapper.TokenEntityMapper;
 //import com.sms.smr.infra.outputadapter.mapper.UserEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
@@ -42,6 +47,7 @@ public class AuthenticationUseCase {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;   
+    private final QueryRepository queryRepository;
 
     //private final TokenEntityMapper tokenEntMapper;
     //private final UserEntityMapper userEntMapper;
@@ -58,7 +64,13 @@ public class AuthenticationUseCase {
     var savedUser = userRepository.save( user);
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
-
+    
+    var qfDto = QueryFilterDto.builder()
+                  .property("code:eq")
+                  .value(savedUser.getRole().name())
+                  .build();
+    var qfDtoList = List.of(qfDto);
+    var menus = MenuEntityMapper queryRepository.getAllAnd(MenuEntity.class, 0, 1, qfDtoList, null);
     saveUserToken((UserEntity)savedUser, jwtToken); 
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
@@ -67,6 +79,7 @@ public class AuthenticationUseCase {
         .lastname(savedUser.getLastname())
         .email(savedUser.getEmail())
         .role(savedUser.getRole())
+        .menuList(menus)
         .build();
   }
 
