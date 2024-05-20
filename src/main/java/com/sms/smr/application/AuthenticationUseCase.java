@@ -26,6 +26,7 @@ import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.TokenEntity;
 import com.sms.smr.infra.outputadapter.db.UserEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.jparepository.user.TokenRepository;
 import com.sms.smr.infra.outputadapter.jparepository.user.UserRepository;
 import com.sms.smr.infra.outputadapter.mapper.MenuEntityMapper;
@@ -116,8 +117,9 @@ public class AuthenticationUseCase {
                   .value(((UserEntity)user).getRole().name())
                   .build();
     var qfDtoList = List.of(qfDto);    
-    var menuRoleEntityList = queryRepository.getAllAnd(MenuRoleEntity.class, 0, 1, qfDtoList, null).getData();
-    List<Menu> menus = (List<Menu>)menuRoleEntityList.stream()
+    QueryResult qResult =  queryRepository.getAllAnd(MenuRoleEntity.class, 0, 100, qfDtoList, null);
+   
+    List<Menu> menus = (List<Menu>)qResult.getData().stream()
     //.filter(item -> item instanceof MenuRoleEntity) // Filter out elements that are not MenuRoleEntity
     .map(item -> {
         //MenuRoleEntity menuRoleEntity = (MenuRoleEntity) item;
