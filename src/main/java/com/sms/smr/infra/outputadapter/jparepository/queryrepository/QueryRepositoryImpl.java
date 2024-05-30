@@ -49,15 +49,14 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     }
     
     @Override
-    public  <T>  QueryResult getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortingFilters) {
-        QueryResult<T> qResult = new QueryResult<T>();
+    public  <T>  List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortingFilters) {
+        
         try{
         clazz = getEntityClass(clazz);
         }catch(Exception e){
-            qResult.setData(List.of());
-            qResult.setTotal(0);
+
             logger.error("Clase no registrada para la query", e);
-            return qResult;
+            return List.of();
         }
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -80,11 +79,9 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
                 .setFirstResult(offset)
                 .getResultList();
 
-        qResult.setData(result);
-        long count = this.getCount(clazz, queryFilters);
-        qResult.setTotal(count);
 
-        return qResult;      
+
+        return result;      
     }
 
     private void addSortings(CriteriaQuery cq,CriteriaBuilder cb, Root root, List<QueryFilterDto> sortingFilters){

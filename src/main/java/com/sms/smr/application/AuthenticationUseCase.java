@@ -117,7 +117,8 @@ public class AuthenticationUseCase {
                   .value(((UserEntity)user).getRole().name())
                   .build();
     var qfDtoList = List.of(qfDto);    
-    QueryResult qResult =  queryRepository.getAllAnd(MenuRoleEntity.class, 0, 100, qfDtoList, null);
+    List<MenuRoleEntity> menuRoleList 
+    =  queryRepository.getAllAnd(MenuRoleEntity.class, 0, 100, qfDtoList, null);
    
     List<Menu> menus = (List<Menu>)qResult.getData().stream()
     //.filter(item -> item instanceof MenuRoleEntity) // Filter out elements that are not MenuRoleEntity

@@ -12,7 +12,7 @@ public interface PersonInputPort {
 
     public Person getById(Long personId);
 
-    public QueryResult getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortings);    
+    public QueryResult<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortings);    
     
 
     
