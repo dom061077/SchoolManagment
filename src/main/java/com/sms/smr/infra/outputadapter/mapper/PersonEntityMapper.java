@@ -1,6 +1,7 @@
 package com.sms.smr.infra.outputadapter.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.mapstruct.Mapper; 
 
@@ -12,7 +13,17 @@ import com.sms.smr.infra.outputadapter.db.PersonEntity;
 )
 public interface PersonEntityMapper{
     
+    PersonEntity domainToPersonEntity(Person person);
+    
     Person toDomain(PersonEntity personEntity);
+
+    default Optional<Person> mapToOptionalDomain(Optional<PersonEntity> personEntity){
+        return personEntity.map(this::toDomain);
+    };
+
+    default Person mapToDomain(Optional<PersonEntity> personEntity){
+        return personEntity.map(this::toDomain).orElse(null);
+    }
 
     PersonEntity toDbo(Person person);
 

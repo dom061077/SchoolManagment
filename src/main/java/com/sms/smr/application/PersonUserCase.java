@@ -1,6 +1,8 @@
 package com.sms.smr.application;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class PersonUserCase implements PersonInputPort{
 
     @Override
     public Person getById(Long personId) {
-        return personEntityMapper.toDomain(entityRepository.getById(personId));
+        return personEntityMapper.mapToDomain( (entityRepository.getById(personId)));
     }
 
     @Override
@@ -54,6 +56,12 @@ public class PersonUserCase implements PersonInputPort{
         qResult.setTotal(count);
 
         return qResult;
+    }
+
+    @Override
+    public Person updatePerson(Long personId, Person person) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updatePerson'");
     }
 
 

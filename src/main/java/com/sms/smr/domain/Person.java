@@ -1,5 +1,7 @@
 package com.sms.smr.domain;
 
+import java.time.LocalDateTime;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,5 +33,19 @@ public class Person {
     private String apellidoMatrimonio;
     private String nombreMatrimonio;
     private String otrasNotas;
+
+
+    String apellidoMadrinaBaut;
+
+    String nombreMadrinaBaut;
+
+    String apellidoMadrinaConf;
+
+    String nombreMadrinaConf;    
+    private LocalDateTime createDate;
+    
+    private LocalDateTime lastModified;
+    private Long createdBy;
+    private Long lastModifiedBy;           
 
 }
