@@ -75,13 +75,13 @@ public class AuthenticationUseCase {
                   .value(savedUser.getRole().name())
                   .build();
     var qfDtoList = List.of(qfDto);
-    var menuRoleEntityList = queryRepository.getAllAnd(MenuRoleEntity.class, 0, 1, qfDtoList, null).getData();
+    var menuRoleEntityList = queryRepository.getAllAnd(MenuRoleEntity.class, 0, 1, qfDtoList, null);
     
-    List<Menu> menus = (List<Menu>)menuRoleEntityList.stream()
+    List<Menu> menus = ((List<MenuRoleEntity>)menuRoleEntityList).stream()
     //.filter(item -> item instanceof MenuRoleEntity) // Filter out elements that are not MenuRoleEntity
     .map(item -> {
         //MenuRoleEntity menuRoleEntity = (MenuRoleEntity) item;
-        return menuEntityMapper.toDomain(((MenuRoleEntity)item).getMenu());
+        return menuEntityMapper.toDomain( ((MenuRoleEntity)item).getMenu());
     })
     .collect(Collectors.toList());
 
@@ -120,7 +120,7 @@ public class AuthenticationUseCase {
     List<MenuRoleEntity> menuRoleList 
     =  queryRepository.getAllAnd(MenuRoleEntity.class, 0, 100, qfDtoList, null);
    
-    List<Menu> menus = (List<Menu>)qResult.getData().stream()
+    List<Menu> menus = (List<Menu>)menuRoleList.stream()
     //.filter(item -> item instanceof MenuRoleEntity) // Filter out elements that are not MenuRoleEntity
     .map(item -> {
         //MenuRoleEntity menuRoleEntity = (MenuRoleEntity) item;

@@ -47,4 +47,10 @@ public class AlumnoRepository implements EntityRepository{
         return (List<T> )queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters,sorts);
     }
 
+    @Override
+    public <T> T update(Long id,T reg) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
 }

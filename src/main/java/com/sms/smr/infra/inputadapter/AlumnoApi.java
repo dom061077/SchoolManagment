@@ -15,18 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sms.smr.domain.Alumno;
 import com.sms.smr.infra.inputadapter.dto.AlumnoDto;
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputadapter.mapper.AlumnoMapper;
 import com.sms.smr.infra.inputport.AlumnoInputPort;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 //https://manerajona.medium.com/mapping-bidirectional-object-associations-using-mapstruct-ce49b1857604
 //https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection
 @RestController
-@RequestMapping(value = "alumno")
+@RequestMapping(value = "/api/v1/alumno")
 @RequiredArgsConstructor
 public class AlumnoApi {
     
@@ -49,11 +51,11 @@ public class AlumnoApi {
     }
 
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public  List<AlumnoDto> getAll( @RequestParam int offset,@RequestParam  int limit
+    public  QueryResult<Alumno> getAll( @RequestParam int offset,@RequestParam  int limit
         ,@RequestParam String qfilters, @RequestParam String sorts) {
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
-        List<QueryFilterDto> queryFilters = new ArrayList();
+        List<QueryFilterDto> queryFilters = new ArrayList<QueryFilterDto>();
         JsonNode jsonArray;
         try{
             jsonArray = objectMapper.readTree(qfilters);
@@ -64,7 +66,7 @@ public class AlumnoApi {
         }catch(Exception e){
             logger.error("Error al parsear filters JSON: "+e.getMessage());
         }
-        List<QueryFilterDto> sortFilters = new ArrayList();
+        List<QueryFilterDto> sortFilters = new ArrayList<QueryFilterDto>();
         try{
             jsonArray = objectMapper.readTree(sorts);
             for(JsonNode element : jsonArray){
@@ -72,9 +74,9 @@ public class AlumnoApi {
                 sortFilters.add(sortFilter); 
             }
         }catch(Exception e){
-            logger.error("Error al pasear sorts JSON: "+e.getMessage());
+            logger.error("Error al parsear sorts JSON: "+e.getMessage());
         }
-        //return queryFilters ;
-        return alumnoMapper.getAlumnoDtos(alumnoInputPort.getAll(offset, limit, queryFilters,sortFilters));
+ 
+        return alumnoInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 }

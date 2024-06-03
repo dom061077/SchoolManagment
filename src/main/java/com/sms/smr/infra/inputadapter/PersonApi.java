@@ -22,6 +22,7 @@ import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -40,10 +41,13 @@ import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 
 import net.sf.jasperreports.engine.JRException;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -65,8 +69,22 @@ public class PersonApi {
       
     }
 
+    @GetMapping("/{id}")
+    public PersonDto getPerson(@PathVariable Long id) {
+        return personMapper.personToPersonDto( personInputPort.getById(id));
+    }
+
+
+    @PutMapping("/{id}")
+    public PersonDto updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto personDto) {
+        //TODO: process PUT request
+        Person person = personMapper.personDtoToPerson(personDto);
+        return personMapper.personToPersonDto(personInputPort.updatePerson(id,person));
+    }
+    
+
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public QueryResult /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
+    public QueryResult<Person> /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryFilterDto> queryFilters = new ArrayList();
@@ -80,7 +98,7 @@ public class PersonApi {
         }catch(Exception e){
             logger.error("Error al parsear filters JSON: "+e.getMessage());
         }
-        List<QueryFilterDto> sortFilters = new ArrayList();
+        List<QueryFilterDto> sortFilters = new ArrayList<QueryFilterDto>();
         try{
             jsonArray = objectMapper.readTree(sorts);
             for(JsonNode element : jsonArray){
@@ -106,7 +124,7 @@ public class PersonApi {
         qFilterDto.setProperty("id:eq");
         qFilterDto.setValue(personId.toString());
         queryFilters.add(qFilterDto);
-        QueryResult qResult = personInputPort.getAll(0,1,queryFilters,null);
+        QueryResult<Person> qResult = personInputPort.getAll(0,1,queryFilters,null);
         List<Person> persons = qResult.getData();
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(persons);
         Map<String, Object> parameters = new HashMap<>();

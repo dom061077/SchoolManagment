@@ -14,6 +14,7 @@ public interface PersonInputPort {
 
     public QueryResult<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortings);    
     
+    public Person updatePerson(Long personId,Person person);
 
     
 }

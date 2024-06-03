@@ -45,9 +45,13 @@ public class PersonEntity {
     int nroLibro;
     int nroFolio;
     String apellidoPadrinoBaut;
+    String apellidoMadrinaBaut;
     String nombrePadrinoBaut;
+    String nombreMadrinaBaut;
     String apellidoPadrinoConf;
+    String apellidoMadrinaConf;
     String nombrePadrinoConf;
+    String nombreMadrinaConf;
     String apellidoMatrimonio;
     String nombreMatrimonio;
     String otrasNotas;
