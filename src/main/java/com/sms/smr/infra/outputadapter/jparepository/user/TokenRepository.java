@@ -53,5 +53,11 @@ public class TokenRepository implements EntityRepository {
     public void saveAll(java.util.List tokens){
         sDataTokenRepository.saveAll(tokens);
     }
+
+    @Override
+    public <T> T update(Long id, T reg) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
     
 }

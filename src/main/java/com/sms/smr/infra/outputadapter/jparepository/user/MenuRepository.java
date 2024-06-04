@@ -37,5 +37,11 @@ public class MenuRepository implements EntityRepository {
         return (List<T>)sMenuRepository.findAll();
     }
 
+    @Override
+    public <T> T update(Long id, T reg) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.sms.smr.infra.outputadapter.jparepository.person;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
@@ -32,15 +33,24 @@ public class PersonRepository implements EntityRepository {
             return null;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <T> T getById(Long id) {
-        return (T)sDataPersonRepository.getReferenceById(id);
+    public <T> T  getById(Long id) {
+        return (T) sDataPersonRepository.findById(id).orElseThrow();
+        //return (T)sDataPersonRepository.getReferenceById(id);
     }
 
     @Override
     public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sortFilters) {
         // TODO Auto-generated method stub
         return (List<T>) queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sortFilters);
+    }
+
+    @Override
+    public <T> T update(Long id, T reg){
+        var record = sDataPersonRepository.findById(id).orElseThrow();
+        
+        return (T)sDataPersonRepository.save(record);
     }
     
 }

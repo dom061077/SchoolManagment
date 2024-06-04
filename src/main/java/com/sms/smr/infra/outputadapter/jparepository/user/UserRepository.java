@@ -37,8 +37,8 @@ public class UserRepository implements EntityRepository{
     }
 
     @Override
-    public <T> Optional<UserEntity> getById(Long id) {
-        return (Optional<UserEntity>)sDataUserRepository.findById(id);
+    public <T> T getById(Long id) {
+        return (T)sDataUserRepository.findById(id);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class PersonUserCase implements PersonInputPort{
 
     @Override
     public Person getById(Long personId) {
-        return personEntityMapper.mapToDomain( (entityRepository.getById(personId)));
+        return personEntityMapper.mapToDomain( (entityRepository.getById(personId)) );
     }
 
     @Override
