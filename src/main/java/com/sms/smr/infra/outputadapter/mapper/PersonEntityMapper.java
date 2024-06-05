@@ -17,10 +17,16 @@ public interface PersonEntityMapper{
     
     Person toDomain(PersonEntity personEntity);
 
+    /*
+     * @deprecated marcado
+     */    
     default Optional<Person> mapToOptionalDomain(Optional<PersonEntity> personEntity){
         return personEntity.map(this::toDomain);
     };
 
+    /*
+     * @deprecated marcado
+     */
     default Person mapToDomain(Optional<PersonEntity> personEntity){
         return personEntity.map(this::toDomain).orElse(null);
     }
@@ -28,4 +34,6 @@ public interface PersonEntityMapper{
     PersonEntity toDbo(Person person);
 
     List<Person> getPersons(List<PersonEntity> personEntities);
+
+    //PersonEntity dboToDbo(PersonEntity personEntity);
 }

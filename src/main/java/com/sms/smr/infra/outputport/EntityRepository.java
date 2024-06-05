@@ -11,4 +11,6 @@ public interface EntityRepository {
     public <T> T getById( Long id );
 
     public <T> List<T> getAll( int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortFilters );    
+
+    public <T> T update(Long id,T reg);
 }

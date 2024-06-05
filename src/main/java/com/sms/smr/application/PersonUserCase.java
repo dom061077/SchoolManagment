@@ -44,7 +44,8 @@ public class PersonUserCase implements PersonInputPort{
 
     @Override
     public Person getById(Long personId) {
-        return personEntityMapper.mapToDomain( (entityRepository.getById(personId)));
+        //return personEntityMapper.mapToDomain( Optional.of(entityRepository.getById(personId)));
+        return personEntityMapper.toDomain(entityRepository.getById(personId));
     }
 
     @Override
@@ -61,7 +62,7 @@ public class PersonUserCase implements PersonInputPort{
     @Override
     public Person updatePerson(Long personId, Person person) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updatePerson'");
+        return personEntityMapper.toDomain( entityRepository.update(personId, personEntityMapper.toDbo(person)));
     }
 
 

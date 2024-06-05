@@ -18,9 +18,16 @@ import io.jsonwebtoken.ExpiredJwtException;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+
+import java.util.NoSuchElementException;
+
+import org.apache.catalina.connector.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 //NO ESTA FUNCIONANDO CORRECTAMENTE
 @ControllerAdvice
 public class GlobalExceptionHandler    {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<String> handleException(Exception ex) {
@@ -33,9 +40,16 @@ public class GlobalExceptionHandler    {
         return new ResponseEntity<>("Credenciales incorrectas",HttpStatus.UNAUTHORIZED);
     }    
 
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handleException(NoSuchElementException e){
+        return ResponseEntity
+                .status(BAD_REQUEST)
+                .body(e.getMessage());
+    }
 
     @ExceptionHandler(RequestRejectedException.class)
     public ResponseEntity<String> handleException(RequestRejectedException e) {
+        logger.trace("RequestRejectedException", e);
         return ResponseEntity
                 .status(BAD_REQUEST)
                 .body(
