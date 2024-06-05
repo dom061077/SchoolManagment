@@ -38,7 +38,11 @@ public class UserRepository implements EntityRepository{
 
     @Override
     public <T> T getById(Long id) {
+<<<<<<< HEAD
         return (T)sDataUserRepository.findById(id).orElseThrow();
+=======
+        return (T)sDataUserRepository.findById(id);
+>>>>>>> c05fb7c8c68f0f28866bfd2253c36d7ad4999a06
     }
 
     @Override

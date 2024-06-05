@@ -1,6 +1,7 @@
 package com.sms.smr.infra.outputadapter.jparepository.person;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +35,7 @@ public class PersonRepository implements EntityRepository {
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T getById(Long id) {
         return (T)sDataPersonRepository.findById(id).orElseThrow();
