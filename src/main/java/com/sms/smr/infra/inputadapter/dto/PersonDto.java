@@ -1,5 +1,7 @@
 package com.sms.smr.infra.inputadapter.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +10,14 @@ import lombok.Setter;
 public class PersonDto {
 
     private Long id;
+    @NotNull
+    @NotBlank
     private String apellido;
+    @NotNull
+    @NotBlank
     private String nombre;
+    @NotNull
+    @NotBlank    
     private int dni;
     private String padre;
     private String madre;
@@ -18,6 +26,7 @@ public class PersonDto {
     private java.sql.Date fechaConfirmacion;
     private java.sql.Date fechaMatrimonio;
 
+    
     private int nroLibro;
     private int nroFolio;
     private String apellidoPadrinoBaut;

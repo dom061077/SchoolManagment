@@ -15,6 +15,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +34,11 @@ public class PersonEntity {
     @Id
     @GeneratedValue
     private Long id;
+
+
     String apellido;
+    
+
     String nombre;
     int dni;
     String padre;
