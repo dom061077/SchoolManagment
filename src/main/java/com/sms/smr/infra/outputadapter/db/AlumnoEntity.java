@@ -1,8 +1,11 @@
 package com.sms.smr.infra.outputadapter.db;
 
+import com.sms.smr.domain.EstudioEnum;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -19,62 +22,52 @@ public class AlumnoEntity {
     @Id
     @GeneratedValue
     private Long id;
-    String apellido;
+    private String apellido;
     //@Column(nullable = false)
     @NotEmpty
     @NotNull
-    String nombre;
+    private String nombre;
 
 
-    java.sql.Date fechaNacimiento;
-    int dni;
-    String cuil;
-    String direccion;
-    boolean planSocial=false;
-    boolean trabaja=false;
-    String apellidoTutor;
-    String nombreTutor;
-    EstudioEnum estudioPrimarioTutor;
-    EstudioEnum estudioSecundarioTutor;
-    EstudioEnum estudioTerUnivTutor;
+    private java.sql.Date fechaNacimiento;
+    private int dni;
+    private String cuil;
+    private String direccion;
+    private boolean planSocial=false;
+    private boolean trabaja=false;
+    private String apellidoTutor;
+    private String nombreTutor;
+    private EstudioEnum estudioPrimarioTutor;
+    private EstudioEnum estudioSecundarioTutor;
+    private EstudioEnum estudioTerUnivTutor;
     
-    int dniTutor;
-    String cuilTutor;
-    String telefono1;
-    String telefono2;
-    boolean fotoDni=false;
-    boolean constanciaCuil=false;
-    boolean constancia6grado=false;
-    boolean actaNacimiento=false;
-    boolean constanciaRegular=false;
-    boolean foto4x4=false;
-    boolean fotoCarnetVac=false;
-    boolean fichaMedica=false;
-    boolean aptitudFisica=false;
-    boolean grupoSanguineo=false;
-    boolean fichaInscripcion=false;
-    boolean libreta6grado=false;
-    boolean fotocopiaLibroMatriz=false;
-    boolean fotocopiaDniTutor=false;
-    boolean constanciaCuilTutor=false;    
+    private int dniTutor;
+    private String cuilTutor;
+    private String telefono1;
+    private String telefono2;
+    private boolean fotoDni=false;
+    private boolean constanciaCuil=false;
+    private boolean constancia6grado=false;
+    private boolean actaNacimiento=false;
+    private boolean constanciaRegular=false;
+    private boolean foto4x4=false;
+    private boolean fotoCarnetVac=false;
+    private boolean fichaMedica=false;
+    private boolean aptitudFisica=false;
+    private boolean grupoSanguineo=false;
+    private boolean fichaInscripcion=false;
+    private boolean libreta6grado=false;
+    private boolean fotocopiaLibroMatriz=false;
+    private boolean fotocopiaDniTutor=false;
+    private boolean constanciaCuilTutor=false;    
+
+    @ManyToOne
+    private ParentescoTutorEntity parentescoTutorEntity;
+
+    @ManyToOne
+    private LocalidadEntity localidadEntity;
 
 
-    public static enum EstudioEnum{
-        ESTUDIO_COMPLETO("Completo"),
-        ESTUDIO_INCOMPLETO("Incompleto");
-        
-        
-        private String name;
-        
-        EstudioEnum(String name){
-            this.name=name;
-        }
-        
-        @Override
-        public String toString(){
-            return this.name;
-        }
-        
-    
-    }    
+
+ 
 }

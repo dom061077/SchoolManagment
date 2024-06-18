@@ -20,10 +20,10 @@ public class LocalidadEntity {
 
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
 
-    String nombre;
+    private String nombre;
 
     @ManyToOne
-    ProvinciaEntity provincia;
+    private DepartamentoEntity departamento;
 }

@@ -39,9 +39,9 @@ public class AlumnoApi {
     private static final Logger logger = LoggerFactory.getLogger(AlumnoApi.class);
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
-    public AlumnoDtoAfterPost create( @RequestBody @Valid AlumnoDto alumnoDtoPost ) {
-        logger.info("DTO recibido: "+alumnoDtoPost.getApellido());
-        return alumnoMapper.alumnoToAlumnoDtoAfterPost(alumnoInputPort.createAlumno (alumnoMapper.alumnoPostDtoToAlumno(alumnoDtoPost)));
+    public AlumnoDtoAfterPost create( @RequestBody @Valid AlumnoDto alumnoDto ) {
+        logger.info("DTO recibido: "+alumnoDto.getApellido());
+        return alumnoMapper.alumnoToAlumnoDtoAfterPost(alumnoInputPort.createAlumno (alumnoMapper.alumnoPostDtoToAlumno(alumnoDto)));
     }
 
     @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
