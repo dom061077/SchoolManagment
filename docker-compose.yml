@@ -12,5 +12,19 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+  keycloak:
+    container_name: keycloak_Schoolmanagment
+    image: quay.io/keycloak/keycloak:21.1.1
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres123      
+    ports:
+      - "9090:8080"
+    command:
+      - "start-dev"    
 
 
