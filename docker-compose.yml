@@ -30,13 +30,18 @@ services:
       - sm_network      
     command:
       - "start-dev"    
+<<<<<<< HEAD
   pgadmin_sm:
+=======
+  pgadmin:
+>>>>>>> 5e184105060dd74674db8a2c7db45b5874786987
     container_name: sm_pgadmin
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
+<<<<<<< HEAD
     ports:
       - "5050:80"
     networks:
@@ -45,3 +50,13 @@ services:
 networks:
   sm_network:
     driver: bridge
+=======
+    #volumes:
+    #  - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    #networks:
+    #  - microservices-net
+    restart: unless-stopped
+
+>>>>>>> 5e184105060dd74674db8a2c7db45b5874786987

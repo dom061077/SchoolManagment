@@ -1,0 +1,27 @@
+application:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://localhost:9090/realms/SM"    
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    password: postgres123
+  sql:
+    init:
+      mode: always
+  jpa:
+    properties:
+      hibernate:
+        check_nullability: 'true'
+    defer-datasource-initialization: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
