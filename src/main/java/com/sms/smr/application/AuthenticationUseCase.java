@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 import com.sms.smr.domain.Role;;
 
 @RequiredArgsConstructor
-@Component
+//@Component
 public class AuthenticationUseCase {
 
     private final TokenRepository tokenRepository;

@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 

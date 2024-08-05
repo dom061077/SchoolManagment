@@ -22,7 +22,7 @@ import com.sms.smr.infra.outputadapter.db.UserEntity;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  private final UserRepository repository;
+  /*private final UserRepository repository;
 
   @Bean
   public UserDetailsService userDetailsService() {
@@ -36,7 +36,7 @@ public class ApplicationConfig {
     authProvider.setUserDetailsService(userDetailsService());
     authProvider.setPasswordEncoder(passwordEncoder());
     return authProvider;
-  }
+  }*/
 
   @Bean
   public AuditorAware<Integer> auditorAware() {

@@ -16,7 +16,7 @@ import com.sms.smr.domain.RegisterRequest;
 import org.springframework.http.MediaType;
 
 
-@RestController
+//@RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationApi {
