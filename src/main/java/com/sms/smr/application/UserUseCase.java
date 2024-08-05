@@ -12,7 +12,7 @@ import com.sms.smr.infra.outputadapter.jparepository.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class UserUseCase {
     private final PasswordEncoder passwordEncoder;

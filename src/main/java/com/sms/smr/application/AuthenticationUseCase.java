@@ -152,6 +152,7 @@ public class AuthenticationUseCase {
   }
 
   private void revokeAllUserTokens(UserEntity user) {
+    /*
     var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
     if (validUserTokens.isEmpty())
       return;
@@ -159,9 +160,10 @@ public class AuthenticationUseCase {
       ((TokenEntity)token).setExpired(true);
       ((TokenEntity)token).setRevoked(true);
     });
-    //List<Token> tokens = (List<Token>)validUserTokens;
+    
     
     tokenRepository.saveAll(validUserTokens);
+    */
   }
 
 

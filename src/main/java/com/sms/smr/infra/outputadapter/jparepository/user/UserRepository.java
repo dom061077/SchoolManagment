@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-@Component(value = "userRepository")
+//@Component(value = "userRepository")
 public class UserRepository implements EntityRepository{
 
     private final SpringDataUserRepository sDataUserRepository;
@@ -30,16 +30,18 @@ public class UserRepository implements EntityRepository{
 
     @Override
     public <T> T save(T reg) {
-        if(reg instanceof UserEntity)
-            return (T)sDataUserRepository.save((UserEntity)reg);
-        else
+        //if(reg instanceof UserEntity)
+        //    return (T)sDataUserRepository.save((UserEntity)reg);
+        //else
             return null;
     }
 
     @Override
     public <T> T getById(Long id) {
-        return (T)sDataUserRepository.findById(id);
+        //return (T)sDataUserRepository.findById(id);
+        return null;
     }
+    
 
     @Override
     public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sorts) {

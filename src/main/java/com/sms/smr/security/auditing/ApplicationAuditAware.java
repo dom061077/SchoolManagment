@@ -9,9 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.sms.smr.infra.outputadapter.db.UserEntity;
 
-public class ApplicationAuditAware implements AuditorAware<Long> {
+public class ApplicationAuditAware implements AuditorAware<String> {
     @Override
-    public Optional<Long> getCurrentAuditor() {
+    public Optional<String> getCurrentAuditor() {
         Authentication authentication =
                 SecurityContextHolder
                         .getContext()
@@ -23,8 +23,9 @@ public class ApplicationAuditAware implements AuditorAware<Long> {
             return Optional.empty();
         }
 
-        UserEntity userPrincipal = (UserEntity) authentication.getPrincipal();
-        return Optional.ofNullable(userPrincipal.getId());
+        //UserEntity userPrincipal = (UserEntity) authentication.getPrincipal();
+        //return Optional.ofNullable(userPrincipal.getId());
+        return Optional.ofNullable(authentication.getName());
         
     }
 }
