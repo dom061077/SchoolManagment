@@ -17,7 +17,6 @@ public class PersonDto {
     @NotBlank
     private String nombre;
     @NotNull
-    @NotBlank    
     private int dni;
     private String padre;
     private String madre;

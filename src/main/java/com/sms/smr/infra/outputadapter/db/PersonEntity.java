@@ -28,7 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="person")
-@Audited
+//@Audited
 public class PersonEntity {
 
     @Id

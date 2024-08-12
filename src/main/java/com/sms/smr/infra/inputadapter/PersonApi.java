@@ -68,7 +68,7 @@ public class PersonApi {
       return personMapper.personToPersonDto(personInputPort.createPerson(personMapper.personDtoToPerson(personDto)));
       
     }
-
+ 
     @GetMapping("/{id}")
     public PersonDto getPerson(@PathVariable Long id) {
         return personMapper.personToPersonDto( personInputPort.getById(id));

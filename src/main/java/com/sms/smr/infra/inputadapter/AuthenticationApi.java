@@ -23,13 +23,13 @@ public class AuthenticationApi {
 
   private final AuthenticationUseCase service;
 
-  @PostMapping(value="/register",produces=MediaType.APPLICATION_JSON_VALUE)
+  //@PostMapping(value="/register",produces=MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<AuthenticationResponse> register(
       @RequestBody RegisterRequest request
   ) {
     return ResponseEntity.ok(service.register(request));
   }
-  @PostMapping("/authenticate")
+  //@PostMapping("/authenticate")
   public ResponseEntity<AuthenticationResponse> authenticate(
       @RequestBody AuthenticationRequest request
   ) {

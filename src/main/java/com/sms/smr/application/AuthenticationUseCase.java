@@ -49,7 +49,7 @@ public class AuthenticationUseCase {
     private final UserRepository userRepository;
     private final EntityRepository menuRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    //private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;   
     private final QueryRepository queryRepository;
     private final MenuEntityMapper menuEntityMapper;
@@ -67,8 +67,8 @@ public class AuthenticationUseCase {
         .role(request.getRole())
         .build();
     var savedUser = userRepository.save( user);
-    var jwtToken = jwtService.generateToken(user);
-    var refreshToken = jwtService.generateRefreshToken(user);
+    //var jwtToken = jwtService.generateToken(user);
+    //var refreshToken = jwtService.generateRefreshToken(user);
     
     var qfDto = QueryFilterDto.builder()
                   .property("code:eq")
@@ -85,8 +85,9 @@ public class AuthenticationUseCase {
     })
     .collect(Collectors.toList());
 
-    saveUserToken((UserEntity)savedUser, jwtToken); 
-    return AuthenticationResponse.builder()
+    //saveUserToken((UserEntity)savedUser, jwtToken); 
+    return null;
+    /*return AuthenticationResponse.builder()
         .accessToken(jwtToken)
         .refreshToken(refreshToken)
         .firstname(savedUser.getFirstname())
@@ -95,6 +96,7 @@ public class AuthenticationUseCase {
         .role(savedUser.getRole())
         .menuList(menus)
         .build();
+        */
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -106,11 +108,11 @@ public class AuthenticationUseCase {
     );
     var user = userRepository.findByEmail(request.getEmail())
         .orElseThrow();
-    var jwtToken = jwtService.generateToken((UserDetails)user);
-    var refreshToken = jwtService.generateRefreshToken((UserDetails)user);
+    //var jwtToken = jwtService.generateToken((UserDetails)user);
+    //var refreshToken = jwtService.generateRefreshToken((UserDetails)user);
     var role = ((UserEntity)user).getRole();
     revokeAllUserTokens((UserEntity)user);
-    saveUserToken((UserEntity)user, jwtToken);
+    //saveUserToken((UserEntity)user, jwtToken);
     var collectionAuth = ((UserEntity)user).getAuthorities();
     var qfDto = QueryFilterDto.builder()
                   .property("role:eq")
@@ -128,8 +130,8 @@ public class AuthenticationUseCase {
     })
     .collect(Collectors.toList());
     
-    
-    return AuthenticationResponse.builder()
+    return null;
+    /*return AuthenticationResponse.builder()
         .id(((UserEntity)user).getId())
         .firstname(((UserEntity)user).getFirstname())
         .lastname(((UserEntity)user).getLastname())
@@ -137,7 +139,7 @@ public class AuthenticationUseCase {
         .refreshToken(refreshToken)
         .role(role)
         .menuList(menus)
-        .build();
+        .build();*/
   }
 
   private void saveUserToken(UserEntity user, String jwtToken) {
@@ -177,11 +179,11 @@ public class AuthenticationUseCase {
       return;
     }
     refreshToken = authHeader.substring(7);
-    userEmail = jwtService.extractUsername(refreshToken);
-    if (userEmail != null) {
-      var user = this.userRepository.findByEmail(userEmail)
-              .orElseThrow();
-      if (jwtService.isTokenValid(refreshToken, (UserDetails)user)) {
+    //userEmail = jwtService.extractUsername(refreshToken);
+    //if (userEmail != null) {
+    //  var user = this.userRepository.findByEmail(userEmail)
+    //          .orElseThrow();
+      /*if (jwtService.isTokenValid(refreshToken, (UserDetails)user)) {
         var accessToken = jwtService.generateToken((UserDetails)user);
         revokeAllUserTokens((UserEntity)user);
         saveUserToken((UserEntity)user, accessToken);
@@ -189,9 +191,10 @@ public class AuthenticationUseCase {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
-        new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
-      }
-    }
+                
+        //new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+      }*/
+    //}
   }  
   
   public List<Role> findByRole(String code){
