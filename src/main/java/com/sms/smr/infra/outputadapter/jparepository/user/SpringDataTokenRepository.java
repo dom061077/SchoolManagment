@@ -8,8 +8,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface SpringDataTokenRepository extends JpaRepository<TokenEntity,Long>{ 
+public interface SpringDataTokenRepository {// extends JpaRepository<TokenEntity,Long>{ 
  
+  /*
   @Query(value = """
       select t from TokenEntity t inner join UserEntity u\s
       on t.user.id = u.id\s
@@ -17,6 +18,7 @@ public interface SpringDataTokenRepository extends JpaRepository<TokenEntity,Lon
       """)
   List<TokenEntity> findAllValidTokenByUser(Long id);
 
-  Optional<TokenEntity> findByToken(String token);    
+  Optional<TokenEntity> findByToken(String token);   
+  */ 
     
 }

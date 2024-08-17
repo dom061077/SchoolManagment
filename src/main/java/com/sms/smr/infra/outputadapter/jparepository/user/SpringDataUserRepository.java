@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.sms.smr.infra.outputadapter.db.UserEntity;
 
-@Component
-public interface SpringDataUserRepository extends JpaRepository<UserEntity,Long> { 
+//@Component
+public interface SpringDataUserRepository { //extends JpaRepository<UserEntity,Long> { 
     Optional<UserEntity> findByEmail(String email);
 }

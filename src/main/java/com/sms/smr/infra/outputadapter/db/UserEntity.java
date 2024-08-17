@@ -23,12 +23,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Builder
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="usuario")
+//@Table(name="usuario")
 public class UserEntity implements UserDetails { 
   @Id
   @GeneratedValue

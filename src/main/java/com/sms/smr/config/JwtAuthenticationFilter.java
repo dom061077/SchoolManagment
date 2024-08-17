@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain
   ) throws ServletException, IOException {
-
+    /*
     if (!request.getServletPath().contains("/api/v1")){
       throw new ServletException("La URL no es válida");
     }
@@ -86,5 +86,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
         response.sendError(HttpServletResponse.SC_FORBIDDEN, msg);
     }
+    */
   }
+  
 }

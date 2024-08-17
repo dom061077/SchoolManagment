@@ -15,7 +15,7 @@ import com.sms.smr.infra.outputport.EntityRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component(value = "tokenRepository")
+//@Component(value = "tokenRepository")
 public class TokenRepository implements EntityRepository {
 
     private final SpringDataTokenRepository sDataTokenRepository;
@@ -24,15 +24,16 @@ public class TokenRepository implements EntityRepository {
 
     @Override
     public <T> T save(T reg) {
-        if(reg instanceof TokenEntity)
-            return (T)sDataTokenRepository.save((TokenEntity)reg);
-        else
+        //if(reg instanceof TokenEntity)
+        //    return (T)sDataTokenRepository.save((TokenEntity)reg);
+        //else
             return null;
     }
 
     @Override
     public <T> T getById(Long id) {
-        return (T)sDataTokenRepository.getReferenceById(id);
+        //return (T)sDataTokenRepository.getReferenceById(id);
+        return null;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class TokenRepository implements EntityRepository {
         return (List<T>) queryRepository.getAllAnd(TokenEntity.class, offset, limit, queryFilters, sorts);
     }
 
-
+/*
     public <T> List<T> findAllValidTokenByUser(Long id){
         return (List<T>)sDataTokenRepository.findAllValidTokenByUser(id);
     }
@@ -49,9 +50,10 @@ public class TokenRepository implements EntityRepository {
     public <T> Optional<TokenEntity> findByToken(String token){
         return (Optional<TokenEntity>) sDataTokenRepository.findByToken(token);
     }
+    */
 
     public void saveAll(java.util.List tokens){
-        sDataTokenRepository.saveAll(tokens);
+        //sDataTokenRepository.saveAll(tokens);
     }
 
     @Override

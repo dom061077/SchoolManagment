@@ -19,12 +19,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Builder
-@Entity
+//@Entity
 @Getter
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="token")
+//@Table(name="token")
 public class TokenEntity {
 
   @Id
@@ -41,8 +41,8 @@ public class TokenEntity {
 
   public boolean expired;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
+  //@ManyToOne(fetch = FetchType.LAZY)
+  //@JoinColumn(name = "user_id")
   public UserEntity user;
     
 }
