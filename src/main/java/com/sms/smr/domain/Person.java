@@ -45,7 +45,7 @@ public class Person {
     private LocalDateTime createDate;
     
     private LocalDateTime lastModified;
-    private Long createdBy;
-    private Long lastModifiedBy;           
+    private String createdBy;
+    private String lastModifiedBy;           
 
 }

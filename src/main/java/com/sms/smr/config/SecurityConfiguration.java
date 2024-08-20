@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -17,6 +18,9 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.sms.smr.security.auditing.ApplicationAuditAware;
 
 import static com.sms.smr.domain.Permission.ADMIN_CREATE;
 import static com.sms.smr.domain.Permission.ADMIN_DELETE;
@@ -42,7 +46,7 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableMethodSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration implements WebMvcConfigurer {
 
     private static final String[] WHITE_LIST_URL = {
         //"/api/v1/auth/register",
@@ -66,6 +70,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
         .csrf(AbstractHttpConfigurer::disable)
+        .cors(Customizer.withDefaults()) // Enable CORS
         .authorizeHttpRequests(req ->
                 req.requestMatchers(
                                 "/auth/**",
@@ -90,7 +95,12 @@ public class SecurityConfiguration {
 
         return http.build();
     }
-    
+  
+    @Bean
+    public AuditorAware<String> auditorAware() {
+        return (AuditorAware)new ApplicationAuditAware();
+    }    
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

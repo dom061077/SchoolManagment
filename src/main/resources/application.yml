@@ -17,7 +17,7 @@ spring:
         check_nullability: 'true'
     defer-datasource-initialization: 'true'
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: 'true'
   security:
     oauth2:

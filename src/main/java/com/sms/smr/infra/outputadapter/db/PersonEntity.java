@@ -20,20 +20,20 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
-@Entity
 @Getter
 @Setter
+@SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@Entity
 @Table(name="person")
 //@Audited
-public class PersonEntity {
+public class PersonEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
 
     String apellido;
@@ -62,28 +62,6 @@ public class PersonEntity {
     String nombreMatrimonio;
     String otrasNotas;
 
-    @CreatedDate
-    @Column(
-            nullable = false,
-            updatable = false
-    )
-    private LocalDateTime createDate;
-
-    @LastModifiedDate
-    @Column(insertable = false)
-    private LocalDateTime lastModified;
-
-
-    @CreatedBy
-    @Column(
-            nullable = false,
-            updatable = false
-    )
-    private Long createdBy;
-
-    @LastModifiedBy
-    @Column(insertable = false)
-    private Long lastModifiedBy;    
-    
+   
     
 }

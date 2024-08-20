@@ -97,18 +97,20 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     }
 
     private Optional<Object> returnValueFromReflection(Class clazz,String fieldName,String value){
-        try{
-            Field field = clazz.getDeclaredField(fieldName);
-            if(field.getType().isEnum()){
-                if(field.getType() == Role.class){
-                    return Optional.of(Role.valueOf(value));
+        while(clazz != null){
+            try{
+                Field field = clazz.getDeclaredField(fieldName);
+                if(field.getType().isEnum()){
+                    if(field.getType() == Role.class){
+                        return Optional.of(Role.valueOf(value));
+                    }
+
+                }else{
+                    return Optional.of(value);
                 }
-
-            }else{
-                return Optional.of(value);
+            }catch(NoSuchFieldException e){
+                clazz = clazz.getSuperclass();
             }
-        }catch(NoSuchFieldException e){
-
         }
         return Optional.empty();
     }
