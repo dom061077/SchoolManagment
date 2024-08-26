@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +15,12 @@ import com.sms.smr.application.AuthenticationUseCase;
 import com.sms.smr.domain.AuthenticationRequest;
 import com.sms.smr.domain.AuthenticationResponse;
 import com.sms.smr.domain.RegisterRequest;
-import org.springframework.http.MediaType;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 
 //@RestController
 @RequestMapping("/api/v1/auth")
@@ -45,7 +51,12 @@ public class AuthenticationApi {
   }
 
   
-
+    public Collection<String> getRoles() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+    }
 
 
 
