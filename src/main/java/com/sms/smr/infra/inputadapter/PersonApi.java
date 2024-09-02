@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,7 +85,8 @@ public class PersonApi {
     
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public QueryResult<Person> /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
+    @PreAuthorize("hasAnyAuthority('ROLE_REALM_CHURCH','ROLE_RESOURCE_bsn_CHURCH')")
+     public QueryResult<Person> /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryFilterDto> queryFilters = new ArrayList();

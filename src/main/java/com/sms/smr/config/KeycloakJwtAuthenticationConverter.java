@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -31,14 +32,23 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
     }
 
     private Collection<? extends GrantedAuthority> extractResourceRoles(Jwt jwt) {
-        var resourceAccess = new HashMap<>(jwt.getClaim("resource_access"));
+         Collection<GrantedAuthority> realmAuthorities = ((List<String>) ((Map<String, Object>) jwt.getClaims()
+            .get("realm_access")).get("roles"))
+            .stream()
+            .map(role -> new SimpleGrantedAuthority("ROLE_REALM_" + role))
+            .collect(Collectors.toList());
 
-        var eternal = (Map<String, List<String>>) resourceAccess.get("account");
+        // Extract resource roles
+        Collection<GrantedAuthority> resourceAuthorities = ((Map<String, Object>) jwt.getClaims()
+            .get("resource_access"))
+            .entrySet()
+            .stream()
+            .flatMap(entry -> ((List<String>) ((Map<String, Object>) entry.getValue()).get("roles"))
+                .stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_RESOURCE_" + entry.getKey() + "_" + role)))
+            .collect(Collectors.toList());
 
-        var roles = eternal.get("roles");
-
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.replace("-", "_")))
-                .collect(toSet());
+        return Stream.concat(realmAuthorities.stream(), resourceAuthorities.stream())
+                .collect(Collectors.toSet());
     }
 }

@@ -27,6 +27,5 @@ public class MenuRoleEntity {
     @ManyToOne
     MenuEntity menu;
     
-    @Enumerated(EnumType.STRING)
-    Role role;
+    String role;
 }
