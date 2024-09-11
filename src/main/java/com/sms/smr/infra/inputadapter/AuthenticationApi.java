@@ -27,8 +27,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import static java.util.stream.Collectors.toSet;
 
-//@RestController
-//@RequestMapping("/api/v1/auth")
+@RestController
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationApi {
 
