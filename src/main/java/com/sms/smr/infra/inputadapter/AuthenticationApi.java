@@ -20,43 +20,22 @@ import com.sms.smr.domain.AuthenticationResponse;
 import com.sms.smr.domain.RegisterRequest;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import static java.util.stream.Collectors.toSet;
 
-@RestController
-@RequestMapping("/api/v1/auth")
+//@RestController
+//@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationApi {
 
-  //private final AuthenticationUseCase service;
+/*   private final AuthenticationUseCase service;
 
-
-
-  @GetMapping(value="/roles", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<String> gertRoles(){
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Jwt jwt = (Jwt) authentication.getPrincipal();
-
-        var realmAccess = new HashMap<>(jwt.getClaim("realm_access"));
-
-        var roles =  realmAccess.get("roles");
-
-        //var roles = (Map<String, List<String>>)realmAccess.get("roles");
-
-        return (List<String>) roles;
-
-    
-  }
-
-
-  //@PostMapping(value="/register",produces=MediaType.APPLICATION_JSON_VALUE)
-/*   public ResponseEntity<AuthenticationResponse> register(
+  @PostMapping(value="/register",produces=MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<AuthenticationResponse> register(
       @RequestBody RegisterRequest request
   ) {
     return ResponseEntity.ok(service.register(request));
@@ -74,17 +53,20 @@ public class AuthenticationApi {
       HttpServletResponse response
   ) throws  java.io.IOException {
     service.refreshToken(request, response);
-  }
+  } */
 
   
-    public Collection<String> getRoles() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-    }
- */
+  @GetMapping("/roles")
+  public Collection<String> getRoles(Authentication authentication) {
+      return authentication.getAuthorities().stream()
+              .map(GrantedAuthority::getAuthority)
+              .collect(Collectors.toList());
+  }
 
+  @GetMapping("/menubyrole")
+  public Collection<String> getMenubyRole(){
 
+    return null;
+  }
 
 }
