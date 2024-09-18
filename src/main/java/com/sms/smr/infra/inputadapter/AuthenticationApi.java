@@ -65,7 +65,7 @@ public class AuthenticationApi {
 
   @GetMapping("/menubyrole")
   public Collection<String> getMenubyRole(){
-
+    
     return null;
   }
 

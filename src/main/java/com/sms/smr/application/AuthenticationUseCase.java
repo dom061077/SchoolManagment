@@ -47,7 +47,7 @@ public class AuthenticationUseCase {
 
     //private final TokenRepository tokenRepository;
     //private final UserRepository userRepository;
-    //private final EntityRepository menuRepository;
+    private final EntityRepository menuRepository;
     //private final PasswordEncoder passwordEncoder;
     //private final JwtService jwtService;
     //private final AuthenticationManager authenticationManager;   
@@ -58,8 +58,13 @@ public class AuthenticationUseCase {
     //private final UserEntityMapper userEntMapper;
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationUseCase.class);
     
-  public List<Role> findByRole(String code){
+  /*public List<Role> findByRole(String code){
 
+    return null;
+  }*/
+
+  public List<String> fundByMenuRole(){
+    
     return null;
   }
 
