@@ -31,7 +31,8 @@ public class MenuRoleRepository implements EntityRepository {
     public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,
             List<QueryFilterDto> sortFilters) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        //return (List<T>) queryRepository.getAllAnd()
     }
 
     @Override

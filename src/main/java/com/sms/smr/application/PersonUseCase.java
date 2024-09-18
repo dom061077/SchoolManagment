@@ -22,9 +22,9 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class PersonUserCase implements PersonInputPort{
+public class PersonUseCase implements PersonInputPort{
 
-    private static final Logger logger = LoggerFactory.getLogger(PersonUserCase.class);
+    private static final Logger logger = LoggerFactory.getLogger(PersonUseCase.class);
     @Qualifier(value="personRepository")
     @Autowired
     private final  EntityRepository entityRepository;
