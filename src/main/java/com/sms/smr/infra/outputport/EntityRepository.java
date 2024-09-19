@@ -12,5 +12,7 @@ public interface EntityRepository {
 
     public <T> List<T> getAll( int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortFilters );    
 
+    public long getCount(List<QueryFilterDto> queryFilters);
+
     public <T> T update(Long id,T reg);
 }

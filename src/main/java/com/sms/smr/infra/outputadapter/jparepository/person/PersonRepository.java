@@ -55,5 +55,11 @@ public class PersonRepository implements EntityRepository {
 
         return (T)sDataPersonRepository.save(personEntity); 
     }
+
+    @Override
+    public long getCount(List<QueryFilterDto> queryFilters) {
+        // TODO Auto-generated method stub
+        return queryRepository.getCount(PersonEntity.class, queryFilters);
+    }
     
 }

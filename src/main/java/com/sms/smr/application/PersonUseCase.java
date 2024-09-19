@@ -53,11 +53,11 @@ public class PersonUseCase implements PersonInputPort{
         QueryResult<Person> qResult = new QueryResult<Person>();            
 
         qResult.setData(personEntityMapper.getPersons(queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sorts)));
-        long count = queryRepository.getCount(PersonEntity.class, queryFilters);
+        long count = entityRepository.getCount(queryFilters);
         qResult.setTotal(count);
 
         return qResult;
-    }
+    }   
 
     @Override
     public Person updatePerson(Long personId, Person person) {

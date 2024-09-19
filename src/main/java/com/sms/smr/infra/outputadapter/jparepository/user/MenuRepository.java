@@ -43,5 +43,11 @@ public class MenuRepository implements EntityRepository {
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
+    @Override
+    public long getCount(List<QueryFilterDto> queryFilters) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCount'");
+    }
+
 
 }

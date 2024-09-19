@@ -61,5 +61,11 @@ public class TokenRepository implements EntityRepository {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
+
+    @Override
+    public long getCount(List<QueryFilterDto> queryFilters) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCount'");
+    }
     
 }
