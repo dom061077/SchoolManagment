@@ -13,11 +13,11 @@ import com.sms.smr.infra.inputport.UserInputPort;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
+//@RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class UserApi {
-    //private final UserInputPort useInputPort;
+    private final UserInputPort useInputPort;
     
     @GetMapping(value="menu-roles")
     public Collection<String> getMenuByRole(Authentication authentication){

@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres123
-      POSTGRES_DB: defaultdb
+      POSTGRES_DB: schoolmanagement
       PGDATA: /data/postgres
     ports:
       - "5432:5432"
@@ -41,7 +41,11 @@ services:
       - "5050:80"
     networks:
       - sm_network      
+    volumes:
+      - postgres_data:/var/lib/postgresql/data      
     restart: unless-stopped
 networks:
   sm_network:
     driver: bridge
+volumes:
+  postgres_data:
