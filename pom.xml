@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sms.smr</groupId>
-	<artifactId>SchoolManagment</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>SchoolManagment</name>
+	<artifactId>schoolmanagement</artifactId>
+	<version>1.0.0</version>
+	<name>SchoolManagement</name>
 	<description>School Managment System</description>
 	<properties>
 		<java.version>18</java.version>

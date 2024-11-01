@@ -33,7 +33,16 @@ services:
     depends_on:
       - postgres           
     command:
-      - "start-dev"    
+      - "start-dev"   
+  schoolmanagement-api:
+    container_name: schoolmanagement-api
+    image: schoolmanagement/schoolmanagement:1.0.0
+    ports:
+      - 8088:8088
+    networks:
+      - sm_network
+    depends_on:
+      - postgres       
   pgadmin_sm:
     container_name: sm_pgadmin
     image: dpage/pgadmin4
