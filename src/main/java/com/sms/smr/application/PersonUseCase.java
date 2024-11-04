@@ -1,7 +1,6 @@
 package com.sms.smr.application;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,7 @@ import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
 import com.sms.smr.infra.inputport.PersonInputPort;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
+import com.sms.smr.infra.outputadapter.jparepository.person.PersonRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
@@ -26,16 +26,10 @@ public class PersonUseCase implements PersonInputPort{
 
     private static final Logger logger = LoggerFactory.getLogger(PersonUseCase.class);
     @Qualifier(value="personRepository")
-    @Autowired
     private final  EntityRepository entityRepository;
     private final PersonEntityMapper personEntityMapper;
     private final QueryRepository queryRepository;
 
-    /*public PersonUserCase(QueryRepository queryRepository, PersonEntityMapper personEntityMapper,@Qualifier(value="personJpaRepository") EntityRepository entityRepository){
-        this.personEntityMapper = personEntityMapper;
-        this.entityRepository = entityRepository;
-        this.queryRepository = queryRepository;
-    }*/
 
     @Override
     public Person createPerson(Person person) {

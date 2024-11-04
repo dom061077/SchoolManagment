@@ -3,6 +3,8 @@ logging:
     org:
       springframework:
         security: TRACE
+        beans:
+          factory: DEBUG
 spring:
   datasource:
     username: postgres

@@ -25,8 +25,8 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class AlumnoUseCase implements AlumnoInputPort{
     private static final Logger logger = LoggerFactory.getLogger(AlumnoUseCase.class);
-
-    private final AlumnoRepository entityRepository;
+    @Qualifier(value="alumnoRepository")
+    private final EntityRepository entityRepository;
     private final  AlumnoEntityMapper alumnoEntMapper;
     private final QueryRepository queryRepository;    
 

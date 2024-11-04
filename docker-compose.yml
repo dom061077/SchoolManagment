@@ -36,9 +36,9 @@ services:
       - "start-dev"   
   schoolmanagement-api:
     container_name: schoolmanagement-api
-    image: schoolmanagement/schoolmanagement:1.0.0
+    image: schoolmanagement/schoolmanagement:1.0.1
     ports:
-      - 8088:8088
+      - 8080:8080
     networks:
       - sm_network
     depends_on:

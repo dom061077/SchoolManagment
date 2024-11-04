@@ -25,4 +25,6 @@ ENV MAILDEV_URL=localhost
 ENV ACTIVE_PROFILE=${PROFILE}
 ENV JAR_VERSION=${APP_VERSION}
 
-CMD java -jar  -Dspring.datasource.url=${DB_URL}  schoolmanagement-1.0.0.jar
+CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL}  schoolmanagement-${JAR_VERSION}.jar
+
+#docker build -t schoolmanagement/schoolmanagement:1.0.1 -f path_to_Dockerfile .
