@@ -15,7 +15,7 @@ import jakarta.persistence.criteria.Root;
 
 
 /* Esta clase está deprecated */
-@Component
+//@Component
 public class SpringDataAlumnoRepositoryImpl/*  implements SpringDataAlumnoRepository*/{
     @PersistenceContext
     private  EntityManager em;
