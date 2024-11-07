@@ -21,10 +21,11 @@ EXPOSE 8088
 
 ENV DB_URL=jdbc:postgresql://postgres:5432/schoolmanagement
 ENV MAILDEV_URL=localhost
+ENV KEYCLOAK_URL=http://keycloak_Schoolmanagment:9090/realms/book-social-network
 
 ENV ACTIVE_PROFILE=${PROFILE}
 ENV JAR_VERSION=${APP_VERSION}
 
-CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL}  schoolmanagement-${JAR_VERSION}.jar
+CMD java -jar -Dspring.security.oauth2.resourceserver.jwt.issuer-uri=${KEYCLOAK_URL} -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL}  schoolmanagement-${JAR_VERSION}.jar
 
 #docker build -t schoolmanagement/schoolmanagement:1.0.1 -f path_to_Dockerfile .
