@@ -85,7 +85,7 @@ public class PersonApi {
     
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyAuthority('ROLE_REALM_CHURCH')")
+    @PreAuthorize("hasAnyAuthority('ROLE_REALM_CHURCH','ROLE_RESOURCE_bsn_CHURCH')")
      public QueryResult<Person> /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();

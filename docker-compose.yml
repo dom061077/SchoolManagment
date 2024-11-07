@@ -14,8 +14,7 @@ services:
     networks:
       - sm_network      
     volumes:
-      - postgres_data:/data/postgres
-       
+      - postgres_data:/var/lib/postgresql/data          
     restart: unless-stopped
   keycloak:
     container_name: keycloak_Schoolmanagment
@@ -26,8 +25,7 @@ services:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
       KC_DB_USERNAME: postgres
-      KC_DB_PASSWORD: postgres123     
-      PROXY_ADDRESS_FORWARDING: true 
+      KC_DB_PASSWORD: postgres123      
     ports:
       - "9090:8080"
     networks:
