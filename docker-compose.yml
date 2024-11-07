@@ -14,7 +14,7 @@ services:
     networks:
       - sm_network      
     volumes:
-      - postgres_data:/var/lib/postgresql/data          
+      - postgres_data:/data/postgres          
     restart: unless-stopped
   keycloak:
     container_name: keycloak_Schoolmanagment
