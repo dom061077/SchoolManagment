@@ -71,10 +71,10 @@ services:
       - sm_network
     depends_on:
       - schoolmanagement-api    
+    extra_hosts:
+      - "schoolmanagement-api:127.0.0.1"      
 networks:
   sm_network:
     driver: bridge
 volumes:
   postgres_data:
-  keycloak:
-    driver: local  

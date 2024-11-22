@@ -28,3 +28,4 @@ spring:
           issuer-uri: "http://localhost:9090/realms/book-social-network"
 server:
   port: 8088
+  forward-headers-strategy: native
