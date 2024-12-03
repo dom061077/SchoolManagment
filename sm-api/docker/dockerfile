@@ -29,3 +29,4 @@ ENV KEYCLOAK=http://keycloak-sm:8080/realms/book-social-network
 CMD java -jar -Dspring.security.oauth2.resourceserver.jwt.issuer-uri=${KEYCLOAK} -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL}  schoolmanagement-${JAR_VERSION}.jar
 
 #docker build -t sm-api/sm-api:1.0.1 -f docker .
+#docker image prune -f
