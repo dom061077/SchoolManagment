@@ -66,7 +66,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     //private final AuthenticationProvider authenticationProvider;
     //private final LogoutHandler logoutHandler;
 
-    @Bean
+    //@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
         .csrf(AbstractHttpConfigurer::disable)
@@ -96,12 +96,12 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         return http.build();
     }
   
-    @Bean
+    //@Bean
     public AuditorAware<String> auditorAware() {
         return (AuditorAware)new ApplicationAuditAware();
     }    
 
-    @Bean
+    //@Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8081"));
