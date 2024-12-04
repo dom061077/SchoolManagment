@@ -46,22 +46,22 @@ public class ApplicationConfig {
     return authProvider;
   }*/
 
-  @Bean
+  //@Bean
   public AuditorAware<String> auditorAware() {
     return (AuditorAware)new ApplicationAuditAware();
   }
 
-  @Bean
+  //@Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
     return config.getAuthenticationManager();
   }
 
-  @Bean
+  //@Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
-    @Bean
+    //@Bean
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
