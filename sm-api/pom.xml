@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sms.smr</groupId>
-	<artifactId>schoolmanagement</artifactId>
+	<artifactId>sm-api</artifactId>
 	<version>1.0.1</version>
-	<name>SchoolManagement</name>
+	<name>sm-api</name>
 	<description>School Managment System</description>
 	<properties>
 		<java.version>18</java.version>
@@ -93,11 +93,7 @@
 			<artifactId>jjwt-impl</artifactId>
 			<version>0.11.5</version>
 		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId>
-			<version>0.11.5</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -146,6 +142,8 @@
 
 	<build>
 		<plugins>
+
+
 	
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
