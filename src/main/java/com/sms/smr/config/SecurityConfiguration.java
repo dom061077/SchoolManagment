@@ -1,6 +1,7 @@
 package com.sms.smr.config;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -33,6 +34,7 @@ import static com.sms.smr.domain.Permission.MANAGER_UPDATE;
 import static com.sms.smr.domain.Role.ADMIN;
 import static com.sms.smr.domain.Role.MANAGER;
 import static com.sms.smr.domain.Role.PERSON;
+
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -41,6 +43,9 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -65,6 +70,9 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     //private final JwtAuthenticationFilter jwtAuthFilter;
     //private final AuthenticationProvider authenticationProvider;
     //private final LogoutHandler logoutHandler;
+
+    @Value("${application.cors.origins:*}")
+    private List<String> allowedOrigin;    
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -102,8 +110,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     }    
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
+    CorsFilter corsConfigurationSource() {
+        /*CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8081"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT"));
         configuration.setAllowedHeaders(List.of("*"));
@@ -111,8 +119,16 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         //configuration.setMaxAge(Duration.ofSeconds(3600));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-        return source;        
-
+        return source;   
+        */     
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+        // config.setAllowCredentials(true);
+        config.setAllowedOrigins(allowedOrigin);
+        config.setAllowedHeaders(Arrays.asList("*"));//not recommended  for production
+        config.setAllowedMethods(Arrays.asList("*"));//not recommended for production
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
 
     }    
 }
