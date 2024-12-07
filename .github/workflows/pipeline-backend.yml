@@ -27,6 +27,7 @@ jobs:
           distribution: 'corretto'
       - name: Running Unit Tests
         run: |
+          pwd
           cd SchoolManagment
           ./mvnw clean compile
   unit-tests:
