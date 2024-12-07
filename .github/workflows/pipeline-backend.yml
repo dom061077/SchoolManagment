@@ -46,7 +46,7 @@ jobs:
 
       - name: Running Unit Tests
         run: |
-          cd SchoolManagment/SchoolManagment
+          cd SchoolManagment
           ./mvnw clean test
   build:
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
 
       - name: Compile project
         run: |
-          cd SchoolManagment/SchoolManagment
+          cd SchoolManagment
           ./mvnw clean compile
 
   build-image:
@@ -82,7 +82,7 @@ jobs:
       - name: Extract project version
         id: extract_version
         run: |
-          cd SchoolManagment/SchoolManagment
+          cd SchoolManagment
           echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
       - name: Login to DockerHub
@@ -95,7 +95,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: book-network
-          file: docker/backend/Dockerfile
+          file: docker/dockerfile
           push: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bsn-api:${{ steps.extract_version.outputs.VERSION }},${{ secrets.DOCKERHUB_USERNAME }}/bsn-api:latest
