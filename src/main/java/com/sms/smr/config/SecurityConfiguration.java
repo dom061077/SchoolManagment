@@ -1,51 +1,23 @@
 package com.sms.smr.config;
 
+import com.sms.smr.security.auditing.ApplicationAuditAware;
+import java.util.Arrays;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.sms.smr.security.auditing.ApplicationAuditAware;
-
-import static com.sms.smr.domain.Permission.ADMIN_CREATE;
-import static com.sms.smr.domain.Permission.ADMIN_DELETE;
-import static com.sms.smr.domain.Permission.ADMIN_READ;
-import static com.sms.smr.domain.Permission.ADMIN_UPDATE;
-import static com.sms.smr.domain.Permission.MANAGER_CREATE;
-import static com.sms.smr.domain.Permission.MANAGER_DELETE;
-import static com.sms.smr.domain.Permission.MANAGER_READ;
-import static com.sms.smr.domain.Permission.MANAGER_UPDATE;
-import static com.sms.smr.domain.Role.ADMIN;
-import static com.sms.smr.domain.Role.MANAGER;
-import static com.sms.smr.domain.Role.PERSON;
-
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpMethod.PUT;
-import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
-
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -121,6 +93,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         source.registerCorsConfiguration("/**", configuration);
         return source;   
         */     
+        //revisar esta config
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
         // config.setAllowCredentials(true);
