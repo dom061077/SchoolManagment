@@ -26,9 +26,8 @@ jobs:
           java-version: '18'
           distribution: 'corretto'
       - name: Running Unit Tests
-        run: |
-          pwd
-#          cd SchoolManagment
+        run: #|
+#          pwd
           ./mvnw clean compile
   unit-tests:
     runs-on: ubuntu-latest
