@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: '18'
           distribution: 'corretto'
-          
+
       - name: Make mvnw executable
         run: chmod +x ./mvnw
 
@@ -47,6 +47,9 @@ jobs:
         with:
           java-version: '18'
           distribution: 'corretto'
+
+      - name: Make mvnw executable
+        run: chmod +x ./mvnw
 
 
 
