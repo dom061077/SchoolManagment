@@ -28,7 +28,7 @@ jobs:
       - name: Running Unit Tests
         run: |
           pwd
-          cd SchoolManagment
+#          cd SchoolManagment
           ./mvnw clean compile
   unit-tests:
     runs-on: ubuntu-latest
@@ -46,8 +46,8 @@ jobs:
           distribution: 'corretto'
 
       - name: Running Unit Tests
-        run: |
-          cd SchoolManagment
+        run: #|
+#          cd SchoolManagment
           ./mvnw clean test
   build:
     runs-on: ubuntu-latest
@@ -66,8 +66,8 @@ jobs:
           distribution: 'corretto'
 
       - name: Compile project
-        run: |
-          cd SchoolManagment
+        run: #|
+#          cd SchoolManagment
           ./mvnw clean compile
 
   build-image:
@@ -82,8 +82,8 @@ jobs:
           distribution: 'corretto'
       - name: Extract project version
         id: extract_version
-        run: |
-          cd SchoolManagment
+        run: #|
+#          cd SchoolManagment
           echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
       - name: Login to DockerHub
