@@ -94,7 +94,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         return source;   
         */     
         //revisar esta config
-        //testing pipeline commit
+        //testing pipeline commit 2
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
         // config.setAllowCredentials(true);
