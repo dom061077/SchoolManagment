@@ -27,7 +27,7 @@ jobs:
           distribution: 'corretto'
       - name: Running Unit Tests
         run: |
-          cd /root/actions-runner/_work/SchoolManagment/SchoolManagment
+          pwd
           ./mvnw clean compile
   unit-tests:
     runs-on: ubuntu-latest
