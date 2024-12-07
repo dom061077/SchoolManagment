@@ -70,9 +70,9 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '18'
           distribution: 'corretto'
-          
+
       - name: Make mvnw executable
         run: chmod +x ./mvnw
 
@@ -89,7 +89,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '18'
           distribution: 'corretto'
       - name: Extract project version
         id: extract_version
