@@ -26,8 +26,8 @@ jobs:
           java-version: '18'
           distribution: 'corretto'
       - name: Running Unit Tests
-        run: 
-#          cd book-network
+        run: |
+          cd SchoolManagment/SchoolManagment
           ./mvnw clean compile
   unit-tests:
     runs-on: self-hosted
@@ -45,8 +45,8 @@ jobs:
           distribution: 'corretto'
 
       - name: Running Unit Tests
-        run: #|
-#          cd book-network
+        run: |
+          cd SchoolManagment/SchoolManagment
           ./mvnw clean test
   build:
     runs-on: self-hosted
@@ -65,8 +65,8 @@ jobs:
           distribution: 'corretto'
 
       - name: Compile project
-        run: #|
-#          cd book-network
+        run: |
+          cd SchoolManagment/SchoolManagment
           ./mvnw clean compile
 
   build-image:
@@ -81,8 +81,8 @@ jobs:
           distribution: 'corretto'
       - name: Extract project version
         id: extract_version
-        run: #|
-#          cd book-network
+        run: |
+          cd SchoolManagment/SchoolManagment
           echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
       - name: Login to DockerHub
