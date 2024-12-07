@@ -26,7 +26,7 @@ jobs:
           java-version: '18'
           distribution: 'corretto'
       - name: Running Unit Tests
-        run: |
+        run: 
 #          cd book-network
           ./mvnw clean compile
   unit-tests:
@@ -45,7 +45,7 @@ jobs:
           distribution: 'corretto'
 
       - name: Running Unit Tests
-        run: |
+        run: #|
 #          cd book-network
           ./mvnw clean test
   build:
@@ -65,7 +65,7 @@ jobs:
           distribution: 'corretto'
 
       - name: Compile project
-        run: |
+        run: #|
 #          cd book-network
           ./mvnw clean compile
 
@@ -81,7 +81,7 @@ jobs:
           distribution: 'corretto'
       - name: Extract project version
         id: extract_version
-        run: |
+        run: #|
 #          cd book-network
           echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
