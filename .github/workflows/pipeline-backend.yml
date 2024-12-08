@@ -136,6 +136,7 @@ jobs:
 
       - name: Add host to known_hosts
         run: |
+          cd /home/runner
           pwd
           mkdir -p ~/.ssh
           ls -a
