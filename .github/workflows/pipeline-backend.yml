@@ -145,9 +145,14 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           cd /home/runner/.ssh
-          ssh-keyscan -p 5489 ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p 5489 -t rsa ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
           ls -a -l
+      - name: Debug SSH Keys
+        run: ssh-add -l
+
+      - name: Test SSH Connection
+        run: ssh -p 5489 user@your.server.com 'echo "SSH connection successful"'
 
       - name: Create deployment folder
         run: |
