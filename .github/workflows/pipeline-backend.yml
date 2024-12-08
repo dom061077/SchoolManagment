@@ -93,6 +93,7 @@ jobs:
           distribution: 'corretto'
       - name: Make mvnw executable
         run: |
+          pwd
           ls -l
           chmod +x ./mvnw
 
