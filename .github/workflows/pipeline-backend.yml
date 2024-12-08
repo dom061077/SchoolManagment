@@ -134,6 +134,12 @@ jobs:
     needs: [build-image]
     steps:
 
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.10.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE
+
+
       - name: Add host to known_hosts
         run: |
           mkdir -p ~/.ssh
