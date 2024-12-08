@@ -133,10 +133,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-image]
     steps:
-      - name: Add Server to Temporary known_hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -p 5489 ${{ secrets.VPS_IP }} > ~/.ssh/known_hosts
+
 
       - name: Create deployment folder
         run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} -p 5489 "mkdir -p ci-cd"
