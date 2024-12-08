@@ -145,6 +145,7 @@ jobs:
 
       - name: Create deployment folder
         run: |
+          cd /home/runner
           pwd
           ls -a 
           ssh -v -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}  "mkdir -p ci-cd"
