@@ -137,7 +137,7 @@ jobs:
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.10.4
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
 
       - name: Add host to known_hosts
