@@ -95,7 +95,6 @@ jobs:
         id: extract_version
         run: #|
 #          cd SchoolManagment
-          ls -l
           echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
       - name: Login to DockerHub
@@ -108,6 +107,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
 #          context: book-network
+          run: chmod +x ./mvnw
           file: docker/dockerfile
           push: true
           platforms: linux/amd64
