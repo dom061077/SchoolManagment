@@ -136,6 +136,7 @@ jobs:
 
       - name: Add host to known_hosts
         run: |
+          mkdir -p ~/.ssh
           cd /home/runner/.ssh
           ssh-keyscan -p 5489 ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
