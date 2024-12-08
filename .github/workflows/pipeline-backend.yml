@@ -91,10 +91,16 @@ jobs:
         with:
           java-version: '18'
           distribution: 'corretto'
+      - name: Make mvnw executable
+        run: |
+          ls -l
+          chmod +x ./mvnw
+
       - name: Extract project version
         id: extract_version
         run: #|
 #          cd SchoolManagment
+
           echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
       - name: Login to DockerHub
