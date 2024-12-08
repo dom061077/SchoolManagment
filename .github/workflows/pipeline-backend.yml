@@ -152,7 +152,7 @@ jobs:
         run: ssh-add -l
 
       - name: Test SSH Connection
-        run: ssh -p 5489 user@your.server.com 'echo "SSH connection successful"'
+        run: ssh -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} 'echo "SSH connection successful"'
 
       - name: Create deployment folder
         run: |
