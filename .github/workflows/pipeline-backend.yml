@@ -90,7 +90,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-              
+
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
@@ -135,7 +135,7 @@ jobs:
     steps:
 
       - name: Create deployment folder
-        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd"
+        run: ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} -p 5489 "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
         run: scp -oStrictHostKeyChecking=no docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
