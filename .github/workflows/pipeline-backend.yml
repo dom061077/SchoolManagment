@@ -147,6 +147,9 @@ jobs:
           cd /home/runner/.ssh
           ssh-keyscan -p 5489 -t rsa ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add ~/.ssh/id_rsa          
           ls -a -l
       - name: Debug SSH Keys
         run: ssh-add -l
