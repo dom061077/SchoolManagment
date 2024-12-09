@@ -77,7 +77,8 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Compile project
-        run: 
+        run: #|
+#          cd SchoolManagment
           ./mvnw clean compile
 
   build-image:
@@ -97,6 +98,8 @@ jobs:
           distribution: 'corretto'
       - name: Make mvnw executable
         run: |
+#          pwd
+#          ls -l
           chmod +x ./mvnw
 
       - name: Extract project version
@@ -128,12 +131,37 @@ jobs:
   deploy:
     name: Deploy Backend
     runs-on: self-hosted
-    needs: [build-image]
+#    needs: [build-image]
     steps:
 
+#      - name: Start SSH Agent and Add Private Key
+#        uses: webfactory/ssh-agent@v0.9.0
+#        with:
+#          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+
+
+ #     - name: Add host to known_hosts
+ #       run: |
+ #         mkdir -p ~/.ssh
+ #         cd /home/runner/.ssh
+ #         ssh-keyscan -p 5489 -t rsa ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
+ #         chmod 600 ~/.ssh/known_hosts
+ #         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+ #         chmod 600 ~/.ssh/id_rsa
+ #         ssh-add ~/.ssh/id_rsa     
+ #         echo "${{ secrets.SSH_PUBLIC_KEY }}" >> ~/.ssh/authorized_keys
+ #         chmod 600 ~/.ssh/authorized_keys               
+ #         ls -a -l
+ #     - name: Debug SSH Keys
+ #       run: ssh-add -l
+
+ #     - name: Test SSH Connection
+ #       run: ssh -vvv -p 5489 ${{ secrets.VPS_USERNAM }}@${{ secrets.VPS_IP }} 'echo "SSH connection successful"'
 
       - name: Create deployment folder
         run: |
+          env
           ssh -v -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}  "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
