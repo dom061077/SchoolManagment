@@ -156,8 +156,8 @@ jobs:
       - name: Debug SSH Keys
         run: ssh-add -l
 
- #     - name: Test SSH Connection
- #       run: ssh -vvv -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} 'echo "SSH connection successful"'
+      - name: Test SSH Connection
+        run: ssh -vvv -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} 'echo "SSH connection successful"'
 
       - name: Create deployment folder
         run: |
