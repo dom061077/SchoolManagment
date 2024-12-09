@@ -77,8 +77,7 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Compile project
-        run: #|
-#          cd SchoolManagment
+        run: 
           ./mvnw clean compile
 
   build-image:
