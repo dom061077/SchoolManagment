@@ -161,6 +161,7 @@ jobs:
 
       - name: Create deployment folder
         run: |
+          cd /home/gitrunner
           ssh -v -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}  "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
