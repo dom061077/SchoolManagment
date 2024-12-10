@@ -104,6 +104,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build & Push to DockerHub
+        run: | 
+          pwd
+          ls -a
         uses: docker/build-push-action@v5
         with:
 #          context: book-network
