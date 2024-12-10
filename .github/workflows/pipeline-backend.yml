@@ -160,8 +160,8 @@ jobs:
  #       run: ssh -vvv -p 5489 ${{ secrets.VPS_USERNAM }}@${{ secrets.VPS_IP }} 'echo "SSH connection successful"'
 
       - name: Create deployment folder
-        run: |
-          env
+        run: 
+
           ssh -v -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}  "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
