@@ -42,7 +42,7 @@ services:
       
   sm-api:
     container_name: sm-api
-    image: sm-api/sm-api:1.0.1
+    image: dom061077/sm-api:1.0.1
     ports:
       - "8088:8088"
     networks:
@@ -66,15 +66,15 @@ services:
     volumes:
       - ./backup:/backup  # Map the backup directory to your Windows host
     restart: unless-stopped
-#  sm-ui:
-#    container_name: sm-ui
-#    image: sm-ui/sm-ui:0.0.0
-#    ports:
-#      - 8081:80
-#    networks:
-#      - sm_network
-#    depends_on:
-#      - sm-api    
+  sm-ui:
+    container_name: sm-ui
+    image: dom061077/sm-ui:0.0.0
+    ports:
+      - 8081:80
+    networks:
+      - sm_network
+    depends_on:
+      - sm-api    
     
 networks:
   sm_network:
