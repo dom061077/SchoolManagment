@@ -58,7 +58,7 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: 'False'
 
     ports:
-      - "5050:80"
+      - "5050:8083"
     networks:
       - sm_network      
     depends_on:
