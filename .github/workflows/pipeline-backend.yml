@@ -30,8 +30,7 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Running Unit Tests
-        run: #|
-#          pwd
+        run: 
           ./mvnw clean compile
   unit-tests:
     runs-on: self-hosted
@@ -54,8 +53,7 @@ jobs:
 
 
       - name: Running Unit Tests
-        run: #|
-#          cd SchoolManagment
+        run: 
           ./mvnw clean test
   build:
     runs-on: self-hosted
@@ -126,7 +124,7 @@ jobs:
   deploy:
     name: Deploy Backend
     runs-on: self-hosted
-#    needs: [build-image]
+    needs: [build-image]
     steps:
 
 #      - name: Start SSH Agent and Add Private Key
