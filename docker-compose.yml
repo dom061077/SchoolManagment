@@ -68,7 +68,7 @@ services:
     restart: unless-stopped
   sm-ui:
     container_name: sm-ui
-    image: sm-ui/sm-ui:1.0.1
+    image: sm-ui/sm-ui:0.0.0
     ports:
       - 8081:80
     networks:
