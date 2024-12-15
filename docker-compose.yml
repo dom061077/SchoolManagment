@@ -56,6 +56,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_LISTEN_PORT: 8083
 
     ports:
       - "5050:8083"
@@ -70,7 +71,7 @@ services:
     container_name: sm-ui
     image: dom061077/sm-ui:0.0.0
     ports:
-      - 8081:8081
+      - 8081:80
     networks:
       - sm_network
     depends_on:
