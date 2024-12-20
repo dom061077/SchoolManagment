@@ -82,7 +82,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     }    
 
     @Bean
-    CorsFilter corsConfigurationSource() {
+    CorsFilter corsFilter() {
         /*CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost:8081"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT"));
