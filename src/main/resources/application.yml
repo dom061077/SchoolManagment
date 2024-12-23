@@ -25,9 +25,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: "http://localhost:9090/realms/book-social-network"
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-  origins: http://149.50.130.196:8088/,http://localhost:8088/,http://localhost:4200,http://149.50.130.196:8080
+          issuer-uri: "http://keycloak-sm:8080/realms/book-social-network"
 server:
-  port: 8088
-  forward-headers-strategy: native
+    port: 8088
+    forward-headers-strategy: native
