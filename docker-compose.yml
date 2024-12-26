@@ -76,6 +76,8 @@ services:
       - sm_network
     depends_on:
       - sm-api    
+    volumes:
+      - ./nginx_logs:/var/log/nginx       
     
 networks:
   sm_network:
