@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -117,10 +118,11 @@ public class PersonApi {
     @GetMapping(value = "certificate")
     public void getPersonCertificateReport(Long personId,HttpServletResponse response) throws IOException, JRException{
         
+        InputStream inputStream = getClass().getResourceAsStream("/church_certificate.jrxml"); 
+        JasperReport jasperReport = JasperCompileManager.compileReport(inputStream); 
 
-
-        File file = ResourceUtils.getFile("classpath:church_certificate.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        //File file = ResourceUtils.getFile("classpath:church_certificate.jrxml");
+        //JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         ArrayList<QueryFilterDto> queryFilters = new ArrayList<QueryFilterDto>();
         QueryFilterDto qFilterDto = QueryFilterDto.builder().build();
         qFilterDto.setProperty("id:eq");
