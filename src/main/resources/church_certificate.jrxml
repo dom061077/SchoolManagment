@@ -27,7 +27,7 @@
 			<staticText>
 				<reportElement x="0" y="28" width="575" height="30" uuid="1374f393-1438-4878-adb6-08a6cd64e03c"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="16"/>
+					<font fontName="DejaVu Sans" size="16"/>
 				</textElement>
 				<text><![CDATA[Parroquia Ntra. Sra. De Guadalupe – Arquidiócesis de Tucumán]]></text>
 			</staticText>
@@ -57,7 +57,7 @@
 			<staticText>
 				<reportElement x="10" y="20" width="90" height="14" uuid="98a82115-76ee-4392-9837-23245ab3eae3"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="DejaVu Sans" size="12"/>
 				</textElement>
 				<text><![CDATA[Se certifica que]]></text>
 			</staticText>
