@@ -26,6 +26,8 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: "http://keycloak-sm:8080/realms/book-social-network"
+  cors:
+    allowed-origins: "http://localhost:4200, https://warriorit.site, http://localhost:8081, http://localhost"
 server:
     port: 8088
     forward-headers-strategy: native
