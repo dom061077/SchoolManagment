@@ -21,8 +21,8 @@ jobs:
           fetch-depth: 0
       - name: Copy certificates from VPS
         run: |
-          scp -oStrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.crt .
-          scp -oStrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.key .
+          scp -oStrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.crt ./warriorit.site.crt
+          scp -oStrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.key ./warriorit.site.key
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
