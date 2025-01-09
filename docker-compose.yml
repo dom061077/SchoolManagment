@@ -71,7 +71,8 @@ services:
     container_name: sm-ui
     image: dom061077/sm-ui:0.0.0
     ports:
-      - 8081:80
+      - 80:80
+      - 443:443
     networks:
       - sm_network
     depends_on:
