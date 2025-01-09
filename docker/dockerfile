@@ -15,7 +15,7 @@ WORKDIR /app
 COPY --from=build /build/target/schoolmanagement-*.jar /app/
 
 # Copy the certificate into the runtime image
-COPY warriorit.site.crt .
+COPY warriorit.site.crt /app/
 
 # Import the certificate into the Java truststore
 RUN keytool -importcert -noprompt \
@@ -35,7 +35,6 @@ ENV MAILDEV_URL=localhost
 ENV ACTIVE_PROFILE=${PROFILE}
 ENV JAR_VERSION=${APP_VERSION}
 ENV KEYCLOAK=https://www.warriorit.site/realms/book-social-network
-CMD keytool -importcert -file warriorit.site.crt -keystore $JAVA_HOME/lib/security/cacerts -alias warriorit
 
 CMD java -jar -Dspring.security.oauth2.resourceserver.jwt.issuer-uri=${KEYCLOAK} -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL}  schoolmanagement-${JAR_VERSION}.jar
 
