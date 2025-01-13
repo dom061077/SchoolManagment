@@ -26,7 +26,9 @@ services:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
       KC_DB_USERNAME: postgres
-      KC_DB_PASSWORD: postgres123      
+      KC_DB_PASSWORD: postgres123     
+      KC_HOSTNAME_ADMIN_URL: https://www.warriorit.site 
+      KC_HOSTNAME_URL: https://www.warriorit.site
 
     ports:
       - "8080:8080"
