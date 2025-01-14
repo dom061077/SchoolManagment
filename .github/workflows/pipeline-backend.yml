@@ -85,8 +85,8 @@ jobs:
           fetch-depth: 0
       - name: Copy certificates from VPS
         run: |
-          scp -oStrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.crt ./warriorit.site.crt
-          scp -oStrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.key ./warriorit.site.key
+          scp  ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.crt ./warriorit.site.crt
+          scp  ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:/home/gitrunner/warriorit.site.key ./warriorit.site.key
 
       - name: Setup JDK
         uses: actions/setup-java@v4
@@ -157,7 +157,7 @@ jobs:
           ssh -v -p 5489 ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}  "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
-        run: scp -oStrictHostKeyChecking=no docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
+        run: scp  docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
 
       - name: Set ENV variable and deploy
         run: |
