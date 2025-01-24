@@ -116,7 +116,9 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sm-api:${{ steps.extract_version.outputs.VERSION }},${{ secrets.DOCKERHUB_USERNAME }}/sm-api:latest
           build-args: |
             PROFILE=dev
-            APP_VERSION=${{ steps.extract_version.outputs.VERSION }}
+            APP_VERSION=${{ steps.extract_version.outputs.VERSION }}   
+            DB_PASSWORD=${{ steps.extract_version.outputs.DB_PASSWORD }}   
+            DB_USER=${{ steps.extract_version.outpus.DB_USER }}
   
 
   deploy:
