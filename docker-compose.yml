@@ -29,6 +29,7 @@ services:
       KC_DB_PASSWORD: ${DB_PASSWORD}     
       KC_HOSTNAME_ADMIN_URL: https://www.warriorit.site 
       KC_HOSTNAME_URL: https://www.warriorit.site
+      KC_PROXY: edge
 
     ports:
       - "8080:8080"
