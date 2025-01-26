@@ -37,7 +37,7 @@ services:
     depends_on:
       - postgres           
     command:
-      - "start-dev"   
+      - "start"   
     extra_hosts:
       - "keycloak-sm:127.0.0.1"
       
