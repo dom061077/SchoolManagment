@@ -39,10 +39,10 @@ ENV MAILDEV_URL=localhost
 
 ENV ACTIVE_PROFILE=${PROFILE}
 ENV JAR_VERSION=${APP_VERSION}
-ENV DB_PASSWORD=${DB_PASSWORD}
-ENV DB_USER=${DB_USER} 
+ENV DB_PASSWORD_API=${DB_PASSWORD}
+ENV DB_USER_API=${DB_USER} 
 ENV KEYCLOAK=https://www.warriorit.site/realms/book-social-network
 
-CMD java -jar -Dspring.datasource.username=${DB_USER} -Dspring.datasource.password=${DB_PASSWORD} -Dspring.security.oauth2.resourceserver.jwt.issuer-uri=${KEYCLOAK} -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL}  schoolmanagement-${JAR_VERSION}.jar
+CMD java -jar -Dspring.datasource.username=${DB_USER_API} -Dspring.datasource.password=${DB_PASSWORD_API} -Dspring.security.oauth2.resourceserver.jwt.issuer-uri=${KEYCLOAK} -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL}  schoolmanagement-${JAR_VERSION}.jar
 
 #docker build -t dom061077/sm-api:1.0.1 -f docker .
