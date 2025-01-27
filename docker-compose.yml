@@ -59,6 +59,8 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
+      DB_USER: ${ secrets.DB_USER }
+      DB_PASSOWRD: ${ secrets.DB_PASSWORD }
       PGADMIN_LISTEN_PORT: 8083
 
     ports:
