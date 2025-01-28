@@ -117,8 +117,8 @@ jobs:
           build-args: |
             PROFILE=dev
             APP_VERSION=${{ steps.extract_version.outputs.VERSION }}   
-            DB_PASSWORD=${{ steps.extract_version.outputs.DB_PASSWORD }}   
-            DB_USER=${{ steps.extract_version.outpus.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}   
+            DB_USER=${{ secrets.DB_USER }}
   
 
   deploy:
