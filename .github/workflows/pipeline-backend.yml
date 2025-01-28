@@ -140,13 +140,11 @@ jobs:
       - name: Set ENV variable and deploy
         run: |
           ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
-          export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
-          export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
-          export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
-          export DB_USER=${{ secrets.DB_USER }} 
-          export DB_PASSWORD=${{ secrets.DB_PASSWORD }} 
+          mkdir -p ci-cd
+          echo "DB_USER=${{ secrets.DB_USER }}" > ci-cd/.env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ci-cd/.env
           cd ci-cd
-          DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker compose down
-          DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker compose pull -q
-          DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker compose up -d
-          EOF          
+          docker compose --env-file .env down
+          docker compose --env-file .env pull -q
+          docker compose --env-file .env up -d
+      EOF    
