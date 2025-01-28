@@ -5,8 +5,8 @@ services:
     container_name: postgres
     image: postgres:11
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: $${DB_USER}
+      POSTGRES_PASSWORD: $${DB_PASSWORD}
       POSTGRES_DB: schoolmanagement
       PGDATA: /data/postgres
     ports:
@@ -25,8 +25,8 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
-      KC_DB_USERNAME: ${DB_USER}
-      KC_DB_PASSWORD: ${DB_PASSWORD}     
+      KC_DB_USERNAME: $${DB_USER}
+      KC_DB_PASSWORD: $${DB_PASSWORD}     
       KC_HOSTNAME_ADMIN_URL: https://www.warriorit.site 
       KC_HOSTNAME_URL: https://www.warriorit.site
       KC_PROXY: edge
@@ -59,8 +59,8 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
-      DB_USER: ${ secrets.DB_USER }
-      DB_PASSOWRD: ${ secrets.DB_PASSWORD }
+      DB_USER: $${DB_USER}
+      DB_PASSOWRD: $${DB_PASSWORD}
       PGADMIN_LISTEN_PORT: 8083
 
     ports:
