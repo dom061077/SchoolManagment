@@ -146,8 +146,7 @@ jobs:
           export DB_USER=${{ secrets.DB_USER }} 
           export DB_PASSWORD=${{ secrets.DB_PASSWORD }} 
           cd ci-cd
-
-          EOF
-          docker compose docker-compose.yml down
-          docker compose -f docker-compose.yml pull -q
-          docker compose -f docker-compose.yml up -d
+          DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker compose down
+          DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker compose pull -q
+          DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker compose up -d
+          EOF          
