@@ -37,3 +37,4 @@ nginx_logs/error.log
 docker-compose.yml
 nginx.conf
 docker/
+docker/dockerfile
