@@ -31,10 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
-nginx_logs/access.log
-nginx_logs/error.log
+nginx_logs/
 .env
 docker-compose.yml
-nginx.conf
 docker/
 docker/dockerfile
+.github/workflows/pipeline-backend.yml
