@@ -34,3 +34,6 @@ build/
 nginx_logs/access.log
 nginx_logs/error.log
 .env
+docker-compose.yml
+nginx.conf
+docker/
