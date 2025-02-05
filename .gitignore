@@ -33,7 +33,6 @@ build/
 .vscode/
 nginx_logs/
 .env
-docker-compose.yml
 docker/
 docker/dockerfile
 .github/workflows/pipeline-backend.yml
