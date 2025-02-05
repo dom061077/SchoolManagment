@@ -30,9 +30,6 @@ services:
       KC_HOSTNAME_ADMIN_URL: https://www.warriorit.site 
       KC_HOSTNAME_URL: https://www.warriorit.site
       KC_PROXY: edge
-    volumes:
-      - ./warrior-theme:/opt/keycloak/themes/      
-
 
     ports:
       - "8080:8080"
