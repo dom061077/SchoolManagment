@@ -33,3 +33,5 @@ build/
 .vscode/
 nginx_logs/access.log
 nginx_logs/error.log
+.env
+docker-compose.yml
