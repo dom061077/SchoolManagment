@@ -35,3 +35,4 @@ nginx_logs/
 .env
 .github/workflows/pipeline-backend.yml
 docker-compose.yml
+.docker/
