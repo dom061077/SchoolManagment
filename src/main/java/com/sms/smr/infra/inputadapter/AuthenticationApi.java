@@ -1,36 +1,28 @@
 package com.sms.smr.infra.inputadapter;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sms.smr.application.AuthenticationUseCase;
-import com.sms.smr.domain.AuthenticationRequest;
-import com.sms.smr.domain.AuthenticationResponse;
-import com.sms.smr.domain.RegisterRequest;
+import com.sms.smr.infra.inputadapter.dto.keycloak.UserInfoDto;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
-import static java.util.stream.Collectors.toSet;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationApi {
+    private final static Logger logger = LoggerFactory.getLogger(Authentication.class);
 
 /*   private final AuthenticationUseCase service;
 
@@ -58,6 +50,7 @@ public class AuthenticationApi {
   
   @GetMapping("/roles")
   public Collection<String> getRoles(Authentication authentication) {
+   
       return authentication.getAuthorities().stream()
               .map(GrantedAuthority::getAuthority)
               .collect(Collectors.toList());
@@ -67,6 +60,33 @@ public class AuthenticationApi {
   public Collection<String> getMenubyRole(){
     
     return null;
+  }
+
+  @GetMapping("/userinfo")
+  public UserInfoDto getUserInfo(Authentication authentication){
+    UserInfoDto userInfo = new UserInfoDto();    
+    Jwt jwt = null;
+    if (authentication instanceof JwtAuthenticationToken jwtAuthToken) {
+      jwt = jwtAuthToken.getToken();
+
+    }
+    
+    //jwt.getClaim("name")
+    //email
+    //preferred_username
+    //family_name
+    //given_name
+    //sid
+
+  
+    userInfo.setName(jwt.getClaim("name"));
+    userInfo.setEmail(jwt.getClaim("email"));
+    userInfo.setPreferred_username(jwt.getClaim("preferred_username"));
+    userInfo.setFamily_name(jwt.getClaim("family_name"));
+    userInfo.setGiven_name(jwt.getClaim("given_name"));
+    userInfo.setSid(jwt.getClaim("sid"));
+
+    return userInfo;
   }
 
 }
