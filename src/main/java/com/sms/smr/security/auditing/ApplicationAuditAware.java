@@ -3,29 +3,18 @@ package com.sms.smr.security.auditing;
 import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import com.sms.smr.infra.outputadapter.db.UserEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
 public class ApplicationAuditAware implements AuditorAware<String> {
     @Override
     public Optional<String> getCurrentAuditor() {
-        Authentication authentication =
-                SecurityContextHolder
-                        .getContext()
-                        .getAuthentication();
-        if (authentication == null ||
-            !authentication.isAuthenticated() ||
-                authentication instanceof AnonymousAuthenticationToken
-        ) {
-            return Optional.empty();
-        }
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        //UserEntity userPrincipal = (UserEntity) authentication.getPrincipal();
-        //return Optional.ofNullable(userPrincipal.getId());
-        return Optional.ofNullable(authentication.getName());
+        if (authentication instanceof JwtAuthenticationToken jwtToken) {
+            return Optional.ofNullable(jwtToken.getToken().getClaimAsString("preferred_username"));
+        }
+        return Optional.of("Unknown");
         
     }
 }
