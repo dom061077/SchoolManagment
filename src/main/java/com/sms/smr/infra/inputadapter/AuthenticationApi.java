@@ -58,8 +58,12 @@ public class AuthenticationApi {
 
   @GetMapping("/menubyrole")
   public Collection<String> getMenubyRole(){
-    
-    return null;
+    //desde un usecase traer todos los roles
+    //y luego filtrarlos de los que estén asignados al usuario usando stream filters
+    Collection<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+      .collect(Collectors.toList());
+
+    return roles;
   }
 
   @GetMapping("/userinfo")
