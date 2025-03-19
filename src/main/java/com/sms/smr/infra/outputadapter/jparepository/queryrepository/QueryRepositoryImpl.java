@@ -165,6 +165,10 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = cb.createQuery(Long.class); 
         Root<T> root = criteriaQuery.from(clazz);
+        
+        List<Predicate> predicates = getPredicates(clazz, queryFilters, root);
+        Predicate predicate = cb.and(predicates.toArray(new Predicate[0]));
+        criteriaQuery.where(predicate);
 
         criteriaQuery.select(cb.count(root));
         TypedQuery<Long> query = em.createQuery(criteriaQuery);

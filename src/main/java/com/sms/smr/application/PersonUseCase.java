@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputport.PersonInputPort;
+import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
@@ -18,9 +18,9 @@ import com.sms.smr.infra.outputport.EntityRepository;
 import lombok.RequiredArgsConstructor;
 
 
-@Component
+@Component(value = "personUseCase")
 @RequiredArgsConstructor
-public class PersonUseCase implements PersonInputPort{
+public class PersonUseCase implements BaseInputPort<Person>{
 
     private static final Logger logger = LoggerFactory.getLogger(PersonUseCase.class);
     @Qualifier(value="personRepository")
@@ -30,7 +30,7 @@ public class PersonUseCase implements PersonInputPort{
 
 
     @Override
-    public Person createPerson(Person person) {
+    public Person create(Person person) {
         return personEntityMapper.toDomain(entityRepository.save(personEntityMapper.toDbo(person)));
     }
 
@@ -52,7 +52,7 @@ public class PersonUseCase implements PersonInputPort{
     }   
 
     @Override
-    public Person updatePerson(Long personId, Person person) {
+    public Person update(Long personId, Person person) {
         // TODO Auto-generated method stub
         return personEntityMapper.toDomain( entityRepository.update(personId, personEntityMapper.toDbo(person)));
     }

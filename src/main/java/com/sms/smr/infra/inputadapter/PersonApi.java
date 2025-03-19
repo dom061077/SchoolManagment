@@ -1,6 +1,5 @@
 package com.sms.smr.infra.inputadapter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,19 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
+import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.inputport.PersonInputPort;
-import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -35,11 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,22 +53,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping(value="/api/v1/person")
 @RequiredArgsConstructor
 public class PersonApi {
-    private final PersonInputPort personInputPort;
+    @Qualifier(value="personUseCase")
+    private final BaseInputPort<Person> baseInputPort;
     private final PersonMapper personMapper;
-    private final PersonEntityMapper personEntityMapper;
     private static final Logger logger = LoggerFactory.getLogger(PersonApi.class); 
 
 
 
      @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)   
     public PersonDto create(@RequestBody @Valid PersonDto personDto){
-      return personMapper.personToPersonDto(personInputPort.createPerson(personMapper.personDtoToPerson(personDto)));
+      return personMapper.personToPersonDto(baseInputPort.create(personMapper.personDtoToPerson(personDto)));
       
     }
  
     @GetMapping("/{id}")
     public PersonDto getPerson(@PathVariable Long id) {
-        return personMapper.personToPersonDto( personInputPort.getById(id));
+        return personMapper.personToPersonDto( baseInputPort.getById(id));
     }
 
 
@@ -81,7 +76,7 @@ public class PersonApi {
     public PersonDto updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto personDto) {
         //TODO: process PUT request
         Person person = personMapper.personDtoToPerson(personDto);
-        return personMapper.personToPersonDto(personInputPort.updatePerson(id,person));
+        return personMapper.personToPersonDto(baseInputPort.update(id,person));
     }
     
 
@@ -112,7 +107,7 @@ public class PersonApi {
             logger.error("Error al parsear sorts JSON: "+e.getMessage());
         }
  
-        return personInputPort.getAll(offset, limit, queryFilters,sortFilters);      
+        return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 
     @GetMapping(value = "certificate")
@@ -129,7 +124,7 @@ public class PersonApi {
         qFilterDto.setProperty("id:eq");
         qFilterDto.setValue(personId.toString());
         queryFilters.add(qFilterDto);
-        QueryResult<Person> qResult = personInputPort.getAll(0,1,queryFilters,null);
+        QueryResult<Person> qResult = baseInputPort.getAll(0,1,queryFilters,null);
         List<Person> persons = qResult.getData();
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(persons);
         Map<String, Object> parameters = new HashMap<>();
