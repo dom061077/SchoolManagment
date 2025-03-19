@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,8 @@ public class MenuRoleRepository implements EntityRepository {
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,
-            List<QueryFilterDto> sortFilters) {
+    public <T> List<T> getAll(int offset, int limit, List<QueryDto> queryFilters,
+            List<QueryDto> sortFilters) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
         //return (List<T>) queryRepository.getAllAnd()
@@ -42,7 +42,7 @@ public class MenuRoleRepository implements EntityRepository {
     }
 
     @Override
-    public long getCount(List<QueryFilterDto> queryFilters) {
+    public long getCount(List<QueryDto> queryFilters) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCount'");
     }

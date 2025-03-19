@@ -4,14 +4,12 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import com.sms.smr.domain.Person;
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.PersonInputPort;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
-import com.sms.smr.infra.outputadapter.jparepository.person.PersonRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
@@ -43,7 +41,7 @@ public class PersonUseCase implements PersonInputPort{
     }
 
     @Override
-    public  QueryResult<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sorts) {
+    public  QueryResult<Person> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sorts) {
         QueryResult<Person> qResult = new QueryResult<Person>();            
 
         qResult.setData(personEntityMapper.getPersons(queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sorts)));

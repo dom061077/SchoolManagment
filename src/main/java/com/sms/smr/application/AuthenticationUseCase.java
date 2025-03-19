@@ -20,7 +20,7 @@ import com.sms.smr.domain.Menu;
 import com.sms.smr.domain.RegisterRequest;
 import com.sms.smr.domain.Token;
 import com.sms.smr.domain.TokenType;
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.MenuEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.TokenEntity;

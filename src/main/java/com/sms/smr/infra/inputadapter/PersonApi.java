@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sms.smr.domain.Person;
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
@@ -90,22 +90,22 @@ public class PersonApi {
      public QueryResult<Person> /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
         ObjectMapper objectMapper = new ObjectMapper();
-        List<QueryFilterDto> queryFilters = new ArrayList();
+        List<QueryDto> queryFilters = new ArrayList();
         JsonNode jsonArray;
         try{
             jsonArray = objectMapper.readTree(qfilters);
             for(JsonNode element : jsonArray){
-                QueryFilterDto queryFilter = objectMapper.treeToValue(element, QueryFilterDto.class);
+                QueryDto queryFilter = objectMapper.treeToValue(element, QueryDto.class);
                 queryFilters.add(queryFilter);
             }
         }catch(Exception e){
             logger.error("Error al parsear filters JSON: "+e.getMessage());
         }
-        List<QueryFilterDto> sortFilters = new ArrayList<QueryFilterDto>();
+        List<QueryDto> sortFilters = new ArrayList<QueryDto>();
         try{
             jsonArray = objectMapper.readTree(sorts);
             for(JsonNode element : jsonArray){
-                QueryFilterDto sortFilter = objectMapper.treeToValue(element, QueryFilterDto.class);
+                QueryDto sortFilter = objectMapper.treeToValue(element, QueryDto.class);
                 sortFilters.add(sortFilter); 
             }
         }catch(Exception e){
@@ -124,8 +124,8 @@ public class PersonApi {
 
         //File file = ResourceUtils.getFile("classpath:church_certificate.jrxml");
         //JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        ArrayList<QueryFilterDto> queryFilters = new ArrayList<QueryFilterDto>();
-        QueryFilterDto qFilterDto = QueryFilterDto.builder().build();
+        ArrayList<QueryDto> queryFilters = new ArrayList<QueryDto>();
+        QueryDto qFilterDto = QueryDto.builder().build();
         qFilterDto.setProperty("id:eq");
         qFilterDto.setValue(personId.toString());
         queryFilters.add(qFilterDto);

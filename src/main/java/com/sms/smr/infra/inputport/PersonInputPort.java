@@ -1,10 +1,9 @@
 package com.sms.smr.infra.inputport;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.sms.smr.domain.Person;
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 public interface PersonInputPort {
@@ -12,7 +11,7 @@ public interface PersonInputPort {
 
     public Person getById(Long personId);
 
-    public QueryResult<Person> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortings);    
+    public QueryResult<Person> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings);    
     
     public Person updatePerson(Long personId,Person person);
 

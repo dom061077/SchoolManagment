@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.db.TokenEntity;
 import com.sms.smr.infra.outputadapter.db.UserEntity;
@@ -37,7 +37,7 @@ public class TokenRepository implements EntityRepository {
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sorts) {
+    public <T> List<T> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sorts) {
         // TODO Auto-generated method stub
         return (List<T>) queryRepository.getAllAnd(TokenEntity.class, offset, limit, queryFilters, sorts);
     }
@@ -63,7 +63,7 @@ public class TokenRepository implements EntityRepository {
     }
 
     @Override
-    public long getCount(List<QueryFilterDto> queryFilters) {
+    public long getCount(List<QueryDto> queryFilters) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCount'");
     }

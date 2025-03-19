@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Alumno;
 import com.sms.smr.domain.Person;
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.AlumnoInputPort;
 import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
@@ -37,7 +37,7 @@ public class AlumnoUseCase implements AlumnoInputPort{
     }
 
     @Override
-    public QueryResult<Alumno> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sorts) {
+    public QueryResult<Alumno> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sorts) {
     
         QueryResult<Alumno> qResult = new QueryResult<Alumno>();            
 

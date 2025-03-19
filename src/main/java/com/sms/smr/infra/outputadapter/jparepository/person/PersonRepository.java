@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputport.EntityRepository;
@@ -36,7 +36,7 @@ public class PersonRepository implements EntityRepository {
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryFilterDto> queryFilters,List<QueryFilterDto> sortFilters) {
+    public <T> List<T> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sortFilters) {
         // TODO Auto-generated method stub
         return (List<T>) queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sortFilters);
     }
@@ -51,7 +51,7 @@ public class PersonRepository implements EntityRepository {
     }
 
     @Override
-    public long getCount(List<QueryFilterDto> queryFilters) {
+    public long getCount(List<QueryDto> queryFilters) {
         // TODO Auto-generated method stub
         return queryRepository.getCount(PersonEntity.class, queryFilters);
     }

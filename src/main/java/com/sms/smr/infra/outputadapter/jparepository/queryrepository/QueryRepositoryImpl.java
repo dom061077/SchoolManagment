@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Role;
-import com.sms.smr.infra.inputadapter.dto.query.QueryFilterDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
@@ -42,14 +42,14 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     }
 
     @Override
-    public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters) {
+    public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, List<QueryDto> queryFilters) {
         List <T> result = null;
 
         return result;
     }
     
     @Override
-    public  <T>  List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryFilterDto> queryFilters, List<QueryFilterDto> sortingFilters) {
+    public  <T>  List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortingFilters) {
         
         try{
         clazz = getEntityClass(clazz);
@@ -84,7 +84,7 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         return result;      
     }
 
-    private void addSortings(CriteriaQuery cq,CriteriaBuilder cb, Root root, List<QueryFilterDto> sortingFilters){
+    private void addSortings(CriteriaQuery cq,CriteriaBuilder cb, Root root, List<QueryDto> sortingFilters){
         sortingFilters.forEach(s->{
 
             if(s.getValue().toUpperCase().compareTo("ASC")==0){
@@ -115,7 +115,7 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         return Optional.empty();
     }
 
-    private List<Predicate> getPredicates(Class<?> clazz, List<QueryFilterDto> queryFilters,Root root) {
+    private List<Predicate> getPredicates(Class<?> clazz, List<QueryDto> queryFilters,Root root) {
         logger.info("Ingresando a getPredicates");
         List<Predicate> predicates = new ArrayList();
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -154,7 +154,7 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     }
 
     @Override
-    public <T> long getCount(Class<T> clazz, List<QueryFilterDto> queryFilters) {
+    public <T> long getCount(Class<T> clazz, List<QueryDto> queryFilters) {
         logger.info("Ingresando a getCount");
         long count = 0;
         try{

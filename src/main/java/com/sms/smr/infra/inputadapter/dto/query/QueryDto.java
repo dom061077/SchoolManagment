@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QueryFilterDto {
+public class QueryDto {
     String property;
     String value;
 
