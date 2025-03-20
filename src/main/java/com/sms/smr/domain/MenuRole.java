@@ -1,7 +1,5 @@
 package com.sms.smr.domain;
 
-import com.sms.smr.infra.outputadapter.db.MenuEntity;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +11,14 @@ public class MenuRole {
 
     private Long id;   
     
-    MenuEntity menu;
+    //MenuDomain
+    //private Long id;
+    //private String description;
+    //private String code;
+    //private String path;
+    private String menuDescription;
+    private String menuCode;
+    private String menuPath;
 
-    Role role;    
+    String role;   
 }
