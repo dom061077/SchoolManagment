@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.sms.smr.domain.MenuRole;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.EntityRepository;
@@ -16,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component(value = "menuRoleUseCase")
 @RequiredArgsConstructor
-public class MenuRoleUseCase implements BaseInputPort{
+public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
 
     private static final Logger logger = LoggerFactory.getLogger(MenuRoleUseCase.class);
 
@@ -24,13 +25,13 @@ public class MenuRoleUseCase implements BaseInputPort{
     private final EntityRepository entityRepository;
 
     @Override
-    public Object create(Object entity) {
+    public MenuRole create(MenuRole menuRole) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 
     @Override
-    public Object getById(Long id) {
+    public MenuRole getById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
     }
@@ -38,13 +39,19 @@ public class MenuRoleUseCase implements BaseInputPort{
     @Override
     public QueryResult getAll(int offset, int limit, List queryFilters, List sortings) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        QueryResult<MenuRole> qResult = new QueryResult<MenuRole>();
+        qResult.setData(entityRepository.getAll(offset, limit, queryFilters, sortings));
+        qResult.setTotal(qResult.getData().size());
+        return qResult;
+
     }
 
     @Override
-    public Object update(Long id, Object entity) {
+    public MenuRole update(Long id, MenuRole entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
+
+
     
 }

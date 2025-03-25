@@ -2,6 +2,7 @@ package com.sms.smr.infra.outputadapter.db;
 
 import com.sms.smr.domain.Role;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,4 +29,9 @@ public class MenuRoleEntity {
     MenuEntity menu;
     
     String role;
+    @Column(name = "create_per")
+    boolean create;
+    boolean update;
+    boolean delete;
+
 }

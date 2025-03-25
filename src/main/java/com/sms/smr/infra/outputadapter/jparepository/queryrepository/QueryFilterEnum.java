@@ -8,7 +8,9 @@ enum QueryFilterEnum {
     neq,
     gt,
     like,
+    eqin,
     lt;
+    
 
 
     /*private final String fieldValue;

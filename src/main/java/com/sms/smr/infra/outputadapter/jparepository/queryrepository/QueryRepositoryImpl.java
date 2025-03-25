@@ -137,6 +137,9 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
                 if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.like){
                     predicates.add(cb.like(cb.upper( root.get(splitted[0])), "%"+q.getValue().toUpperCase()+"%"));
                 }
+                if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.eqin){
+                    predicates.add(root.get(splitted[0]).in(List.of(splitted[1])));
+                }
             }
         });
 

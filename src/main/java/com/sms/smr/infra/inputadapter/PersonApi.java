@@ -14,6 +14,7 @@ import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
+import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.inputport.PersonInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
@@ -84,7 +85,7 @@ public class PersonApi {
     @PreAuthorize("hasAnyAuthority('ROLE_REALM_CHURCH','ROLE_RESOURCE_bsn_CHURCH')")
      public QueryResult<Person> /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
         logger.info("Filters: "+qfilters);
-        ObjectMapper objectMapper = new ObjectMapper();
+        /*ObjectMapper objectMapper = new ObjectMapper();
         List<QueryDto> queryFilters = new ArrayList();
         JsonNode jsonArray;
         try{
@@ -105,8 +106,9 @@ public class PersonApi {
             }
         }catch(Exception e){
             logger.error("Error al parsear sorts JSON: "+e.getMessage());
-        }
- 
+        }*/
+        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
         return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 

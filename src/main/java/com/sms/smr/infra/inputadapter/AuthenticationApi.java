@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sms.smr.domain.MenuRole;
 import com.sms.smr.infra.inputadapter.dto.keycloak.UserInfoDto;
+import com.sms.smr.infra.inputadapter.utils.Utils;
+import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +30,9 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationApi {
     private final static Logger logger = LoggerFactory.getLogger(Authentication.class);
     private final QueryRepository queryRepository;
+    
+    @Qualifier(value = "menuRoleUseCase")
+    private final BaseInputPort<MenuRole> inputPort;
 /*   private final AuthenticationUseCase service;
 
   @PostMapping(value="/register",produces=MediaType.APPLICATION_JSON_VALUE)
@@ -58,13 +66,19 @@ public class AuthenticationApi {
   }
 
   @GetMapping("/menubyrole")
-  public Collection<String> getMenubyRole(Authentication authentication){
+  public QueryResult<MenuRole> getMenubyRole(Authentication authentication){
     //desde un usecase traer todos los roles
     //y luego filtrarlos de los que estén asignados al usuario usando stream filters
+    logger.info("MenubyRole: ");
     Collection<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
       .collect(Collectors.toList());
+    roles.stream().collect(Collectors.joining(","));
+    String filterStr = "";
+    String orderStr = "";
+    var qFilters = Utils.stringToQueryFilterDto(filterStr);
+    var qOrders = Utils.stringToQueryFilterDto(orderStr);
     
-    return roles;
+    return inputPort.getAll(0, 100, qFilters, qOrders );
   }
 
   @GetMapping("/userinfo")
