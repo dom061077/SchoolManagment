@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
+import com.sms.smr.infra.outputadapter.db.PersonEntity;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class MenuRoleRepository implements EntityRepository {
 
     private final SpringDataMenuRoleRepository sMenuRoleRepository;
+    private final QueryRepository queryRepository;
     
     @Override
     public <T> T save(T reg) {
@@ -30,9 +34,8 @@ public class MenuRoleRepository implements EntityRepository {
     @Override
     public <T> List<T> getAll(int offset, int limit, List<QueryDto> queryFilters,
             List<QueryDto> sortFilters) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-        //return (List<T>) queryRepository.getAllAnd()
+       return (List<T>) queryRepository.getAllAnd(MenuRoleEntity.class, offset, limit, queryFilters, sortFilters);
+
     }
 
     @Override

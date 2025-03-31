@@ -1,6 +1,7 @@
 package com.sms.smr.infra.outputadapter.mapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,7 +13,7 @@ import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 @Mapper(
         componentModel = "spring"
 )
-public interface MenuEntityRoleMapper {
+public interface MenuRoleEntityMapper {
 
 /*    private Long id;
     private String description;
@@ -35,6 +36,14 @@ public interface MenuEntityRoleMapper {
     @Mapping(source = "menuPath", target = "menu.path")
     MenuRoleEntity toEntity(MenuRole menuRole);
 
+    default List<MenuRole> getMenuRoles(List<MenuRoleEntity> menuRolesEntities){
+        return  menuRolesEntities.stream().map(menuRoleEntity->MenuRole.builder()
+                    .menuDescription(menuRoleEntity.getMenu().getDescription())
+                    .menuCode(menuRoleEntity.getMenu().getCode())
+                    .menuPath(menuRoleEntity.getMenu().getPath())
+                    .build()    
+        ).collect(Collectors.toList());
+    }
     
 }
 
