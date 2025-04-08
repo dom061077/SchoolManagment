@@ -1,6 +1,7 @@
 package com.sms.smr.infra.inputadapter;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.MenuRole;
 import com.sms.smr.infra.inputadapter.dto.keycloak.UserInfoDto;
+import com.sms.smr.infra.inputadapter.dto.menurole.MenuRoleDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
@@ -65,6 +67,8 @@ public class AuthenticationApi {
               .collect(Collectors.toList());
   }
 
+
+/*
   @GetMapping("/menubyrole")
   public QueryResult<MenuRole> getMenubyRole(Authentication authentication){
     //desde un usecase traer todos los roles
@@ -80,6 +84,24 @@ public class AuthenticationApi {
     
     return inputPort.getAll(0, 100, qFilters, qOrders );
   }
+  */
+
+
+  private List<MenuRoleDto> getMenubyRole(Authentication authentication){
+    //desde un usecase traer todos los roles
+    //y luego filtrarlos de los que estén asignados al usuario usando stream filters
+    logger.info("MenubyRole: ");
+    Collection<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+      .collect(Collectors.toList());
+    roles.stream().collect(Collectors.joining(","));
+    String filterStr = "";
+    String orderStr = "";
+    var qFilters = Utils.stringToQueryFilterDto(filterStr);
+    var qOrders = Utils.stringToQueryFilterDto(orderStr);
+    QueryResult qResult = inputPort.getAll(0, 100, qFilters, qOrders );
+    return qResult.getData();
+  }  
+  
 
   @GetMapping("/userinfo")
   public UserInfoDto getUserInfo(Authentication authentication){
@@ -104,6 +126,7 @@ public class AuthenticationApi {
     userInfo.setFamily_name(jwt.getClaim("family_name"));
     userInfo.setGiven_name(jwt.getClaim("given_name"));
     userInfo.setSid(jwt.getClaim("sid"));
+    userInfo.setMenus(this.getMenubyRole(authentication));
 
     return userInfo;
   }

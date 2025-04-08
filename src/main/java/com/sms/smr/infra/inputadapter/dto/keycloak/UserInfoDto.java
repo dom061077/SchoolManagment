@@ -1,5 +1,9 @@
 package com.sms.smr.infra.inputadapter.dto.keycloak;
 
+import java.util.List;
+
+import com.sms.smr.infra.inputadapter.dto.menurole.MenuRoleDto;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +28,8 @@ public class UserInfoDto {
     private String given_name;
 
     private String sid;
+
+    private List<MenuRoleDto> menus;
+
     
 }
