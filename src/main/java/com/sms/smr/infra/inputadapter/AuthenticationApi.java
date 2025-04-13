@@ -93,8 +93,10 @@ public class AuthenticationApi {
     logger.info("MenubyRole: ");
     Collection<String> roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
       .collect(Collectors.toList());
-    roles.stream().collect(Collectors.joining(","));
-    String filterStr = "";
+    
+    String filterStr = "[{\"property\": \"role:eqin\",\"value\":\""
+      + roles.stream().collect(Collectors.joining(","))
+      +"\"}]";
     String orderStr = "";
     var qFilters = Utils.stringToQueryFilterDto(filterStr);
     var qOrders = Utils.stringToQueryFilterDto(orderStr);
