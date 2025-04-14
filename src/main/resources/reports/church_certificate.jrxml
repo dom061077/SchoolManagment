@@ -38,7 +38,7 @@
 			</staticText>
 			<image>
 				<reportElement x="262" y="0" width="50" height="50" uuid="3f2a84ad-48c5-421d-813e-053d3be7d629"/>
-				<imageExpression><![CDATA["C:/springboot/Church/logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["reports/report_img/logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

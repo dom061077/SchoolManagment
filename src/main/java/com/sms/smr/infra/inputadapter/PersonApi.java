@@ -116,7 +116,7 @@ public class PersonApi {
     public void getPersonCertificateReport(Long personId,HttpServletResponse response) throws IOException, JRException{
         
 
-        InputStream inputStream = getClass().getResourceAsStream("/church_certificate.jrxml"); 
+        InputStream inputStream = getClass().getResourceAsStream("/reports/church_certificate.jrxml"); 
         JasperReport jasperReport = JasperCompileManager.compileReport(inputStream); 
 
         //File file = ResourceUtils.getFile("classpath:church_certificate.jrxml");
