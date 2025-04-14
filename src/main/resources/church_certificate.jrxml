@@ -19,6 +19,11 @@
 	<field name="nombrePadrinoConf" class="java.lang.String"/>
 	<field name="otrasNotas" class="java.lang.String"/>
 	<field name="padre" class="java.lang.String"/>
+	<field name="apellidoMadrinaConf" class="java.lang.String"/>
+
+	<field name="apellidoMadrinaBaut" class="java.lang.String"/>
+	<field name="nombreMadrinaConf" class="java.lang.String"/>
+	<field name="nombreMadrinaBaut" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -178,7 +183,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre_padrino_baut}+" "+ $F{apellido_padrino_baut}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombrePadrinoBaut}+" "+ $F{apellidoPadrinoBaut}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="127" width="40" height="14" uuid="29dc1e40-5b55-4707-ba4c-78be5bdb7af2">
@@ -200,7 +205,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre_madrina_baut}+" "+ $F{apellido_madrina_baut}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombreMadrinaBaut}+" "+ $F{apellidoMadrinaBaut}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="152" width="200" height="14" uuid="e3ead885-97ed-4d98-8141-2c7e8cebe98b">
@@ -222,7 +227,7 @@
 				<textElement textAlignment="Left">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nro_libro}+" Folio # "+$F{nro_libro}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nroLibro}+" Folio # "+$F{nroLibro}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="177" width="105" height="14" uuid="694c06ec-c584-4ea9-941b-801db0375886">
@@ -248,7 +253,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_nacimiento}.toLocalDate().getDayOfMonth()+" de  "+new Date($F{fecha_nacimiento}.getTime()).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fecha_nacimiento}.toLocalDate().getYear()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fechaNacimiento}.toLocalDate().getDayOfMonth()+" de  "+new Date($F{fechaNacimiento}.getTime()).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fechaNacimiento}.toLocalDate().getYear()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="434" y="83" width="122" height="14" uuid="0cef86e3-d983-4974-8c1f-7b489bc816e7">
@@ -262,7 +267,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_bautismo}.toLocalDate().getDayOfMonth()+" de  "+$F{fecha_bautismo}.toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fecha_bautismo}.toLocalDate().getYear()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fechaBautismo}.toLocalDate().getDayOfMonth()+" de  "+$F{fechaBautismo}.toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fechaBautismo}.toLocalDate().getYear()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="177" width="324" height="14" uuid="c27236e5-0023-41ce-a3b1-b9a1d132cc1c">
@@ -276,7 +281,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_confirmacion}.toLocalDate().getDayOfMonth()+" de  "+$F{fecha_confirmacion}.toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fecha_confirmacion}.toLocalDate().getYear()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fechaConfirmacion}.toLocalDate().getDayOfMonth()+" de  "+$F{fechaConfirmacion}.toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fechaConfirmacion}.toLocalDate().getYear()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="437" y="177" width="116" height="14" uuid="f5fa0dc4-ce74-43d7-b6e0-1d9fac6593f3">
@@ -308,7 +313,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre_padrino_conf}+" "+ $F{apellido_padrino_conf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombrePadrinoConf}+" "+ $F{apellidoPadrinoConf}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="500" y="200" width="51" height="14" uuid="c172fb5c-4d86-4188-82f4-c6e1a99afea2">
@@ -331,7 +336,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre_madrina_conf}+" "+ $F{apellido_madrina_conf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombreMadrinaConf}+" "+ $F{apellidoMadrinaConf}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="250" width="302" height="14" uuid="9b35287a-8e9a-4b09-8b1e-0148b9b227e9">
@@ -364,7 +369,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre_matrimonio}+" "+ $F{apellido_matrimonio}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombreMatrimonio}+" "+ $F{apellidoMatrimonio}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="295" width="16" height="14" uuid="4cb78d24-c4ff-4192-9db6-19a15ccd3141">
@@ -387,7 +392,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_matrimonio}.toLocalDate().getDayOfMonth()+" de  "+$F{fecha_matrimonio}.toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fecha_matrimonio}.toLocalDate().getYear()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fechaMatrimonio}.toLocalDate().getDayOfMonth()+" de  "+$F{fechaMatrimonio}.toLocalDate().getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es"))+" de  "+$F{fechaMatrimonio}.toLocalDate().getYear()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="320" width="302" height="14" uuid="c36dffe0-62d3-4c2f-9a2e-47b40df86102">
@@ -411,7 +416,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{otras_notas}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{otrasNotas}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="400" width="210" height="14" uuid="cf7737b6-5704-4a5c-a8c7-afd63f65f353">

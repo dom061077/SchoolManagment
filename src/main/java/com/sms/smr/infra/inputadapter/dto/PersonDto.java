@@ -28,12 +28,17 @@ public class PersonDto {
     
     private int nroLibro;
     private int nroFolio;
-    private String apellidoPadrinoBaut;
-    private String nombrePadrinoBaut;
-    private String apellidoPadrinoConf;
-    private String nombrePadrinoConf;
-    private String apellidoMatrimonio;
-    private String nombreMatrimonio;
-    private String otrasNotas;
+    String apellidoPadrinoBaut;
+    String apellidoMadrinaBaut;
+    String nombrePadrinoBaut;
+    String nombreMadrinaBaut;
+    String apellidoPadrinoConf;
+    String apellidoMadrinaConf;
+    String nombrePadrinoConf;
+    String nombreMadrinaConf;
+    String apellidoMatrimonio;
+    String nombreMatrimonio;
+    String otrasNotas;
+
     
 }
