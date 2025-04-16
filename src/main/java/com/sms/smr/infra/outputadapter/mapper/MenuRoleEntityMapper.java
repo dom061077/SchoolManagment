@@ -34,7 +34,15 @@ public interface MenuRoleEntityMapper {
     @Mapping(source = "menuDescription", target = "menu.description")
     @Mapping(source = "menuCode", target = "menu.code")
     @Mapping(source = "menuPath", target = "menu.path")
+    @Mapping(source = "create", target = "create")
+    @Mapping(source = "delete", target = "delete")
+    @Mapping(source = "update", target = "update")
     MenuRoleEntity toEntity(MenuRole menuRole);
+
+    @Mapping(source = "create", target = "create")
+    @Mapping(source = "delete", target = "delete")
+    @Mapping(source = "update", target = "update")
+    MenuRoleEntity toDbo(MenuRole menuRole);
 
     default List<MenuRole> getMenuRoles(List<MenuRoleEntity> menuRolesEntities){
         return  menuRolesEntities.stream().map(menuRoleEntity->MenuRole.builder()

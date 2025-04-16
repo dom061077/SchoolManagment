@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +70,7 @@ public class PersonApi {
  
     @GetMapping("/{id}")
     public PersonDto getPerson(@PathVariable Long id) {
-        return personMapper.personToPersonDto( baseInputPort.getById(id));
+        return personMapper.personToPersonDto( baseInputPort.getById(id).get());
     }
 
 
@@ -77,9 +78,15 @@ public class PersonApi {
     public PersonDto updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto personDto) {
         //TODO: process PUT request
         Person person = personMapper.personDtoToPerson(personDto);
-        return personMapper.personToPersonDto(baseInputPort.update(id,person));
+        return personMapper.personToPersonDto(baseInputPort.update(id,person).get());
     }
     
+    public ResponseEntity<?> deletePerson(@PathVariable Long id) {
+        baseInputPort.delete(id);
+        //return ResponseEntity.ok(Map.of("Message","Person marked as deleted"));
+        return ResponseEntity.noContent().build();
+    }
+
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyAuthority('ROLE_REALM_CHURCH','ROLE_RESOURCE_bsn_CHURCH')")

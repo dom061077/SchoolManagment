@@ -20,5 +20,9 @@ public class MenuRole {
     private String menuCode;
     private String menuPath;
 
+    boolean create;
+    boolean update;
+    boolean delete;
+
     String role;   
 }

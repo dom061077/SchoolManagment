@@ -51,7 +51,10 @@ public class AlumnoUseCase implements AlumnoInputPort{
     @Override
     public Alumno getById(Long alumnoId) {
         
-        return alumnoEntMapper.toDomain(entityRepository.getById(alumnoId));
+        return entityRepository.getById(alumnoId)
+                .map(obj -> (AlumnoEntity) obj)
+                .map(alumnoEntMapper::toDomain)
+                .orElseThrow(() -> new IllegalArgumentException("Alumno not found with ID: " + alumnoId));
     }
     
 }

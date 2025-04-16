@@ -1,7 +1,7 @@
 package com.sms.smr.application;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,7 @@ import com.sms.smr.domain.MenuRole;
 import com.sms.smr.infra.inputadapter.dto.menurole.MenuRoleDto;
 import com.sms.smr.infra.inputadapter.mapper.MenuRoleMapper;
 import com.sms.smr.infra.inputport.BaseInputPort;
+import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.MenuRoleEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
@@ -36,7 +37,7 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
     }
 
     @Override
-    public MenuRole getById(Long id) {
+    public Optional<MenuRole> getById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
     }
@@ -54,9 +55,30 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
     }
 
     @Override
-    public MenuRole update(Long id, MenuRole entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public Optional<MenuRole> update(Long id, MenuRole entity) {
+        // Implement the update logic here
+        /*
+        MenuRole updatedMenuRole = entityRepository.update(id, entity)
+                .orElseThrow(() -> new IllegalArgumentException("MenuRole not found for id: " + id));
+        return menuRoleMapper.toDto(updatedMenuRole);
+        */
+        //return entityRepository.update(personId, personEntityMapper.toDbo(person))
+        //        .map(personEntityMapper::toDomain);
+
+        //return entityRepository.update(id, menuRoleEntityMapper.toDbo(entity))
+        //        .map(menuRoleEntityMapper::toDomain);        
+
+        return entityRepository.update(id,menuRoleEntityMapper.toDbo(entity))
+                .map(mr->menuRoleEntityMapper.toDomain(mr)); // Convert to domain object
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        
+        Optional<MenuRoleEntity> deletedMenuRole = entityRepository.getById(id);
+        if(deletedMenuRole.isEmpty())
+            return false;
+        return true;
     }
 
 

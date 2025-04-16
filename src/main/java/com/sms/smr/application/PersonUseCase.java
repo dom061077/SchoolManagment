@@ -1,6 +1,7 @@
 package com.sms.smr.application;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +36,11 @@ public class PersonUseCase implements BaseInputPort<Person>{
     }
 
     @Override
-    public Person getById(Long personId) {
+    public Optional<Person> getById(Long personId) {
         //return personEntityMapper.mapToDomain( Optional.of(entityRepository.getById(personId)));
-        return personEntityMapper.toDomain(entityRepository.getById(personId));
+        
+        return entityRepository.getById(personId)
+                .map(personEntity -> personEntityMapper.toDomain((PersonEntity) personEntity));
     }
 
     @Override
@@ -52,9 +55,19 @@ public class PersonUseCase implements BaseInputPort<Person>{
     }   
 
     @Override
-    public Person update(Long personId, Person person) {
+    public Optional<Person> update(Long personId, Person person) {
         // TODO Auto-generated method stub
-        return personEntityMapper.toDomain( entityRepository.update(personId, personEntityMapper.toDbo(person)));
+        return entityRepository.update(personId, personEntityMapper.toDbo(person))
+                .map(personEntityMapper::toDomain);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        // TODO Auto-generated method stub
+        Optional<PersonEntity> deletedPerson = entityRepository.getById(id);
+        if(deletedPerson.isEmpty())
+            return false;
+        return true;
     }
 
 
