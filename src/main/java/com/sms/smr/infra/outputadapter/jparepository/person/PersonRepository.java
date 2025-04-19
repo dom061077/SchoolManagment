@@ -26,7 +26,7 @@ public class PersonRepository implements EntityRepository {
 
     @Override
     public <T>  T save(T reg) {
-        return (T) sDataPersonRepository.save((PersonEntity)reg);
+        return (T) sDataPersonRepository.save((PersonEntity) reg);
 
     }
 

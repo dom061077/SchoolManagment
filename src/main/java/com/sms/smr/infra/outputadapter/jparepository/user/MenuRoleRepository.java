@@ -1,6 +1,7 @@
 package com.sms.smr.infra.outputadapter.jparepository.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -26,9 +27,11 @@ public class MenuRoleRepository implements EntityRepository {
     }
 
     @Override
-    public <T> T getById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+    public <T> Optional<T> getById(Long id) {
+        if (MenuRoleEntity.class.isAssignableFrom(MenuRoleEntity.class)) {
+            return (Optional<T>) sMenuRoleRepository.findById(id);
+        }
+        throw new UnsupportedOperationException("Unsupported entity type for 'getById'");
     }
 
     @Override
@@ -39,7 +42,7 @@ public class MenuRoleRepository implements EntityRepository {
     }
 
     @Override
-    public <T> T update(Long id, T reg) {
+    public <T> Optional<T> update(Long id, T reg) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }

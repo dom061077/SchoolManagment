@@ -3,6 +3,7 @@ package com.sms.smr.infra.outputadapter.jparepository.alumno;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
@@ -34,10 +35,8 @@ public class AlumnoRepository implements EntityRepository{
     }
 
     @Override
-    public <T> T getById(Long id) {
-        
-        return (T) sDataAlumnoRepository.getReferenceById(id);
-        //return null;
+    public <T> Optional<T> getById(Long id) {
+        return (Optional<T>) sDataAlumnoRepository.findById(id);
     }
 
     @Override
@@ -48,8 +47,8 @@ public class AlumnoRepository implements EntityRepository{
     }
 
     @Override
-    public <T> T update(Long id,T reg) {
-        // TODO Auto-generated method stub
+    public <T> Optional<T> update(Long id, T reg) {
+        // TODO Implement the update logic here
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 

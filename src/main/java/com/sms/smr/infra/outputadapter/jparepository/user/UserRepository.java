@@ -37,7 +37,7 @@ public class UserRepository implements EntityRepository{
     }
 
     @Override
-    public <T> T getById(Long id) {
+    public <T> Optional getById(Long id) {
         //return (T)sDataUserRepository.findById(id);
         return null;
     }
@@ -54,7 +54,7 @@ public class UserRepository implements EntityRepository{
     }
 
    @Override
-    public <T> T update(Long id,T reg) {
+    public <T> Optional<T> update(Long id, T reg) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }

@@ -31,7 +31,7 @@ public class TokenRepository implements EntityRepository {
     }
 
     @Override
-    public <T> T getById(Long id) {
+    public <T> Optional<T> getById(Long id) {
         //return (T)sDataTokenRepository.getReferenceById(id);
         return null;
     }
@@ -57,7 +57,7 @@ public class TokenRepository implements EntityRepository {
     }
 
     @Override
-    public <T> T update(Long id, T reg) {
+    public <T> Optional<T> update(Long id, T reg) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
