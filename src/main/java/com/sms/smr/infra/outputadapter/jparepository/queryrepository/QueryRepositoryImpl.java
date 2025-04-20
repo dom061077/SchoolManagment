@@ -106,6 +106,14 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
                     }
 
                 }else{
+                    if(field.getType() == boolean.class || field.getType() == Boolean.class){
+                        if(value.equalsIgnoreCase("true")){
+                            return Optional.of(true);   
+                        }else if(value.equalsIgnoreCase("false")){
+                            return Optional.of(false);
+                        }
+                        
+                    }
                     return Optional.of(value);
                 }
             }catch(NoSuchFieldException e){

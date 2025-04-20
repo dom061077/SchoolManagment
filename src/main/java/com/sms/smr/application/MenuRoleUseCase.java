@@ -28,7 +28,7 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
     private final MenuRoleEntityMapper menuRoleEntityMapper;
 
     @Qualifier(value="menuRoleRepository")
-    private final EntityRepository entityRepository;
+    private final EntityRepository<MenuRoleEntity> entityRepository;
 
     @Override
     public MenuRole create(MenuRole menuRole) {

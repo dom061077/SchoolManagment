@@ -5,15 +5,17 @@ import java.util.Optional;
 
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 
-public interface EntityRepository{
+public interface EntityRepository<T>{
     
-    public <T> T save(T reg);
+    public  T save(T reg);
 
-    public <T> Optional<T> getById( Long id );
+    public  Optional<T> getById( Long id );
 
-    public <T> List<T> getAll( int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortFilters );    
+    public  List<T> getAll( int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortFilters );    
 
     public long getCount(List<QueryDto> queryFilters);
 
-    public <T>  Optional<T> update(Long id,T reg);
+    public   Optional<T> update(Long id,T reg);
+
+    public  Optional<T> delete(Long id);
 }

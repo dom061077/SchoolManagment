@@ -25,7 +25,7 @@ public class PersonUseCase implements BaseInputPort<Person>{
 
     private static final Logger logger = LoggerFactory.getLogger(PersonUseCase.class);
     @Qualifier(value="personRepository")
-    private final  EntityRepository entityRepository;
+    private final  EntityRepository<PersonEntity> entityRepository;
     private final PersonEntityMapper personEntityMapper;
     private final QueryRepository queryRepository;
 
@@ -64,7 +64,7 @@ public class PersonUseCase implements BaseInputPort<Person>{
     @Override
     public boolean delete(Long id) {
         // TODO Auto-generated method stub
-        Optional<PersonEntity> deletedPerson = entityRepository.getById(id);
+        Optional<PersonEntity> deletedPerson = entityRepository.delete(id);
         if(deletedPerson.isEmpty())
             return false;
         return true;

@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component(value = "alumnoRepository")
-public class AlumnoRepository implements EntityRepository{
+public class AlumnoRepository implements EntityRepository<AlumnoEntity>{
 
     private final SpringDataAlumnoRepository sDataAlumnoRepository;
     
@@ -28,26 +28,26 @@ public class AlumnoRepository implements EntityRepository{
 
 
     @Override
-    public <T> T save(T reg) {
+    public AlumnoEntity save(AlumnoEntity reg) {
        
-        return (T) sDataAlumnoRepository.save((AlumnoEntity)reg);
+        return  sDataAlumnoRepository.save((AlumnoEntity)reg);
        
     }
 
     @Override
-    public <T> Optional<T> getById(Long id) {
-        return (Optional<T>) sDataAlumnoRepository.findById(id);
+    public  Optional<AlumnoEntity> getById(Long id) {
+        return  sDataAlumnoRepository.findById(id);
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sorts) {
+    public  List<AlumnoEntity> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sorts) {
         //return (List<T>)sDataAlumnoRepository.findAll();
         
-        return (List<T> )queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters,sorts);
+        return queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters,sorts);
     }
 
     @Override
-    public <T> Optional<T> update(Long id, T reg) {
+    public  Optional<AlumnoEntity> update(Long id, AlumnoEntity reg) {
         // TODO Implement the update logic here
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
@@ -56,6 +56,12 @@ public class AlumnoRepository implements EntityRepository{
     public long getCount(List<QueryDto> queryFilters) {
         // TODO Auto-generated method stub
         return queryRepository.getCount(AlumnoEntity.class, queryFilters);
+    }
+
+    @Override
+    public Optional<AlumnoEntity> delete(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
 }

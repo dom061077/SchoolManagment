@@ -13,25 +13,25 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component(value = "menuRepository")
-public class MenuRepository implements EntityRepository {
+public class MenuRepository implements EntityRepository<MenuEntity> {
 
     private final SpringDataMenuRepository sMenuRepository;
 
     @Override
-    public <T> T save(T reg) {
+    public MenuEntity save(MenuEntity reg) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Override
-    public Optional getById(Long id) {
+    public Optional<MenuEntity> getById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
 
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryDto> queryFilters,
+    public  List<MenuEntity> getAll(int offset, int limit, List<QueryDto> queryFilters,
             List<QueryDto> sortFilters) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAll'");
@@ -39,7 +39,7 @@ public class MenuRepository implements EntityRepository {
     }
 
     @Override
-    public <T> Optional<T> update(Long id, T reg) {
+    public  Optional<MenuEntity> update(Long id, MenuEntity reg) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
@@ -48,6 +48,12 @@ public class MenuRepository implements EntityRepository {
     public long getCount(List<QueryDto> queryFilters) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCount'");
+    }
+
+    @Override
+    public Optional<MenuEntity> delete(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
 

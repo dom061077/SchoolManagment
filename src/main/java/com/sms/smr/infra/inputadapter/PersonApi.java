@@ -38,6 +38,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -81,9 +82,11 @@ public class PersonApi {
         return personMapper.personToPersonDto(baseInputPort.update(id,person).get());
     }
     
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_REALM_CHURCH','ROLE_RESOURCE_bsn_CHURCH')")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
-        baseInputPort.delete(id);
-        //return ResponseEntity.ok(Map.of("Message","Person marked as deleted"));
+        if(baseInputPort.delete(id))
+            return ResponseEntity.ok(Map.of("Message","Person marked as deleted"));
         return ResponseEntity.noContent().build();
     }
 
@@ -115,6 +118,8 @@ public class PersonApi {
             logger.error("Error al parsear sorts JSON: "+e.getMessage());
         }*/
         List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
+
         List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
         return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }

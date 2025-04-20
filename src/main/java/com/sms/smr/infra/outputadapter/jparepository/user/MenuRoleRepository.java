@@ -15,34 +15,31 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component(value = "menuRoleRepository")
-public class MenuRoleRepository implements EntityRepository {
+public class MenuRoleRepository implements EntityRepository<MenuRoleEntity> {
 
     private final SpringDataMenuRoleRepository sMenuRoleRepository;
     private final QueryRepository queryRepository;
     
     @Override
-    public <T> T save(T reg) {
+    public MenuRoleEntity save(MenuRoleEntity reg) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Override
-    public <T> Optional<T> getById(Long id) {
-        if (MenuRoleEntity.class.isAssignableFrom(MenuRoleEntity.class)) {
-            return (Optional<T>) sMenuRoleRepository.findById(id);
-        }
-        throw new UnsupportedOperationException("Unsupported entity type for 'getById'");
+    public  Optional<MenuRoleEntity> getById(Long id) {
+        return  sMenuRoleRepository.findById(id);
     }
 
     @Override
-    public <T> List<T> getAll(int offset, int limit, List<QueryDto> queryFilters,
+    public  List<MenuRoleEntity> getAll(int offset, int limit, List<QueryDto> queryFilters,
             List<QueryDto> sortFilters) {
-       return (List<T>) queryRepository.getAllAnd(MenuRoleEntity.class, offset, limit, queryFilters, sortFilters);
+       return  queryRepository.getAllAnd(MenuRoleEntity.class, offset, limit, queryFilters, sortFilters);
 
     }
 
     @Override
-    public <T> Optional<T> update(Long id, T reg) {
+    public  Optional<MenuRoleEntity> update(Long id, MenuRoleEntity reg) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
@@ -51,6 +48,12 @@ public class MenuRoleRepository implements EntityRepository {
     public long getCount(List<QueryDto> queryFilters) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCount'");
+    }
+
+    @Override
+    public Optional<MenuRoleEntity> delete(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
     
 }
