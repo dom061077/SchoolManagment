@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -93,7 +94,8 @@ public class PersonApi {
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyAuthority('ROLE_REALM_CHURCH','ROLE_RESOURCE_bsn_CHURCH')")
-     public QueryResult<Person> /*List<Person>*/ getAll(int offset, int limit, String qfilters, String sorts){
+     public QueryResult<Person> /*List<Person>*/ getAll(@RequestParam int offset,@RequestParam int limit
+        ,@RequestParam String qfilters,@RequestParam String sorts){
         logger.info("Filters: "+qfilters);
         /*ObjectMapper objectMapper = new ObjectMapper();
         List<QueryDto> queryFilters = new ArrayList();

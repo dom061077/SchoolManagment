@@ -20,6 +20,7 @@ import com.sms.smr.infra.inputadapter.dto.AlumnoDto;
 import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.mapper.AlumnoMapper;
+import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.AlumnoInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
@@ -54,29 +55,10 @@ public class AlumnoApi {
     public  QueryResult<Alumno> getAll( @RequestParam int offset,@RequestParam  int limit
         ,@RequestParam String qfilters, @RequestParam String sorts) {
         logger.info("Filters: "+qfilters);
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<QueryDto> queryFilters = new ArrayList<QueryDto>();
-        JsonNode jsonArray;
-        try{
-            jsonArray = objectMapper.readTree(qfilters);
-            for(JsonNode element : jsonArray){
-                QueryDto queryFilter = objectMapper.treeToValue(element, QueryDto.class);
-                queryFilters.add(queryFilter);
-            }
-        }catch(Exception e){
-            logger.error("Error al parsear filters JSON: "+e.getMessage());
-        }
-        List<QueryDto> sortFilters = new ArrayList<QueryDto>();
-        try{
-            jsonArray = objectMapper.readTree(sorts);
-            for(JsonNode element : jsonArray){
-                QueryDto sortFilter = objectMapper.treeToValue(element, QueryDto.class);
-                sortFilters.add(sortFilter); 
-            }
-        }catch(Exception e){
-            logger.error("Error al parsear sorts JSON: "+e.getMessage());
-        }
- 
+        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
+
+        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts); 
         return alumnoInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 }
