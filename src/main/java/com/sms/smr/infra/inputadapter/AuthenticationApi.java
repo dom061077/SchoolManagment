@@ -97,6 +97,7 @@ public class AuthenticationApi {
     String filterStr = "[{\"property\": \"role:eqin\",\"value\":\""
       + roles.stream().collect(Collectors.joining(","))
       +"\"}]";
+    filterStr = filterStr.replaceAll("ROLE_", "");
     String orderStr = "";
     var qFilters = Utils.stringToQueryFilterDto(filterStr);
     var qOrders = Utils.stringToQueryFilterDto(orderStr);
