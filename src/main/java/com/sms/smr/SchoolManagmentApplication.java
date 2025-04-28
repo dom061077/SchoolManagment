@@ -24,7 +24,7 @@ public class SchoolManagmentApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SchoolManagmentApplication.class, args);
 	}
-    @Bean
+    // @Bean
     public CommandLineRunner databaseInitializer() {
         return args -> {
             // Add code to initialize the database with data
