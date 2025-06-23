@@ -2,6 +2,7 @@ package com.sms.smr.infra.inputadapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ import com.sms.smr.infra.inputadapter.mapper.TranslationMapper;
 public class TranslationApi {
 
     private static final Logger logger = LoggerFactory.getLogger(TranslationApi.class);
+    @Qualifier(value="translationUseCase")
     private final BaseInputPort<Translation> baseInputPort;
     private final TranslationMapper translationMapper;
 
