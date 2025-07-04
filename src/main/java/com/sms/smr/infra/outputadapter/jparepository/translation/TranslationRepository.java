@@ -3,6 +3,7 @@ package com.sms.smr.infra.outputadapter.jparepository.translation;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Translation;
@@ -46,14 +47,28 @@ public class TranslationRepository implements EntityRepository<TranslationEntity
 
     @Override
     public Optional<TranslationEntity> update(Long id, TranslationEntity reg) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Optional<TranslationEntity> translationOptionalEntity = sDataTranslationRepository.findById(id) ;
+        if (translationOptionalEntity.isPresent()) {
+            TranslationEntity entity = translationOptionalEntity.get();
+            BeanUtils.copyProperties(reg, entity, "id");
+            sDataTranslationRepository.save(entity);
+            return Optional.of(entity);
+        }
+        return Optional.empty();
+        
     }
 
     @Override
     public Optional<TranslationEntity> delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Optional<TranslationEntity> translationOptionalEntity = sDataTranslationRepository.findById(id);
+        if (translationOptionalEntity.isPresent()) {
+            translationOptionalEntity.get().setDeleted(true);
+            sDataTranslationRepository.save(translationOptionalEntity.get());
+            
+        } else {
+            return Optional.empty();
+        }
+        return translationOptionalEntity;
     }
 
 }

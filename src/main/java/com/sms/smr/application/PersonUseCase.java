@@ -56,14 +56,12 @@ public class PersonUseCase implements BaseInputPort<Person>{
 
     @Override
     public Optional<Person> update(Long personId, Person person) {
-        // TODO Auto-generated method stub
         return entityRepository.update(personId, personEntityMapper.toDbo(person))
                 .map(personEntityMapper::toDomain);
     }
 
     @Override
     public boolean delete(Long id) {
-        // TODO Auto-generated method stub
         Optional<PersonEntity> deletedPerson = entityRepository.delete(id);
         if(deletedPerson.isEmpty())
             return false;

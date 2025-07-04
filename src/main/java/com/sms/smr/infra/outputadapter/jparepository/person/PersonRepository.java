@@ -53,7 +53,6 @@ public class PersonRepository implements EntityRepository<PersonEntity> {
 
     @Override
     public long getCount(List<QueryDto> queryFilters) {
-        // TODO Auto-generated method stub
         return queryRepository.getCount(PersonEntity.class, queryFilters);
     }
 

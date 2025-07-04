@@ -3,9 +3,10 @@ package com.sms.smr.application;
 import java.util.List;
 import java.util.Optional;
 
-import org.mapstruct.Qualifier;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Translation;
@@ -16,14 +17,17 @@ import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult
 import com.sms.smr.infra.outputadapter.mapper.TranslationEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+
 @Component(value = "translationUseCase")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class TranslationUseCase implements BaseInputPort<Translation> {
 
     private static final Logger logger = LoggerFactory.getLogger(TranslationUseCase.class);
     
+    @Qualifier(value = "translationRepository")
     private final EntityRepository<TranslationEntity> entityRepository;
     private final TranslationEntityMapper translationEntityMapper;
 
@@ -36,21 +40,23 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
 
     @Override
     public Optional<Translation> getById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        return entityRepository.getById(id).map(translationEntity -> translationEntityMapper.toDomain(translationEntity) );
     }
 
     @Override
     public QueryResult<Translation> getAll(int offset, int limit, List<QueryDto> queryFilters,
             List<QueryDto> sortings) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        QueryResult<Translation> qResult = new QueryResult<Translation>();
+        qResult.setData(translationEntityMapper.getTranslations(entityRepository.getAll(offset, limit, queryFilters, queryFilters)));
+        long count = entityRepository.getCount(queryFilters);
+        qResult.setTotal(count);
+        
+        return qResult;
     }
 
     @Override
     public Optional<Translation> update(Long id, Translation entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        
     }
 
     @Override
