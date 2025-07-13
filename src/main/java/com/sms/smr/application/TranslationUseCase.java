@@ -56,15 +56,18 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
 
     @Override
     public Optional<Translation> update(Long id, Translation entity) {
-        
+        return entityRepository.update(id, translationEntityMapper.toDbo(entity))
+                .map(translationEntityMapper::toDomain);
     }
 
     @Override
     public boolean delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Optional<TranslationEntity> deletedTranslation = entityRepository.delete(id);
+        if(deletedTranslation.isPresent())
+            return false;
+        return true;
     }
 
-    // Implement other methods as needed...
+
 
 }

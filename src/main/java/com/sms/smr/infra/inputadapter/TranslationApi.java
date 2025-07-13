@@ -9,19 +9,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sms.smr.domain.Translation;
 import com.sms.smr.infra.inputport.BaseInputPort;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-// TODO: Replace the following import with the correct package if TranslationMapper exists elsewhere
+import com.sms.smr.infra.inputadapter.dto.translation.TranslationDto;
 import com.sms.smr.infra.inputadapter.mapper.TranslationMapper;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
 
 @RestController
 @RequestMapping(value="/api/v1/translation")
 @RequiredArgsConstructor
 public class TranslationApi {
 
-    private static final Logger logger = LoggerFactory.getLogger(TranslationApi.class);
+
     @Qualifier(value="translationUseCase")
     private final BaseInputPort<Translation> baseInputPort;
     private final TranslationMapper translationMapper;
+    private static final Logger logger = LoggerFactory.getLogger(TranslationApi.class);
+
+
+
+    @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)    
+    @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")
+    public TranslationDto create(@RequestBody @Valid TranslationDto transationDto ){
+        return translationMapper.toDto(baseInputPort.create(translationMapper.toDomain(transationDto)));
+    }
 
 }

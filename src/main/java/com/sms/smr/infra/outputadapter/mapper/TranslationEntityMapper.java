@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 import com.sms.smr.domain.Translation;
 import com.sms.smr.infra.outputadapter.db.TranslationEntity;
-import java.util.List;
+import java.util.List; 
 
 @Mapper(componentModel = "spring")
 public interface TranslationEntityMapper {

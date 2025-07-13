@@ -7,16 +7,12 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
-import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
-import com.sms.smr.infra.inputport.PersonInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -78,7 +74,7 @@ public class PersonApi {
 
     @PutMapping("/{id}")
     public PersonDto updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto personDto) {
-        //TODO: process PUT request
+
         Person person = personMapper.personDtoToPerson(personDto);
         return personMapper.personToPersonDto(baseInputPort.update(id,person).get());
     }

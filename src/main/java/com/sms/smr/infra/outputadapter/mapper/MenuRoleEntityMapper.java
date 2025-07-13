@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.sms.smr.domain.Menu;
 import com.sms.smr.domain.MenuRole;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 

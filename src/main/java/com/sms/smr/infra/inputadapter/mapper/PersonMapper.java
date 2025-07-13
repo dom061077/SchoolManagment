@@ -11,7 +11,7 @@ import com.sms.smr.infra.inputadapter.dto.PersonDto;
 @Mapper(
         componentModel = "spring"
 )
-public interface PersonMapper{ 
+public interface PersonMapper{  
 
     PersonDto personToPersonDto(Person person);
 

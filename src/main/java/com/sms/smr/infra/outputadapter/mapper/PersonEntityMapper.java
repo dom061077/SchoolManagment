@@ -10,7 +10,7 @@ import com.sms.smr.infra.outputadapter.db.PersonEntity;
 
 @Mapper(
         componentModel = "spring" 
-)
+) 
 public interface PersonEntityMapper{
     
     PersonEntity domainToPersonEntity(Person person);
