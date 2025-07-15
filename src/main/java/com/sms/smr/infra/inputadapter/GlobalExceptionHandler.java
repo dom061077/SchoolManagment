@@ -1,7 +1,11 @@
 package com.sms.smr.infra.inputadapter;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,16 +14,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.security.web.firewall.RequestRejectedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.ExpiredJwtException;
 //NO ESTA FUNCIONANDO CORRECTAMENTE
 @ControllerAdvice
 public class GlobalExceptionHandler    {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    public ObjectMapper objectMapper = new ObjectMapper();
 
+    /* 
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<String> handleException(Exception ex) {
        String bodyOfResponse = "Access denied: " + ex.getMessage();
@@ -46,6 +56,18 @@ public class GlobalExceptionHandler    {
                 .body(
                         e.getMessage()
                 );
+    }
+    */
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Object> handleNotSupportedMethod(HttpRequestMethodNotSupportedException ex) {
+        logger.error("Not supported method", ex.getMessage());
+        Map<String, Object> errorDetails = new HashMap<>();
+        errorDetails.put("timestamp", LocalDateTime.now());
+        errorDetails.put("status", HttpStatus.METHOD_NOT_ALLOWED.value());  
+        errorDetails.put("error", "Method Not Allowed");
+        errorDetails.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(Exception.class)
