@@ -134,7 +134,7 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
             logger.info("splitted[0]: "+splitted[0]);
   
             if(splitted.length != 2){
-                throw new IllegalArgumentException("Parameter type filter is not correct. Example of correct filter --> gt:PropertyName");
+                throw new IllegalArgumentException("Parameter type filter is not correct. Example of correct filter --> gt:PropertyName. Item filter: "+String.join(", ",splitted));
             }
             if(q.getValue()!=null){
                 if(QueryFilterEnum.valueOf(splitted[1]) == QueryFilterEnum.eq){

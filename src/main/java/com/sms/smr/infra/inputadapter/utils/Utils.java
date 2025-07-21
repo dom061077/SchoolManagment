@@ -23,6 +23,8 @@ public class Utils {
                 QueryDto queryFilter = objectMapper.treeToValue(element, QueryDto.class);
                 queryFilters.add(queryFilter);
             }
+            
+            
         }catch(Exception e){
             logger.error("Error al parsear filters JSON: "+e.getMessage());
         }        

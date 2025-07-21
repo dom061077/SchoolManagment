@@ -1,13 +1,19 @@
 package com.sms.smr.infra.inputadapter;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.Translation;
 import com.sms.smr.infra.inputport.BaseInputPort;
+import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.http.MediaType;
@@ -16,8 +22,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.dto.translation.TranslationDto;
 import com.sms.smr.infra.inputadapter.mapper.TranslationMapper;
+import com.sms.smr.infra.inputadapter.utils.Utils;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -41,4 +51,31 @@ public class TranslationApi {
         return translationMapper.toDto(baseInputPort.create(translationMapper.toDomain(transationDto)));
     }
 
+    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")
+    public QueryResult<Translation> getAll(@RequestParam int offset, @RequestParam int limit
+    , @RequestParam String qfilters, @RequestParam String sorts) {
+        //logger.info("Filters: "+qfilters);
+        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto("");
+        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto("");
+        return baseInputPort.getAll(offset, limit, queryFilters, sortFilters);
+    }
+
+    @GetMapping(value = "messages", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")  
+    public Map<String, Object> getMessages(@RequestParam String lang) {
+        logger.info("Language: " + lang);
+        Map<String, Object> result = new LinkedHashMap<>();
+        List<Translation> translations = baseInputPort.getAll(0, 100
+            , Utils.stringToQueryFilterDto("[{\"property\":\"language:eq\", \"value\":\""+lang+"\" }]"), Utils.stringToQueryFilterDto("[]")).getData();
+        
+        for(Translation t : translations ) {
+            result.computeIfAbsent(t.getNamespace(), k-> new LinkedHashMap<>());
+            Map<String, String> group = (Map<String, String>) result.get(t.getNamespace());
+            group.put(t.getKey(), t.getValue());
+        }   
+
+        
+        return result ; 
+    }
 }

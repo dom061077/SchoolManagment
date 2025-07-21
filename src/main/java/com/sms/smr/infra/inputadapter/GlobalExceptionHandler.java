@@ -11,6 +11,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -52,22 +53,45 @@ public class GlobalExceptionHandler    {
     }
     */
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleNotSupportedMethod(MethodArgumentNotValidException ex) {
-        logger.error("Not supported method", ex.getMessage());
+    private Map<String, Object> createErrorResponse(String message, Map<String, String> fieldErrors) {
         Map<String, Object> errorDetails = new HashMap<>();
-        Map<String, String> fieldErrors = new HashMap<>();
-
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-            fieldErrors.put(error.getField(), error.getDefaultMessage())
-        );
-
         errorDetails.put("timestamp", LocalDateTime.now());
         errorDetails.put("status", HttpStatus.BAD_REQUEST.value());
         errorDetails.put("error", "Bad Request");
-        errorDetails.put("message", "Validation failed");
-        errorDetails.put("errors", fieldErrors);
+        errorDetails.put("message", message);
+        errorDetails.put("errors",fieldErrors);
+        return errorDetails;
+    }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleNotSupportedMethod(MethodArgumentNotValidException ex) {
+        logger.error("Not supported method", ex.getMessage());
+
+        Map<String, String> fieldErrors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+            fieldErrors.put(error.getField(), error.getDefaultMessage())
+        );
+        Map<String, Object> errorDetails = createErrorResponse("Validation failed",fieldErrors);
+        
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<Object> handleMissingParams(MissingServletRequestParameterException e) {
+        logger.error("Missing request parameter", e);
+         Map<String, String> fieldErrors = new HashMap<>();
+        Map<String, Object> errorDetails = createErrorResponse("Missing request parameter: "+e.getParameterName(), fieldErrors);
+       
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }    
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e) {
+        logger.error("Illegal argument", e);
+        Map<String, String> fieldErrors = new HashMap<>();
+        Map<String, Object> errorDetails = createErrorResponse(e.getMessage(), fieldErrors);
+        
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
@@ -82,6 +106,8 @@ public class GlobalExceptionHandler    {
     public ResponseEntity<String> handleException(InvalidBearerTokenException e){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("El token es incorrecto");
     }
+
+
 
     /*@ExceptionHandler(CustomException.class)
     public ResponseEntity<String> handleCustomException(CustomException ex) {
