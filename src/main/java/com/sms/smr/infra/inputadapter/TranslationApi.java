@@ -28,6 +28,7 @@ import com.sms.smr.infra.inputadapter.mapper.TranslationMapper;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -61,12 +62,13 @@ public class TranslationApi {
         return baseInputPort.getAll(offset, limit, queryFilters, sortFilters);
     }
 
-    @GetMapping(value = "messages", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")  
-    public Map<String, Object> getMessages(@RequestParam String lang) {
+    @GetMapping(value = "messages/{lang}", produces = MediaType.APPLICATION_JSON_VALUE)
+    //@PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")  
+    public Map<String, Object> getMessages(@PathVariable String lang) {
         logger.info("Language: " + lang);
         Map<String, Object> result = new LinkedHashMap<>();
         List<Translation> translations = baseInputPort.getAll(0, 100
+            //, Utils.stringToQueryFilterDto("[]"), Utils.stringToQueryFilterDto("[]")).getData();
             , Utils.stringToQueryFilterDto("[{\"property\":\"language:eq\", \"value\":\""+lang+"\" }]"), Utils.stringToQueryFilterDto("[]")).getData();
         
         for(Translation t : translations ) {
