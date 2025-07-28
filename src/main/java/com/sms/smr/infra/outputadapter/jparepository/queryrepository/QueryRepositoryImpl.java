@@ -10,10 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Role;
+import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
+import com.sms.smr.infra.outputadapter.db.TranslationEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -38,6 +40,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
             return AlumnoEntity.class;
         if (clazz.equals(MenuRoleEntity.class)==true)
             return MenuRoleEntity.class;
+        if (clazz.equals(TranslationEntity.class) == true)
+            return TranslationEntity.class;
         throw new Exception("La clase "+clazz.getName()+ " no está registrada para la query");
     }
 
@@ -52,11 +56,10 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     public  <T>  List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortingFilters) {
         
         try{
-        clazz = getEntityClass(clazz);
+            clazz = getEntityClass(clazz);
         }catch(Exception e){
 
-            logger.error("Clase no registrada para la query", e);
-            return List.of();
+            throw new InternalServerErrorException("Clase no registrada para query");
         }
 
         CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -45,9 +45,9 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
 
     @Override
     public QueryResult<Translation> getAll(int offset, int limit, List<QueryDto> queryFilters,
-            List<QueryDto> sortings) {
+            List<QueryDto> sorts) {
         QueryResult<Translation> qResult = new QueryResult<Translation>();
-        qResult.setData(translationEntityMapper.getTranslations(entityRepository.getAll(offset, limit, queryFilters, queryFilters)));
+        qResult.setData(translationEntityMapper.getTranslations(entityRepository.getAll(offset, limit, queryFilters, sorts)));
         long count = entityRepository.getCount(queryFilters);
         qResult.setTotal(count);
         
