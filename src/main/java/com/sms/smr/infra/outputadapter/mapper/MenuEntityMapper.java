@@ -1,5 +1,7 @@
 package com.sms.smr.infra.outputadapter.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 
 import com.sms.smr.domain.Menu;
@@ -10,4 +12,5 @@ public interface MenuEntityMapper {
 
     Menu entityToDomain(MenuEntity menuEntity); 
     MenuEntity domainToEntity(Menu menu);
+    List<Menu> getMenus(List<MenuEntity> menuEntities);
 }

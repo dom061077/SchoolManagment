@@ -25,32 +25,41 @@ public class MenuUseCase implements BaseInputPort<Menu> {
     private final MenuEntityMapper menuEntityMapper;
 
     public Menu create(Menu entity) {
-        // TODO Auto-generated method stub
+        
         return menuEntityMapper.entityToDomain(entityRepository.save(menuEntityMapper.domainToEntity(entity)));
     }
 
     @Override
     public Optional<Menu> getById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        return entityRepository.getById(id)
+                .map(menuEntity -> menuEntityMapper.entityToDomain((MenuEntity) menuEntity));
     }
 
     @Override
     public QueryResult<Menu> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        QueryResult<Menu> qResult = new QueryResult<Menu>();
+
+        qResult.setData(menuEntityMapper.getMenus(queryRepository.getAllAnd(MenuEntity.class, offset, limit, queryFilters, sortings)));
+        long count = entityRepository.getCount(queryFilters);
+        qResult.setTotal(count);
+
+        return qResult;
     }
 
     @Override
     public Optional<Menu> update(Long id, Menu entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return entityRepository.update(id, menuEntityMapper.domainToEntity(entity))
+                .map(menuEntityMapper::entityToDomain);
     }
 
     @Override
     public boolean delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Optional<MenuEntity> deletedMenu = entityRepository.getById(id);
+        if(deletedMenu.isPresent()) {
+            entityRepository.delete(id);
+            return true;
+        }   
+        return false;
     }
 
     

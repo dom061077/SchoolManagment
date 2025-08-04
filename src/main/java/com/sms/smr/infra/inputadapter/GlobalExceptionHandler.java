@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sms.smr.infra.exception.ApiException;
 import com.sms.smr.infra.exception.InternalServerErrorException;
-//NO ESTA FUNCIONANDO CORRECTAMENTE
+
 @ControllerAdvice
 public class GlobalExceptionHandler    {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
@@ -47,6 +48,7 @@ public class GlobalExceptionHandler    {
         return errorDetails;    
     }
 
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleNotSupportedMethod(MethodArgumentNotValidException ex) {
         logger.error("Not supported method", ex.getMessage());
@@ -59,6 +61,26 @@ public class GlobalExceptionHandler    {
         
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UnsupportedOperationException.class)
+    public ResponseEntity<Object> handleUnsupportedOperationException(UnsupportedOperationException e) {
+        logger.error("Server error", e);
+        Map<String, String> fieldErrors = new HashMap<>();
+        Map<String, Object> errorDetails = createErrorResponse("Server error: " + e.getMessage(), fieldErrors);
+        
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Object> handleInternalAuthenticationServiceException(InternalAuthenticationServiceException e) {
+        logger.error("Access denied error", e);
+        Map<String, String> fieldErrors = new HashMap<>();
+        Map<String, Object> errorDetails = createErrorResponse("Accessdenied error: " + e.getMessage(), fieldErrors);
+        
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<Object> handleMissingParams(MissingServletRequestParameterException e) {
