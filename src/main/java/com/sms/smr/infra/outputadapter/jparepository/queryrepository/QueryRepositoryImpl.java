@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.sms.smr.domain.Role;
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
+import com.sms.smr.infra.outputadapter.db.StudentEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.db.TranslationEntity;
@@ -36,8 +36,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     private Class getEntityClass(Class clazz) throws Exception {
         if (clazz.equals(PersonEntity.class)==true)
             return PersonEntity.class;
-        if (clazz.equals(AlumnoEntity.class)==true)
-            return AlumnoEntity.class;
+        if (clazz.equals(StudentEntity.class)==true)
+            return StudentEntity.class;
         if (clazz.equals(MenuRoleEntity.class)==true)
             return MenuRoleEntity.class;
         if (clazz.equals(TranslationEntity.class) == true)

@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sms.smr.domain.Alumno;
-import com.sms.smr.infra.inputadapter.dto.AlumnoDto;
-import com.sms.smr.infra.inputadapter.dto.alumno.AlumnoDtoAfterPost;
+import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputadapter.mapper.AlumnoMapper;
+import com.sms.smr.infra.inputadapter.dto.student.StudentDto;
+import com.sms.smr.infra.inputadapter.dto.student.StudentDtoAfterPost;
+import com.sms.smr.infra.inputadapter.mapper.StudentMapper;
 import com.sms.smr.infra.inputadapter.utils.Utils;
-import com.sms.smr.infra.inputport.AlumnoInputPort;
+import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import jakarta.validation.Valid;
@@ -31,34 +31,34 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(value = "/api/v1/alumno")
 @RequiredArgsConstructor
-public class AlumnoApi {
+public class StudentApi {
     
     
-    private final AlumnoInputPort alumnoInputPort;
+    private final StudentInputPort studentInputPort;
     
-    private final  AlumnoMapper alumnoMapper;
-    private static final Logger logger = LoggerFactory.getLogger(AlumnoApi.class);
+    private final  StudentMapper studentMapper;
+    private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
-    public AlumnoDtoAfterPost create( @RequestBody @Valid AlumnoDto alumnoDto ) {
+    public StudentDtoAfterPost create( @RequestBody @Valid StudentDto alumnoDto ) {
         logger.info("DTO recibido: "+alumnoDto.getApellido());
-        return alumnoMapper.alumnoToAlumnoDtoAfterPost(alumnoInputPort.createAlumno (alumnoMapper.alumnoPostDtoToAlumno(alumnoDto)));
+        return studentMapper.studentToStudentDtoAfterPost(studentInputPort.createAlumno (studentMapper.studentPostDtoToStudent(alumnoDto)));
     }
 
     @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-    public AlumnoDto getAlumno(@PathVariable("id") Long id) {
+    public StudentDto getAlumno(@PathVariable("id") Long id) {
         logger.info("ID de alumno a buscar: "+id);
-        return alumnoMapper.alumnoToAlumnoDto(alumnoInputPort.getById(id));
+        return studentMapper.studentToStudentDto(studentInputPort.getById(id));
     }
 
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public  QueryResult<Alumno> getAll( @RequestParam int offset,@RequestParam  int limit
+    public  QueryResult<Student> getAll( @RequestParam int offset,@RequestParam  int limit
         ,@RequestParam String qfilters, @RequestParam String sorts) {
         logger.info("Filters: "+qfilters);
         List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
         queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
 
         List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts); 
-        return alumnoInputPort.getAll(offset, limit, queryFilters,sortFilters);      
+        return studentInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 }

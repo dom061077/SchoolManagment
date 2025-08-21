@@ -1,17 +1,13 @@
 package com.sms.smr;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
-import com.sms.smr.infra.outputadapter.jparepository.alumno.SpringDataAlumnoRepository;
+import com.sms.smr.infra.outputadapter.db.StudentEntity;
+import com.sms.smr.infra.outputadapter.jparepository.student.SpringDataAlumnoRepository;
 
 
 @SpringBootApplication()
@@ -28,11 +24,11 @@ public class SchoolManagmentApplication {
     public CommandLineRunner databaseInitializer() {
         return args -> {
             // Add code to initialize the database with data
-            AlumnoEntity alumnoEntity = null;
+            StudentEntity alumnoEntity = null;
 			for(int i =1;i<21;i++) {
-				alumnoEntity = new AlumnoEntity();
-				alumnoEntity.setApellido("Apellido "+i);
-				alumnoEntity.setNombre("Nombre "+i);
+				alumnoEntity = new StudentEntity();
+				//alumnoEntity.setApellido("Apellido "+i);
+				//alumnoEntity.setNombre("Nombre "+i);
 				sDAlumnoRepository.save(alumnoEntity);
 			}
 
