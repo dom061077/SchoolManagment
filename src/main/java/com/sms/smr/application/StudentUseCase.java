@@ -7,41 +7,41 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.Alumno;
+import com.sms.smr.domain.Student;
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputport.AlumnoInputPort;
-import com.sms.smr.infra.outputadapter.db.AlumnoEntity;
+import com.sms.smr.infra.inputport.StudentInputPort;
+import com.sms.smr.infra.outputadapter.db.StudentEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
-import com.sms.smr.infra.outputadapter.jparepository.alumno.AlumnoRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
-import com.sms.smr.infra.outputadapter.mapper.AlumnoEntityMapper;
+import com.sms.smr.infra.outputadapter.jparepository.student.AlumnoRepository;
+import com.sms.smr.infra.outputadapter.mapper.StudentEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class AlumnoUseCase implements AlumnoInputPort{
-    private static final Logger logger = LoggerFactory.getLogger(AlumnoUseCase.class);
-    @Qualifier(value="alumnoRepository")
-    private final EntityRepository<AlumnoEntity> entityRepository;
-    private final  AlumnoEntityMapper alumnoEntMapper;
+public class StudentUseCase implements StudentInputPort{
+    private static final Logger logger = LoggerFactory.getLogger(StudentUseCase.class);
+    @Qualifier(value="studentRepository")
+    private final EntityRepository<StudentEntity> entityRepository;
+    private final  StudentEntityMapper alumnoEntMapper;
     private final QueryRepository queryRepository;    
 
     @Override
-    public Alumno createAlumno(Alumno alumno) {
+    public Student createStudent(Student student) {
         logger.info("Apellido de alumno: "+alumno.getApellido());
        return alumnoEntMapper.toDomain(entityRepository.save(alumnoEntMapper.toDbo(alumno)));
     }
 
     @Override
-    public QueryResult<Alumno> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sorts) {
+    public QueryResult<Student> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sorts) {
     
-        QueryResult<Alumno> qResult = new QueryResult<Alumno>();            
+        QueryResult<Student> qResult = new QueryResult<Student>();            
 
-        qResult.setData(alumnoEntMapper.getAlumnos(queryRepository.getAllAnd(AlumnoEntity.class, offset, limit, queryFilters, sorts)));
+        qResult.setData(alumnoEntMapper.getAlumnos(queryRepository.getAllAnd(StudentEntity.class, offset, limit, queryFilters, sorts)));
         long count = queryRepository.getCount(PersonEntity.class, queryFilters);
         qResult.setTotal(count);
 
@@ -49,10 +49,10 @@ public class AlumnoUseCase implements AlumnoInputPort{
     }
 
     @Override
-    public Alumno getById(Long alumnoId) {
+    public Student getById(Long alumnoId) {
         
         return entityRepository.getById(alumnoId)
-                .map(obj -> (AlumnoEntity) obj)
+                .map(obj -> (StudentEntity) obj)
                 .map(alumnoEntMapper::toDomain)
                 .orElseThrow(() -> new IllegalArgumentException("Alumno not found with ID: " + alumnoId));
     }
