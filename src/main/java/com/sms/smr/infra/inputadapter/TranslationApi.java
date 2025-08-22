@@ -15,7 +15,7 @@ import com.sms.smr.domain.Translation;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -30,6 +30,7 @@ import com.sms.smr.infra.inputadapter.utils.Utils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -46,10 +47,11 @@ public class TranslationApi {
 
 
 
-    @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)    
+    @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)    
     @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")
-    public TranslationDto create(@RequestBody @Valid TranslationDto transationDto ){
-        return translationMapper.toDto(baseInputPort.create(translationMapper.toDomain(transationDto)));
+    public TranslationDto create(@RequestBody @Valid TranslationDto transLationDto ){
+        logger.info("translationDto: ",transLationDto);
+        return translationMapper.toDto(baseInputPort.create(translationMapper.toDomain(transLationDto)));
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
