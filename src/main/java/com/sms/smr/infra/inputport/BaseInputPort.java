@@ -10,6 +10,6 @@ public interface BaseInputPort<T> {
     T create(T entity);
     Optional<T> getById(Long id);
     QueryResult<T> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings);
-    Optional<T> update(Long id, T entity);
+    Optional<T> update(Long id, T domain);
     boolean delete(Long id);
 }

@@ -49,10 +49,8 @@ public class Student {
     private boolean constanciaCuilTutor=false;    
 
     
-    private ParentescoTutor parentescoTutor;
-
-    
-    private Localidad localidad;
+    private Long localidadId;
+    private String localidadNombre;
 
 
      

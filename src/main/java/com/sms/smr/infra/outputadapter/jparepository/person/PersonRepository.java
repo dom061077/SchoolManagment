@@ -23,7 +23,7 @@ public class PersonRepository implements EntityRepository<PersonEntity> {
 
     private final SpringDataPersonRepository sDataPersonRepository;
 
-    private final QueryRepository queryRepository;
+    private final QueryRepository<PersonEntity> queryRepository;
 
     @Override
     public PersonEntity save(PersonEntity reg) {
@@ -38,8 +38,8 @@ public class PersonRepository implements EntityRepository<PersonEntity> {
 
     @Override
     public List<PersonEntity> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sortFilters) {
-        // TODO Auto-generated method stub
-        return  (List<PersonEntity>)queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sortFilters);
+
+        return  queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sortFilters);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.sms.smr.infra.outputadapter.db;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @Table(name="localidad")
-public class LocalidadEntity {
+public class LocalidadEntity extends BaseEntity {
 
     @Id
     @GeneratedValue

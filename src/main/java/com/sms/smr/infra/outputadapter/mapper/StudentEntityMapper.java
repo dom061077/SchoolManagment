@@ -4,7 +4,9 @@ package com.sms.smr.infra.outputadapter.mapper;
 
 import java.util.List;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
@@ -13,12 +15,16 @@ import com.sms.smr.infra.outputadapter.db.StudentEntity;
         componentModel = "spring"
 )
  
-public interface StudentEntityMapper { 
+public interface StudentEntityMapper extends GenericMapper<StudentEntity, Student> {
 
-    Student toDomain(StudentEntity studentEntity);
+    @Override
+    @Mapping(source = "localidadEntity.id", target = "localidadId")
+    @Mapping(source = "localidadEntity.nombre", target = "localidadNombre")
+    Student toDomain(StudentEntity entity);
 
-    StudentEntity toDbo(Student student);
-
-    List <Student> getStudents(List<StudentEntity> studentEntities);
+    @Override
+    @InheritInverseConfiguration
+    @Mapping(target = "localidadEntity", ignore = true)
+    StudentEntity toEntity(Student domain);
     
 }

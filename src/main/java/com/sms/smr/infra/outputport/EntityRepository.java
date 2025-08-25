@@ -1,9 +1,8 @@
 package com.sms.smr.infra.outputport;
 
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import java.util.List;
 import java.util.Optional;
-
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 
 public interface EntityRepository<T>{
     

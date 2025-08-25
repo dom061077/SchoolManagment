@@ -8,6 +8,7 @@ import com.sms.smr.domain.EstudioEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -65,7 +66,7 @@ public class StudentEntity extends BasePersonEntity {
     private boolean fotocopiaDniTutor=false;
     private boolean constanciaCuilTutor=false;    
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ParentescoTutorEntity parentescoTutorEntity;
 
     @ManyToOne

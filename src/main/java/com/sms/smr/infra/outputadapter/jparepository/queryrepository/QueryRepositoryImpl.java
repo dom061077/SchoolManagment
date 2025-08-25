@@ -26,14 +26,14 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 @Component
-public class QueryRepositoryImpl<T> implements QueryRepository {
+public class QueryRepositoryImpl<T> implements QueryRepository<T> {
     @PersistenceContext
     private  EntityManager em;
 
     private static final Logger logger = LoggerFactory.getLogger(QueryRepositoryImpl.class); 
 
 
-    private Class getEntityClass(Class clazz) throws Exception {
+    private Class<?> getEntityClass(Class<?> clazz) throws Exception {
         if (clazz.equals(PersonEntity.class)==true)
             return PersonEntity.class;
         if (clazz.equals(StudentEntity.class)==true)
@@ -46,17 +46,18 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     }
 
     @Override
-    public <T> List<T> getAllOr(Class<T> clazz, int offset, int limit, List<QueryDto> queryFilters) {
+    public  List<T> getAllOr(Class<T> clazz, int offset, int limit, List<QueryDto> queryFilters) {
         List <T> result = null;
 
         return result;
     }
     
     @Override
-    public  <T>  List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortingFilters) {
+    public   List<T> getAllAnd(Class<T> clazz, int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortingFilters) {
         
+        Class<?> entityClass;
         try{
-            clazz = getEntityClass(clazz);
+            entityClass = getEntityClass(clazz);
         }catch(Exception e){
 
             throw new InternalServerErrorException("Clase no registrada para query");
@@ -87,7 +88,7 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         return result;      
     }
 
-    private void addSortings(CriteriaQuery cq,CriteriaBuilder cb, Root root, List<QueryDto> sortingFilters){
+    private void addSortings(CriteriaQuery<T> cq, CriteriaBuilder cb, Root<T> root, List<QueryDto> sortingFilters){
         sortingFilters.forEach(s->{
 
             if(s.getValue().toUpperCase().compareTo("ASC")==0){
@@ -99,7 +100,7 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         });
     }
 
-    private Optional<Object> returnValueFromReflection(Class clazz,String fieldName,String value){
+    private Optional<Object> returnValueFromReflection(Class<?> clazz, String fieldName, String value){
         while(clazz != null){
             try{
                 Field field = clazz.getDeclaredField(fieldName);
@@ -126,9 +127,9 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
         return Optional.empty();
     }
 
-    private List<Predicate> getPredicates(Class<?> clazz, List<QueryDto> queryFilters,Root root) {
+    private List<Predicate> getPredicates(Class<?> clazz, List<QueryDto> queryFilters, Root<T> root) {
         logger.info("Ingresando a getPredicates");
-        List<Predicate> predicates = new ArrayList();
+        List<Predicate> predicates = new ArrayList<Predicate>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         queryFilters.forEach(q->{
@@ -168,19 +169,21 @@ public class QueryRepositoryImpl<T> implements QueryRepository {
     }
 
     @Override
-    public <T> long getCount(Class<T> clazz, List<QueryDto> queryFilters) {
+    public long getCount(Class<T> clazz, List<QueryDto> queryFilters) {
         logger.info("Ingresando a getCount");
         long count = 0;
+        Class<?> entityClass;
         try{
-            clazz = getEntityClass(clazz);
+            entityClass = getEntityClass(clazz);
         }catch(Exception e){
             logger.warn("No está registrada la clase para la query");
+            entityClass = clazz; // fallback to original clazz
         }
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = cb.createQuery(Long.class); 
         Root<T> root = criteriaQuery.from(clazz);
         
-        List<Predicate> predicates = getPredicates(clazz, queryFilters, root);
+        List<Predicate> predicates = getPredicates(entityClass, queryFilters, root);
         Predicate predicate = cb.and(predicates.toArray(new Predicate[0]));
         criteriaQuery.where(predicate);
 
