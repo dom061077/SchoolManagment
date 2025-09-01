@@ -26,6 +26,8 @@ import com.sms.smr.infra.inputadapter.dto.student.StudentDtoAfterPost;
 import com.sms.smr.infra.inputadapter.mapper.StudentMapper;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
+import com.sms.smr.infra.inputport.CrudInputPort;
+import com.sms.smr.infra.outputadapter.jpaadapter.StudentJpaAdapter;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import jakarta.validation.Valid;
@@ -37,16 +39,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StudentApi {
     
-    @Qualifier(value = "studentUseCase")
-    private final BaseInputPort<Student> baseInputPort;
+    private final CrudInputPort<Student, Long> studentService;
     
     private final  StudentMapper studentMapper;
     private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
 
+    public StudentApi(StudentJpaAdapter studentJpaAdapter) {
+        this.studentService = new GenericCrudUseCase<>(studentJpaAdapter);
+    }    
+
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentDtoAfterPost> create( @RequestBody @Valid StudentDto studentDto ) {
         logger.info("DTO recibido: "+studentDto.getApellido());
-        Student student = baseInputPort.create(studentMapper.studentPostDtoToStudent(studentDto));
+        Student student = student.create(studentMapper.studentPostDtoToStudent(studentDto));
         URI location = ServletUriComponentsBuilder
             .fromCurrentRequest()
             .path("/{id}")
