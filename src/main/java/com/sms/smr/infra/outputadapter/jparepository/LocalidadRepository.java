@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Component(value = "localidadRepository")
 public class LocalidadRepository implements EntityRepository<LocalidadEntity> {
-    private final SpringDataRespository<LocalidadEntity> springDataRespository;
+    private final SpringDataRepository<LocalidadEntity> springDataRespository;
     private final QueryRepository<LocalidadEntity> queryRepository;
 
     @Override

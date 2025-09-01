@@ -7,15 +7,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
-import com.sms.smr.infra.outputadapter.jparepository.student.SpringDataAlumnoRepository;
+//import com.sms.smr.infra.outputadapter.jparepository.student.SpringDataAlumnoRepository;
 
 
 @SpringBootApplication()
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class SchoolManagmentApplication {
 
-	@Autowired
-	private  SpringDataAlumnoRepository sDAlumnoRepository;
+	//@Autowired
+	//private  SpringDataAlumnoRepository sDAlumnoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SchoolManagmentApplication.class, args);
@@ -29,7 +29,7 @@ public class SchoolManagmentApplication {
 				alumnoEntity = new StudentEntity();
 				//alumnoEntity.setApellido("Apellido "+i);
 				//alumnoEntity.setNombre("Nombre "+i);
-				sDAlumnoRepository.save(alumnoEntity);
+				//sDAlumnoRepository.save(alumnoEntity);
 			}
 
         };

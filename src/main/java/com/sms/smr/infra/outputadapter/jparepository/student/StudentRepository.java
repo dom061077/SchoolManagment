@@ -1,32 +1,36 @@
 package com.sms.smr.infra.outputadapter.jparepository.student;
 
-import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
-import com.sms.smr.infra.outputadapter.jparepository.SpringDataRespository;
+
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputport.EntityRepository;
+
 import java.util.List;
 import java.util.Optional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.stereotype.Component;
+import com.sms.smr.infra.outputadapter.jparepository.SpringDataRepository;
+
+
 @Component(value = "studentRepository")
+@RequiredArgsConstructor
 public class StudentRepository implements EntityRepository<StudentEntity> {
 
-    private final SpringDataRespository<StudentEntity> springDataRespository;
+    private final SpringDataRepository<StudentEntity> springDataRepository;
+
     private final QueryRepository<StudentEntity> queryRepository;
     
-    @Override
+    @Override 
     public StudentEntity save(StudentEntity reg) {
-        return springDataRespository.save(reg);
+        return springDataRepository.save(reg);
     }
 
     @Override
     public Optional<StudentEntity> getById(Long id) {
-        return springDataRespository.findById(id);
+        return springDataRepository.findById(id);
     }
 
     @Override
@@ -42,19 +46,19 @@ public class StudentRepository implements EntityRepository<StudentEntity> {
     @Override
     public Optional<StudentEntity> update(Long id, StudentEntity reg) {
         // Implement the update logic here, for example:
-        if (springDataRespository.existsById(id)) {
+        if (springDataRepository.existsById(id)) {
             reg.setId(id);
-            return Optional.of(springDataRespository.save(reg));
+            return Optional.of(springDataRepository.save(reg));
         }
         return Optional.empty();
     }
 
     @Override
     public Optional<StudentEntity> delete(Long id) {
-        Optional<StudentEntity> studentOptionalEntity = springDataRespository.findById(id);
+        Optional<StudentEntity> studentOptionalEntity = springDataRepository.findById(id);
         if (studentOptionalEntity.isPresent()) {
             studentOptionalEntity.get().setDeleted(true);
-            springDataRespository.save(studentOptionalEntity.get());
+            springDataRepository.save(studentOptionalEntity.get());
             
         } else {
             return Optional.empty();

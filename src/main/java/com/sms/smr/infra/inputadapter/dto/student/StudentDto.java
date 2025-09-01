@@ -2,13 +2,10 @@ package com.sms.smr.infra.inputadapter.dto.student;
 
 
 import com.sms.smr.domain.EstudioEnum;
-import com.sms.smr.domain.Localidad;
-import com.sms.smr.domain.ParentescoTutor;
-
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 
 
@@ -121,6 +118,6 @@ public class StudentDto{
 
     private boolean constanciaCuilTutor=false;    
 
-    ParentescoTutor parentescoTutor;
-    Localidad localidad;
+    Long localidadId;
+    Long parentescoTutorId;
 }

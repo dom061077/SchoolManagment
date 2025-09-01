@@ -52,6 +52,9 @@ public class Student {
     private Long localidadId;
     private String localidadNombre;
 
+    private Long parentescoTutorId;
+    private String parentescoTutorNombre;
+
 
      
     /*String apellido
