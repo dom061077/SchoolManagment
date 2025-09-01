@@ -21,11 +21,11 @@ import com.sms.smr.infra.outputport.EntityRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component
+@Component(value = "studentUseCase")
 public class StudentUseCase implements BaseInputPort<Student> {
     private static final Logger logger = LoggerFactory.getLogger(StudentUseCase.class);
     
-    @Qualifier(value="studentRepository")
+    @Qualifier(value = "studentRepository")
     private final EntityRepository<StudentEntity> entityRepository;
     private final EntityRepository<LocalidadEntity> localidadRepository;
     private final QueryRepository<StudentEntity> queryRepository;
