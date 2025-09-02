@@ -69,7 +69,7 @@ public class StudentEntity extends BasePersonEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private ParentescoTutorEntity parentescoTutorEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private LocalidadEntity localidadEntity;
 
 

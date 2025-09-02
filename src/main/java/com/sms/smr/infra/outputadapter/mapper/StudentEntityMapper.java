@@ -15,7 +15,7 @@ import com.sms.smr.infra.outputadapter.db.StudentEntity;
         componentModel = "spring"
 )
  
-public interface StudentEntityMapper extends GenericMapper<StudentEntity, Student> {
+public interface StudentEntityMapper extends EntityMapper<Student, StudentEntity> {
 
     @Override
     @Mapping(source = "localidadEntity.id", target = "localidadId")

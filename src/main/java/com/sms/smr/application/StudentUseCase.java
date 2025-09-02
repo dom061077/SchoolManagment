@@ -21,7 +21,7 @@ import com.sms.smr.infra.outputport.EntityRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component(value = "studentUseCase")
+@Component
 public class StudentUseCase implements BaseInputPort<Student> {
     private static final Logger logger = LoggerFactory.getLogger(StudentUseCase.class);
     
