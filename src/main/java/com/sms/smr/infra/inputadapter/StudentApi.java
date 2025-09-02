@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sms.smr.application.GenericUseCase;
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.dto.student.StudentDto;
@@ -36,16 +37,15 @@ import lombok.RequiredArgsConstructor;
 //https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection
 @RestController
 @RequestMapping(value = "/api/v1/alumno")
-@RequiredArgsConstructor
 public class StudentApi {
     
     private final CrudInputPort<Student, Long> studentService;
     
-    private final  StudentMapper studentMapper;
+    //private final  StudentMapper studentMapper;
     private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
 
     public StudentApi(StudentJpaAdapter studentJpaAdapter) {
-        this.studentService = new GenericCrudUseCase<>(studentJpaAdapter);
+        this.studentService = new GenericUseCase<>(studentJpaAdapter);
     }    
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)

@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class GenericUseCase<T, ID extends Long> implements CrudInputPort<T, ID> {
+public class GenericUseCase<T, ID> implements CrudInputPort<T, ID> {
 
     private final CrudOutputPort<T,ID> repository;
 
