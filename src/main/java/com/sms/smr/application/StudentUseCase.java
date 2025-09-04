@@ -10,7 +10,10 @@ import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
 
-
+/*
+ * In this class we connect inputport with outputport.
+ * 
+ */
 public class StudentUseCase implements StudentInputPort {
     private final CrudOutputPort<Student, Long> crudOutputPort;
 

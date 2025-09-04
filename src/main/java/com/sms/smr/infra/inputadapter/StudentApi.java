@@ -19,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sms.smr.application.GenericUseCase;
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.dto.student.StudentDto;
@@ -28,38 +27,54 @@ import com.sms.smr.infra.inputadapter.mapper.StudentMapper;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.inputport.CrudInputPort;
-import com.sms.smr.infra.outputadapter.jpaadapter.StudentJpaAdapter;
+import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 //https://manerajona.medium.com/mapping-bidirectional-object-associations-using-mapstruct-ce49b1857604
 //https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection
+
+
+
+/*
+ HTTP (REST Controller)
+    ↓
+Input Port (PersonInputPort)
+    ↓
+Use Case (PersonService)
+    ↓
+Output Port (CrudOutputPort)
+    ↓
+Repository Adapter (BaseRepository + Mapper)
+    ↓
+Spring Data JPA Repository
+    ↓
+Database 
+  
+ */
+
+
+
 @RestController
 @RequestMapping(value = "/api/v1/alumno")
 public class StudentApi {
     
-    private final CrudInputPort<Student, Long> studentService;
+    private final StudentInputPort studentInputPort;
     
     //private final  StudentMapper studentMapper;
     private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
 
-    public StudentApi(StudentJpaAdapter studentJpaAdapter) {
-        this.studentService = new GenericUseCase<>(studentJpaAdapter);
+    public StudentApi(StudentInputPort studentInputPort) {
+        this.studentInputPort = studentInputPort;
     }    
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentDtoAfterPost> create( @RequestBody @Valid StudentDto studentDto ) {
         logger.info("DTO recibido: "+studentDto.getApellido());
-        Student student = student.create(studentMapper.studentPostDtoToStudent(studentDto));
-        URI location = ServletUriComponentsBuilder
-            .fromCurrentRequest()
-            .path("/{id}")
-            .buildAndExpand(student.getId())
-            .toUri();
-        return ResponseEntity.created(location).body(studentMapper.studentToStudentDtoAfterPost(student));
+        return ResponseEntity.ok(studentInputPort.create(person));        
     }
-
+    /* 
     @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     public Student getStudent(@PathVariable("id") Long id) {
         logger.info("ID de alumno a buscar: "+id);
@@ -78,4 +93,5 @@ public class StudentApi {
         List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts); 
         return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
+    */
 }

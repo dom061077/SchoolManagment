@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.EntityMapper;
-
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
 public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>> implements CrudOutputPort<T, ID>{
@@ -47,8 +46,10 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>> i
 
     @Override
     public T create(T reg) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        E createdEntity = repository.save(mapper.toEntity(reg));
+        return mapper.toDomain(createdEntity);
+        
     }
 
     @Override
