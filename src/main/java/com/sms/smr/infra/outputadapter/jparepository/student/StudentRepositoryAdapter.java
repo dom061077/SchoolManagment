@@ -11,7 +11,10 @@ import com.sms.smr.infra.outputadapter.mapper.StudentEntityMapper;
 @Repository
 public class StudentRepositoryAdapter extends BaseRepository<Student, Long, StudentEntity, StudentJpaRepository> {
 
-    
+    /*
+        scanner de beans de spring boot instancia el mapper y lo pasa como parámetro
+        al constructor de BaseRepository
+     */    
 
     public StudentRepositoryAdapter(StudentJpaRepository repository, StudentEntityMapper mapper){
         super(repository,mapper) ;

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CrudOutputPort<T, ID> {
-    public  T save(T reg);
+    public  T create(T reg);
 
     public  Optional<T> getById( ID id );
 

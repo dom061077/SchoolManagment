@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
-
+//to be deprecated
 public interface CrudInputPort<T, ID> {
     T create(T entity);
     Optional<T> getById(ID id);

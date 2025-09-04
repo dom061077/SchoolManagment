@@ -46,7 +46,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>> i
     }
 
     @Override
-    public T save(T reg) {
+    public T create(T reg) {
         // TODO Auto-generated method stub
         return null;
     }
