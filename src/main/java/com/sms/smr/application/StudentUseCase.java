@@ -3,6 +3,9 @@ package com.sms.smr.application;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.StudentInputPort;
@@ -14,6 +17,7 @@ import com.sms.smr.infra.outputport.CrudOutputPort;
  * In this class we connect inputport with outputport.
  * 
  */
+@Service
 public class StudentUseCase implements StudentInputPort {
     private final CrudOutputPort<Student, Long> crudOutputPort;
 

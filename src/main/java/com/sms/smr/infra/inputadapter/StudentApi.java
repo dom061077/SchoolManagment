@@ -70,9 +70,9 @@ public class StudentApi {
     }    
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StudentDtoAfterPost> create( @RequestBody @Valid StudentDto studentDto ) {
-        logger.info("DTO recibido: "+studentDto.getApellido());
-        return ResponseEntity.ok(studentInputPort.create(person));        
+    public ResponseEntity<Student> create( @RequestBody @Valid Student student ) {
+        logger.info("Student lastname: "+student.getApellido());
+        return ResponseEntity.ok(studentInputPort.create(student));        
     }
     /* 
     @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)

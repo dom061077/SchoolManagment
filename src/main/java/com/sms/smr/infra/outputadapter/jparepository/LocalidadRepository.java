@@ -13,7 +13,7 @@ import com.sms.smr.infra.outputport.EntityRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component(value = "localidadRepository")
+//@Component(value = "localidadRepository")
 public class LocalidadRepository implements EntityRepository<LocalidadEntity> {
     private final SpringDataRepository<LocalidadEntity> springDataRespository;
     private final QueryRepository<LocalidadEntity> queryRepository;
