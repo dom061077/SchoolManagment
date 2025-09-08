@@ -7,6 +7,7 @@ import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 //to be deprecated
+//It's use in older use case
 public interface BaseInputPort<T> {
     T create(T entity);
     Optional<T> getById(Long id);

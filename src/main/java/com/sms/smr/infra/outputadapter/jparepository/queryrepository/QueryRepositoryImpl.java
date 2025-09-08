@@ -16,6 +16,7 @@ import com.sms.smr.infra.outputadapter.db.StudentEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.db.TranslationEntity;
+import com.sms.smr.infra.outputadapter.db.StudentEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -42,6 +43,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository<T> {
             return MenuRoleEntity.class;
         if (clazz.equals(TranslationEntity.class) == true)
             return TranslationEntity.class;
+        if (clazz.equals(StudentEntity.class) == true)
+            return StudentEntity.class;
         throw new Exception("La clase "+clazz.getName()+ " no está registrada para la query");
     }
 
@@ -192,6 +195,13 @@ public class QueryRepositoryImpl<T> implements QueryRepository<T> {
         count = query.getSingleResult();
 
         return count;
+    }
+
+    @Override
+    public List<T> getAllAnd( int offset, int limit, List<QueryDto> queryFilters,
+            List<QueryDto> sortingFilters) {
+        throw new UnsupportedOperationException("Unimplemented method 'getAllAnd'");
+        //return this.getAllAnd((Class<T>) type.getClass(), offset, limit, queryFilters, sortingFilters);
     }
     
 }

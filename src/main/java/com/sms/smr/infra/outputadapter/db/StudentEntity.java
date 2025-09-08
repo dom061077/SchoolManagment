@@ -6,18 +6,14 @@ import java.time.Period;
 
 import com.sms.smr.domain.EstudioEnum;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,7 +34,9 @@ public class StudentEntity extends BasePersonEntity {
     //private int dni;
     private String cuil;
     //private String direccion;
+    @Builder.Default
     private boolean planSocial=false;
+    @Builder.Default
     private boolean trabaja=false;
     private String apellidoTutor;
     private String nombreTutor;
@@ -50,20 +48,35 @@ public class StudentEntity extends BasePersonEntity {
     private String cuilTutor;
     private String telefono1;
     private String telefono2;
+    @Builder.Default
     private boolean fotoDni=false;
+    @Builder.Default
     private boolean constanciaCuil=false;
+    @Builder.Default
     private boolean constancia6grado=false;
+    @Builder.Default
     private boolean actaNacimiento=false;
+    @Builder.Default
     private boolean constanciaRegular=false;
+    @Builder.Default
     private boolean foto4x4=false;
+    @Builder.Default
     private boolean fotoCarnetVac=false;
+    @Builder.Default
     private boolean fichaMedica=false;
+    @Builder.Default
     private boolean aptitudFisica=false;
+    @Builder.Default
     private boolean grupoSanguineo=false;
+    @Builder.Default
     private boolean fichaInscripcion=false;
+    @Builder.Default
     private boolean libreta6grado=false;
+    @Builder.Default
     private boolean fotocopiaLibroMatriz=false;
+    @Builder.Default
     private boolean fotocopiaDniTutor=false;
+    @Builder.Default
     private boolean constanciaCuilTutor=false;    
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -74,7 +87,6 @@ public class StudentEntity extends BasePersonEntity {
 
 
     @Override
-    @NotNull(message = "Birth date is required")
     @Past(message = "Birth date must be in the past")    
     public LocalDate getBirthDate(){
         return super.getBirthDate();

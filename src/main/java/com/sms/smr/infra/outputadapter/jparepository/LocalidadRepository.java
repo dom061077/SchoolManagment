@@ -12,12 +12,12 @@ import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 //@Component(value = "localidadRepository")
-public class LocalidadRepository implements EntityRepository<LocalidadEntity> {
-    private final SpringDataRepository<LocalidadEntity> springDataRespository;
-    private final QueryRepository<LocalidadEntity> queryRepository;
-
+public class LocalidadRepository /*implements EntityRepository<LocalidadEntity>*/{
+    //private final SpringDataRepository<LocalidadEntity> springDataRespository;
+    //private final QueryRepository<LocalidadEntity> queryRepository;
+/*
     @Override
     public LocalidadEntity save(LocalidadEntity reg) {
         return springDataRespository.save(reg);
@@ -61,5 +61,5 @@ public class LocalidadRepository implements EntityRepository<LocalidadEntity> {
         
         return localidadOptionalEntity;
     }
-
+*/
 }

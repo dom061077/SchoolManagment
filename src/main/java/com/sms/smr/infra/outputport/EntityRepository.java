@@ -3,6 +3,7 @@ package com.sms.smr.infra.outputport;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import java.util.List;
 import java.util.Optional;
+//To be deprecated in favor of CrudOutputPort
 
 public interface EntityRepository<T>{
     

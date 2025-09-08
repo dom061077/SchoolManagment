@@ -1,6 +1,6 @@
 package com.sms.smr.domain;
 
-import jakarta.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +13,9 @@ public class Student {
 
     
     private Long id;
-    private String apellido;
-    @NotNull
-    private String nombre;
+    private String lastName;
+    
+    private String firstName;
     private java.sql.Date fechaNacimiento;
     private int dni;
     private String cuil;
