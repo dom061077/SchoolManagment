@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
@@ -48,8 +49,12 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
 
     @Override
     public Optional<T> getById(ID id) {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+
+        Optional<E> regEntOpt = repository.findById(id);
+        if(regEntOpt.isPresent())
+            return  Optional.of(mapper.toDomain(regEntOpt.get()));
+        else
+            throw new InternalServerErrorException("Registro con Id: "+id+" no existe");
     }
 
     @Override

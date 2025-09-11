@@ -1,6 +1,7 @@
 package com.sms.smr.infra.inputadapter;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,17 +30,17 @@ import jakarta.validation.Valid;
 
 
 /*
- HTTP (REST Controller)
+ HTTP (REST Controller) StudentApi
     ↓
-Input Port (PersonInputPort)
+Input Port (PersonInputPort) StudentInputPort
     ↓
-Use Case (PersonService)
+Use Case (PersonService) StudentUseCase
     ↓
-Output Port (CrudOutputPort)
+Output Port (CrudOutputPort) 
     ↓
-Repository Adapter (BaseRepository + Mapper)
+Repository Adapter (BaseRepository + Mapper) StudentRepositoryAdapter
     ↓
-Spring Data JPA Repository
+Spring Data JPA Repository StudentJpaRepository
     ↓
 Database 
   
@@ -76,15 +78,19 @@ public class StudentApi {
         List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
         return studentInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }        
-    /* 
+    
     @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     public Student getStudent(@PathVariable("id") Long id) {
         logger.info("ID de alumno a buscar: "+id);
-        Student student = baseInputPort.getById(id).orElseThrow();
-        logger.info("Alumno encontrado: "+student.getApellido());
+        Optional<Student> studentOpt = studentInputPort.getById(id);
+        if(studentOpt.isEmpty()){
+            throw new RuntimeException("Alumno no encontrado");
+        }
+        Student student = studentOpt.get();
+        logger.info("Alumno encontrado: "+student.getLastName());
         return student;
     }
-
+    /*
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
     public  QueryResult<Student> getAll( @RequestParam int offset,@RequestParam  int limit
         ,@RequestParam String qfilters, @RequestParam String sorts) {
