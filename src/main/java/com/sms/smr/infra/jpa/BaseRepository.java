@@ -33,7 +33,11 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
 
     @Override
     public Optional<T> delete(ID id) {
-        // TODO Auto-generated method stub
+        Optional<E> regEntOpt = repository.findById(id);
+        if(regEntOpt.isPresent()){
+            repository.deleteById(id);
+            return Optional.of(mapper.toDomain(regEntOpt.get()));
+        }   
         return Optional.empty();
     }
 
@@ -73,7 +77,15 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
 
     @Override
     public Optional<T> update(ID id, T reg) {
-        // TODO Auto-generated method stub
+        Optional<E> regEntOpt = repository.findById(id);
+        if(regEntOpt.isPresent()){          
+            E entityToUpdate = mapper.toEntity(reg);
+            //se asegura que el id del entity a actualizar sea el mismo del id del path
+            //en caso de que vengan diferente en el dto
+            //((BaseEntity)entityToUpdate).setId((Long)id); 
+            E updatedEntity = repository.save(entityToUpdate);
+            return Optional.of(mapper.toDomain(updatedEntity));
+        }
         return Optional.empty();
     }
 
