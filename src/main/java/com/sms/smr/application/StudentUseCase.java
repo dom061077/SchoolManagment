@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.Student;
+import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
@@ -26,7 +27,7 @@ public class StudentUseCase implements StudentInputPort {
     }   
     @Override
     public Student create(Student student) {
-        return crudOutputPort.create(student);
+        return crudOutputPort.save(student);
     }
 
     @Override
@@ -40,8 +41,13 @@ public class StudentUseCase implements StudentInputPort {
     }
 
     @Override
-    public Optional<Student> update(Long id, Student student) {
-        return crudOutputPort.update(id, student);
+    public Student update(Long id, Student student) {
+        if(crudOutputPort.getById(id).isPresent()){
+            student.setId(id);
+            return crudOutputPort.save(student); 
+        }
+            
+        throw new InternalServerErrorException("Student with id "+id+" not found");
     }
 
     @Override

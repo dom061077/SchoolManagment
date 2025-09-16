@@ -12,6 +12,6 @@ public interface StudentInputPort {
     Student create(Student student);
     Optional<Student> getById(Long id);
     QueryResult<Student> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings);
-    Optional<Student> update(Long id, Student student);
+    Student update(Long id, Student student);
     boolean delete(Long id);
 }

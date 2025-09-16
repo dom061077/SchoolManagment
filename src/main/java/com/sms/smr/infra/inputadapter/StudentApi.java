@@ -11,12 +11,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sms.smr.domain.Person;
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
@@ -89,6 +89,12 @@ public class StudentApi {
         Student student = studentOpt.get();
         logger.info("Alumno encontrado: "+student.getLastName());
         return student;
+    }
+
+    @PutMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody @Valid Student student ) {
+        logger.info("Student lastname: "+student.getLastName());
+        return ResponseEntity.ok(studentInputPort.update(id,student).get());        
     }
     /*
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)

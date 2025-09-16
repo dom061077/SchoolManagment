@@ -7,7 +7,7 @@ import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
 public interface CrudOutputPort<T, ID> {
-    public  T create(T reg);
+    public  T save(T reg);
 
     public  Optional<T> getById( ID id );
 
@@ -15,7 +15,7 @@ public interface CrudOutputPort<T, ID> {
 
     public long getCount(List<QueryDto> queryFilters);
 
-    public   Optional<T> update(ID id,T reg);
+
 
     public  Optional<T> delete(ID id);
 }

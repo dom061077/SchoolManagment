@@ -68,26 +68,14 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
     }
 
     @Override
-    public T create(T reg) {
+    public T save(T reg) {
         
         E createdEntity = repository.save(mapper.toEntity(reg));
         return mapper.toDomain(createdEntity);
         
     }
 
-    @Override
-    public Optional<T> update(ID id, T reg) {
-        Optional<E> regEntOpt = repository.findById(id);
-        if(regEntOpt.isPresent()){          
-            E entityToUpdate = mapper.toEntity(reg);
-            //se asegura que el id del entity a actualizar sea el mismo del id del path
-            //en caso de que vengan diferente en el dto
-            //((BaseEntity)entityToUpdate).setId((Long)id); 
-            E updatedEntity = repository.save(entityToUpdate);
-            return Optional.of(mapper.toDomain(updatedEntity));
-        }
-        return Optional.empty();
-    }
+
 
     
 
