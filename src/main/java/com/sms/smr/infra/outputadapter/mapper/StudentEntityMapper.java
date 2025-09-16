@@ -4,9 +4,12 @@ package com.sms.smr.infra.outputadapter.mapper;
 
 import java.util.List;
 
+import org.mapstruct.BeanMapping;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
@@ -26,5 +29,13 @@ public interface StudentEntityMapper extends EntityMapper<Student, StudentEntity
     @InheritInverseConfiguration
     @Mapping(target = "localidadEntity", ignore = true)
     StudentEntity toEntity(Student domain);
+
+    @Override
+    List<Student> getDomainList(List<StudentEntity> entities);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntityFromDomain(Student domain, @MappingTarget StudentEntity entity);
+
+    
     
 }
