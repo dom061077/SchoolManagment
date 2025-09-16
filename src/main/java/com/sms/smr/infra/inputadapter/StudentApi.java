@@ -94,7 +94,7 @@ public class StudentApi {
     @PutMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody @Valid Student student ) {
         logger.info("Student lastname: "+student.getLastName());
-        return ResponseEntity.ok(studentInputPort.update(id,student).get());        
+        return ResponseEntity.ok(studentInputPort.update(id,student));        
     }
     /*
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)

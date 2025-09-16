@@ -15,7 +15,7 @@ public interface CrudOutputPort<T, ID> {
 
     public long getCount(List<QueryDto> queryFilters);
 
-
+    public  Optional<T> update(ID id, T reg);
 
     public  Optional<T> delete(ID id);
 }

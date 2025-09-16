@@ -75,6 +75,14 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
         
     }
 
+    @Override
+    public Optional<T> update(ID id, T reg) {
+        return repository.findById(id).map(entity->{
+            mapper.updateEntityFromDomain(reg,entity);
+            E saved = repository.save(entity);
+            return mapper.toDomain(saved);
+        });
+    }
 
 
     
