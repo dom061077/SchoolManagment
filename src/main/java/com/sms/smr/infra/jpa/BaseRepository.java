@@ -3,6 +3,9 @@ package com.sms.smr.infra.jpa;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.NotImplementedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sms.smr.infra.exception.InternalServerErrorException;
@@ -18,7 +21,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
     protected final EntityMapper<T, E> mapper;
     protected final Q queryRepository;
     protected Class<E> clazz;
-
+    private static final Logger logger = LoggerFactory.getLogger(BaseRepository.class);
 
     public BaseRepository(R repository, EntityMapper<T,E> mapper, Q queryRepository, Class<E> clazz) {
         this.repository = repository;
@@ -33,12 +36,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
 
     @Override
     public Optional<T> delete(ID id) {
-        Optional<E> regEntOpt = repository.findById(id);
-        if(regEntOpt.isPresent()){
-            repository.deleteById(id);
-            return Optional.of(mapper.toDomain(regEntOpt.get()));
-        }   
-        return Optional.empty();
+        throw new NotImplementedException();
     }
 
     @Override

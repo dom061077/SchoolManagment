@@ -44,14 +44,20 @@ public class StudentUseCase implements StudentInputPort {
     public Student update(Long id, Student student) {
         if(crudOutputPort.getById(id).isPresent()){
             student.setId(id);
-            return crudOutputPort.save(student); 
+            return crudOutputPort.update(id,student).get(); 
         }
             
         throw new InternalServerErrorException("Student with id "+id+" not found");
     }
 
     @Override
-    public boolean delete(Long id) {
-        return crudOutputPort.delete(id).isPresent();
+    public boolean delete(Long id, Student student){
+        if(crudOutputPort.getById(id).isPresent()){
+            student.setId(id);
+            student.setDeleted(true);
+            return crudOutputPort.update(id, student).isPresent();
+        }
+
+        throw new InternalServerErrorException("Student with id: "+id+" not found");
     }
 }

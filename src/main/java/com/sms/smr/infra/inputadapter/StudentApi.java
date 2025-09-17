@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,6 +97,15 @@ public class StudentApi {
         logger.info("Student lastname: "+student.getLastName());
         return ResponseEntity.ok(studentInputPort.update(id,student));        
     }
+
+    @DeleteMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity delete(@PathVariable Long id){
+        logger.info("Student's id to be deleted: "+id);
+        Student student = Student.builder().build();
+        studentInputPort.delete(id, student);
+        return ResponseEntity.ok("");
+    }
+
     /*
     @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
     public  QueryResult<Student> getAll( @RequestParam int offset,@RequestParam  int limit

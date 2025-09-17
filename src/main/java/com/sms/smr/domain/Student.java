@@ -1,18 +1,19 @@
 package com.sms.smr.domain;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
 @Getter
 @Setter
-
-public class Student {
+@SuperBuilder
+@Builder
+public class Student extends BaseDomain{
 
     
-    private Long id;
     private String lastName;
     
     private String firstName;

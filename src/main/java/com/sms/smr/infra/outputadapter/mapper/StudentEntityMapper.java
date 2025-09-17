@@ -15,7 +15,7 @@ import com.sms.smr.domain.Student;
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
 
 @Mapper(
-        componentModel = "spring"
+        componentModel = "spring" 
 )
  
 public interface StudentEntityMapper extends EntityMapper<Student, StudentEntity> {
