@@ -1,12 +1,39 @@
 package com.sms.smr.infra.inputadapter.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import com.sms.smr.domain.Translation;
-import com.sms.smr.infra.inputadapter.dto.translation.TranslationDto;
+import com.sms.smr.infra.outputadapter.db.TranslationEntity;
+import com.sms.smr.infra.outputadapter.mapper.EntityMapper;
 
-@Mapper(componentModel = "spring")
-public interface TranslationMapper {
-    Translation toDomain(TranslationDto translationDto);
-    TranslationDto toDto(Translation translation);
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface TranslationMapper extends EntityMapper<Translation, TranslationEntity> {
+/*
+    TranslationMapper INSTANCE = Mappers.getMapper(TranslationMapper.class);
+
+    @Override
+    @Mapping(target = "createdDate", ignore = true)
+    @Mapping(target = "lastModifiedDate", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "lastModifiedBy", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    TranslationEntity toEntity(Translation domain);
+
+    @Override
+    @Mapping(target = "createdDate", ignore = true)
+    @Mapping(target = "lastModifiedDate", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "lastModifiedBy", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    Translation toDomain(TranslationEntity entity);
+
+    @Override
+    @Mapping(target = "createdDate", ignore = true)
+    @Mapping(target = "lastModifiedDate", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "lastModifiedBy", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    void updateEntityFromDomain(Translation domain, @MappingTarget TranslationEntity entity);
+    */
 }

@@ -1,18 +1,18 @@
 package com.sms.smr.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Getter
 @Setter
-public class Translation {
+public class Translation extends BaseDomain {
     private Long id;
 
     private String key;
     private String value;
     private String language;
     private String namespace;
-
+    
 }

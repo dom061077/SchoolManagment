@@ -24,22 +24,22 @@ public class MenuUseCase implements BaseInputPort<Menu> {
     private final QueryRepository queryRepository;
     private final MenuEntityMapper menuEntityMapper;
 
-    public Menu create(Menu entity) {
+    public Menu create(Menu domain) {
         
-        return menuEntityMapper.entityToDomain(entityRepository.save(menuEntityMapper.domainToEntity(entity)));
+        return menuEntityMapper.toDomain(entityRepository.save(menuEntityMapper.toEntity(domain)));
     }
 
     @Override
     public Optional<Menu> getById(Long id) {
         return entityRepository.getById(id)
-                .map(menuEntity -> menuEntityMapper.entityToDomain((MenuEntity) menuEntity));
+                .map(menuEntity -> menuEntityMapper.toDomain((MenuEntity) menuEntity));
     }
 
     @Override
     public QueryResult<Menu> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings) {
         QueryResult<Menu> qResult = new QueryResult<Menu>();
 
-        qResult.setData(menuEntityMapper.getMenus(queryRepository.getAllAnd(MenuEntity.class, offset, limit, queryFilters, sortings)));
+        qResult.setData(menuEntityMapper.getDomainList(queryRepository.getAllAnd(MenuEntity.class, offset, limit, queryFilters, sortings)));
         long count = entityRepository.getCount(queryFilters);
         qResult.setTotal(count);
 
@@ -48,8 +48,8 @@ public class MenuUseCase implements BaseInputPort<Menu> {
 
     @Override
     public Optional<Menu> update(Long id, Menu entity) {
-        return entityRepository.update(id, menuEntityMapper.domainToEntity(entity))
-                .map(menuEntityMapper::entityToDomain);
+        return entityRepository.update(id, menuEntityMapper.toEntity(entity))
+                .map(menuEntityMapper::toDomain);
     }
 
     @Override

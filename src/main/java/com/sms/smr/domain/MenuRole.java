@@ -16,9 +16,8 @@ public class MenuRole {
     //private String description;
     //private String code;
     //private String path;
-    private String menuDescription;
-    private String menuCode;
-    private String menuPath;
+
+    Menu menu;
 
     boolean create;
     boolean update;

@@ -35,7 +35,7 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
 
     @Override
     public Translation create(Translation translation) {
-        return translationEntityMapper.toDomain(entityRepository.save(translationEntityMapper.toDbo(translation)));
+        return translationEntityMapper.toDomain(entityRepository.save(translationEntityMapper.toEntity(translation)));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
     public QueryResult<Translation> getAll(int offset, int limit, List<QueryDto> queryFilters,
             List<QueryDto> sorts) {
         QueryResult<Translation> qResult = new QueryResult<Translation>();
-        qResult.setData(translationEntityMapper.getTranslations(entityRepository.getAll(offset, limit, queryFilters, sorts)));
+        qResult.setData(translationEntityMapper.getDomainList(entityRepository.getAll(offset, limit, queryFilters, sorts)));
         long count = entityRepository.getCount(queryFilters);
         qResult.setTotal(count);
         
@@ -56,7 +56,7 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
 
     @Override
     public Optional<Translation> update(Long id, Translation entity) {
-        return entityRepository.update(id, translationEntityMapper.toDbo(entity))
+        return entityRepository.update(id, translationEntityMapper.toEntity(entity))
                 .map(translationEntityMapper::toDomain);
     }
 
