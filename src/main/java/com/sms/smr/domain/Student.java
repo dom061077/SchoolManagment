@@ -16,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
+@Builder
 public class Student extends BasePersonDomain{
     //private java.sql.Date fechaNacimiento;
     //private int dni;
@@ -66,9 +67,9 @@ public class Student extends BasePersonDomain{
     @Builder.Default
     private boolean constanciaCuilTutor=false;    
 
-    private ParentescoTutorEntity parentescoTutorEntity;
+    private ParentescoTutor parentescoTutorEntity;
 
-    private LocalidadEntity localidadEntity;
+    private Localidad localidadEntity;
 
 
     @Override

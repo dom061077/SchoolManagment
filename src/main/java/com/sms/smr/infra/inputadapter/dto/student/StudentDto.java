@@ -2,8 +2,8 @@ package com.sms.smr.infra.inputadapter.dto.student;
 
 
 import com.sms.smr.domain.EstudioEnum;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,32 +13,27 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class StudentDto{
 
 
     private Long id;
 
-    @NotBlank
     private String apellido;
 
 
-    @NotBlank
     private String nombre;
 
 
-    @NotNull
     private java.sql.Date fechaNacimiento;
 
 
-    @NotNull
     private int dni;
 
 
-    @NotBlank
     private String cuil;
 
 
-    @NotBlank
     private String direccion;
 
 

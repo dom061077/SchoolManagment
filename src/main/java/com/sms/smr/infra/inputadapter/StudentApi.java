@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.inputadapter.dto.student.StudentDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
@@ -63,9 +64,19 @@ public class StudentApi {
     }    
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Student> create( @RequestBody @Valid Student student ) {
-        logger.info("Student lastname: "+student.getLastName());
-        return ResponseEntity.ok(studentInputPort.create(student));        
+    public ResponseEntity<Student> create( @RequestBody @Valid StudentDto student ) {
+        logger.info("Student lastname: "+student.getApellido());
+        Student studentDomain = Student.builder()
+            .lastName(student.getApellido())
+            .firstName(student.getNombre())
+            //.birthDate(student.getFechaNacimiento().toLocalDate())
+            .dni(student.getDni())
+            .cuil(student.getCuil())
+            .address(student.getDireccion())
+            //.localidadEntity(Localidad.builder().id(Long.valueOf(1)).nombre("Localidad de prueba").build())
+            .build();
+        return ResponseEntity.ok(studentInputPort.create(studentDomain));        
+        //return ResponseEntity.ok(studentDomain        );        
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
