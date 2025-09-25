@@ -4,11 +4,11 @@ package com.sms.smr.domain;
 import java.time.LocalDate;
 import java.time.Period;
 
-import com.sms.smr.infra.outputadapter.db.LocalidadEntity;
-import com.sms.smr.infra.outputadapter.db.ParentescoTutorEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import jakarta.validation.constraints.Past;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -17,6 +17,8 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student extends BasePersonDomain{
     //private java.sql.Date fechaNacimiento;
     //private int dni;

@@ -2,11 +2,9 @@ package com.sms.smr.domain;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Builder;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -14,12 +12,10 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@MappedSuperclass
 @SuperBuilder
 public  class BaseDomain {
     private Long id;
 
-    @Builder.Default
     private boolean deleted = false;
 
     private LocalDateTime createdDate;
