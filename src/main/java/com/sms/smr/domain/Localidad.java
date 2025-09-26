@@ -1,14 +1,18 @@
 package com.sms.smr.domain;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@Builder
-public class Localidad {
-    private Long id;
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Localidad extends BaseDomain {
+
     private String nombre;
     private Departamento departamento;
 }

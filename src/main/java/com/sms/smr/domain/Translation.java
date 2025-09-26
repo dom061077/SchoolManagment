@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 public class Translation extends BaseDomain {
-    private Long id;
+
 
     private String key;
     private String value;

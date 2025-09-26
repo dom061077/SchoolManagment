@@ -3,6 +3,7 @@ package com.sms.smr.domain;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 public  class BaseDomain {
     private Long id;
 
+    @Builder.Default
     private boolean deleted = false;
 
     private LocalDateTime createdDate;
