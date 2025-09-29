@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -137,17 +138,25 @@ public class GlobalExceptionHandler    {
     }
 
     @ExceptionHandler(InvalidBearerTokenException.class)
-    public ResponseEntity<String> handleException(InvalidBearerTokenException e){
+    public ResponseEntity<String> handleInvalidBearerTokenException(InvalidBearerTokenException e){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("El token es incorrecto");
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<Object> handleExcpetion(HttpMessageNotReadableException e){
+    public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
         Map<String, String> fieldErrors = new HashMap<>();
         Map<String, Object> errorDetails = createErrorResponse(e.getMessage(),HttpStatus.BAD_REQUEST.value(), fieldErrors);
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+    public ResponseEntity<Object> handleInvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException e){
+        Map<String, String> fieldErrors = new HashMap<>();
+        Map<String, Object> errorDetails = createErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), fieldErrors);
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    
 
     /*@ExceptionHandler(CustomException.class)
     public ResponseEntity<String> handleCustomException(CustomException ex) {
