@@ -3,24 +3,26 @@ package com.sms.smr.infra.outputadapter.db;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder   
+@Builder
 @Table(name="provincia")
-public class ProvinciaEntity {
+public class ProvinciaEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+
     private String nombre;
 
     @OneToMany(mappedBy = "provincia")

@@ -1,15 +1,21 @@
 package com.sms.smr.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Setter
 @Getter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class MenuRole {
+public class MenuRole extends BaseDomain {
 
-    private Long id;   
+
     
     //MenuDomain
     //private Long id;
