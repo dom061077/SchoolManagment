@@ -1,23 +1,25 @@
 package com.sms.smr.infra.outputadapter.db;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
+@Builder
 @Entity
 @Table(name="parentesco_tutor")
-public class ParentescoTutorEntity {
+public class ParentescoTutorEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+
 
     private String descripcion;
 }

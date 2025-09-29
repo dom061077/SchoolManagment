@@ -2,9 +2,6 @@ package com.sms.smr.infra.outputadapter.db;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -12,18 +9,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @AllArgsConstructor
+@SuperBuilder
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
 @Table(name = "menu_role")
-public class MenuRoleEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;   
+public class MenuRoleEntity extends BaseEntity {
+
     
     @ManyToOne
     MenuEntity menu;
