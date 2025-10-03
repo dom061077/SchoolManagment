@@ -32,12 +32,26 @@ spring:
       mode: always
   jpa:
     properties:
+      javax:
+        persistence:
+          schema-generation:
+            create-source: metadata
+            scripts:
+              action: create
+              create-target: ./target/create-schema.sql
       hibernate:
         check_nullability: 'true'
     defer-datasource-initialization: 'true'
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: 'true'
+  flyway:
+    baseline-on-migrate: true
+    enabled: false
+    user: postgres
+    password: postgres123
+    baseline-description: "init"
+    baseline-version: 0
   security:
     oauth2:
       resourceserver:
