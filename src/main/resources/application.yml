@@ -41,13 +41,13 @@ spring:
               create-target: ./target/create-schema.sql
       hibernate:
         check_nullability: 'true'
-    defer-datasource-initialization: 'true'
+    defer-datasource-initialization: 'false' #This is useful for scenarios where schema.sql or data.sql scripts should run after Hibernate's schema generation. It must be set false for run flyway
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     show-sql: 'true'
   flyway:
     baseline-on-migrate: true
-    enabled: false
+    enabled: true
     user: postgres
     password: postgres123
     baseline-description: "init"

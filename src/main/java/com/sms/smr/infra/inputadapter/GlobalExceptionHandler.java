@@ -125,10 +125,12 @@ public class GlobalExceptionHandler    {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleNotFound(Exception e) {
+    public ResponseEntity<Object> handleNotFound(Exception e) {
         // Provide custom 404 error handling logic here
         logger.error("Exception",e);
-        return ResponseEntity.status(BAD_REQUEST).body(e.getMessage()); // This should map to your custom not found page or endpoint
+        Map<String, String> fieldErrors = new HashMap<>();
+        Map<String, Object> errorDetails = createErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), fieldErrors);
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(InternalServerErrorException.class)
