@@ -1,4 +1,4 @@
-package com.sms.smr.infra.jpa;
+package com.sms.smr.infra.outputadapter.jpa;
 
 import java.util.List;
 import java.util.Optional;
