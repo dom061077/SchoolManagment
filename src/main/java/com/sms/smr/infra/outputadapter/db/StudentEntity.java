@@ -7,10 +7,11 @@ import java.time.Period;
 import com.sms.smr.domain.EstudioEnum;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,8 +41,11 @@ public class StudentEntity extends BasePersonEntity {
     private boolean trabaja=false;
     private String apellidoTutor;
     private String nombreTutor;
+    @Enumerated(EnumType.STRING)
     private EstudioEnum estudioPrimarioTutor;
+    @Enumerated(EnumType.STRING)
     private EstudioEnum estudioSecundarioTutor;
+    @Enumerated(EnumType.STRING)
     private EstudioEnum estudioTerUnivTutor;
     
     private int dniTutor;
