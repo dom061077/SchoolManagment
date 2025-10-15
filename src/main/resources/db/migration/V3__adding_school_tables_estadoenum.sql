@@ -1,7 +1,8 @@
 alter table if exists alumno alter column created_date set data type timestamp(6);
 alter table if exists alumno alter column last_modified_date set data type timestamp(6);
 
-
+ALTER TABLE alumno 
+    DROP CONSTRAINT alumno_estudio_primario_tutor_check;
 ALTER TABLE alumno 
 ALTER COLUMN estudio_primario_tutor 
 SET DATA TYPE VARCHAR(255) 
@@ -11,30 +12,41 @@ USING
         WHEN 1 THEN 'ESTUDIO_INCOMPLETO' -- 1 is the ordinal for ESTUDIO_INCOMPLETO
         ELSE NULL -- Handle any unexpected values
     END;
+ALTER TABLE alumno 
+    ADD CONSTRAINT alumno_estudio_primario_tutor_check 
+    CHECK (estudio_primario_tutor IN ('ESTUDIO_COMPLETO', 'ESTUDIO_INCOMPLETO'));    
 
+
+ALTER TABLE alumno 
+    DROP CONSTRAINT alumno_estudio_secundario_tutor_check;
 ALTER TABLE alumno 
 ALTER COLUMN estudio_secundario_tutor 
 SET DATA TYPE VARCHAR(255) 
 USING 
-    CASE estudio_primario_tutor
+    CASE estudio_secundario_tutor
         WHEN 0 THEN 'ESTUDIO_COMPLETO' -- 0 is the ordinal for ESTUDIO_COMPLETO
         WHEN 1 THEN 'ESTUDIO_INCOMPLETO' -- 1 is the ordinal for ESTUDIO_INCOMPLETO
         ELSE NULL -- Handle any unexpected values
     END;
+ALTER TABLE alumno 
+    ADD CONSTRAINT alumno_estudio_secundario_tutor_check 
+    CHECK (estudio_primario_tutor IN ('ESTUDIO_COMPLETO', 'ESTUDIO_INCOMPLETO'));  
 
 
-
-
+ALTER TABLE alumno 
+    DROP CONSTRAINT alumno_estudio_ter_univ_tutor_check;
 ALTER TABLE alumno 
 ALTER COLUMN estudio_ter_univ_tutor 
 SET DATA TYPE VARCHAR(255) 
 USING 
-    CASE estudio_primario_tutor
+    CASE estudio_ter_univ_tutor
         WHEN 0 THEN 'ESTUDIO_COMPLETO' -- 0 is the ordinal for ESTUDIO_COMPLETO
         WHEN 1 THEN 'ESTUDIO_INCOMPLETO' -- 1 is the ordinal for ESTUDIO_INCOMPLETO
         ELSE NULL -- Handle any unexpected values
     END;
-
+ALTER TABLE alumno 
+    ADD CONSTRAINT alumno_estudio_ter_univ_tutor_check 
+    CHECK (estudio_primario_tutor IN ('ESTUDIO_COMPLETO', 'ESTUDIO_INCOMPLETO'));
 
 
 
