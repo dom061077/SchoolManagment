@@ -1,17 +1,14 @@
 package com.sms.smr.application;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.CrudOutputPort;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 
 /*
@@ -37,7 +34,7 @@ public class StudentUseCase implements StudentInputPort {
 
     @Override
     public QueryResult<Student> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings) {
-        return crudOutputPort.getAll(offset, limit, queryFilters, queryFilters);
+        return crudOutputPort.getAll(offset, limit, queryFilters, sortings);
     }
 
     @Override
