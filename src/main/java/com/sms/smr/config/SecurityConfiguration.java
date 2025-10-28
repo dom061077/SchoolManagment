@@ -67,7 +67,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                                 "/swagger-ui/**",
                                 "/webjars/**",
                                 "/swagger-ui.html",
-                                "/api/v1/translation/messages/es"
+                                "/api/v1/translation/messages/**"
                         )
                             .permitAll()
                         .anyRequest()
