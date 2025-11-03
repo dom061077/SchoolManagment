@@ -14,6 +14,7 @@ public class Utils {
     private static final Logger logger = LoggerFactory.getLogger(Utils.class);
 
     public static List<QueryDto> stringToQueryFilterDto(String queryString){
+        logger.info("queryString to parse: "+queryString);
         ObjectMapper objectMapper = new ObjectMapper();
         List<QueryDto> queryFilters = new ArrayList();
         JsonNode jsonArray;
