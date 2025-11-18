@@ -6,12 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.sms.smr.application.EnumValuesUseCase;
 import com.sms.smr.domain.EstudioEnum;
+import com.sms.smr.infra.inputadapter.dto.enumeration.EstudioEnumDto;
 import com.sms.smr.infra.inputport.EnumValuesInputPort;
-
-import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(value="/api/v1/enum")
@@ -22,13 +19,15 @@ public class EnumApi {
     }
 
     @GetMapping("/estudio")
-    public List<String> getEstudioEnumValues(){
-        List<String> enumValues=enumValuesInputPort.getEstudioEnumValues()
+    public List<EstudioEnumDto> getEstudioEnumValues(){
+        List<EstudioEnumDto> enumValues=enumValuesInputPort.getEstudioEnumValues()
             .stream()
-            .map(e->{
-                return e.name();
-            })
-            .toList();
+            .map((EstudioEnum e)->{
+                return EstudioEnumDto.builder()
+                    .code(e.name( ))
+                    .description(e.toString())
+                    .build();
+            }).toList();
         return enumValues;
     }   
     
