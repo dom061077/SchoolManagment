@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class EstudioEnumDto {
-    private final String code;
+    private final String id;
     private final String description;
 }
