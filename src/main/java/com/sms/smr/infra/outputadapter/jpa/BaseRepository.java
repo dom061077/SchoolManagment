@@ -1,5 +1,6 @@
 package com.sms.smr.infra.outputadapter.jpa;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,24 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
 
     @Override
     public Optional<T> delete(ID id) {
-        throw new NotImplementedException();
+        Optional<E> regEntOpt = repository.findById(id);
+        if(regEntOpt.isPresent()) {
+            try {
+                regEntOpt.get().getClass().getMethod("setDeleted", Boolean.class).invoke(regEntOpt.get(), true);
+            } catch (IllegalAccessException e) {
+                logger.error("Error en IllegalAccessException", e);
+            } catch (InvocationTargetException e) {
+                logger.error("Error en InvocationTargetException", e);
+            } catch (NoSuchMethodException e) {
+                logger.error("Error en NoSuchMethodException", e);
+            } catch (SecurityException e) {
+                logger.error("Error en SecurityException", e);
+            }
+            return Optional.of(mapper.toDomain(regEntOpt.get()));
+        }
+        else
+            throw new InternalServerErrorException("Registro con Id: "+id+" no existe");
+        
     }
 
     @Override
