@@ -1,0 +1,14 @@
+create table turno (id bigint not null, name varchar(255), primary key (id));
+create table curso_turno (curso_id bigint not null, turno_id bigint not null, primary key (curso_id, turno_id));
+create table inscripcion_alumno (deleted boolean not null, academic_period_id bigint, created_date timestamp(6), grade_level_id bigint, id bigint not null, last_modified_date timestamp(6), section_id bigint, shift_id bigint, student_id bigint, created_by varchar(255), last_modified_by varchar(255), primary key (id));
+create table nivel_grado (grade integer not null, id bigint not null, primary key (id));
+create table periodo_lectivo (deleted boolean not null, is_active boolean not null, year integer not null, created_date timestamp(6), id bigint not null, last_modified_date timestamp(6), created_by varchar(255), last_modified_by varchar(255), primary key (id));
+alter table if exists curso_division add constraint FKoih6s32mlygj76qk3wj44tl6u foreign key (division_id) references division;
+alter table if exists curso_division add constraint FKg2x83qtsf5mhnm7b4y3al2ui8 foreign key (curso_id) references nivel_grado;
+alter table if exists curso_turno add constraint FKs4tf2bk0ipeswopxaol5g81si foreign key (turno_id) references turno;
+alter table if exists curso_turno add constraint FK62xfyy9sl29uqa950gkc26ka8 foreign key (curso_id) references nivel_grado;
+alter table if exists inscripcion_alumno add constraint FKahwhpo1590g411aawy5kninwy foreign key (academic_period_id) references periodo_lectivo;
+alter table if exists inscripcion_alumno add constraint FKjwm29v9qhgfn5kgdsqa8044v3 foreign key (grade_level_id) references nivel_grado;
+alter table if exists inscripcion_alumno add constraint FKhexl692gyfeevlua311obxo6y foreign key (section_id) references division;
+alter table if exists inscripcion_alumno add constraint FK6ye58dxo8d42ni0apdtdg6jds foreign key (shift_id) references turno;
+alter table if exists inscripcion_alumno add constraint FK5hulq8ytl8j0asyk3yiu445ma foreign key (student_id) references alumno;
