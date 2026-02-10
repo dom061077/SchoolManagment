@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 import com.sms.smr.domain.Role;
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.outputadapter.db.StudentEntity;
+import com.sms.smr.infra.outputadapter.db.LocalidadEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
-import com.sms.smr.infra.outputadapter.db.TranslationEntity;
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
+import com.sms.smr.infra.outputadapter.db.TranslationEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -45,6 +45,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository<T> {
             return TranslationEntity.class;
         if (clazz.equals(StudentEntity.class) == true)
             return StudentEntity.class;
+        if (clazz.equals(LocalidadEntity.class) == true)
+            return LocalidadEntity.class;
         throw new Exception("La clase "+clazz.getName()+ " no está registrada para la query");
     }
 
@@ -135,6 +137,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository<T> {
         List<Predicate> predicates = new ArrayList<Predicate>();
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
+        if(queryFilters==null)
+            return predicates;
         queryFilters.forEach(q->{
             
             String[] splitted = q.getProperty().split(":");
