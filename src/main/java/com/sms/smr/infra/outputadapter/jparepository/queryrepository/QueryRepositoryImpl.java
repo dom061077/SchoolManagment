@@ -9,12 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.sms.smr.domain.Provincia;
 import com.sms.smr.domain.Role;
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.LocalidadEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
+import com.sms.smr.infra.outputadapter.db.ProvinciaEntity;
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
 import com.sms.smr.infra.outputadapter.db.TranslationEntity;
 
@@ -47,6 +49,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository<T> {
             return StudentEntity.class;
         if (clazz.equals(LocalidadEntity.class) == true)
             return LocalidadEntity.class;
+        if (clazz.equals(ProvinciaEntity.class) == true)
+            return ProvinciaEntity.class;
         throw new Exception("La clase "+clazz.getName()+ " no está registrada para la query");
     }
 

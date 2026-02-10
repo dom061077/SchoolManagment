@@ -1,8 +1,10 @@
 package com.sms.smr.infra.inputadapter;
 
+import com.sms.smr.domain.Provincia;
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
+import com.sms.smr.infra.inputport.ProvinciaInputPort;
 import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import jakarta.validation.Valid;
@@ -52,12 +54,14 @@ Database
 public class StudentApi {
     
     private final StudentInputPort studentInputPort;
+    private final ProvinciaInputPort provinciaInputPort;
     
     //private final  StudentMapper studentMapper;
     private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
 
-    public StudentApi(StudentInputPort studentInputPort) {
+    public StudentApi(StudentInputPort studentInputPort,ProvinciaInputPort ProvinciaInputPort) {
         this.studentInputPort = studentInputPort;
+        this.provinciaInputPort = ProvinciaInputPort;
     }    
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -77,6 +81,17 @@ public class StudentApi {
         List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
         return studentInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }        
+
+    @GetMapping(value = "provincias", produces = MediaType.APPLICATION_JSON_VALUE)
+    public QueryResult<Provincia> getAllProvincias(@RequestParam int offset, @RequestParam int limit
+        ,@RequestParam String qfilters, @RequestParam String sorts){
+        logger.info("Filters: "+qfilters);
+        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        //queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
+
+        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
+        return provinciaInputPort.getAll(offset, limit, queryFilters,sortFilters);      
+    }
     
     @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     public Student getStudent(@PathVariable("id") Long id) {
