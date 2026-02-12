@@ -2,12 +2,13 @@ package com.sms.smr.infra.inputport;
 
 import java.util.List;
 
-import com.sms.smr.domain.Localidad;
+import com.sms.smr.domain.Departamento;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 
-public interface LocalidadInputPort  {
+public interface DepartamentoInputPort {
 
-    
-    QueryResult<Localidad> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings);
+    QueryResult<Departamento> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings);
+
 }
+

@@ -13,6 +13,7 @@ import com.sms.smr.domain.Provincia;
 import com.sms.smr.domain.Role;
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.outputadapter.db.DepartamentoEntity;
 import com.sms.smr.infra.outputadapter.db.LocalidadEntity;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
@@ -27,6 +28,15 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+
+/* Note:
+Root<T> → represents the entity
+
+CriteriaBuilder → used to build conditions (=, like, >, etc.)
+
+Predicate → the actual condition
+*/
+
 
 @Component
 public class QueryRepositoryImpl<T> implements QueryRepository<T> {
@@ -51,6 +61,8 @@ public class QueryRepositoryImpl<T> implements QueryRepository<T> {
             return LocalidadEntity.class;
         if (clazz.equals(ProvinciaEntity.class) == true)
             return ProvinciaEntity.class;
+        if (clazz.equals(DepartamentoEntity.class) == true)
+            return DepartamentoEntity.class;
         throw new Exception("La clase "+clazz.getName()+ " no está registrada para la query");
     }
 
