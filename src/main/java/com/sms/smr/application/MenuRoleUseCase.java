@@ -14,6 +14,7 @@ import com.sms.smr.infra.inputadapter.mapper.MenuRoleMapper;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 import com.sms.smr.infra.outputadapter.mapper.MenuRoleEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
@@ -46,7 +47,7 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
     public QueryResult getAll(int offset, int limit, List queryFilters, List sortings) {
         // TODO Auto-generated method stub
         QueryResult<MenuRole> qResult = new QueryResult<MenuRole>();
-        List<MenuRole> menuRoleList = menuRoleEntityMapper.getDomainList(entityRepository.getAll(offset, limit, queryFilters, sortings));
+        List<MenuRole> menuRoleList = menuRoleEntityMapper.getDomainList(entityRepository.getAll(offset, limit, queryFilters, sortings), new CycleAvoidingMappingContext());
                 //menuRoleMapper.getMenuRoleDtos( 
                 //menuRoleEntityMapper.getMenuRoles(entityRepository.getAll(offset, limit, queryFilters, sortings)));
         qResult.setData(menuRoleList);
@@ -69,8 +70,8 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
         //return entityRepository.update(id, menuRoleEntityMapper.toDbo(entity))
         //        .map(menuRoleEntityMapper::toDomain);        
 
-        return entityRepository.update(id,menuRoleEntityMapper.toEntity(entity))
-                .map(mr->menuRoleEntityMapper.toDomain(mr)); // Convert to domain object
+        return entityRepository.update(id,menuRoleEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
+                .map(mr->menuRoleEntityMapper.toDomain(mr, new CycleAvoidingMappingContext())); // Convert to domain object
     }
 
     @Override

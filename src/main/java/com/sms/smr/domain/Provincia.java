@@ -1,7 +1,5 @@
 package com.sms.smr.domain;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +17,6 @@ public class Provincia extends BaseDomain {
 
 
     private String nombre;
-    private List<Departamento> departamentos;
+    //private List<Departamento> departamentos;
     
 }

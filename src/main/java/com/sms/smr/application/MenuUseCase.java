@@ -11,6 +11,7 @@ import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.MenuEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 import com.sms.smr.infra.outputadapter.mapper.MenuEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
@@ -26,20 +27,20 @@ public class MenuUseCase implements BaseInputPort<Menu> {
 
     public Menu create(Menu domain) {
         
-        return menuEntityMapper.toDomain(entityRepository.save(menuEntityMapper.toEntity(domain)));
+        return menuEntityMapper.toDomain(entityRepository.save(menuEntityMapper.toEntity(domain, new CycleAvoidingMappingContext())), new CycleAvoidingMappingContext());
     }
 
     @Override
     public Optional<Menu> getById(Long id) {
         return entityRepository.getById(id)
-                .map(menuEntity -> menuEntityMapper.toDomain((MenuEntity) menuEntity));
+                .map(menuEntity -> menuEntityMapper.toDomain((MenuEntity) menuEntity, new CycleAvoidingMappingContext()));
     }
 
     @Override
     public QueryResult<Menu> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings) {
         QueryResult<Menu> qResult = new QueryResult<Menu>();
 
-        qResult.setData(menuEntityMapper.getDomainList(queryRepository.getAllAnd(MenuEntity.class, offset, limit, queryFilters, sortings)));
+        qResult.setData(menuEntityMapper.getDomainList(queryRepository.getAllAnd(MenuEntity.class, offset, limit, queryFilters, sortings), new CycleAvoidingMappingContext()));
         long count = entityRepository.getCount(queryFilters);
         qResult.setTotal(count);
 
@@ -48,8 +49,10 @@ public class MenuUseCase implements BaseInputPort<Menu> {
 
     @Override
     public Optional<Menu> update(Long id, Menu entity) {
-        return entityRepository.update(id, menuEntityMapper.toEntity(entity))
-                .map(menuEntityMapper::toDomain);
+        //return null;
+        return entityRepository.update(id, menuEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
+                .map(menuEntity -> menuEntityMapper.toDomain(menuEntity, new CycleAvoidingMappingContext()));
+                //.map(menuEntityMapper::toDomain, new CycleAvoidingMappingContext());
     }
 
     @Override

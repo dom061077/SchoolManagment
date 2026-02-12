@@ -14,6 +14,7 @@ import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.TranslationEntity;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 import com.sms.smr.infra.outputadapter.mapper.TranslationEntityMapper;
 import com.sms.smr.infra.outputport.EntityRepository;
 
@@ -35,19 +36,19 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
 
     @Override
     public Translation create(Translation translation) {
-        return translationEntityMapper.toDomain(entityRepository.save(translationEntityMapper.toEntity(translation)));
+        return translationEntityMapper.toDomain(entityRepository.save(translationEntityMapper.toEntity(translation, new CycleAvoidingMappingContext())), new CycleAvoidingMappingContext());
     }
 
     @Override
     public Optional<Translation> getById(Long id) {
-        return entityRepository.getById(id).map(translationEntity -> translationEntityMapper.toDomain(translationEntity) );
+        return entityRepository.getById(id).map(translationEntity -> translationEntityMapper.toDomain(translationEntity, new CycleAvoidingMappingContext()) );
     }
 
     @Override
     public QueryResult<Translation> getAll(int offset, int limit, List<QueryDto> queryFilters,
             List<QueryDto> sorts) {
         QueryResult<Translation> qResult = new QueryResult<Translation>();
-        qResult.setData(translationEntityMapper.getDomainList(entityRepository.getAll(offset, limit, queryFilters, sorts)));
+        qResult.setData(translationEntityMapper.getDomainList(entityRepository.getAll(offset, limit, queryFilters, sorts), new CycleAvoidingMappingContext()));
         long count = entityRepository.getCount(queryFilters);
         qResult.setTotal(count);
         
@@ -56,8 +57,9 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
 
     @Override
     public Optional<Translation> update(Long id, Translation entity) {
-        return entityRepository.update(id, translationEntityMapper.toEntity(entity))
-                .map(translationEntityMapper::toDomain);
+        return entityRepository.update(id, translationEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
+                .map(translationEntity -> translationEntityMapper.toDomain(translationEntity, new CycleAvoidingMappingContext()));
+                //.map(translationEntityMapper::toDomain);
     }
 
     @Override

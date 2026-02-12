@@ -13,6 +13,7 @@ import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 import com.sms.smr.infra.outputadapter.mapper.EntityMapper;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
@@ -50,7 +51,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
             } catch (SecurityException e) {
                 logger.error("Error en SecurityException", e);
             }
-            return Optional.of(mapper.toDomain(regEntOpt.get()));
+            return Optional.of(mapper.toDomain(regEntOpt.get(), new CycleAvoidingMappingContext()));
         }
         else
             throw new InternalServerErrorException("Registro con Id: "+id+" no existe");
@@ -61,7 +62,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
     public QueryResult<T> getAll( int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortFilters) {
         QueryResult<T>  qResult = new QueryResult<T>();
          qResult.setTotal(queryRepository.getCount(clazz,queryFilters));
-         qResult.setData(mapper.getDomainList(queryRepository.getAllAnd( (Class<E>) clazz,offset, limit, queryFilters, sortFilters)));
+         qResult.setData(mapper.getDomainList(queryRepository.getAllAnd( (Class<E>) clazz,offset, limit, queryFilters, sortFilters),new CycleAvoidingMappingContext()));
 
         return qResult;
         
@@ -72,7 +73,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
 
         Optional<E> regEntOpt = repository.findById(id);
         if(regEntOpt.isPresent())
-            return  Optional.of(mapper.toDomain(regEntOpt.get()));
+            return  Optional.of(mapper.toDomain(regEntOpt.get(), new CycleAvoidingMappingContext()));
         else
             throw new InternalServerErrorException("Registro con Id: "+id+" no existe");
     }
@@ -86,17 +87,17 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
     @Override
     public T save(T reg) {
         
-        E createdEntity = repository.save(mapper.toEntity(reg));
-        return mapper.toDomain(createdEntity);
+        E createdEntity = repository.save(mapper.toEntity(reg, new CycleAvoidingMappingContext()));
+        return mapper.toDomain(createdEntity, new CycleAvoidingMappingContext());
         
     }
 
     @Override
     public Optional<T> update(ID id, T reg) {
         return repository.findById(id).map(entity->{
-            mapper.updateEntityFromDomain(reg,entity);
+            mapper.updateEntityFromDomain(reg,entity, new CycleAvoidingMappingContext());
             E saved = repository.save(entity);
-            return mapper.toDomain(saved);
+            return mapper.toDomain(saved, new CycleAvoidingMappingContext());
         });
     }
 
