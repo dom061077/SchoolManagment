@@ -23,7 +23,7 @@ public class PersonRepository implements EntityRepository<PersonEntity> {
 
     private final SpringDataPersonRepository sDataPersonRepository;
 
-    private final QueryRepository<PersonEntity> queryRepository;
+    private final QueryRepository<PersonEntity, Long> queryRepository;
 
     @Override
     public PersonEntity save(PersonEntity reg) {
