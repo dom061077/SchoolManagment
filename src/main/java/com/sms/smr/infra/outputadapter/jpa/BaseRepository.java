@@ -7,10 +7,12 @@ import java.util.Optional;
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
@@ -41,22 +43,37 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
         Optional<E> regEntOpt = repository.findById(id);
         if(regEntOpt.isPresent()) {
             try {
-                regEntOpt.get().getClass().getMethod("setDeleted", Boolean.class).invoke(regEntOpt.get(), true);
+                regEntOpt.get().getClass().getMethod("setDeleted", boolean.class).invoke(regEntOpt.get(), true);
+                repository.save(regEntOpt.get());
             } catch (IllegalAccessException e) {
                 logger.error("Error en IllegalAccessException", e);
+                throw new InternalServerErrorException("IllegalAccessException. Error al eliminar el registro con Id: "+id);
             } catch (InvocationTargetException e) {
-                logger.error("Error en InvocationTargetException", e);
+                logger.error("IllegalAccessException. Error en InvocationTargetException");
+                throw new InternalServerErrorException("InvocationTargetException. Error al eliminar el registro con Id: "+id);
+
             } catch (NoSuchMethodException e) {
-                logger.error("Error en NoSuchMethodException", e);
+                logger.error("NoSuchMethodException. Error en NoSuchMethodException", e);
+                throw new InternalServerErrorException("NoSuchMethodException. Error al eliminar el registro con Id: "+id);
             } catch (SecurityException e) {
-                logger.error("Error en SecurityException", e);
+                logger.error("SecurityException. Error en SecurityException", e);
+                throw new InternalServerErrorException("SecurityException. Error al eliminar el registro con Id: "+id);
             }
             return Optional.of(mapper.toDomain(regEntOpt.get(), new CycleAvoidingMappingContext()));
         }
         else
-            throw new InternalServerErrorException("Registro con Id: "+id+" no existe");
+            throw new InternalServerErrorException("El registro no existe. Registro con Id: "+id+" no existe");
         
     }
+
+    @Override
+    public Page<T> getAll(int offset, int limit, String queryFilters, String sortFilters, String globalOperator) {
+        List<QueryDto> queryFilterDtos = Utils.stringToQueryFilterDto(queryFilters);
+        List<QueryDto> sortFilterDtos = Utils.stringToQueryFilterDto(sortFilters);
+        Page<E> page = queryRepository.getAll(offset, limit, queryFilterDtos, sortFilterDtos, globalOperator);
+        return page.map(entity -> mapper.toDomain(entity, new CycleAvoidingMappingContext()));
+    }
+
 
     @Override
     public QueryResult<T> getAll( int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortFilters) {

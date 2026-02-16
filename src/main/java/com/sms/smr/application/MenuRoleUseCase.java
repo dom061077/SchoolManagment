@@ -6,10 +6,12 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.MenuRole;
 import com.sms.smr.infra.inputadapter.dto.menurole.MenuRoleDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.mapper.MenuRoleMapper;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
@@ -20,9 +22,9 @@ import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Component(value = "menuRoleUseCase")
+//@Component(value = "menuRoleUseCase") Deprecated El menu se maneja desde angular.
 @RequiredArgsConstructor
-public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
+public class MenuRoleUseCase implements BaseInputPort<MenuRole,Long>{
 
     private static final Logger logger = LoggerFactory.getLogger(MenuRoleUseCase.class);
     private final MenuRoleMapper menuRoleMapper;
@@ -57,7 +59,7 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
     }
 
     @Override
-    public Optional<MenuRole> update(Long id, MenuRole entity) {
+    public MenuRole update(Long id, MenuRole entity) {
         // Implement the update logic here
         /*
         MenuRole updatedMenuRole = entityRepository.update(id, entity)
@@ -70,8 +72,9 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
         //return entityRepository.update(id, menuRoleEntityMapper.toDbo(entity))
         //        .map(menuRoleEntityMapper::toDomain);        
 
-        return entityRepository.update(id,menuRoleEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
-                .map(mr->menuRoleEntityMapper.toDomain(mr, new CycleAvoidingMappingContext())); // Convert to domain object
+       // return entityRepository.update(id,menuRoleEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
+       //         .map(mr->menuRoleEntityMapper.toDomain(mr, new CycleAvoidingMappingContext())); // Convert to domain object
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
@@ -81,6 +84,13 @@ public class MenuRoleUseCase implements BaseInputPort<MenuRole>{
         if(deletedMenuRole.isEmpty())
             return false;
         return true;
+    }
+
+    @Override
+    public Page<MenuRole> getAll(int offset, int limit, String queryFilters, String sortings,
+            String loperator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
 

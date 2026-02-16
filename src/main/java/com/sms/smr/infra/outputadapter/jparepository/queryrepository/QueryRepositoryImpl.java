@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -224,6 +225,12 @@ public class QueryRepositoryImpl<T,ID> implements QueryRepository<T,ID> {
             List<QueryDto> sortingFilters) {
         throw new UnsupportedOperationException("Unimplemented method 'getAllAnd'");
         //return this.getAllAnd((Class<T>) type.getClass(), offset, limit, queryFilters, sortingFilters);
+    }
+
+    @Override
+    public Page<T> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortingFilters, String globalOperator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
     
 }

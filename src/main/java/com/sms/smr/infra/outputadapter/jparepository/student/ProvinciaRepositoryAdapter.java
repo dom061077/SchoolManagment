@@ -6,12 +6,12 @@ import com.sms.smr.domain.Provincia;
 import com.sms.smr.infra.outputadapter.db.ProvinciaEntity;
 import com.sms.smr.infra.outputadapter.jpa.BaseRepository;
 import com.sms.smr.infra.outputadapter.jpa.repository.ProvinciaJpaRepository;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepositoryImpl;
+import com.sms.smr.infra.outputadapter.jpa.repository.query.ProvinciaQueryJpaRepository;
 import com.sms.smr.infra.outputadapter.mapper.ProvinciaEntityMapper;
 
 @Repository
-public class ProvinciaRepositoryAdapter extends BaseRepository<Provincia, Long, ProvinciaEntity, ProvinciaJpaRepository, QueryRepositoryImpl<ProvinciaEntity, Long>>{
-    public ProvinciaRepositoryAdapter(ProvinciaJpaRepository repository, ProvinciaEntityMapper mapper, QueryRepositoryImpl<ProvinciaEntity, Long> queryRepository) {
+public class ProvinciaRepositoryAdapter extends BaseRepository<Provincia, Long, ProvinciaEntity, ProvinciaJpaRepository, ProvinciaQueryJpaRepository>{
+    public ProvinciaRepositoryAdapter(ProvinciaJpaRepository repository, ProvinciaEntityMapper mapper, ProvinciaQueryJpaRepository queryRepository) {
         super(repository, mapper, queryRepository, ProvinciaEntity.class);
     }           
 

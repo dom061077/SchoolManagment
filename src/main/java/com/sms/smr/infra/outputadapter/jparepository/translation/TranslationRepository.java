@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 
 @AllArgsConstructor
-@Component(value = "translationRepository")
+//@Component(value = "translationRepository")
 public class TranslationRepository implements EntityRepository<TranslationEntity> {
 
     private final SpringDataTranslationRepository sDataTranslationRepository;

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Translation;
@@ -22,9 +23,9 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 
-@Component(value = "translationUseCase")
+//@Component(value = "translationUseCase")
 @AllArgsConstructor
-public class TranslationUseCase implements BaseInputPort<Translation> {
+public class TranslationUseCase implements BaseInputPort<Translation, Long> {
 
     private static final Logger logger = LoggerFactory.getLogger(TranslationUseCase.class);
     
@@ -56,10 +57,11 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
     }
 
     @Override
-    public Optional<Translation> update(Long id, Translation entity) {
-        return entityRepository.update(id, translationEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
-                .map(translationEntity -> translationEntityMapper.toDomain(translationEntity, new CycleAvoidingMappingContext()));
+    public Translation update(Long id, Translation entity) {
+        //return entityRepository.update(id, translationEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
+        //        .map(translationEntity -> translationEntityMapper.toDomain(translationEntity, new CycleAvoidingMappingContext()));
                 //.map(translationEntityMapper::toDomain);
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
@@ -68,6 +70,13 @@ public class TranslationUseCase implements BaseInputPort<Translation> {
         if(deletedTranslation.isPresent())
             return false;
         return true;
+    }
+
+    @Override
+    public Page<Translation> getAll(int offset, int limit, String queryFilters, String sortings,
+            String loperator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
 

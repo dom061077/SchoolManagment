@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
@@ -19,9 +20,9 @@ import com.sms.smr.infra.outputport.EntityRepository;
 import lombok.RequiredArgsConstructor;
 
 
-@Component(value = "personUseCase")
+//@Component(value = "personUseCase")
 @RequiredArgsConstructor
-public class PersonUseCase implements BaseInputPort<Person>{
+public class PersonUseCase implements BaseInputPort<Person,Long>{
 
     private static final Logger logger = LoggerFactory.getLogger(PersonUseCase.class);
     @Qualifier(value="personRepository")
@@ -55,9 +56,10 @@ public class PersonUseCase implements BaseInputPort<Person>{
     }   
 
     @Override
-    public Optional<Person> update(Long personId, Person person) {
-        return entityRepository.update(personId, personEntityMapper.toDbo(person))
-                .map(personEntityMapper::toDomain);
+    public Person update(Long personId, Person person) {
+        //return entityRepository.update(personId, personEntityMapper.toDbo(person))
+        //        .map(personEntityMapper::toDomain);
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
@@ -66,6 +68,13 @@ public class PersonUseCase implements BaseInputPort<Person>{
         if(deletedPerson.isEmpty())
             return false;
         return true;
+    }
+
+    @Override
+    public Page<Person> getAll(int offset, int limit, String queryFilters, String sortings,
+            String loperator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
 

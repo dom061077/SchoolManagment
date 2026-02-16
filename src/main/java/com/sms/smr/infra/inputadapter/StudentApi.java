@@ -6,9 +6,7 @@ import com.sms.smr.domain.Provincia;
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
-import com.sms.smr.infra.inputport.DepartamentoInputPort;
-import com.sms.smr.infra.inputport.LocalidadInputPort;
-import com.sms.smr.infra.inputport.ProvinciaInputPort;
+import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import jakarta.validation.Valid;
@@ -18,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import lombok.RequiredArgsConstructor;
 
 //https://manerajona.medium.com/mapping-bidirectional-object-associations-using-mapstruct-ce49b1857604
 //https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection
@@ -62,10 +60,10 @@ Database
 @RequiredArgsConstructor
 public class StudentApi {
     
-    private final StudentInputPort studentInputPort;
-    private final ProvinciaInputPort provinciaInputPort;
-    private final DepartamentoInputPort departamentoInputPort;
-    private final LocalidadInputPort localidadInputPort;
+    private final BaseInputPort<Student, Long> studentInputPort;
+    private final BaseInputPort<Provincia, Long> provinciaInputPort;
+    private final BaseInputPort<Departamento, Long> departamentoInputPort;
+    private final BaseInputPort<Localidad, Long> localidadInputPort;
     
     //private final  StudentMapper studentMapper;
     private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
@@ -84,14 +82,14 @@ public class StudentApi {
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-     public QueryResult<Student> /*List<Person>*/ getAll(@RequestParam @Valid int offset,@RequestParam @Valid int limit
-        ,@RequestParam String qfilters,@RequestParam String sorts){
+     public Page<Student> /*List<Person>*/ getAll(@RequestParam @Valid int offset,@RequestParam @Valid int limit
+        ,@RequestParam String qfilters,@RequestParam String sorts,@RequestParam String loperator){
         logger.info("Filters: "+qfilters);
-        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
         //queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
 
-        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        return studentInputPort.getAll(offset, limit, queryFilters,sortFilters);      
+        ///List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
+        return studentInputPort.getAll(offset, limit, qfilters,sorts,loperator);      
     }        
 
     @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -117,40 +115,40 @@ public class StudentApi {
     @PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:delete')")
     public ResponseEntity delete(@PathVariable Long id){
         logger.info("Student's id to be deleted: "+id);
-        Student student = Student.builder().build();
-        studentInputPort.delete(id, student);
+        //Student student = Student.builder().build();
+        studentInputPort.delete(id);
         return ResponseEntity.ok("");
     }
 
     @GetMapping(value = "provincias", produces = MediaType.APPLICATION_JSON_VALUE)
-    public QueryResult<Provincia> getAllProvincias(@RequestParam int offset, @RequestParam int limit
-        ,@RequestParam String qfilters, @RequestParam String sorts){
+    public Page<Provincia> getAllProvincias(@RequestParam int offset, @RequestParam int limit
+        ,@RequestParam String qfilters, @RequestParam String sorts,@RequestParam String loperator){
         logger.info("Filters: "+qfilters);
-        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
         //queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
 
-        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        return provinciaInputPort.getAll(offset, limit, queryFilters,sortFilters);      
+        //List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
+        return provinciaInputPort.getAll(offset, limit, qfilters,sorts,loperator);      
     }
 
     @GetMapping(value = "departamentos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public QueryResult<Departamento> getDepartamentoByProvincia(@RequestParam int offset, @RequestParam int limit
-        ,@RequestParam String qfilters, @RequestParam String sorts){
+    public Page<Departamento> getDepartamentoByProvincia(@RequestParam int offset, @RequestParam int limit
+        ,@RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator){
         logger.info("Filters: "+qfilters);
-        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
 
-        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        return departamentoInputPort.getAll(offset, limit, queryFilters,sortFilters);
+        //List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
+        return departamentoInputPort.getAll(offset, limit, qfilters,sorts,loperator);
     }
 
     @GetMapping(value = "localidades", produces = MediaType.APPLICATION_JSON_VALUE)
-    public QueryResult<Localidad> getLocalidadByDepartamento(@RequestParam int offset, @RequestParam int limit
-        ,@RequestParam String qfilters, @RequestParam String sorts){
+    public Page<Localidad> getLocalidadByDepartamento(@RequestParam int offset, @RequestParam int limit
+        ,@RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator){
         logger.info("Filters: "+qfilters);
-        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
+        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
 
-        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        return localidadInputPort.getAll(offset, limit, queryFilters,sortFilters);
+        //List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
+        return localidadInputPort.getAll(offset, limit, qfilters,sorts,loperator);
     }
 
     /*

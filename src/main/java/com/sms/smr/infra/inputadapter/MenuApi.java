@@ -29,7 +29,7 @@ import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@RestController
+//@RestController
 @RequestMapping(value="/api/v1/menu")
 @RequiredArgsConstructor
 public class MenuApi {
@@ -37,7 +37,7 @@ public class MenuApi {
     private final static Logger logger = LoggerFactory.getLogger(MenuApi.class);
 
     @Qualifier(value="menuUseCase")
-    private final BaseInputPort<Menu> baseInputPort;
+    private final BaseInputPort<Menu, Long> baseInputPort;
 
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('ROLE_REALM_ADMIN')")

@@ -1,12 +1,14 @@
 package com.sms.smr.application;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.Departamento;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputport.DepartamentoInputPort;
+import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
@@ -14,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class DepartamentoUseCase implements DepartamentoInputPort{
+public class DepartamentoUseCase implements BaseInputPort<Departamento, Long> {
     private final CrudOutputPort<Departamento, Long> crudOutputPort;
 
     @Override
@@ -22,6 +24,36 @@ public class DepartamentoUseCase implements DepartamentoInputPort{
             List<QueryDto> sortings) {
         return crudOutputPort.getAll(offset, limit, queryFilters, sortings);
         
+    }
+
+    @Override
+    public Departamento create(Departamento entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'create'");
+    }
+
+    @Override
+    public Optional<Departamento> getById(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+    }
+
+    @Override
+    public Departamento update(Long id, Departamento domain) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    @Override
+    public Page<Departamento> getAll(int offset, int limit,String queryFilters, String sortings,
+            String loperator) {
+        return crudOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 
 }

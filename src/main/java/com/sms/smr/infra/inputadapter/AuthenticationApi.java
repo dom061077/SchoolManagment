@@ -26,7 +26,7 @@ import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
+//@RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationApi {
@@ -34,7 +34,7 @@ public class AuthenticationApi {
     private final QueryRepository queryRepository;
     
     @Qualifier(value = "menuRoleUseCase")
-    private final BaseInputPort<MenuRole> inputPort;
+    private final BaseInputPort<MenuRole, Long> inputPort;
 /*   private final AuthenticationUseCase service;
 
   @PostMapping(value="/register",produces=MediaType.APPLICATION_JSON_VALUE)

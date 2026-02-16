@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Primary
-@Component(value = "personRepository")
+//@Component(value = "personRepository")
 public class PersonRepository implements EntityRepository<PersonEntity> {
 
     private final SpringDataPersonRepository sDataPersonRepository;

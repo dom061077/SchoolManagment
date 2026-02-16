@@ -1,12 +1,6 @@
 package com.sms.smr.infra.outputadapter.jparepository.queryrepository;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.data.jpa.domain.Specification;
-
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.From;
@@ -15,9 +9,16 @@ import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.jpa.domain.Specification;
 
 public class BaseSpecificationBuilder<T> {
-    public Specification<T> build(List<QueryDto> filters) {
+    private static final Logger logger = LoggerFactory.getLogger(BaseSpecificationBuilder.class);
+    public Specification<T> build(List<QueryDto> filters, String globalOperator) {
+        logger.info("Building Specification with filters: " + filters + " and global operator: " + globalOperator);
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -31,6 +32,7 @@ public class BaseSpecificationBuilder<T> {
                 Path<?> path = getPath(root, pathStr);
 
                 // 3. Create Predicate based on operator
+                logger.info("Creating predicate for path: " + pathStr + ", operator: " + operator + ", value: " + filter.getValue());
                 predicates.add(createPredicate(path, filter.getValue(), operator, cb));
             }
 

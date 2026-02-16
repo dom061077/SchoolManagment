@@ -14,7 +14,7 @@ import com.sms.smr.infra.outputport.EntityRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component(value = "menuRoleRepository")
+//@Component(value = "menuRoleRepository") Deprecated. El menu se maneja desde angular
 public class MenuRoleRepository implements EntityRepository<MenuRoleEntity> {
 
     private final SpringDataMenuRoleRepository sMenuRoleRepository;
