@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.Provincia;
 import com.sms.smr.domain.Role;
@@ -39,9 +38,8 @@ Predicate → the actual condition
 */
 
 
-//@Service Depracated por Refactoring a QueryRepositoryBase
-//service anulado por Refactoring a QueryRepositoryBase
-public class QueryRepositoryImpl<T,ID> implements QueryRepository<T,ID> {
+@Component
+public class QueryRepositoryImpl<T> implements QueryRepository<T> {
     @PersistenceContext
     private  EntityManager em;
 

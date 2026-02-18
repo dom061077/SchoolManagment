@@ -17,7 +17,7 @@ import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 import com.sms.smr.infra.outputadapter.mapper.EntityMapper;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
-public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q extends QueryRepository<E, ID>> implements CrudOutputPort<T, ID>{
+public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q extends QueryRepository<E>> implements CrudOutputPort<T, ID>{
     
     protected final R repository;
     protected final EntityMapper<T, E> mapper;

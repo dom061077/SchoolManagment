@@ -27,7 +27,7 @@ public class PersonUseCase implements BaseInputPort<Person>{
     @Qualifier(value="personRepository")
     private final  EntityRepository<PersonEntity> entityRepository;
     private final PersonEntityMapper personEntityMapper;
-    private final QueryRepository<PersonEntity,Long> queryRepository;
+    private final QueryRepository<PersonEntity> queryRepository;
 
 
     @Override
