@@ -5,23 +5,23 @@ import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.From;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Path;
-import jakarta.persistence.criteria.Root;
-import jakarta.persistence.criteria.Expression;
-import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
-
+import jakarta.persistence.criteria.Root;
 
 public class BaseSpecificationBuilder<T> {
-
-    public Specification<T> build(List<FilterRequest> filters) {
+    public Specification<T> build(List<QueryDto> filters) {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            for (FilterRequest filter : filters) {
+            for (QueryDto filter : filters) {
                 // 1. Separate path from operator (e.g., "departamento.id:eq")
                 String[] parts = filter.getProperty().split(":");
                 String pathStr = parts[0];
@@ -38,7 +38,7 @@ public class BaseSpecificationBuilder<T> {
         };
     }
 
-    private Path<?> getPath(Root<T> root, String propertyPath) {
+    private  Path<?> getPath(Root<T> root, String propertyPath) {
         String[] parts = propertyPath.split("\\.");
         Path<?> path = root;
 
@@ -68,4 +68,5 @@ public class BaseSpecificationBuilder<T> {
             default -> cb.equal(path, value);
         };
     }
+
 }

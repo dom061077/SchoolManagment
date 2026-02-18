@@ -10,8 +10,8 @@ import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryReposi
 import com.sms.smr.infra.outputadapter.mapper.LocalidadEntityMapper;
 
 @Repository
-public class LocalidadRepositoryAdapter extends BaseRepository<Localidad, Long, LocalidadEntity, LocalidadJpaRepository, QueryRepositoryImpl<LocalidadEntity>>{
-    public LocalidadRepositoryAdapter(LocalidadJpaRepository repository, LocalidadEntityMapper mapper, QueryRepositoryImpl<LocalidadEntity> queryRepository) {
+public class LocalidadRepositoryAdapter extends BaseRepository<Localidad, Long, LocalidadEntity, LocalidadJpaRepository, QueryRepositoryImpl<LocalidadEntity, Long>>{
+    public LocalidadRepositoryAdapter(LocalidadJpaRepository repository, LocalidadEntityMapper mapper, QueryRepositoryImpl<LocalidadEntity, Long> queryRepository) {
         super(repository, mapper, queryRepository, LocalidadEntity.class);
     }
 }

@@ -10,8 +10,8 @@ import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryReposi
 import com.sms.smr.infra.outputadapter.mapper.ProvinciaEntityMapper;
 
 @Repository
-public class ProvinciaRepositoryAdapter extends BaseRepository<Provincia, Long, ProvinciaEntity, ProvinciaJpaRepository, QueryRepositoryImpl<ProvinciaEntity>>{
-    public ProvinciaRepositoryAdapter(ProvinciaJpaRepository repository, ProvinciaEntityMapper mapper, QueryRepositoryImpl<ProvinciaEntity> queryRepository) {
+public class ProvinciaRepositoryAdapter extends BaseRepository<Provincia, Long, ProvinciaEntity, ProvinciaJpaRepository, QueryRepositoryImpl<ProvinciaEntity, Long>>{
+    public ProvinciaRepositoryAdapter(ProvinciaJpaRepository repository, ProvinciaEntityMapper mapper, QueryRepositoryImpl<ProvinciaEntity, Long> queryRepository) {
         super(repository, mapper, queryRepository, ProvinciaEntity.class);
     }           
 
