@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class StudentRegistration extends BaseDomain{
     private Long studentId;
-    private String studentName;
+    private String studentFirstName;
     private String studentLastName;
     private int studentDni;
 

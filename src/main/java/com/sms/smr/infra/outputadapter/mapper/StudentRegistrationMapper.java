@@ -1,36 +1,51 @@
 package com.sms.smr.infra.outputadapter.mapper;
 
+import java.util.List;
+
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 
+import com.sms.smr.domain.Student;
 import com.sms.smr.domain.StudentRegistration;
 import com.sms.smr.infra.outputadapter.db.academic.StudentRegistrationEntity;
 
-@Component
-public class StudentRegistrationMapper implements BaseEntityMapper<StudentRegistration, StudentRegistrationEntity> {
+@Mapper(componentModel = "spring")
+public interface StudentRegistrationMapper extends EntityMapper<StudentRegistration, StudentRegistrationEntity> {
+    @Override
+    @Mapping(target = "studentId", source = "student.id")
+    @Mapping(target = "studentFirstName", source = "student.firstName")
+    @Mapping(target = "studentLastName", source = "student.lastName")
+    @Mapping(target = "studentDni", source = "student.dni")
+    @Mapping(target = "academicYearId", source = "academicYear.id")
+    @Mapping(target = "gradeLevelId", source = "gradeLevel.id")
+    @Mapping(target = "shiftId", source = "shift.id")
+    @Mapping(target = "sectionId", source = "section.id")
+    StudentRegistration toDomain(StudentRegistrationEntity entity, @Context CycleAvoidingMappingContext context);
 
     @Override
-    public StudentRegistration toDomain(StudentRegistrationEntity entity) {
-        if (entity == null) return null;
-        return StudentRegistration.builder()
-                .id(entity.getId())
-                .studentId((entity.getStudent() != null ? entity.getStudent().getId() : null))
-                .studentDni(entity.getStudent() != null ? entity.getStudent().getDni() : 0)
-                .academicYearId(entity.getAcademicYear() != null ? entity.getAcademicYear().getId() : null)
-                .academicYearYear(entity.getAcademicYear() != null ? entity.getAcademicYear().getYear() : 0)
-                .gradeLevelId(entity.getGradeLevel() != null ? entity.getGradeLevel().getId() : null)
-                .gradeLevelGradeNumber(entity.getGradeLevel() != null ? entity.getGradeLevel().getGradeNumber() : 0)
-                .shiftId(entity.getShift() != null ? entity.getShift().getId() : null)
-                .shiftName(entity.getShift() != null ? entity.getShift().getName() : null)
-                .sectionId(entity.getSection() != null ? entity.getSection().getId() : null)
-                .sectionName(entity.getSection() != null ? entity.getSection().getName() : null)
-                .build();
-     }
+    @Mapping(target = "student", ignore = true)
+    @Mapping(target = "academicYear", ignore = true)
+    @Mapping(target = "gradeLevel", ignore = true)
+    @Mapping(target = "shift", ignore = true)
+    @Mapping(target = "section", ignore = true)
+    StudentRegistrationEntity toEntity(StudentRegistration domain, @Context CycleAvoidingMappingContext context);
 
     @Override
-    public StudentRegistrationEntity toEntity(StudentRegistration domain) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
+    @Mapping(target = "student", ignore = true)
+    @Mapping(target = "academicYear", ignore = true)
+    @Mapping(target = "gradeLevel", ignore = true)
+    @Mapping(target = "shift", ignore = true)
+    @Mapping(target = "section", ignore = true)    
+    void updateEntityFromDomain(StudentRegistration d, @MappingTarget StudentRegistrationEntity e, @Context CycleAvoidingMappingContext context);
+
+    @Override
+    default List<StudentRegistration> getDomainList(List<StudentRegistrationEntity> entities, @Context CycleAvoidingMappingContext context) {
+        if (entities == null) return List.of();
+        return entities.stream()
+                .map(entity -> toDomain(entity, context))
+                .toList();
     }
-
 }

@@ -2,6 +2,12 @@ package com.sms.smr.infra.outputadapter.mapper;
 
 import java.util.List;
 
+/**
+ * Deprecated: Use EntityMapper instead. This interface is kept for backward compatibility and will be removed in future versions.
+ * @param <D>
+ * @param <E>
+ */
+
 public interface BaseEntityMapper<D, E> {
 
     D toDomain(E entity);
