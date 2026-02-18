@@ -3,11 +3,14 @@ package com.sms.smr.application;
 import com.sms.smr.domain.Student;
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 
@@ -16,7 +19,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class StudentUseCase implements StudentInputPort {
+public class StudentUseCase implements BaseInputPort<Student, Long> {
     private final CrudOutputPort<Student, Long> crudOutputPort;
 
     public StudentUseCase(CrudOutputPort<Student, Long> crudOutputPort) {
@@ -38,6 +41,11 @@ public class StudentUseCase implements StudentInputPort {
     }
 
     @Override
+    public Page<Student> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
+        return crudOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
+    }
+
+    @Override
     public Student update(Long id, Student student) {
         if(crudOutputPort.getById(id).isPresent()){
             student.setId(id);
@@ -48,7 +56,7 @@ public class StudentUseCase implements StudentInputPort {
     }
 
     @Override
-    public boolean delete(Long id, Student student){
+    public boolean delete(Long id){
         if(crudOutputPort.getById(id).isPresent()){
             return crudOutputPort.delete(id).isPresent();
         }

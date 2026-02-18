@@ -26,7 +26,7 @@ public class DepartamentoEntity {
     @ManyToOne
     private ProvinciaEntity provincia;
 
-    @OneToMany(mappedBy = "departamento")
-    private List<LocalidadEntity> localidades;
+    //@OneToMany(mappedBy = "departamento")
+    //private List<LocalidadEntity> localidades;
     
 }

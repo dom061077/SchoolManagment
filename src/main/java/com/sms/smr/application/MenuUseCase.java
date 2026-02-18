@@ -3,6 +3,7 @@ package com.sms.smr.application;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Menu;
@@ -17,9 +18,9 @@ import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Component(value = "menuUseCase")
+//@Component(value = "menuUseCase") Deprecated El menu se maneja desde angular.
 @RequiredArgsConstructor
-public class MenuUseCase implements BaseInputPort<Menu> {
+public class MenuUseCase implements BaseInputPort<Menu, Long> {
 
     private final EntityRepository<MenuEntity> entityRepository;
     private final QueryRepository queryRepository;
@@ -48,11 +49,12 @@ public class MenuUseCase implements BaseInputPort<Menu> {
     }
 
     @Override
-    public Optional<Menu> update(Long id, Menu entity) {
+    public Menu update(Long id, Menu entity) {
         //return null;
-        return entityRepository.update(id, menuEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
-                .map(menuEntity -> menuEntityMapper.toDomain(menuEntity, new CycleAvoidingMappingContext()));
+        //return entityRepository.update(id, menuEntityMapper.toEntity(entity, new CycleAvoidingMappingContext()))
+        //        .map(menuEntity -> menuEntityMapper.toDomain(menuEntity, new CycleAvoidingMappingContext()));
                 //.map(menuEntityMapper::toDomain, new CycleAvoidingMappingContext());
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
@@ -63,6 +65,13 @@ public class MenuUseCase implements BaseInputPort<Menu> {
             return true;
         }   
         return false;
+    }
+
+    @Override
+    public Page<Menu> getAll(int offset, int limit, String queryFilters, String sortings,
+            String loperator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     

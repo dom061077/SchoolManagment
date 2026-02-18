@@ -29,14 +29,14 @@ import lombok.RequiredArgsConstructor;
 
 
 
-@RestController
+//@RestController
 @RequestMapping(value="/api/v1/translation")
 @RequiredArgsConstructor
 public class TranslationApi {
 
 
     @Qualifier(value="translationUseCase")
-    private final BaseInputPort<Translation> baseInputPort;
+    private final BaseInputPort<Translation, Long> baseInputPort;
     private final TranslationMapper translationMapper;
     private static final Logger logger = LoggerFactory.getLogger(TranslationApi.class);
 

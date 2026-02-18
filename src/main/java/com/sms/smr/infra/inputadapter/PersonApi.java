@@ -49,12 +49,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 
-@RestController
+//@RestController
 @RequestMapping(value="/api/v1/person")
 @RequiredArgsConstructor
 public class PersonApi {
     @Qualifier(value="personUseCase")
-    private final BaseInputPort<Person> baseInputPort;
+    private final BaseInputPort<Person, Long> baseInputPort;
     private final PersonMapper personMapper;
     private static final Logger logger = LoggerFactory.getLogger(PersonApi.class); 
 
@@ -76,7 +76,8 @@ public class PersonApi {
     public PersonDto updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto personDto) {
 
         Person person = personMapper.personDtoToPerson(personDto);
-        return personMapper.personToPersonDto(baseInputPort.update(id,person).get());
+        return null;
+        //return personMapper.personToPersonDto(baseInputPort.update(id,person).get());
     }
     
     @DeleteMapping("/{id}")

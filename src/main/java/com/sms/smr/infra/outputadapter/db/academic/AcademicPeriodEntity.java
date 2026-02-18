@@ -1,31 +1,24 @@
 package com.sms.smr.infra.outputadapter.db.academic;
 
-import org.hibernate.validator.constraints.EAN;
-
 import com.sms.smr.infra.outputadapter.db.BaseEntity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 @Entity
+@Table(name="periodo_academico")
+@SuperBuilder
 @Getter
 @Setter
-@SuperBuilder
-@Table(name="periodo_lectivo")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AcademicPeriodEntity extends BaseEntity {
+    @Column(name="cantidad_dias_escolares")
+    private int numberOfSchoolDays;
     
-    @NotNull
-    private int year;
-    @Builder.Default
-    private boolean isActive=false;
-
 }

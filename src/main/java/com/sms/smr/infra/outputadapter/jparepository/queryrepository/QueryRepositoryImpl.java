@@ -7,7 +7,9 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.Provincia;
 import com.sms.smr.domain.Role;
@@ -38,8 +40,9 @@ Predicate → the actual condition
 */
 
 
-@Component
-public class QueryRepositoryImpl<T> implements QueryRepository<T> {
+//@Service Depracated por Refactoring a QueryRepositoryBase
+//service anulado por Refactoring a QueryRepositoryBase
+public class QueryRepositoryImpl<T,ID> implements QueryRepository<T,ID> {
     @PersistenceContext
     private  EntityManager em;
 
@@ -222,6 +225,12 @@ public class QueryRepositoryImpl<T> implements QueryRepository<T> {
             List<QueryDto> sortingFilters) {
         throw new UnsupportedOperationException("Unimplemented method 'getAllAnd'");
         //return this.getAllAnd((Class<T>) type.getClass(), offset, limit, queryFilters, sortingFilters);
+    }
+
+    @Override
+    public Page<T> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortingFilters, String globalOperator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
     
 }

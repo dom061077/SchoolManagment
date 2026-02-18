@@ -1,7 +1,5 @@
 package com.sms.smr.domain;
 
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +12,5 @@ public class Departamento {
     private Long id;
     private String nombre;
     private Provincia provincia;
-    private List<Localidad> localidades;
+    //private List<Localidad> localidades;
 }
