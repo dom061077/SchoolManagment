@@ -2,23 +2,27 @@ package com.sms.smr.infra.outputadapter.db.academic;
 
 import com.sms.smr.infra.outputadapter.db.BaseEntity;
 
-import jakarta.persistence.Column;
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+
 @Entity
-@Table(name="periodo_academico")
-@SuperBuilder
 @Getter
 @Setter
+@Table(name="tipo_periodo_academico")
 @AllArgsConstructor
 @NoArgsConstructor
-public class AcademicPeriodEntity extends BaseEntity {
-    @Column(name="cantidad_dias_escolares")
-    private int numberOfSchoolDays;
-    
+public class AcademicTypePeriodEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    private String description;
+
 }
