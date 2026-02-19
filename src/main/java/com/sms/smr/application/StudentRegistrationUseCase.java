@@ -54,7 +54,6 @@ public class StudentRegistrationUseCase implements BaseInputPort<StudentRegistra
     @Override
     public Page<StudentRegistration> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        return crudOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 }

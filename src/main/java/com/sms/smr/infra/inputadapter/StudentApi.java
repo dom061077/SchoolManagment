@@ -151,16 +151,6 @@ public class StudentApi {
         return localidadInputPort.getAll(offset, limit, qfilters,sorts,loperator);
     }
 
-    /*
-    @GetMapping(value = "/list", produces =MediaType.APPLICATION_JSON_VALUE)
-    public  QueryResult<Student> getAll( @RequestParam int offset,@RequestParam  int limit
-        ,@RequestParam String qfilters, @RequestParam String sorts) {
-        logger.info("Filters: "+qfilters);
-        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
-        queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
 
-        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts); 
-        return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
-    }
-    */
+    
 }

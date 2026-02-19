@@ -33,12 +33,38 @@ public interface StudentRegistrationMapper extends EntityMapper<StudentRegistrat
     StudentRegistration toDomain(StudentRegistrationEntity entity, @Context CycleAvoidingMappingContext context);
 
     @Override
-    @Mapping(target = "student", ignore = true)
-    @Mapping(target = "academicYear", ignore = true)
-    @Mapping(target = "gradeLevel", ignore = true)
-    @Mapping(target = "shift", ignore = true)
-    @Mapping(target = "section", ignore = true)
-    StudentRegistrationEntity toEntity(StudentRegistration domain, @Context CycleAvoidingMappingContext context);
+    default StudentRegistrationEntity toEntity(StudentRegistration domain, @Context CycleAvoidingMappingContext context){
+        if(domain == null) return null;
+        StudentRegistrationEntity entity = new StudentRegistrationEntity();
+        entity.setId(domain.getId());
+        if(domain.getStudentId() != null) {
+            StudentEntity studentEntity = new StudentEntity();
+            studentEntity.setId(domain.getStudentId());
+            entity.setStudent(studentEntity);
+        }
+        if(domain.getAcademicYearId() != null) {
+            AcademicYearEntity academicYearEntity = new AcademicYearEntity();
+            academicYearEntity.setId(domain.getAcademicYearId());
+            entity.setAcademicYear(academicYearEntity);
+        }
+        if(domain.getGradeLevelId() != null) {
+            GradeLevelEntity gradeLevelEntity = new GradeLevelEntity();
+            gradeLevelEntity.setId(domain.getGradeLevelId());
+            entity.setGradeLevel(gradeLevelEntity);
+        }
+        if(domain.getShiftId() != null) {
+            ShiftEntity shiftEntity = new ShiftEntity();
+            shiftEntity.setId(domain.getShiftId());
+            entity.setShift(shiftEntity);
+        }
+        if(domain.getSectionId() != null) {
+            SectionEntity sectionEntity = new SectionEntity();
+            sectionEntity.setId(domain.getSectionId());
+            entity.setSection(sectionEntity);
+        }
+        return entity;
+
+    }
 
     @Override
     @Mapping(target = "student", ignore = true)
@@ -49,12 +75,17 @@ public interface StudentRegistrationMapper extends EntityMapper<StudentRegistrat
     void updateEntityFromDomain(StudentRegistration d, @MappingTarget StudentRegistrationEntity e, @Context CycleAvoidingMappingContext context);
 
 
- /*List<StudentRegistration> getDomainList(
-        List<StudentRegistrationEntity> entities,
-        @Context CycleAvoidingMappingContext context);*/
 
     @AfterMapping
-    default void setRelations(StudentRegistration domain, @MappingTarget StudentRegistrationEntity entity, @Context CycleAvoidingMappingContext context) {
+    default void afterUpdate(
+            StudentRegistration source,
+            @MappingTarget StudentRegistrationEntity target,
+            @Context CycleAvoidingMappingContext context) {
+
+        setRelations(source, target);
+    }    
+
+    default void setRelations(StudentRegistration domain, @MappingTarget StudentRegistrationEntity entity) {
         if (domain == null || entity == null) return;
 
         // Map student
