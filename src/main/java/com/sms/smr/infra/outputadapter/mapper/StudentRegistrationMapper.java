@@ -21,7 +21,7 @@ import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 
 @Mapper(componentModel = "spring")
 public interface StudentRegistrationMapper extends EntityMapper<StudentRegistration, StudentRegistrationEntity> {
-    @Override
+    @Override 
     @Mapping(target = "studentId", source = "student.id")
     @Mapping(target = "studentFirstName", source = "student.firstName")
     @Mapping(target = "studentLastName", source = "student.lastName")
@@ -32,8 +32,15 @@ public interface StudentRegistrationMapper extends EntityMapper<StudentRegistrat
     @Mapping(target = "sectionId", source = "section.id")
     StudentRegistration toDomain(StudentRegistrationEntity entity, @Context CycleAvoidingMappingContext context);
 
+
+    /*
     @Override
-    default StudentRegistrationEntity toEntity(StudentRegistration domain, @Context CycleAvoidingMappingContext context){
+    @Mapping(target = "student", ignore = true)
+    @Mapping(target = "academicYear", ignore = true)
+    @Mapping(target = "gradeLevel", ignore = true)
+    @Mapping(target = "shift", ignore = true)
+    @Mapping(target = "section", ignore = true)       
+    StudentRegistrationEntity toEntity(StudentRegistration domain, @Context CycleAvoidingMappingContext context);{
         if(domain == null) return null;
         StudentRegistrationEntity entity = new StudentRegistrationEntity();
         entity.setId(domain.getId());
@@ -62,9 +69,14 @@ public interface StudentRegistrationMapper extends EntityMapper<StudentRegistrat
             sectionEntity.setId(domain.getSectionId());
             entity.setSection(sectionEntity);
         }
+        entity.setCreatedBy(domain.getCreatedBy());
+        entity.setCreatedDate(domain.getCreatedDate());
+        entity.setLastModifiedBy(domain.getLastModifiedBy());
+        entity.setLastModifiedDate(domain.getLastModifiedDate());
+
         return entity;
 
-    }
+    }*/
 
     @Override
     @Mapping(target = "student", ignore = true)
