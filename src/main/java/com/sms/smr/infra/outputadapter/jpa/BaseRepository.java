@@ -71,7 +71,10 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
         List<QueryDto> queryFilterDtos = Utils.stringToQueryFilterDto(queryFilters);
         List<QueryDto> sortFilterDtos = Utils.stringToQueryFilterDto(sortFilters);
         Page<E> page = queryRepository.getAll(offset, limit, queryFilterDtos, sortFilterDtos, globalOperator);
-        return page.map(entity -> mapper.toDomain(entity, new CycleAvoidingMappingContext()));
+        return page.map(
+            (entity) ->{ 
+                return mapper.toDomain(entity, new CycleAvoidingMappingContext());
+            });
     }
 
 

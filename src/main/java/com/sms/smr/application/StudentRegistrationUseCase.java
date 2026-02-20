@@ -41,14 +41,14 @@ public class StudentRegistrationUseCase implements BaseInputPort<StudentRegistra
 
     @Override
     public StudentRegistration update(Long id, StudentRegistration domain) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return crudOutputPort.update(id, domain).get();
+        
     }
 
     @Override
     public boolean delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        
+        return crudOutputPort.delete(id).isPresent();
     }
 
     @Override

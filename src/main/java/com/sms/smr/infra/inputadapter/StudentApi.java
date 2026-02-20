@@ -75,7 +75,7 @@ public class StudentApi {
     } */   
 
     @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:create')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:create')")
     public ResponseEntity<Student> create( @RequestBody @Valid Student student ) {
         logger.info("StudentApi, student parameter",student);
         return ResponseEntity.ok(studentInputPort.create(student));        
@@ -105,14 +105,14 @@ public class StudentApi {
     }
 
     @PutMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:update')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:update')")
     public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody @Valid Student student ) {
         logger.info("Student lastname: "+student.getLastName());
         return ResponseEntity.ok(studentInputPort.update(id,student));        
     }
 
     @DeleteMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:delete')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:delete')")
     public ResponseEntity delete(@PathVariable Long id){
         logger.info("Student's id to be deleted: "+id);
         //Student student = Student.builder().build();

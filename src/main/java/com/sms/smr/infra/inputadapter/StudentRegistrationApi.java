@@ -12,10 +12,14 @@ import com.sms.smr.domain.StudentRegistration;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.academic.StudentRegistrationEntity;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -44,5 +48,18 @@ public class StudentRegistrationApi {
         return studentRegistrationInputPort.getAll(offset, limit, qfilters, sorts, loperator);
     }
     
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    //@PreAuthorize("hasAnyAuthority('ROLE_RESOUCE_bsn_inscripcion_alumno_delete')")
+    public boolean deleteStudentRegistration(@RequestParam Long id) {
+        logger.info("Deleting student registration with id: " + id);
+        return studentRegistrationInputPort.delete(id);
+    }
+
+    @PutMapping(value = "/{id}", produces = "application/json")
+    //@PreAuthorize("hasAnyAuthority('ROLE_RESOUCE_bsn_inscripcion_alumno_update')")
+    public StudentRegistration updateStudentRegistration(@PathVariable Long id, @RequestBody @Valid StudentRegistration studentRegistration) {
+        logger.info("Updating student registration with id: " + id);
+        return studentRegistrationInputPort.update(id, studentRegistration);
+    }
 
 }
