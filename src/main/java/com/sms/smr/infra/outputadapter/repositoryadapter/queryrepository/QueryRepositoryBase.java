@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.queryrepository;
+package com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository;
 
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
 
 
 

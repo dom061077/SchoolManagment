@@ -4,8 +4,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
 import com.sms.smr.infra.outputadapter.jpa.repository.StudentJpaRepository;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.BaseSpecificationBuilder;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepositoryBase;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.BaseSpecificationBuilder;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepositoryBase;
 
 @Repository
 public class StudentQueryJpaRepository extends QueryRepositoryBase<StudentEntity, Long, StudentJpaRepository> {

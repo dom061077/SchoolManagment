@@ -9,28 +9,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 import com.sms.smr.infra.outputadapter.mapper.EntityMapper;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
-public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q extends QueryRepository<E, ID>> implements CrudOutputPort<T, ID>{
+
+
+public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>> implements CrudOutputPort<T, ID>{
     
     protected final R repository;
     protected final EntityMapper<T, E> mapper;
-    protected final Q queryRepository;
+
     protected Class<E> clazz;
     private static final Logger logger = LoggerFactory.getLogger(BaseRepository.class);
 
-    public BaseRepository(R repository, EntityMapper<T,E> mapper, Q queryRepository, Class<E> clazz) {
+    public BaseRepository(R repository, EntityMapper<T,E> mapper, Class<E> clazz) {
         this.repository = repository;
         this.mapper = mapper;
-        this.queryRepository = queryRepository;
         this.clazz = clazz;
     }
 
@@ -44,7 +46,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
         if(regEntOpt.isPresent()) {
             try {
                 regEntOpt.get().getClass().getMethod("setDeleted", boolean.class).invoke(regEntOpt.get(), true);
-                repository.save(regEntOpt.get());
+                //repository.save(regEntOpt.get());
             } catch (IllegalAccessException e) {
                 logger.error("Error en IllegalAccessException", e);
                 throw new InternalServerErrorException("IllegalAccessException. Error al eliminar el registro con Id: "+id);
@@ -66,7 +68,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
         
     }
 
-    @Override
+    /*@Override
     public Page<T> getAll(int offset, int limit, String queryFilters, String sortFilters, String globalOperator) {
         List<QueryDto> queryFilterDtos = Utils.stringToQueryFilterDto(queryFilters);
         List<QueryDto> sortFilterDtos = Utils.stringToQueryFilterDto(sortFilters);
@@ -75,10 +77,10 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
             (entity) ->{ 
                 return mapper.toDomain(entity, new CycleAvoidingMappingContext());
             });
-    }
+    }*/
 
 
-    @Override
+    /*@Override
     public QueryResult<T> getAll( int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortFilters) {
         QueryResult<T>  qResult = new QueryResult<T>();
          qResult.setTotal(queryRepository.getCount(clazz,queryFilters));
@@ -86,7 +88,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
 
         return qResult;
         
-    }
+    }*/
 
     @Override
     public Optional<T> getById(ID id) {
@@ -98,11 +100,6 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
             throw new InternalServerErrorException("Registro con Id: "+id+" no existe");
     }
 
-    @Override
-    public long getCount(List<QueryDto> queryFilters) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 
     @Override
     public T save(T reg) {
@@ -116,8 +113,8 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>, Q
     public Optional<T> update(ID id, T reg) {
         return repository.findById(id).map(entity->{
             mapper.updateEntityFromDomain(reg,entity, new CycleAvoidingMappingContext());
-            E saved = repository.save(entity);
-            return mapper.toDomain(saved, new CycleAvoidingMappingContext());
+            //E saved = repository.save(entity);
+            return mapper.toDomain(entity, new CycleAvoidingMappingContext());
         });
     }
 

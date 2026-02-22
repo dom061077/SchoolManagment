@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.student;
+package com.sms.smr.infra.outputadapter.repositoryadapter.student;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,16 +10,16 @@ import com.sms.smr.infra.outputadapter.jpa.repository.query.StudentQueryJpaRepos
 import com.sms.smr.infra.outputadapter.mapper.StudentEntityMapper;
 
 @Repository
-public class StudentRepositoryAdapter extends BaseRepository<Student, Long, StudentEntity, StudentJpaRepository, StudentQueryJpaRepository>{
+public class StudentRepositoryAdapter extends BaseRepository<Student, Long, StudentEntity, StudentJpaRepository>{
 
     /*
         scanner de beans de spring boot instancia el mapper y lo pasa como parámetro
         al constructor de BaseRepository
      */    
 
-    public StudentRepositoryAdapter(StudentJpaRepository repository, StudentEntityMapper mapper, StudentQueryJpaRepository queryRepository) {
+    public StudentRepositoryAdapter(StudentJpaRepository repository, StudentEntityMapper mapper) {
         
-        super(repository,mapper, queryRepository,StudentEntity.class);
+        super(repository,mapper, StudentEntity.class);
             
     }
 

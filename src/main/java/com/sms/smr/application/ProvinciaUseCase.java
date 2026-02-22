@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sms.smr.domain.Provincia;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.BaseInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
 import lombok.RequiredArgsConstructor;
@@ -53,7 +53,8 @@ public class ProvinciaUseCase implements BaseInputPort<Provincia, Long>{
     @Override
     public Page<Provincia> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
-        return crudOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
 }

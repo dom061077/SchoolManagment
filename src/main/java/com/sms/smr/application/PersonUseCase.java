@@ -12,9 +12,9 @@ import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.PersonEntityMapper;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;

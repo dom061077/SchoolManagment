@@ -10,10 +10,10 @@ import com.sms.smr.domain.Menu;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.outputadapter.db.MenuEntity;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
 import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
 import com.sms.smr.infra.outputadapter.mapper.MenuEntityMapper;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.queryrepository;
+package com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository;
 
 import java.util.List;
 

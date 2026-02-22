@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.person;
+package com.sms.smr.infra.outputadapter.repositoryadapter.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;

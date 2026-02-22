@@ -50,7 +50,7 @@ public class StudentRegistrationApi {
     
     @DeleteMapping(value = "/{id}", produces = "application/json")
     //@PreAuthorize("hasAnyAuthority('ROLE_RESOUCE_bsn_inscripcion_alumno_delete')")
-    public boolean deleteStudentRegistration(@RequestParam Long id) {
+    public boolean deleteStudentRegistration(@PathVariable Long id) {
         logger.info("Deleting student registration with id: " + id);
         return studentRegistrationInputPort.delete(id);
     }

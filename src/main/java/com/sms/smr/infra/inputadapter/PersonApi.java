@@ -13,7 +13,7 @@ import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

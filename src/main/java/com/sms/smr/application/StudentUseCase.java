@@ -5,7 +5,7 @@ import com.sms.smr.infra.exception.InternalServerErrorException;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.inputport.StudentInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 import java.util.List;
 import java.util.Optional;
@@ -37,12 +37,14 @@ public class StudentUseCase implements BaseInputPort<Student, Long> {
 
     @Override
     public QueryResult<Student> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings) {
-        return crudOutputPort.getAll(offset, limit, queryFilters, sortings);
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Page<Student> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
-        return crudOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override

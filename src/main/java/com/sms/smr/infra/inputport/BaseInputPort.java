@@ -1,7 +1,8 @@
 package com.sms.smr.infra.inputport;
 
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

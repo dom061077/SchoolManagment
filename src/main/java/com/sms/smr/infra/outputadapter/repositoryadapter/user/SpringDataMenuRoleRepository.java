@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.user;
+package com.sms.smr.infra.outputadapter.repositoryadapter.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

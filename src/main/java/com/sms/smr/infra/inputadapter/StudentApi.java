@@ -8,7 +8,8 @@ import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
 import com.sms.smr.infra.inputport.StudentInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 

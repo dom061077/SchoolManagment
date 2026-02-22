@@ -28,6 +28,23 @@ public interface StudentRegistrationMapper
         extends EntityMapper<StudentRegistration, StudentRegistrationEntity> {
 
     @Override
+    @Mapping(target = "studentId", source = "student.id")
+    @Mapping(target = "studentFirstName", source= "student.firstName")
+    @Mapping(target = "studentLastName", source = "student.lastName")
+    @Mapping(target = "studentDni", source = "student.dni")
+    @Mapping(target = "academicYearId", source = "academicYear.id")
+    @Mapping(target = "academicYearYear", source="academicYear.year")
+    @Mapping(target = "gradeLevelId", source = "gradeLevel.id")
+    @Mapping(target = "gradeLevelGradeNumber", source="gradeLevel.gradeNumber")
+    @Mapping(target = "shiftId", source="shift.id")
+    @Mapping(target = "shiftName", source="shift.name")
+    @Mapping(target = "sectionId", source="section.id")
+    @Mapping(target = "sectionName", source="section.name")
+    StudentRegistration toDomain(StudentRegistrationEntity entity, @Context CycleAvoidingMappingContext context);
+
+
+
+    @Override
     @Mapping(target = "student", source = "studentId")
     @Mapping(target = "academicYear", source = "academicYearId")
     @Mapping(target = "gradeLevel", source = "gradeLevelId")

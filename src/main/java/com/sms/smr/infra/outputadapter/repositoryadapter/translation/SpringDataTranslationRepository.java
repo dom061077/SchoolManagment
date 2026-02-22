@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.translation;
+package com.sms.smr.infra.outputadapter.repositoryadapter.translation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

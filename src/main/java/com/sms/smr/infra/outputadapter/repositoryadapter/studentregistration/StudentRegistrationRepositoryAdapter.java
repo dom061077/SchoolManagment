@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.studentregistration;
+package com.sms.smr.infra.outputadapter.repositoryadapter.studentregistration;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +10,9 @@ import com.sms.smr.infra.outputadapter.mapper.StudentRegistrationMapper;
 import com.sms.smr.infra.outputadapter.jpa.repository.query.StudentRegistrationrQueryJpaRepository;
 
 @Repository
-public class StudentRegistrationRepositoryAdapter extends BaseRepository<StudentRegistration, Long, StudentRegistrationEntity, StudentRegistrationJpaRepository, StudentRegistrationrQueryJpaRepository>{
+public class StudentRegistrationRepositoryAdapter extends BaseRepository<StudentRegistration, Long, StudentRegistrationEntity, StudentRegistrationJpaRepository>{
     public StudentRegistrationRepositoryAdapter(StudentRegistrationJpaRepository repository, StudentRegistrationMapper mapper, StudentRegistrationrQueryJpaRepository queryRepository) {
-        super(repository, mapper, queryRepository, StudentRegistrationEntity.class);
+        super(repository, mapper, StudentRegistrationEntity.class);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.translation;
+package com.sms.smr.infra.outputadapter.repositoryadapter.translation;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.sms.smr.domain.Translation;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.TranslationEntity;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.AllArgsConstructor;

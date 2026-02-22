@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.user;
+package com.sms.smr.infra.outputadapter.repositoryadapter.user;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 public interface PersonInputPort {
    public Person createPerson(Person person);

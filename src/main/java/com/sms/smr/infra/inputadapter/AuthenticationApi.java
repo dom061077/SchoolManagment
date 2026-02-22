@@ -21,8 +21,8 @@ import com.sms.smr.infra.inputadapter.dto.keycloak.UserInfoDto;
 import com.sms.smr.infra.inputadapter.dto.menurole.MenuRoleDto;
 import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.BaseInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryRepository;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 import lombok.RequiredArgsConstructor;
 

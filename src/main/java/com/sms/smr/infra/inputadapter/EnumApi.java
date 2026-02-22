@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sms.smr.domain.EstudioEnum;
 import com.sms.smr.infra.inputadapter.dto.enumeration.EstudioEnumDto;
 import com.sms.smr.infra.inputport.EnumValuesInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 @RestController
 @RequestMapping(value="/api/v1/enum")

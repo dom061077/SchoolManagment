@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.user;
+package com.sms.smr.infra.outputadapter.repositoryadapter.user;
 
 import java.util.List;
 import java.util.Optional;

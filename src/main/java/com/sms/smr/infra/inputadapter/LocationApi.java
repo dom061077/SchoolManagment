@@ -2,7 +2,8 @@ package com.sms.smr.infra.inputadapter;
 
 import com.sms.smr.domain.Localidad;
 import com.sms.smr.infra.inputport.BaseInputPort;
-import com.sms.smr.infra.outputadapter.jparepository.queryrepository.QueryResult;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

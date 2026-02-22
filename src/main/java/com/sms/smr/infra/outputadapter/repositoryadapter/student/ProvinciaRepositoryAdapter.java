@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.jparepository.student;
+package com.sms.smr.infra.outputadapter.repositoryadapter.student;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +10,9 @@ import com.sms.smr.infra.outputadapter.jpa.repository.query.ProvinciaQueryJpaRep
 import com.sms.smr.infra.outputadapter.mapper.ProvinciaEntityMapper;
 
 @Repository
-public class ProvinciaRepositoryAdapter extends BaseRepository<Provincia, Long, ProvinciaEntity, ProvinciaJpaRepository, ProvinciaQueryJpaRepository>{
-    public ProvinciaRepositoryAdapter(ProvinciaJpaRepository repository, ProvinciaEntityMapper mapper, ProvinciaQueryJpaRepository queryRepository) {
-        super(repository, mapper, queryRepository, ProvinciaEntity.class);
+public class ProvinciaRepositoryAdapter extends BaseRepository<Provincia, Long, ProvinciaEntity, ProvinciaJpaRepository>{
+    public ProvinciaRepositoryAdapter(ProvinciaJpaRepository repository, ProvinciaEntityMapper mapper) {
+        super(repository, mapper, ProvinciaEntity.class);
     }           
 
 }
