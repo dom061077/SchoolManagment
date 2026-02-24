@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.Menu;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
@@ -39,6 +38,7 @@ public class MenuUseCase implements BaseInputPort<Menu, Long> {
 
     @Override
     public QueryResult<Menu> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings) {
+        /* 
         QueryResult<Menu> qResult = new QueryResult<Menu>();
 
         qResult.setData(menuEntityMapper.getDomainList(queryRepository.getAllAnd(MenuEntity.class, offset, limit, queryFilters, sortings), new CycleAvoidingMappingContext()));
@@ -46,6 +46,8 @@ public class MenuUseCase implements BaseInputPort<Menu, Long> {
         qResult.setTotal(count);
 
         return qResult;
+        */
+       throw new UnsupportedOperationException();
     }
 
     @Override

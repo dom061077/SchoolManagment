@@ -6,7 +6,6 @@ import com.sms.smr.domain.Student;
 import com.sms.smr.infra.outputadapter.db.StudentEntity;
 import com.sms.smr.infra.outputadapter.jpa.BaseRepository;
 import com.sms.smr.infra.outputadapter.jpa.repository.StudentJpaRepository;
-import com.sms.smr.infra.outputadapter.jpa.repository.query.StudentQueryJpaRepository;
 import com.sms.smr.infra.outputadapter.mapper.StudentEntityMapper;
 
 @Repository

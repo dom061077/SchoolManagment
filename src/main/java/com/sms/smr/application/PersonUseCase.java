@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Component;
+
 import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.BaseInputPort;
@@ -46,6 +46,7 @@ public class PersonUseCase implements BaseInputPort<Person,Long>{
 
     @Override
     public  QueryResult<Person> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sorts) {
+        /*
         QueryResult<Person> qResult = new QueryResult<Person>();            
 
         qResult.setData(personEntityMapper.getPersons(queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sorts)));
@@ -53,6 +54,8 @@ public class PersonUseCase implements BaseInputPort<Person,Long>{
         qResult.setTotal(count);
 
         return qResult;
+        */
+       throw new UnsupportedOperationException();
     }   
 
     @Override

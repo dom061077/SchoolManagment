@@ -5,9 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.Person;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.PersonEntity;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
@@ -38,8 +36,8 @@ public class PersonRepository implements EntityRepository<PersonEntity> {
 
     @Override
     public List<PersonEntity> getAll(int offset, int limit, List<QueryDto> queryFilters,List<QueryDto> sortFilters) {
-
-        return  queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sortFilters);
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        //return  queryRepository.getAllAnd(PersonEntity.class, offset, limit, queryFilters, sortFilters);
     }
 
     @Override
@@ -53,7 +51,8 @@ public class PersonRepository implements EntityRepository<PersonEntity> {
 
     @Override
     public long getCount(List<QueryDto> queryFilters) {
-        return queryRepository.getCount(PersonEntity.class, queryFilters);
+        //return queryRepository.getCount(PersonEntity.class, queryFilters);
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override

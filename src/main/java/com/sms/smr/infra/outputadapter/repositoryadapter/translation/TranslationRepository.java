@@ -4,21 +4,19 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.Translation;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.db.TranslationEntity;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputport.EntityRepository;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 
 
 @AllArgsConstructor
 //@Component(value = "translationRepository")
+//Deprecated
 public class TranslationRepository implements EntityRepository<TranslationEntity> {
 
     private final SpringDataTranslationRepository sDataTranslationRepository;
@@ -37,12 +35,14 @@ public class TranslationRepository implements EntityRepository<TranslationEntity
     @Override
     public List<TranslationEntity> getAll(int offset, int limit, List<QueryDto> queryFilters,
             List<QueryDto> sortFilters) {
-        return (List<TranslationEntity>)queryRepository.getAllAnd(TranslationEntity.class, offset, limit, queryFilters, sortFilters);
+        //return (List<TranslationEntity>)queryRepository.getAllAnd(TranslationEntity.class, offset, limit, queryFilters, sortFilters);
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override
     public long getCount(List<QueryDto> queryFilters) {
-        return queryRepository.getCount(TranslationEntity.class, queryFilters);
+        //return queryRepository.getCount(TranslationEntity.class, queryFilters);
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override

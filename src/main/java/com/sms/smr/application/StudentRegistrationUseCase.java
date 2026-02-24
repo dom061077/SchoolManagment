@@ -10,11 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sms.smr.domain.StudentRegistration;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.BaseInputPort;
-import com.sms.smr.infra.outputadapter.db.academic.StudentRegistrationEntity;
+import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryRepository;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.outputport.CrudOutputPort;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,6 +21,11 @@ import lombok.RequiredArgsConstructor;
 @Transactional(readOnly = true) 
 public class StudentRegistrationUseCase implements BaseInputPort<StudentRegistration, Long>{
     public final CrudOutputPort<StudentRegistration, Long> crudOutputPort;
+    //public final StudentRegistrationRepositoryAdapter crudOutputPort;
+    public final QueryRepository<StudentRegistration, Long> queryRepository;
+    //public final StudentRegistrationrQueryJpaRepository queryRepository;
+
+
 
     @Override
     public StudentRegistration create(StudentRegistration studentRegistration) {
@@ -30,8 +34,7 @@ public class StudentRegistrationUseCase implements BaseInputPort<StudentRegistra
 
     @Override
     public Optional<StudentRegistration> getById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        return crudOutputPort.getById(id);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class StudentRegistrationUseCase implements BaseInputPort<StudentRegistra
     @Override
     public Page<StudentRegistration> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
-        //TODO
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        return queryRepository.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 }
