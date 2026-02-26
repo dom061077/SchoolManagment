@@ -5,8 +5,8 @@ import java.util.List;
 import org.mapstruct.BeanMapping;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.Shift;
-import com.sms.smr.infra.outputadapter.db.school.ShiftEntity;
+import com.sms.smr.domain.model.Shift;
+import com.sms.smr.infra.ouput.persistence.db.school.ShiftEntity;
 
 @Component
 public class ShiftEntityMapper implements BaseEntityMapper<Shift, ShiftEntity> {

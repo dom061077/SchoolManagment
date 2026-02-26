@@ -1,0 +1,16 @@
+package com.sms.smr.domain.model;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Builder
+public class Departamento {
+    
+    private Long id;
+    private String nombre;
+    private Provincia provincia;
+    //private List<Localidad> localidades;
+}

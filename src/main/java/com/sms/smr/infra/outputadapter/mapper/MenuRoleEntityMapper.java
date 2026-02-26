@@ -2,8 +2,9 @@ package com.sms.smr.infra.outputadapter.mapper;
 
 import org.mapstruct.Mapper;
 
-import com.sms.smr.domain.MenuRole;
-import com.sms.smr.infra.outputadapter.db.MenuRoleEntity;
+import com.sms.smr.domain.model.MenuRole;
+import com.sms.smr.infra.ouput.persistence.EntityMapper;
+import com.sms.smr.infra.ouput.persistence.db.MenuRoleEntity;
 
 @Mapper(
         componentModel = "spring", uses = {MenuEntityMapper.class}

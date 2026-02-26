@@ -8,8 +8,8 @@ import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 
 import com.lowagie.text.Section;
-import com.sms.smr.domain.GradeLevel;
-import com.sms.smr.infra.outputadapter.db.school.GradeLevelEntity;
+import com.sms.smr.domain.model.GradeLevel;
+import com.sms.smr.infra.ouput.persistence.db.school.GradeLevelEntity;
 
 @Component
 public class GradeLevelEntityMapper implements BaseEntityMapper<GradeLevel, GradeLevelEntity> {

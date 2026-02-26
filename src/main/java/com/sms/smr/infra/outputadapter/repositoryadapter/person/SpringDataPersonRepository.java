@@ -3,7 +3,7 @@ package com.sms.smr.infra.outputadapter.repositoryadapter.person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.infra.outputadapter.db.PersonEntity;
+import com.sms.smr.infra.ouput.persistence.db.PersonEntity;
 
 
 @Component

@@ -10,15 +10,16 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 
-import com.sms.smr.domain.Student;
-import com.sms.smr.domain.StudentRegistration;
-import com.sms.smr.infra.outputadapter.db.StudentEntity;
-import com.sms.smr.infra.outputadapter.db.academic.AcademicYearEntity;
-import com.sms.smr.infra.outputadapter.db.academic.StudentRegistrationEntity;
-import com.sms.smr.infra.outputadapter.db.school.GradeLevelEntity;
-import com.sms.smr.infra.outputadapter.db.school.SectionEntity;
-import com.sms.smr.infra.outputadapter.db.school.ShiftEntity;
-import com.sms.smr.infra.outputadapter.mapper.CycleAvoidingMappingContext;
+import com.sms.smr.domain.model.Student;
+import com.sms.smr.domain.model.StudentRegistration;
+import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.ouput.persistence.EntityMapper;
+import com.sms.smr.infra.ouput.persistence.db.academic.AcademicYearEntity;
+import com.sms.smr.infra.ouput.persistence.db.academic.StudentRegistrationEntity;
+import com.sms.smr.infra.ouput.persistence.db.school.GradeLevelEntity;
+import com.sms.smr.infra.ouput.persistence.db.school.SectionEntity;
+import com.sms.smr.infra.ouput.persistence.db.school.ShiftEntity;
+import com.sms.smr.infra.ouput.persistence.student.StudentEntity;
 
 @Mapper(
     componentModel = "spring",

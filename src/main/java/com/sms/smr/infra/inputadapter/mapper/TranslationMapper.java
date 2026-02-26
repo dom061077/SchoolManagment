@@ -3,9 +3,9 @@ package com.sms.smr.infra.inputadapter.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import com.sms.smr.domain.Translation;
-import com.sms.smr.infra.outputadapter.db.TranslationEntity;
-import com.sms.smr.infra.outputadapter.mapper.EntityMapper;
+import com.sms.smr.domain.model.Translation;
+import com.sms.smr.infra.ouput.persistence.EntityMapper;
+import com.sms.smr.infra.ouput.persistence.translation.TranslationEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TranslationMapper extends EntityMapper<Translation, TranslationEntity> {

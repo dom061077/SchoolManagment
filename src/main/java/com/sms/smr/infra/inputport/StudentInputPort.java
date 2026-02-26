@@ -3,7 +3,7 @@ package com.sms.smr.infra.inputport;
 import java.util.List;
 import java.util.Optional;
 
-import com.sms.smr.domain.Student;
+import com.sms.smr.domain.model.Student;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 

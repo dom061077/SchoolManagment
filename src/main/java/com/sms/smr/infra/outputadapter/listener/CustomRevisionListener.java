@@ -4,7 +4,7 @@ import org.hibernate.envers.RevisionListener;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
-import com.sms.smr.infra.outputadapter.db.CustomRevisionEntity;
+import com.sms.smr.infra.ouput.persistence.db.CustomRevisionEntity;
 
 public class CustomRevisionListener implements RevisionListener {
     @Override

@@ -6,8 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import com.sms.smr.infra.outputadapter.db.StudentEntity;
-//import com.sms.smr.infra.outputadapter.jparepository.student.SpringDataAlumnoRepository;
+import com.sms.smr.infra.ouput.persistence.student.StudentEntity;
 
 
 @SpringBootApplication()

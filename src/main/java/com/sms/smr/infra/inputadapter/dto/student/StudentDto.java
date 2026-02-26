@@ -1,7 +1,7 @@
 package com.sms.smr.infra.inputadapter.dto.student;
 
 
-import com.sms.smr.domain.EstudioEnum;
+import com.sms.smr.domain.model.EstudioEnum;
 
 import lombok.Builder;
 import lombok.Getter;
