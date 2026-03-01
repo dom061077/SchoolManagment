@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.model.StudentRegistration;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @PreAuthorize("hasAnyAuthority('ROLE_REALM_preceptor')")
 @RequiredArgsConstructor
 public class StudentRegistrationApi {
-    public final BaseInputPort<StudentRegistration, Long> studentRegistrationInputPort;
+    public final BaseUseCase<StudentRegistration, Long> studentRegistrationInputPort;
  
     public Logger logger = Logger.getLogger(StudentRegistrationApi.class.getName());
 
