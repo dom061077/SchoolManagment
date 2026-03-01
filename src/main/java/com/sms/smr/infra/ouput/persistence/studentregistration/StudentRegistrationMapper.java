@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.mapper;
+package com.sms.smr.infra.ouput.persistence.studentregistration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,11 @@ import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.model.StudentRegistration;
 import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
 import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.db.academic.AcademicYearEntity;
-import com.sms.smr.infra.ouput.persistence.db.academic.StudentRegistrationEntity;
-import com.sms.smr.infra.ouput.persistence.db.school.GradeLevelEntity;
-import com.sms.smr.infra.ouput.persistence.db.school.SectionEntity;
-import com.sms.smr.infra.ouput.persistence.db.school.ShiftEntity;
+import com.sms.smr.infra.ouput.persistence.academic.AcademicYearEntity;
+import com.sms.smr.infra.ouput.persistence.academic.StudentRegistrationEntity;
+import com.sms.smr.infra.ouput.persistence.school.GradeLevelEntity;
+import com.sms.smr.infra.ouput.persistence.school.SectionEntity;
+import com.sms.smr.infra.ouput.persistence.school.ShiftEntity;
 import com.sms.smr.infra.ouput.persistence.student.StudentEntity;
 
 @Mapper(

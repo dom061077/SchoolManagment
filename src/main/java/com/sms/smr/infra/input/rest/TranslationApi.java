@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.model.Translation;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.mapper.TranslationMapper;
-import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
+import com.sms.smr.infra.utils.Utils;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,7 @@ public class TranslationApi {
 
 
     @Qualifier(value="translationUseCase")
-    private final BaseInputPort<Translation, Long> baseInputPort;
+    private final BaseUseCase<Translation, Long> baseUseCase;
     private final TranslationMapper translationMapper;
     private static final Logger logger = LoggerFactory.getLogger(TranslationApi.class);
 
@@ -46,17 +47,15 @@ public class TranslationApi {
     @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")
     public Translation create(@RequestBody @Valid Translation translation ){
         logger.info("translationDto: ",translation);
-        return baseInputPort.create(translation);
+        return baseUseCase.create(translation);
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")
-    public QueryResult<Translation> getAll(@RequestParam int offset, @RequestParam int limit
-    , @RequestParam String qfilters, @RequestParam String sorts) {
-        //logger.info("Filters: "+qfilters);
-        List<QueryDto> queryFilters = Utils.stringToQueryFilterDto("");
-        List<QueryDto> sortFilters = Utils.stringToQueryFilterDto("");
-        return baseInputPort.getAll(offset, limit, queryFilters, sortFilters);
+    public Page<Translation> getAll(@RequestParam int offset, @RequestParam int limit
+    , @RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator) {
+        logger.info("Filters: "+qfilters);
+        return baseUseCase.getAll(offset, limit, qfilters, sorts, loperator);
     }
 
     @GetMapping(value = "messages/{lang}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -64,9 +63,9 @@ public class TranslationApi {
     public Map<String, Object> getMessages(@PathVariable String lang) {
         logger.info("Language: " + lang);
         Map<String, Object> result = new LinkedHashMap<>();
-        List<Translation> translations = baseInputPort.getAll(0, 100
+        List<Translation> translations = baseUseCase.getAll(0, 100
             //, Utils.stringToQueryFilterDto("[]"), Utils.stringToQueryFilterDto("[]")).getData();
-            , Utils.stringToQueryFilterDto("[{\"property\":\"language:eq\", \"value\":\""+lang+"\" }]"), Utils.stringToQueryFilterDto("[]")).getData();
+            ,"[{\"property\":\"language:eq\", \"value\":\""+lang+"\" }]", "[]","AND").getContent();
         
         for(Translation t : translations ) {
             result.computeIfAbsent(t.getNamespace(), k-> new LinkedHashMap<>());

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Departamento;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
@@ -16,16 +16,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class DepartamentoService implements BaseInputPort<Departamento, Long> {
+public class DepartamentoService implements BaseUseCase<Departamento, Long> {
     private final CrudPersistenceOutputPort<Departamento, Long> crudOutputPort;
-
-    @Override
-    public QueryResult<Departamento> getAll(int offset, int limit, List<QueryDto> queryFilters,
-            List<QueryDto> sortings) {
-        //TODO
-        throw new UnsupportedOperationException();
-        
-    }
 
     @Override
     public Departamento create(Departamento entity) {

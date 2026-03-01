@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Provincia;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
@@ -16,15 +16,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ProvinciaService implements BaseInputPort<Provincia, Long>{
+public class ProvinciaService implements BaseUseCase<Provincia, Long>{
     private final CrudPersistenceOutputPort<Provincia, Long> crudOutputPort;
-
-    @Override
-    public QueryResult<Provincia> getAll(int offset, int limit, List<QueryDto> qfilters, List<QueryDto> sorts) {
-        //TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
-        
-    }
 
     @Override
     public Provincia create(Provincia entity) {

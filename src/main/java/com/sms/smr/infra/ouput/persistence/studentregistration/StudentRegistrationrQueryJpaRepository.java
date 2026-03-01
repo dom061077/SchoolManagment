@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.sms.smr.domain.model.StudentRegistration;
 import com.sms.smr.infra.ouput.persistence.BaseSpecificationBuilder;
 import com.sms.smr.infra.ouput.persistence.QueryRepositoryBase;
-import com.sms.smr.infra.ouput.persistence.db.academic.StudentRegistrationEntity;
-import com.sms.smr.infra.outputadapter.mapper.StudentRegistrationMapper;
+import com.sms.smr.infra.ouput.persistence.academic.StudentRegistrationEntity;
 
 @Repository
 public class StudentRegistrationrQueryJpaRepository extends QueryRepositoryBase<StudentRegistration, Long, StudentRegistrationEntity, StudentRegistrationJpaRepository> {

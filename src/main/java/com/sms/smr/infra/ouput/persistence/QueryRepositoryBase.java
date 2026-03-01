@@ -9,16 +9,16 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import com.sms.smr.domain.ports.out.QueryRepository;
+import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputadapter.utils.Utils;
+import com.sms.smr.infra.utils.Utils;
 
 
 
 
 
 
-public abstract class QueryRepositoryBase<T, ID,E , R extends JpaRepository<E, ID> & JpaSpecificationExecutor<E>> implements QueryRepository<T, ID> {
+public abstract class QueryRepositoryBase<T, ID,E , R extends JpaRepository<E, ID> & JpaSpecificationExecutor<E>> implements QueryPersistenceOutputPort<T, ID> {
     private final R repository;
     private final BaseSpecificationBuilder<E> specificationBuilder;
     private final EntityMapper<T, E> mapper;

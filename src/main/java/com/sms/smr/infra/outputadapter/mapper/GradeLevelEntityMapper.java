@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.lowagie.text.Section;
 import com.sms.smr.domain.model.GradeLevel;
-import com.sms.smr.infra.ouput.persistence.db.school.GradeLevelEntity;
+import com.sms.smr.infra.ouput.persistence.school.GradeLevelEntity;
 
 @Component
 public class GradeLevelEntityMapper implements BaseEntityMapper<GradeLevel, GradeLevelEntity> {

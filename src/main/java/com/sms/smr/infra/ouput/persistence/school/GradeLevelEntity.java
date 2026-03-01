@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.db.school;
+package com.sms.smr.infra.ouput.persistence.school;
 /*
 Este es el curso
  */

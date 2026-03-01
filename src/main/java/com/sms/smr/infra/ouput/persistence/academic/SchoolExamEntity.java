@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.db.academic;
+package com.sms.smr.infra.ouput.persistence.academic;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.smr.domain.model.StudentRegistration;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
-import com.sms.smr.domain.ports.out.QueryRepository;
+import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
@@ -19,10 +19,10 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true) 
-public class StudentRegistrationService implements BaseInputPort<StudentRegistration, Long>{
+public class StudentRegistrationService implements BaseUseCase<StudentRegistration, Long>{
     public final CrudPersistenceOutputPort<StudentRegistration, Long> crudOutputPort;
     //public final StudentRegistrationRepositoryAdapter crudOutputPort;
-    public final QueryRepository<StudentRegistration, Long> queryRepository;
+    public final QueryPersistenceOutputPort<StudentRegistration, Long> queryRepository;
     //public final StudentRegistrationrQueryJpaRepository queryRepository;
 
 
@@ -37,12 +37,6 @@ public class StudentRegistrationService implements BaseInputPort<StudentRegistra
         return crudOutputPort.getById(id);
     }
 
-    @Override
-    public QueryResult<StudentRegistration> getAll(int offset, int limit, List<QueryDto> queryFilters,
-            List<QueryDto> sortings) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
-    }
 
     @Override
     @Transactional

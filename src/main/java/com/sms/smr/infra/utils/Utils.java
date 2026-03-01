@@ -1,4 +1,4 @@
-package com.sms.smr.infra.inputadapter.utils;
+package com.sms.smr.infra.utils;
 
 import java.util.ArrayList;
 import java.util.List;

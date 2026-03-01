@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.domain.model.Person;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
-import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
+import com.sms.smr.infra.utils.Utils;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -25,6 +25,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +55,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequiredArgsConstructor
 public class PersonApi {
     @Qualifier(value="personUseCase")
-    private final BaseInputPort<Person, Long> baseInputPort;
+    private final BaseUseCase<Person, Long> baseInputPort;
     private final PersonMapper personMapper;
     private static final Logger logger = LoggerFactory.getLogger(PersonApi.class); 
 
@@ -120,18 +121,17 @@ public class PersonApi {
         queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
 
         List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
+        throw new NotImplementedException();
+        //return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 
     @GetMapping(value = "certificate")
     public void getPersonCertificateReport(Long personId,HttpServletResponse response) throws IOException, JRException{
-        
-
+        throw new NotImplementedException();
+        /*
         InputStream inputStream = getClass().getResourceAsStream("/reports/church_certificate.jrxml"); 
         JasperReport jasperReport = JasperCompileManager.compileReport(inputStream); 
 
-        //File file = ResourceUtils.getFile("classpath:church_certificate.jrxml");
-        //JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         ArrayList<QueryDto> queryFilters = new ArrayList<QueryDto>();
         QueryDto qFilterDto = QueryDto.builder().build();
         qFilterDto.setProperty("id:eq");
@@ -146,7 +146,7 @@ public class PersonApi {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         //Export report
         JasperExportManager.exportReportToPdfStream(jasperPrint,response.getOutputStream());
-
+        */
     }
 
 }

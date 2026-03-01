@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.db.school;
+package com.sms.smr.infra.ouput.persistence.school;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -4,11 +4,11 @@ import com.sms.smr.domain.model.Departamento;
 import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.model.Provincia;
 import com.sms.smr.domain.model.Student;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputadapter.utils.Utils;
 import com.sms.smr.infra.inputport.StudentInputPort;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
+import com.sms.smr.infra.utils.Utils;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -61,10 +61,10 @@ Database
 @RequiredArgsConstructor
 public class StudentApi {
     
-    private final BaseInputPort<Student, Long> studentInputPort;
-    private final BaseInputPort<Provincia, Long> provinciaInputPort;
-    private final BaseInputPort<Departamento, Long> departamentoInputPort;
-    private final BaseInputPort<Localidad, Long> localidadInputPort;
+    private final BaseUseCase<Student, Long> studentInputPort;
+    private final BaseUseCase<Provincia, Long> provinciaInputPort;
+    private final BaseUseCase<Departamento, Long> departamentoInputPort;
+    private final BaseUseCase<Localidad, Long> localidadInputPort;
     
     //private final  StudentMapper studentMapper;
     private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
@@ -83,7 +83,7 @@ public class StudentApi {
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-     public Page<Student> /*List<Person>*/ getAll(@RequestParam @Valid int offset,@RequestParam @Valid int limit
+     public Page<Student> /*List<Person>*/ getAll(@RequestParam  int offset,@RequestParam  int limit
         ,@RequestParam String qfilters,@RequestParam String sorts,@RequestParam String loperator){
         logger.info("Filters: "+qfilters);
         //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);

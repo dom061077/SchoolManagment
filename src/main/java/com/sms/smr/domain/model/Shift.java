@@ -1,6 +1,6 @@
 package com.sms.smr.domain.model;
 
-import com.sms.smr.infra.ouput.persistence.db.school.GradeLevelEntity;
+import com.sms.smr.infra.ouput.persistence.school.GradeLevelEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

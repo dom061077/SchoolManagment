@@ -1,22 +1,13 @@
 package com.sms.smr.infra.ouput.persistence;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
-import com.sms.smr.domain.ports.out.QueryRepository;
 import com.sms.smr.infra.exception.InternalServerErrorException;
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputadapter.utils.Utils;
-import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 
 

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Localidad;
-import com.sms.smr.domain.ports.in.BaseInputPort;
+import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
@@ -17,16 +17,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LocalidadService implements BaseInputPort<Localidad, Long> {
+public class LocalidadService implements BaseUseCase<Localidad, Long> {
     private final CrudPersistenceOutputPort<Localidad, Long> crudOutputPort;
-
-
-
-    @Override
-    public QueryResult<Localidad> getAll(int offset, int limit, List<QueryDto> queryFilters, List<QueryDto> sortings) {
-        //TODO
-        throw new UnsupportedOperationException();
-    }
 
 
 

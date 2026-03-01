@@ -1,10 +1,8 @@
-package com.sms.smr.infra.ouput.persistence.db;
+package com.sms.smr.infra.ouput.persistence;
 
 
 
 import java.time.LocalDate;
-
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;

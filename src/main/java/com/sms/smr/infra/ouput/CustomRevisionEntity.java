@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.db;
+package com.sms.smr.infra.ouput;
 
 import org.hibernate.envers.DefaultTrackingModifiedEntitiesRevisionEntity;
 import org.hibernate.envers.RevisionEntity;

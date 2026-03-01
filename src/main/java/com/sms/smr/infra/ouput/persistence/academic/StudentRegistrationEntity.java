@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.db.academic;
+package com.sms.smr.infra.ouput.persistence.academic;
 
 import com.sms.smr.infra.ouput.persistence.BaseEntity;
-import com.sms.smr.infra.ouput.persistence.db.school.GradeLevelEntity;
-import com.sms.smr.infra.ouput.persistence.db.school.SectionEntity;
-import com.sms.smr.infra.ouput.persistence.db.school.ShiftEntity;
+import com.sms.smr.infra.ouput.persistence.school.GradeLevelEntity;
+import com.sms.smr.infra.ouput.persistence.school.SectionEntity;
+import com.sms.smr.infra.ouput.persistence.school.ShiftEntity;
 import com.sms.smr.infra.ouput.persistence.student.StudentEntity;
 
 import jakarta.persistence.Entity;

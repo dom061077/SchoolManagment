@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 import com.sms.smr.domain.model.EstudioEnum;
-import com.sms.smr.infra.ouput.persistence.db.BasePersonEntity;
+import com.sms.smr.infra.ouput.persistence.BasePersonEntity;
 import com.sms.smr.infra.ouput.persistence.localidad.LocalidadEntity;
 
 import jakarta.persistence.Entity;
