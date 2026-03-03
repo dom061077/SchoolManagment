@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TranslationService implements BaseUseCase<Translation,Long> {
     private final CrudPersistenceOutputPort<Translation,Long> crudPersistenceOutputPort;
-    private final QueryPersistenceOutputPort<Translation, Long> queryPesistenceOutpuPort;
+    //private final QueryPersistenceOutputPort<Translation, Long> queryPesistenceOutpuPort;
     @Override
     public Translation create(Translation entity) {
         // TODO Auto-generated method stub

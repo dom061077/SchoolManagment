@@ -7,8 +7,8 @@ import com.sms.smr.infra.ouput.persistence.BaseRepository;
 import com.sms.smr.infra.ouput.persistence.academic.StudentRegistrationEntity;
 
 @Repository
-public class StudentRegistrationRepositoryAdapter extends BaseRepository<StudentRegistration, Long, StudentRegistrationEntity, StudentRegistrationJpaRepository>{
-    public StudentRegistrationRepositoryAdapter(StudentRegistrationJpaRepository repository, StudentRegistrationMapper mapper) {
+public class StudentRegistrationPersistenceAdapter extends BaseRepository<StudentRegistration, Long, StudentRegistrationEntity, StudentRegistrationJpaRepository>{
+    public StudentRegistrationPersistenceAdapter(StudentRegistrationJpaRepository repository, StudentRegistrationMapper mapper) {
         super(repository, mapper, StudentRegistrationEntity.class);
     }
 

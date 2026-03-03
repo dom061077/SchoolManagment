@@ -20,25 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.model.Translation;
 import com.sms.smr.domain.ports.in.BaseUseCase;
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputadapter.mapper.TranslationMapper;
-import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
-import com.sms.smr.infra.utils.Utils;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
 
-//@RestController
+@RestController
 @RequestMapping(value="/api/v1/translation")
 @RequiredArgsConstructor
 public class TranslationApi {
 
 
-    @Qualifier(value="translationUseCase")
     private final BaseUseCase<Translation, Long> baseUseCase;
-    private final TranslationMapper translationMapper;
     private static final Logger logger = LoggerFactory.getLogger(TranslationApi.class);
 
 
@@ -51,7 +44,7 @@ public class TranslationApi {
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_REALM_ADMIN')")
     public Page<Translation> getAll(@RequestParam int offset, @RequestParam int limit
     , @RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator) {
         logger.info("Filters: "+qfilters);

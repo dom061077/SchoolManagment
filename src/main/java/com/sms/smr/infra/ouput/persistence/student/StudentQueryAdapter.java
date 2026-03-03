@@ -8,10 +8,10 @@ import com.sms.smr.infra.ouput.persistence.EntityMapper;
 import com.sms.smr.infra.ouput.persistence.QueryRepositoryBase;
 
 @Repository
-public class StudentQueryJpaRepository extends QueryRepositoryBase<Student, Long, StudentEntity, StudentJpaRepository> {
+public class StudentQueryAdapter extends QueryRepositoryBase<Student, Long, StudentEntity, StudentJpaRepository> {
     //(R repository, BaseSpecificationBuilder<E> specificationBuilder, EntityMapper<T, E> mapper) {
 
-    public StudentQueryJpaRepository(StudentJpaRepository repository, EntityMapper<Student, StudentEntity> mapper) {
+    public StudentQueryAdapter(StudentJpaRepository repository, EntityMapper<Student, StudentEntity> mapper) {
         super(repository,new BaseSpecificationBuilder<StudentEntity>(), mapper);
     }
 
