@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
+import com.sms.smr.infra.input.QueryResult;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 import lombok.RequiredArgsConstructor;
 

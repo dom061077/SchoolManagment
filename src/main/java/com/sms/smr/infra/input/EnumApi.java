@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sms.smr.domain.model.EstudioEnum;
 import com.sms.smr.infra.inputadapter.dto.enumeration.EstudioEnumDto;
 import com.sms.smr.infra.inputport.EnumValuesInputPort;
-import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 @RestController
 @RequestMapping(value="/api/v1/enum")
@@ -31,8 +30,8 @@ public class EnumApi {
                     .build();
             }).toList();
         QueryResult<EstudioEnumDto> qr=new QueryResult<>();
-        qr.setData(enumValues);
-        qr.setTotal(enumValues.size());
+        qr.setContent(enumValues);
+        qr.setTotalElements(enumValues.size());
         return qr;
     }   
     

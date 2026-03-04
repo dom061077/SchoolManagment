@@ -5,9 +5,9 @@ import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.model.Provincia;
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.ports.in.BaseUseCase;
+import com.sms.smr.infra.input.QueryResult;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputport.StudentInputPort;
-import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.utils.Utils;
 
 import jakarta.validation.Valid;

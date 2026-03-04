@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.Student;
+import com.sms.smr.infra.input.QueryResult;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 
 
 

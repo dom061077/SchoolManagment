@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.domain.model.Person;
 import com.sms.smr.domain.ports.in.BaseUseCase;
+import com.sms.smr.infra.input.QueryResult;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
-import com.sms.smr.infra.outputadapter.repositoryadapter.queryrepository.QueryResult;
 import com.sms.smr.infra.utils.Utils;
 
 import jakarta.servlet.http.HttpServletResponse;
