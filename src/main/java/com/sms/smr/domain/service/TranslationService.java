@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TranslationService implements BaseUseCase<Translation,Long> {
     private final CrudPersistenceOutputPort<Translation,Long> crudPersistenceOutputPort;
-    //private final QueryPersistenceOutputPort<Translation, Long> queryPesistenceOutpuPort;
+    private final QueryPersistenceOutputPort<Translation,Long> queryPersistenceOutputPort;
     @Override
     public Translation create(Translation entity) {
         // TODO Auto-generated method stub
@@ -39,8 +39,7 @@ public class TranslationService implements BaseUseCase<Translation,Long> {
     }
     @Override
     public Page<Translation> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        return queryPersistenceOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 
 }
