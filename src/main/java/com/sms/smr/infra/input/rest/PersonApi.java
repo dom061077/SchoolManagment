@@ -1,50 +1,37 @@
 package com.sms.smr.infra.input.rest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.lang3.NotImplementedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.domain.model.Person;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.infra.input.QueryResult;
 import com.sms.smr.infra.inputadapter.dto.PersonDto;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.inputadapter.mapper.PersonMapper;
 import com.sms.smr.infra.utils.Utils;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-
-import org.apache.commons.lang3.NotImplementedException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.io.IOException;
-import java.io.InputStream;
-
 import net.sf.jasperreports.engine.JRException;
-import org.springframework.web.bind.annotation.PutMapping;
 
 
 
@@ -121,7 +108,7 @@ public class PersonApi {
         queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
 
         List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
         //return baseInputPort.getAll(offset, limit, queryFilters,sortFilters);      
     }
 

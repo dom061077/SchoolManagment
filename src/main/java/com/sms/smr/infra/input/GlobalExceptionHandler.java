@@ -129,7 +129,7 @@ public class GlobalExceptionHandler    {
         // Provide custom 404 error handling logic here
         logger.error("Exception",e);
         Map<String, String> fieldErrors = new HashMap<>();
-        Map<String, Object> errorDetails = createErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), fieldErrors);
+        Map<String, Object> errorDetails = createErrorResponse("Exception class: "+e.getClass().getName()+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), fieldErrors);
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
