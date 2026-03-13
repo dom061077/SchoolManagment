@@ -11,13 +11,15 @@ import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.infra.input.QueryResult;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.ouput.persistence.provincia.ProvinciaQueryAdapter;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ProvinciaService implements BaseUseCase<Provincia, Long>{
-    private final CrudPersistenceOutputPort<Provincia, Long> crudOutputPort;
+    private final ProvinciaQueryAdapter provinciaQueryAdapter;
+    
 
     @Override
     public Provincia create(Provincia entity) {
@@ -46,8 +48,7 @@ public class ProvinciaService implements BaseUseCase<Provincia, Long>{
     @Override
     public Page<Provincia> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
-        //TODO
-        throw new UnsupportedOperationException();
+        return provinciaQueryAdapter.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 
 }

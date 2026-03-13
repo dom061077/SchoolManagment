@@ -3,14 +3,18 @@ package com.sms.smr.domain.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.management.Query;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
+import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 import com.sms.smr.infra.input.QueryResult;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.ouput.persistence.localidad.LocalidadQueryAdapter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +22,10 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class LocalidadService implements BaseUseCase<Localidad, Long> {
-    private final CrudPersistenceOutputPort<Localidad, Long> crudOutputPort;
+    private final LocalidadQueryAdapter localidadQueryAdapter;
+    
+
+
 
 
 
@@ -57,8 +64,7 @@ public class LocalidadService implements BaseUseCase<Localidad, Long> {
     @Override
     public Page<Localidad> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
-        //TODO
-        throw new UnsupportedOperationException();
+        return localidadQueryAdapter.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 
 }
