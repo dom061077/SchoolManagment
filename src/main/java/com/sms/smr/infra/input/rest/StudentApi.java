@@ -5,15 +5,9 @@ import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.model.Provincia;
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.ports.in.BaseUseCase;
-import com.sms.smr.infra.input.QueryResult;
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.inputport.StudentInputPort;
-import com.sms.smr.infra.utils.Utils;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
