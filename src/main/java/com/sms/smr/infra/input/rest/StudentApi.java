@@ -5,6 +5,8 @@ import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.model.Provincia;
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.ports.in.BaseUseCase;
+import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -143,7 +145,7 @@ public class StudentApi {
         //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
 
         //List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        return localidadInputPort.getAll(offset, limit, qfilters,sorts,loperator);
+        return localidadInputPort.getAll(0, limit, qfilters,sorts,QueryPersistenceOutputPort.AND_OPERATOR);
     }
 
 
@@ -154,15 +156,16 @@ public class StudentApi {
 src/main/java/com/app/student/
 ├── domain/                         <-- THE HEXAGON (No Spring/JPA dependencies)
 │   ├── model/                      
-│   │   └── StudentRegistration.java (Plain Java Object)
+│   │   └── StudentRegistration.java (Plain Java Object) | Student.java
 │   ├── ports/
 │   │   ├── in/                     <-- INPUT PORTS (What the app CAN do)
-│   │   │   ├── RegisterStudentUseCase.java
+│   │   │   ├── RegisterStudentUseCase.java | BaseUseCase.java
 │   │   │   └── GetStudentUseCase.java
 │   │   └── out/                    <-- OUTPUT PORTS (What the app NEEDS)
-│   │       └── StudentPersistencePort.java
+│   │       └── StudentPersistencePort.java | CrudPersistenceOutputPort.java - QueryPersistenceOutputPort.java
 │   └── service/                    <-- INTERACTORS (Business Logic)
-│       └── RegisterStudentService.java (Implements RegisterStudentUseCase)
+│       └── RegisterStudentService.java (Implements RegisterStudentUseCase) 
+|       └-- StudentService.java (Implements BaseUseCase and AUTOWIRES both CrudPersistenceOutputPort(StudentPersistenceAdapter) and QueryPersistenceOutputPort (StudetnQueryAdapter))    
 │
 └── infrastructure/                 <-- THE ADAPTERS (Spring/JPA/External)
     ├── input/                      <-- PRIMARY ADAPTERS (Driving)
@@ -172,7 +175,8 @@ src/main/java/com/app/student/
     │       └── StudentResponse.java (DTO)
     └── output/                     <-- SECONDARY ADAPTERS (Driven)
         └── persistence/
-            ├── StudentPersistenceAdapter.java (Implements StudentPersistencePort)
+            ├── StudentPersistenceAdapter.java (Implements StudentPersistencePort | CrudPersistenceOutputPort and AUTOWIRES StudentEntityMapper and StudentJpaRepository)
+            |-- StudentQueryAdapter.java (Implements QueryPersistenceOutputPort) 
             ├── StudentRegistrationEntity.java (JPA Entity)
             ├── StudentRegistrationJpaRepository.java (Spring Data)
             └── StudentPersistenceMapper.java (The Bridge)
