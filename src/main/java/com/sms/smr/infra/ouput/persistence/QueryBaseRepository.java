@@ -18,13 +18,13 @@ import com.sms.smr.infra.utils.Utils;
 
 
 
-public abstract class QueryRepositoryBase<T, ID,E , R extends JpaRepository<E, ID> & JpaSpecificationExecutor<E>> implements QueryPersistenceOutputPort<T, ID> {
+public abstract class QueryBaseRepository<T, ID,E , R extends JpaRepository<E, ID> & JpaSpecificationExecutor<E>> implements QueryPersistenceOutputPort<T, ID> {
     private final R repository;
     private final BaseSpecificationBuilder<E> specificationBuilder;
     private final EntityMapper<T, E> mapper;
 
 
-    public QueryRepositoryBase(R repository, BaseSpecificationBuilder<E> specificationBuilder, EntityMapper<T, E> mapper) {
+    public QueryBaseRepository(R repository, BaseSpecificationBuilder<E> specificationBuilder, EntityMapper<T, E> mapper) {
         this.repository = repository;
         this.specificationBuilder = specificationBuilder;
         this.mapper = mapper;

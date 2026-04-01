@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sms.smr.domain.model.Departamento;
 import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.ports.in.BaseUseCase;
+import com.sms.smr.domain.service.LocalidadService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,5 +26,12 @@ public class LocalidadApi {
                                   @RequestParam String loperator) {
         return localidadInputPort.getAll(offset, limit, qfilters, sorts, loperator);
     }
+
+        @GetMapping(value = "departamentos-by-provincia", produces = MediaType.APPLICATION_JSON_VALUE)
+        public Page<Departamento> getDepartamentoByProvincia(@RequestParam int offset, @RequestParam int limit,
+                                        @RequestParam String qfilters, @RequestParam String sorts, 
+                                        @RequestParam String loperator) {
+            throw new UnsupportedOperationException("Unimplemented method 'getDepartamentoByProvincia'");
+        }
 
 }
