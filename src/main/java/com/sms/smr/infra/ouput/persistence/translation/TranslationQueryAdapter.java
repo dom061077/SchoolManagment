@@ -5,10 +5,10 @@ import org.springframework.stereotype.Repository;
 import com.sms.smr.domain.model.Translation;
 import com.sms.smr.infra.ouput.persistence.BaseSpecificationBuilder;
 import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.QueryRepositoryBase;
+import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
 
 @Repository
-public class TranslationQueryAdapter extends QueryRepositoryBase<Translation, Long, TranslationEntity, TranslationJpaRepository> {
+public class TranslationQueryAdapter extends QueryBaseRepository<Translation, Long, TranslationEntity, TranslationJpaRepository> {
 
     public TranslationQueryAdapter(TranslationJpaRepository repository, EntityMapper<Translation, TranslationEntity> mapper) {
         super(repository,new BaseSpecificationBuilder<TranslationEntity>(), mapper);

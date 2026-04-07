@@ -25,7 +25,6 @@ public class DepartamentoService implements BaseQueryUseCase<Departamento, Long>
     @Override
     public Page<Departamento> getAll(int offset, int limit,String queryFilters, String sortings,
             String loperator) {
-        return queryPersistenceOutputPort.getAll(offset, limit, queryFilters, sortings, loperator); 
+        return queryPersistenceOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
-
 }
