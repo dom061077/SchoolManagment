@@ -4,6 +4,7 @@ import com.sms.smr.domain.model.Departamento;
 import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.model.Provincia;
 import com.sms.smr.domain.model.Student;
+import com.sms.smr.domain.ports.in.BaseQueryUseCase;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +58,7 @@ public class StudentApi {
     
     private final BaseUseCase<Student, Long> studentInputPort;
     private final BaseUseCase<Provincia, Long> provinciaInputPort;
-    private final BaseUseCase<Departamento, Long> departamentoInputPort;
+    private final BaseQueryUseCase<Departamento, Long> departamentoInputPort;
     private final BaseUseCase<Localidad, Long> localidadInputPort;
     
     //private final  StudentMapper studentMapper;
