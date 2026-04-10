@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.model.Departamento;
 import com.sms.smr.domain.model.Localidad;
+import com.sms.smr.domain.ports.in.BaseQueryUseCase;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 
@@ -20,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LocalidadApi {
     private final BaseUseCase<Localidad, Long> localidadInputPort;
-    private final BaseUseCase<Departamento, Long> departamentoInputPort;
+    private final BaseQueryUseCase<Departamento, Long> departamentoInputPort;
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(LocalidadApi.class);
 
 
@@ -32,12 +33,14 @@ public class LocalidadApi {
         return localidadInputPort.getAll(offset, limit, qfilters, sorts, loperator);
     }
 
-    @GetMapping(value = "departamentos-by-provincia", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Departamento> getDepartamentoByProvincia(@RequestParam int offset, @RequestParam int limit,
-                                                        @RequestParam String qfilters, @RequestParam String sorts) {
-        logger.info("qfilters: "+qfilters);
-        logger.info("sorts: "+sorts);
-        
+    @GetMapping(value = "departamentos-por-provincia/{idProvincia}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<Departamento> getDepartamentoByProvincia(@PathVariable Long idProvincia) {
+        logger.info("departamentos-por-provincia, idProvincia: "+idProvincia);
+        int offset = 0;
+        int limit = 10;
+        String qfilters = "[{\"property\":\"provincia.id:eq\",\"value\":\""+idProvincia+"\"}]";
+        String sorts = "[]";
+
         return departamentoInputPort.getAll(offset, limit, qfilters, sorts, QueryPersistenceOutputPort.AND_OPERATOR);
         
     }
