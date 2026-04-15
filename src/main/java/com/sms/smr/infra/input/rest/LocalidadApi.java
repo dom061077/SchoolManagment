@@ -45,4 +45,15 @@ public class LocalidadApi {
         
     }
 
+    @GetMapping(value = "localidades-por-departamento/{idDepartamento}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<Localidad> getLocalidadByDepartamento(@PathVariable Long idDepartamento) {
+        logger.info("localidades-por-departamento, idDepartamento: "+idDepartamento);
+        int offset = 0;
+        int limit = 10;
+        String qfilters = "[{\"property\":\"departamento.id:eq\",\"value\":\""+idDepartamento+"\"}]";
+        String sorts = "[]";
+
+        return localidadInputPort.getAll(offset, limit, qfilters, sorts, QueryPersistenceOutputPort.AND_OPERATOR);
+    }
+
 }

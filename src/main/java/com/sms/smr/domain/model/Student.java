@@ -4,9 +4,9 @@ package com.sms.smr.domain.model;
 import java.time.LocalDate;
 import java.time.Period;
 
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import jakarta.validation.constraints.Past;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -69,9 +69,17 @@ public class Student extends BasePersonDomain{
     @Builder.Default
     private boolean constanciaCuilTutor=false;    
 
-    private ParentescoTutor parentescoTutorEntity;
+    private Long parentescoTutorId;
+    private String parentescoTutorDesc;
 
     private Localidad localidadEntity;
+    private Long localidadId;
+    private String localidadNombre;
+    private Long departamentoId;
+    private String departamentoNombre;
+    private Long provinciaId;
+    private String provinciaNombre;
+
 
 
     @Override

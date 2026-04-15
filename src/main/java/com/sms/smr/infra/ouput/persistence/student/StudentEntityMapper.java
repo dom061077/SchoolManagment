@@ -14,6 +14,14 @@ import com.sms.smr.infra.ouput.persistence.localidad.LocalidadEntityMapper;
  
 public interface StudentEntityMapper extends EntityMapper<Student, StudentEntity> {
 
-    
+    @Override
+    @Mapping(target = "localidadId", source = "localidad.id")
+    @Mapping(target = "parentescoTutorId", source = "parentescoTutor.id")
+    @Mapping(target = "parentescoTutorDescripcion", source = "parentescoTutor.descripcion")
+    @Mapping
+    Student toDomain(StudentEntity entity, @Context CycleAvoidingMappingContext context);
+
+    @Override
+    StudentEntity toEntity(Student domain, @Context CycleAvoidingMappingContext context);
     
 }
