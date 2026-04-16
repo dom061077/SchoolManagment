@@ -105,7 +105,7 @@ public class StudentApi {
     @PutMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     //@PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:update')")
     public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody @Valid Student student ) {
-        logger.info("Student lastname: "+student.getLastName());
+        logger.info("Student:  ",student.getDni());
         return ResponseEntity.ok(studentInputPort.update(id,student));        
     }
 

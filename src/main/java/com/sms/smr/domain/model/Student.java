@@ -70,7 +70,7 @@ public class Student extends BasePersonDomain{
     private boolean constanciaCuilTutor=false;    
 
     private Long parentescoTutorId;
-    private String parentescoTutorDesc;
+    private String parentescoTutorDescripcion;
 
     private Localidad localidadEntity;
     private Long localidadId;
