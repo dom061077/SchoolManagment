@@ -72,7 +72,6 @@ public class Student extends BasePersonDomain{
     private Long parentescoTutorId;
     private String parentescoTutorDescripcion;
 
-    private Localidad localidadEntity;
     private Long localidadId;
     private String localidadNombre;
     private Long departamentoId;
