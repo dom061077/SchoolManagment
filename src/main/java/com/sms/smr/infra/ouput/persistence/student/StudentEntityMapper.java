@@ -5,6 +5,7 @@ package com.sms.smr.infra.ouput.persistence.student;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
@@ -24,7 +25,6 @@ public interface StudentEntityMapper extends EntityMapper<Student, StudentEntity
     @Mapping(target = "departamentoNombre", source = "localidadEntity.departamento.nombre")
     @Mapping(target = "provinciaId", source = "localidadEntity.departamento.provincia.id")
     @Mapping(target = "provinciaNombre", source = "localidadEntity.departamento.provincia.nombre")
-    @Mapping(target = "localidadEntity", ignore = true)
     @Mapping(target = "parentescoTutorId", source = "parentescoTutorEntity.id")
     @Mapping(target = "parentescoTutorDescripcion", source = "parentescoTutorEntity.descripcion")
     @Mapping(target = "dni", source = "dni")

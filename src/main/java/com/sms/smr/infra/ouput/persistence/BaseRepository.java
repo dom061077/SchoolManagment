@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.infra.exception.InternalServerErrorException;
 
@@ -100,10 +101,11 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>> i
 
     @Override
     public Optional<T> update(ID id, T reg) {
+        logger.info("BaseRepository, update method, id: {}, reg: {}", id, reg);
         return repository.findById(id).map(entity->{
             mapper.updateEntityFromDomain(reg,entity, new CycleAvoidingMappingContext());
-            //E saved = repository.save(entity);
-            return mapper.toDomain(entity, new CycleAvoidingMappingContext());
+            E saved = repository.save(entity);
+            return mapper.toDomain(saved, new CycleAvoidingMappingContext());
         });
     }
 

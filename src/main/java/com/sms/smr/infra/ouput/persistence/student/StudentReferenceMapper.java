@@ -1,6 +1,7 @@
 package com.sms.smr.infra.ouput.persistence.student;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Named;
 
 import com.sms.smr.infra.ouput.persistence.localidad.LocalidadEntity;
 
