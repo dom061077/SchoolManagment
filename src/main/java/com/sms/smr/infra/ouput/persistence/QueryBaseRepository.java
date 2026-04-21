@@ -38,7 +38,7 @@ public abstract class QueryBaseRepository<T, ID,E , R extends JpaRepository<E, I
     @Override
     public Page<T> getAll(int offset, int limit, String queryFilters, String sortingFilters, String globalOperator) {
         List<QueryDto> qDtoFilters = Utils.stringToQueryFilterDto(queryFilters);
-        List<QueryDto> qDtoSorts = Utils.stringToQueryFilterDto(globalOperator);
+        List<QueryDto> qDtoSorts = Utils.stringToQueryFilterDto(sortingFilters);
 
         Specification<E> spec = specificationBuilder.build(qDtoFilters, globalOperator);
         PageRequest pageRequest = PageRequest.of(offset / limit, limit);
