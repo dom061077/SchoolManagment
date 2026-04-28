@@ -43,9 +43,8 @@ public class StudentRegistrationApi {
         return studentRegistrationInputPort.getById(id).get();
     }
 
-    @GetMapping(value = "list", produces = "application/json"
+    @GetMapping(value = "list", produces = "application/json")
     //@PreAuthorize("hasAnyAuthority('ROLE_RESOUCE_bsn_inscripcion_alumno_read')")
-    )
     public Page<StudentRegistration> getAll(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts,@RequestParam String loperator) {
         logger.info("Getting all student registrations with offset: " + offset + ", limit: " + limit);
