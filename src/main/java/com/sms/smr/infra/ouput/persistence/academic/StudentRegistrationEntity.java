@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,21 +23,26 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name="inscripcion_alumno")
+@Table(name = "inscripcion_alumno")
 public class StudentRegistrationEntity extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name="alumno_id")
+    @JoinColumn(name = "alumno_id")
+    @NotNull
     private StudentEntity student;
     @ManyToOne
-    @JoinColumn(name="periodo_lectivo_id")
+    @JoinColumn(name = "periodo_lectivo_id")
+    @NotNull
     private AcademicYearEntity academicYear;
     @ManyToOne
-    @JoinColumn(name="nivel_grado_id")
+    @JoinColumn(name = "nivel_grado_id")
+    @NotNull
     private GradeLevelEntity gradeLevel;
     @ManyToOne
-    @JoinColumn(name="turno_id")
+    @JoinColumn(name = "turno_id")
+    @NotNull
     private ShiftEntity shift;
     @ManyToOne
-    @JoinColumn(name="division_id")
+    @JoinColumn(name = "division_id")
+    @NotNull
     private SectionEntity section;
 }
