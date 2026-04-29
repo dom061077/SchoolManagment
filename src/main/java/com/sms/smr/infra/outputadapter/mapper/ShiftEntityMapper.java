@@ -1,33 +1,26 @@
 package com.sms.smr.infra.outputadapter.mapper;
 
-import java.util.List;
-
-import org.mapstruct.BeanMapping;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Context;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import com.sms.smr.domain.model.Shift;
+import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.ouput.persistence.EntityMapper;
 import com.sms.smr.infra.ouput.persistence.school.ShiftEntity;
 
-@Component
-public class ShiftEntityMapper implements BaseEntityMapper<Shift, ShiftEntity> {
+@Mapper(componentModel = "spring")
+public interface ShiftEntityMapper extends EntityMapper<Shift, ShiftEntity> {
 
     @Override
-    public Shift toDomain(ShiftEntity entity) {
-        if (entity == null) return null;
-        return Shift.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .build();
-     }
+    Shift toDomain(ShiftEntity entity, @Context CycleAvoidingMappingContext context);
 
     @Override
-    public ShiftEntity toEntity(Shift domain) {
-        if(domain == null) return null;
-        return ShiftEntity.builder()
-                .id(domain.getId())
-                .name(domain.getName())
-                .build();
-    }
+    ShiftEntity toEntity(Shift domain, @Context CycleAvoidingMappingContext context);
 
-
+    @Override
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "gradeLevels", ignore = true)
+    void updateEntityFromDomain(Shift source, @MappingTarget ShiftEntity target, @Context CycleAvoidingMappingContext context);
 }
