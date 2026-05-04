@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.academic;
+package com.sms.smr.infra.ouput.persistence.academic.academicyear;
 
 import org.hibernate.validator.constraints.EAN;
 
@@ -19,15 +19,15 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@Table(name="periodo_lectivo")
+@Table(name = "periodo_lectivo")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AcademicYearEntity extends BaseEntity {
-    
+
     @NotNull
-    @Column(name="anio", unique=true)
+    @Column(name = "anio", unique = true)
     private int year;
     @Builder.Default
-    private boolean isActive=false;
+    private boolean isActive = false;
 
 }

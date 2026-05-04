@@ -3,6 +3,7 @@ package com.sms.smr.infra.ouput.persistence.academic;
 import java.math.BigDecimal;
 
 import com.sms.smr.infra.ouput.persistence.BaseEntity;
+import com.sms.smr.infra.ouput.persistence.academic.academicyear.AcademicYearEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +17,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name="detalle_examenes_escolares")
+@Table(name = "detalle_examenes_escolares")
 @SuperBuilder
 @Getter
 @Setter
@@ -25,15 +26,15 @@ import lombok.experimental.SuperBuilder;
 public class SchoolExamDetailEntity extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name="id_examen_escolar")
+    @JoinColumn(name = "id_examen_escolar")
     private SchoolExamEntity schoolExam;
     @ManyToOne
-    @JoinColumn(name="id_periodo_lectivo")
+    @JoinColumn(name = "id_periodo_lectivo")
     private AcademicYearEntity academicPeriod;
-    @Column(name="calificacion")
+    @Column(name = "calificacion")
     private BigDecimal score;
     @ManyToOne
-    @JoinColumn(name="id_inscripcion_alumno")
+    @JoinColumn(name = "id_inscripcion_alumno")
     private StudentRegistrationEntity studentRegistration;
 
 }
