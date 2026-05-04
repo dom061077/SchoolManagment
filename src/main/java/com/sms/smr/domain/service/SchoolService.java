@@ -62,7 +62,7 @@ public class SchoolService implements BaseUseCase<School, Long> {
         Optional<SchoolEntity> existingSchool = schoolJpaRepository.findByCue(cue);
         if (existingSchool.isPresent()) {
             if (excludeId == null || !existingSchool.get().getId().equals(excludeId)) {
-                throw new ApiException("School with CUE " + cue + " already exists", "400");
+                throw new ApiException(400, "SMR001", "School with CUE " + cue + " already exists");
             }
         }
     }

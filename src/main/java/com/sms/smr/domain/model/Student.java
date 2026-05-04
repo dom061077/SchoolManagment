@@ -1,6 +1,5 @@
 package com.sms.smr.domain.model;
 
-
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -12,62 +11,61 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-
 @Getter
 @Setter
 @SuperBuilder
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student extends BasePersonDomain{
-    //private java.sql.Date fechaNacimiento;
-    //private int dni;
+public class Student extends BasePersonDomain {
+    // private java.sql.Date fechaNacimiento;
+    // private int dni;
     private String cuil;
-    //private String direccion;
+    // private String direccion;
     @Builder.Default
-    private boolean planSocial=false;
+    private boolean planSocial = false;
     @Builder.Default
-    private boolean trabaja=false;
+    private boolean trabaja = false;
     private String apellidoTutor;
     private String nombreTutor;
     private EstudioEnum estudioPrimarioTutor;
     private EstudioEnum estudioSecundarioTutor;
     private EstudioEnum estudioTerUnivTutor;
-    
+
     private int dniTutor;
     private String cuilTutor;
     private String telefono1;
     private String telefono2;
     @Builder.Default
-    private boolean fotoDni=false;
+    private boolean fotoDni = false;
     @Builder.Default
-    private boolean constanciaCuil=false;
+    private boolean constanciaCuil = false;
     @Builder.Default
-    private boolean constancia6grado=false;
+    private boolean constancia6grado = false;
     @Builder.Default
-    private boolean actaNacimiento=false;
+    private boolean actaNacimiento = false;
     @Builder.Default
-    private boolean constanciaRegular=false;
+    private boolean constanciaRegular = false;
     @Builder.Default
-    private boolean foto4x4=false;
+    private boolean foto4x4 = false;
     @Builder.Default
-    private boolean fotoCarnetVac=false;
+    private boolean fotoCarnetVac = false;
     @Builder.Default
-    private boolean fichaMedica=false;
+    private boolean fichaMedica = false;
     @Builder.Default
-    private boolean aptitudFisica=false;
+    private boolean aptitudFisica = false;
     @Builder.Default
-    private boolean grupoSanguineo=false;
+    private boolean grupoSanguineo = false;
     @Builder.Default
-    private boolean fichaInscripcion=false;
+    private boolean fichaInscripcion = false;
     @Builder.Default
-    private boolean libreta6grado=false;
+    private boolean libreta6grado = false;
     @Builder.Default
-    private boolean fotocopiaLibroMatriz=false;
+    private boolean fotocopiaLibroMatriz = false;
     @Builder.Default
-    private boolean fotocopiaDniTutor=false;
+    private boolean fotocopiaDniTutor = false;
     @Builder.Default
-    private boolean constanciaCuilTutor=false;    
+    private boolean constanciaCuilTutor = false;
 
     private Long parentescoTutorId;
     private String parentescoTutorDescripcion;
@@ -78,18 +76,20 @@ public class Student extends BasePersonDomain{
     private String departamentoNombre;
     private Long provinciaId;
     private String provinciaNombre;
-
-
+    private String dniLastNameFirstName;
 
     @Override
-    @Past(message = "Birth date must be in the past")    
-    public LocalDate getBirthDate(){
+    @Past(message = "Birth date must be in the past")
+    public LocalDate getBirthDate() {
         return super.getBirthDate();
     }
 
-    public int getAge(){
-        return getBirthDate() != null ? Period.between(getBirthDate(), LocalDate.now()).getYears():0;
+    public String getDniLastNameFirstName() {
+        return getDni() + " " + getLastName() + ", " + getFirstName();
     }
 
-    
+    public int getAge() {
+        return getBirthDate() != null ? Period.between(getBirthDate(), LocalDate.now()).getYears() : 0;
+    }
+
 }

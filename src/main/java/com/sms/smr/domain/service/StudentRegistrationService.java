@@ -14,16 +14,15 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true) 
-public class StudentRegistrationService implements BaseUseCase<StudentRegistration, Long>{
+@Transactional(readOnly = true)
+public class StudentRegistrationService implements BaseUseCase<StudentRegistration, Long> {
     public final CrudPersistenceOutputPort<StudentRegistration, Long> crudOutputPort;
-    //public final StudentRegistrationRepositoryAdapter crudOutputPort;
+    // public final StudentRegistrationRepositoryAdapter crudOutputPort;
     public final QueryPersistenceOutputPort<StudentRegistration, Long> queryRepository;
-    //public final StudentRegistrationrQueryJpaRepository queryRepository;
-
-
+    // public final StudentRegistrationrQueryJpaRepository queryRepository;
 
     @Override
+    @Transactional
     public StudentRegistration create(StudentRegistration studentRegistration) {
         return crudOutputPort.save(studentRegistration);
     }
@@ -33,25 +32,24 @@ public class StudentRegistrationService implements BaseUseCase<StudentRegistrati
         return crudOutputPort.getById(id);
     }
 
-
     @Override
     @Transactional
     public StudentRegistration update(Long id, StudentRegistration domain) {
         return crudOutputPort.update(id, domain).get();
-        
+
     }
 
     @Override
     @Transactional
     public boolean delete(Long id) {
-        
+
         return crudOutputPort.delete(id).isPresent();
     }
 
     @Override
     public Page<StudentRegistration> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
-        //throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        // throw new UnsupportedOperationException("Unimplemented method 'getAll'");
         return queryRepository.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 }

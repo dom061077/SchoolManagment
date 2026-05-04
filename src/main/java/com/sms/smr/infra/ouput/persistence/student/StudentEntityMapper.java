@@ -11,11 +11,8 @@ import com.sms.smr.domain.model.Student;
 import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
 import com.sms.smr.infra.ouput.persistence.EntityMapper;
 
-@Mapper( 
-        componentModel = "spring",
-        uses = StudentReferenceMapper.class
-)
- 
+@Mapper(componentModel = "spring", uses = StudentReferenceMapper.class)
+
 public interface StudentEntityMapper extends EntityMapper<Student, StudentEntity> {
 
     @Override
@@ -35,14 +32,11 @@ public interface StudentEntityMapper extends EntityMapper<Student, StudentEntity
     @Mapping(target = "parentescoTutorEntity", source = "parentescoTutorId", qualifiedByName = "parentescoFromId")
     StudentEntity toEntity(Student domain, @Context CycleAvoidingMappingContext context);
 
-    
-    //@Override
+    // @Override
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "localidadEntity", source = "localidadId", qualifiedByName = "localidadFromId")
     @Mapping(target = "parentescoTutorEntity", source = "parentescoTutorId", qualifiedByName = "parentescoFromId")
-    void updateEntityFromDomain(Student source, @MappingTarget StudentEntity target, @Context CycleAvoidingMappingContext context);
-
-    
-
+    void updateEntityFromDomain(Student source, @MappingTarget StudentEntity target,
+            @Context CycleAvoidingMappingContext context);
 
 }

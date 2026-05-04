@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,4 +46,11 @@ public class StudentRegistrationEntity extends BaseEntity {
     @JoinColumn(name = "division_id")
     @NotNull
     private SectionEntity section;
+
+    @Transient
+    private String studentDniLastNameFirstName;
+
+    public String getStudentDniLastNameFirstName() {
+        return student != null ? student.getDni() + " " + student.getLastName() + " " + student.getFirstName() : null;
+    }
 }

@@ -11,11 +11,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentRegistration extends BaseDomain{
+public class StudentRegistration extends BaseDomain {
     private Long studentId;
     private String studentFirstName;
     private String studentLastName;
     private int studentDni;
+    private String studentDniLastNameFirstName;
 
     private Long academicYearId;
     private int academicYearYear;
@@ -28,7 +29,5 @@ public class StudentRegistration extends BaseDomain{
 
     private Long sectionId;
     private String sectionName;
-
-
 
 }
