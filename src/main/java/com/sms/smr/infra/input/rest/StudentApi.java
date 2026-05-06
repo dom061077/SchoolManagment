@@ -8,30 +8,18 @@ import com.sms.smr.domain.ports.in.BaseQueryUseCase;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 //https://manerajona.medium.com/mapping-bidirectional-object-associations-using-mapstruct-ce49b1857604
 //https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection
-
-
 
 /*
  HTTP (REST Controller) StudentApi
@@ -50,86 +38,29 @@ Database
   
  */
 
-
-
 @RestController
 @RequestMapping(value = "/api/v1/alumno")
 @PreAuthorize("hasAnyAuthority('ROLE_REALM_preceptor')")
-@RequiredArgsConstructor
-public class StudentApi {
+public class StudentApi extends BaseApi<Student, Long> {
     
-    private final BaseUseCase<Student, Long> studentInputPort;
     private final BaseUseCase<Provincia, Long> provinciaInputPort;
     private final BaseQueryUseCase<Departamento, Long> departamentoInputPort;
     private final BaseUseCase<Localidad, Long> localidadInputPort;
     
-    //private final  StudentMapper studentMapper;
-    private static final Logger logger = LoggerFactory.getLogger(StudentApi.class);
-
-    /*public StudentApi(StudentInputPort studentInputPort,ProvinciaInputPort ProvinciaInputPort) {
-        this.studentInputPort = studentInputPort;
-        this.provinciaInputPort = ProvinciaInputPort;
-
-    } */   
-
-    @PostMapping(value = "create", produces=MediaType.APPLICATION_JSON_VALUE)
-    //@PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:create')")
-    public ResponseEntity<Student> create( @RequestBody @Valid Student student ) {
-        logger.info("StudentApi, student parameter",student);
-        return ResponseEntity.ok(studentInputPort.create(student));        
-    }
-
-    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-     public Page<Student> /*List<Person>*/ getAll(@RequestParam  int offset,@RequestParam  int limit
-        ,@RequestParam String qfilters,@RequestParam String sorts,@RequestParam String loperator){
-        logger.info("Filters: "+qfilters);
-        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
-        //queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
-
-        ///List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
-        return studentInputPort.getAll(offset, limit, qfilters,sorts,loperator);      
-    }        
-
-    @GetMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-    public Student getStudent(@PathVariable("id") Long id) {
-        logger.info("ID de alumno a buscar: "+id);
-        Optional<Student> studentOpt = studentInputPort.getById(id);
-        if(studentOpt.isEmpty()){
-            throw new RuntimeException("Alumno no encontrado");
-        }
-        Student student = studentOpt.get();
-        logger.info("Alumno encontrado: "+student.getLastName());
-        return student;
-    }
-
-    @PutMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-    //@PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:update')")
-    public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody @Valid Student student ) {
-        logger.info("Student: {} ",student.getDni());
-        Student setentSaved = studentInputPort.update(id,student);
-        logger.info("Student saved: {} ",setentSaved.getDni());
-        Optional<Student> studentOpt = studentInputPort.getById(id);
-        
-        return ResponseEntity.ok(studentOpt.get());        
-    }
-
-    @DeleteMapping(value = "/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-    //@PreAuthorize("hasAnyAuthority('ROLE_RESOURCE_bsn_student:delete')")
-    public ResponseEntity delete(@PathVariable Long id){
-        logger.info("Student's id to be deleted: "+id);
-        //Student student = Student.builder().build();
-        studentInputPort.delete(id);
-        return ResponseEntity.ok("");
+    public StudentApi(BaseUseCase<Student, Long> studentInputPort,
+                      BaseUseCase<Provincia, Long> provinciaInputPort,
+                      BaseQueryUseCase<Departamento, Long> departamentoInputPort,
+                      BaseUseCase<Localidad, Long> localidadInputPort) {
+        super(studentInputPort);
+        this.provinciaInputPort = provinciaInputPort;
+        this.departamentoInputPort = departamentoInputPort;
+        this.localidadInputPort = localidadInputPort;
     }
 
     @GetMapping(value = "provincias", produces = MediaType.APPLICATION_JSON_VALUE)
     public Page<Provincia> getAllProvincias(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts,@RequestParam String loperator){
         logger.info("Filters: "+qfilters);
-        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
-        //queryFilters.add(QueryDto.builder().property("deleted:eq").value("false").build());
-
-        //List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
         return provinciaInputPort.getAll(offset, limit, qfilters,sorts,loperator);      
     }
 
@@ -137,9 +68,6 @@ public class StudentApi {
     public Page<Departamento> getDepartamentoByProvincia(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator){
         logger.info("Filters: "+qfilters);
-        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
-
-        //List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
         return departamentoInputPort.getAll(offset, limit, qfilters,sorts,loperator);
     }
 
@@ -147,14 +75,8 @@ public class StudentApi {
     public Page<Localidad> getLocalidadByDepartamento(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator){
         logger.info("Filters: "+qfilters);
-        //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);
-
-        //List<QueryDto> sortFilters = Utils.stringToQueryFilterDto(sorts);
         return localidadInputPort.getAll(0, limit, qfilters,sorts,QueryPersistenceOutputPort.AND_OPERATOR);
     }
-
-
-    
 }
 
 /*

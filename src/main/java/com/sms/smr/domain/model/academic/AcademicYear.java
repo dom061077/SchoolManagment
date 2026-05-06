@@ -14,7 +14,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AcademicYear extends BaseDomain {
-    private Long id;
     private int year;
     private boolean isActive;
 }
