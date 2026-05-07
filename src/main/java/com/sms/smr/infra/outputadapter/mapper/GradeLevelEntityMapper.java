@@ -9,31 +9,29 @@ import org.springframework.stereotype.Component;
 
 import com.lowagie.text.Section;
 import com.sms.smr.domain.model.GradeLevel;
-import com.sms.smr.infra.ouput.persistence.school.GradeLevelEntity;
+import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
 
 @Component
 public class GradeLevelEntityMapper implements BaseEntityMapper<GradeLevel, GradeLevelEntity> {
 
     @Override
     public GradeLevel toDomain(GradeLevelEntity entity) {
-        if (entity == null) return null;
+        if (entity == null)
+            return null;
         return GradeLevel.builder()
                 .id(entity.getId())
                 .gradeNumber(entity.getGradeNumber())
                 .build();
-     }
+    }
 
     @Override
     public GradeLevelEntity toEntity(GradeLevel domain) {
-        if(domain == null) return null;
+        if (domain == null)
+            return null;
         return GradeLevelEntity.builder()
                 .id(domain.getId())
                 .gradeNumber(domain.getGradeNumber())
                 .build();
     }
 
-        
-
-    
- 
 }

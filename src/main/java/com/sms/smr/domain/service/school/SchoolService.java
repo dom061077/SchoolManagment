@@ -1,4 +1,4 @@
-package com.sms.smr.domain.service;
+package com.sms.smr.domain.service.school;
 
 import java.util.Optional;
 

@@ -3,7 +3,7 @@ package com.sms.smr.infra.ouput.persistence.studentregistration;
 import org.mapstruct.Mapper;
 
 import com.sms.smr.infra.ouput.persistence.academic.academicyear.AcademicYearEntity;
-import com.sms.smr.infra.ouput.persistence.school.GradeLevelEntity;
+import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
 import com.sms.smr.infra.ouput.persistence.school.SectionEntity;
 import com.sms.smr.infra.ouput.persistence.school.ShiftEntity;
 import com.sms.smr.infra.ouput.persistence.student.StudentEntity;

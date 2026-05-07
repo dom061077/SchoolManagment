@@ -1,7 +1,10 @@
-package com.sms.smr.infra.ouput.persistence.school;
+package com.sms.smr.infra.ouput.persistence.gradelevel;
 /*
 Este es el curso
  */
+
+import com.sms.smr.infra.ouput.persistence.school.SectionEntity;
+import com.sms.smr.infra.ouput.persistence.school.ShiftEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +26,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="nivel_grado")
+@Table(name = "nivel_grado")
 public class GradeLevelEntity {
     @Id
     @GeneratedValue
@@ -33,18 +36,10 @@ public class GradeLevelEntity {
     private int gradeNumber;
 
     @ManyToMany
-    @JoinTable(
-        name = "curso_division",
-        joinColumns = @JoinColumn(name = "curso_id"),
-        inverseJoinColumns = @JoinColumn(name = "division_id")
-    )
+    @JoinTable(name = "curso_division", joinColumns = @JoinColumn(name = "curso_id"), inverseJoinColumns = @JoinColumn(name = "division_id"))
     private java.util.Set<SectionEntity> sections;
 
     @ManyToMany
-    @JoinTable(
-        name = "curso_turno",
-        joinColumns = @JoinColumn(name = "curso_id"),
-        inverseJoinColumns = @JoinColumn(name = "turno_id")
-    )
+    @JoinTable(name = "curso_turno", joinColumns = @JoinColumn(name = "curso_id"), inverseJoinColumns = @JoinColumn(name = "turno_id"))
     private java.util.Set<ShiftEntity> shifts;
 }

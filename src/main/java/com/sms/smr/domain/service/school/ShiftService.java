@@ -1,4 +1,4 @@
-package com.sms.smr.domain.service;
+package com.sms.smr.domain.service.school;
 
 import java.util.Optional;
 
@@ -32,7 +32,7 @@ public class ShiftService implements BaseUseCase<Shift, Long> {
 
     @Override
     public Shift update(Long id, Shift domain) {
-        if(crudOutputPort.getById(id).isPresent()){
+        if (crudOutputPort.getById(id).isPresent()) {
             domain.setId(id);
             return crudOutputPort.update(id, domain).get();
         }
@@ -41,7 +41,7 @@ public class ShiftService implements BaseUseCase<Shift, Long> {
 
     @Override
     public boolean delete(Long id) {
-        if(crudOutputPort.getById(id).isPresent()){
+        if (crudOutputPort.getById(id).isPresent()) {
             return crudOutputPort.delete(id).isPresent();
         }
         throw new InternalServerErrorException("Shift with id " + id + " not found");

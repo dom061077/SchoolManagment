@@ -1,5 +1,7 @@
 package com.sms.smr.infra.ouput.persistence.school;
 
+import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="division")
+@Table(name = "division")
 public class SectionEntity {
     @Id
     @GeneratedValue
@@ -28,6 +30,6 @@ public class SectionEntity {
     @NotBlank
     @Column(name = "division")
     private String name;
-    @ManyToMany(mappedBy = "sections") //refereces "sections" in GradeLevelEntity
+    @ManyToMany(mappedBy = "sections") // refereces "sections" in GradeLevelEntity
     private java.util.Set<GradeLevelEntity> gradeLevels;
 }

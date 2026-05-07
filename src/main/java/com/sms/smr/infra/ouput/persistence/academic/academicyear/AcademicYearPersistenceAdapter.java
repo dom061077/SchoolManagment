@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.model.academic.AcademicYear;
 import com.sms.smr.infra.ouput.persistence.BaseRepository;
-import com.sms.smr.infra.outputadapter.mapper.AcademicYearEntityMapper;
 
 @Component
 public class AcademicYearPersistenceAdapter
