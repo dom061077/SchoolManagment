@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.school;
+package com.sms.smr.infra.ouput.persistence.section;
 
 import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
 
