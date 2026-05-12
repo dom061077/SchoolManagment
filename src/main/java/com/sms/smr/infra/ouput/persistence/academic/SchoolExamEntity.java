@@ -3,6 +3,7 @@ package com.sms.smr.infra.ouput.persistence.academic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
@@ -38,5 +39,8 @@ public class SchoolExamEntity extends BaseEntity{
     @ManyToOne
     @JoinColumn(name="id_docente")
     private TeacherEntity teacher;
+
+    @OneToMany(mappedBy = "schoolExam", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<SchoolExamDetailEntity> details;
     
 }

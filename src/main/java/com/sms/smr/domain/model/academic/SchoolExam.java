@@ -1,12 +1,9 @@
 package com.sms.smr.domain.model.academic;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.sms.smr.domain.model.BaseDomain;
-import com.sms.smr.infra.ouput.persistence.academic.AcademicPeriodEntity;
-import com.sms.smr.infra.ouput.persistence.academic.SubjectEntity;
-import com.sms.smr.infra.ouput.persistence.academic.TeacherEntity;
-import com.sms.smr.infra.ouput.persistence.academic.TipoExamenEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,9 +23,16 @@ public class SchoolExam extends BaseDomain {
     private String description;
     private LocalDate date;
 
-    private TipoExamenEntity tipoExamen;
-    private AcademicPeriodEntity academicPeriod;
-    private SubjectEntity subject;
-    private TeacherEntity teacher;
+    private Long tipoExamenId;
+    private String tipoExamenName;
+
+    private Long academicPeriodId;
+
+    private Long subjectId;
+    private String subjectName;
+
+    private Long teacherId;
+
+    private List<SchoolExamDetail> details;
 
 }
