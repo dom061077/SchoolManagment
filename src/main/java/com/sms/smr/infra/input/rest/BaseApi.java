@@ -33,7 +33,9 @@ public abstract class BaseApi<T, ID> {
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     public Page<T> getAll(@RequestParam int offset, @RequestParam int limit,
-                          @RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator) {
+            @RequestParam(required = false, defaultValue = "[]") String qfilters,
+            @RequestParam(required = false, defaultValue = "[]") String sorts,
+            @RequestParam(required = false, defaultValue = "AND") String loperator) {
         logger.info("Fetching list with filters: {}", qfilters);
         return useCase.getAll(offset, limit, qfilters, sorts, loperator);
     }

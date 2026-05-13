@@ -10,8 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sms.smr.domain.model.Section;
 import com.sms.smr.infra.ouput.persistence.BaseRepository;
 
-import lombok.RequiredArgsConstructor;
-
+@Repository
 public class SectionPersistenceAdapter
         extends BaseRepository<Section, Long, SectionEntity, SectionJpaRepository> {
 

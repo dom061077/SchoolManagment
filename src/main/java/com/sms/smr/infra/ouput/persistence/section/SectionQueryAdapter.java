@@ -11,7 +11,7 @@ import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Repository
 public class SectionQueryAdapter extends QueryBaseRepository<Section, Long, SectionEntity, SectionJpaRepository> {
 
     public SectionQueryAdapter(SectionJpaRepository repository, EntityMapper<Section, SectionEntity> mapper) {
