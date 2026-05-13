@@ -12,6 +12,7 @@ import com.sms.smr.infra.ouput.persistence.BaseRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@Repository
 public class SectionPersistenceAdapter
         extends BaseRepository<Section, Long, SectionEntity, SectionJpaRepository> {
 

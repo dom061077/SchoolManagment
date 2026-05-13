@@ -42,6 +42,12 @@ public class SchoolExamReferenceMapper {
     private EntityManager entityManager;
 
     public <T> T resolve(Long id, @TargetType Class<T> entityClass) {
-        return id != null ? entityManager.getReference(entityClass, id) : null;
+        if (id == null) {
+            return null;
+        }
+        if (entityClass.equals(Long.class)) {
+            return (T) id;
+        }
+        return entityManager.getReference(entityClass, id);
     }
 }
