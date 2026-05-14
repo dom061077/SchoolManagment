@@ -1,0 +1,1 @@
+alter table inscripcion_alumno add constraint UK_inscripcion_alumno unique (alumno_id, periodo_lectivo_id);

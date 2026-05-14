@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "inscripcion_alumno")
+@Table(name = "inscripcion_alumno", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"alumno_id", "periodo_lectivo_id"})
+})
 public class StudentRegistrationEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "alumno_id")
