@@ -13,6 +13,17 @@ import com.sms.smr.infra.ouput.persistence.EntityMapper;
 import com.sms.smr.infra.ouput.persistence.academic.SchoolExamDetailEntity;
 import com.sms.smr.infra.ouput.persistence.academic.SchoolExamEntity;
 
+/*
+The SchoolExamDetailEntity has a @ManyToOne relationship with SchoolExamEntity where schoolExam is annotated with @NotNull. 
+When mapping the incoming domain object SchoolExam to SchoolExamEntity using SchoolExamMapper,
+ MapStruct converts the list of details properly but it wasn't successfully setting the parent reference (schoolExam) on the newly created detail entities.
+
+Even though you had an @AfterMapping method linkDetails defined in SchoolExamMapper to accomplish exactly this, 
+MapStruct was ignoring it during the toEntity method generation. 
+This happens because MapStruct uses the Builder pattern by default for classes annotated with @SuperBuilder. Since @AfterMapping expects a built SchoolExamEntity object (not a builder), MapStruct wasn't able to call it before returning builder.build().
+
+*/
+
 @Mapper(componentModel = "spring", uses = SchoolExamReferenceMapper.class, builder = @org.mapstruct.Builder(disableBuilder = true))
 public interface SchoolExamMapper extends EntityMapper<SchoolExam, SchoolExamEntity> {
 
@@ -38,7 +49,8 @@ public interface SchoolExamMapper extends EntityMapper<SchoolExam, SchoolExamEnt
     @Mapping(target = "academicPeriod", source = "academicPeriodId")
     @Mapping(target = "subject", source = "subjectId")
     @Mapping(target = "teacher", source = "teacherId")
-    void updateEntityFromDomain(SchoolExam source, @MappingTarget SchoolExamEntity target, @Context CycleAvoidingMappingContext context);
+    void updateEntityFromDomain(SchoolExam source, @MappingTarget SchoolExamEntity target,
+            @Context CycleAvoidingMappingContext context);
 
     @Mapping(target = "schoolExamId", source = "schoolExam.id")
     @Mapping(target = "academicPeriodId", source = "academicPeriod.id")
