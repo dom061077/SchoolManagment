@@ -12,7 +12,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name="tipo_examen")
+@Table(name = "tipo_examen")
 @SuperBuilder
 @Getter
 @Setter
@@ -22,6 +22,4 @@ public class TipoExamenEntity extends BaseEntity {
     private String name;
     private String description;
 
-    @ManyToOne
-    private SchoolExamEntity schoolExam;
 }

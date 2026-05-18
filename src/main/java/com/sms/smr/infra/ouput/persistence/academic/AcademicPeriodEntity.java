@@ -30,7 +30,7 @@ public class AcademicPeriodEntity extends BaseEntity {
     private LocalDate startDate;
     @Column(name = "fecha_fin")
     private LocalDate endDate;
-    @Column(name = "descripcion")
+    @Column(name = "description")
     private String description;
 
     @ManyToOne
