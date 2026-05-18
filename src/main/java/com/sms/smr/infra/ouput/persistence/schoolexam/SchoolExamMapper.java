@@ -13,7 +13,7 @@ import com.sms.smr.infra.ouput.persistence.EntityMapper;
 import com.sms.smr.infra.ouput.persistence.academic.SchoolExamDetailEntity;
 import com.sms.smr.infra.ouput.persistence.academic.SchoolExamEntity;
 
-@Mapper(componentModel = "spring", uses = SchoolExamReferenceMapper.class)
+@Mapper(componentModel = "spring", uses = SchoolExamReferenceMapper.class, builder = @org.mapstruct.Builder(disableBuilder = true))
 public interface SchoolExamMapper extends EntityMapper<SchoolExam, SchoolExamEntity> {
 
     @Override

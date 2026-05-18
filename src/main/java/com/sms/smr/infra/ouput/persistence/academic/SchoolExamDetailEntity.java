@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "detalle_examenes_escolares")
+@Table(name = "detalle_examenes_escolares", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "id_inscripcion_alumno", "id_examen_escolar" })
+})
 @SuperBuilder
 @Getter
 @Setter
@@ -26,11 +30,15 @@ import lombok.experimental.SuperBuilder;
 public class SchoolExamDetailEntity extends BaseEntity {
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "id_examen_escolar")
     private SchoolExamEntity schoolExam;
+
     @ManyToOne
     @JoinColumn(name = "id_periodo_lectivo")
+    @NotNull
     private AcademicYearEntity academicPeriod;
+
     @Column(name = "calificacion")
     private BigDecimal score;
     @ManyToOne
