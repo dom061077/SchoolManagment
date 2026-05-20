@@ -34,11 +34,6 @@ public class SchoolExamDetailEntity extends BaseEntity {
     @JoinColumn(name = "id_examen_escolar")
     private SchoolExamEntity schoolExam;
 
-    @ManyToOne
-    @JoinColumn(name = "id_periodo_lectivo")
-    @NotNull
-    private AcademicYearEntity academicPeriod;
-
     @Column(name = "calificacion")
     private BigDecimal score;
     @ManyToOne

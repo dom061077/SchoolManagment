@@ -53,12 +53,10 @@ public interface SchoolExamMapper extends EntityMapper<SchoolExam, SchoolExamEnt
             @Context CycleAvoidingMappingContext context);
 
     @Mapping(target = "schoolExamId", source = "schoolExam.id")
-    @Mapping(target = "academicPeriodId", source = "academicPeriod.id")
     @Mapping(target = "studentRegistrationId", source = "studentRegistration.id")
     SchoolExamDetail detailToDomain(SchoolExamDetailEntity entity, @Context CycleAvoidingMappingContext context);
 
     @Mapping(target = "schoolExam", source = "schoolExamId")
-    @Mapping(target = "academicPeriod", source = "academicPeriodId")
     @Mapping(target = "studentRegistration", source = "studentRegistrationId")
     SchoolExamDetailEntity detailToEntity(SchoolExamDetail domain, @Context CycleAvoidingMappingContext context);
 
