@@ -6,6 +6,7 @@ import com.sms.smr.domain.model.Provincia;
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.ports.in.BaseQueryUseCase;
 import com.sms.smr.domain.ports.in.BaseUseCase;
+import com.sms.smr.domain.ports.in.StudentUseCase;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 
 import org.slf4j.Logger;
@@ -46,15 +47,28 @@ public class StudentApi extends BaseApi<Student, Long> {
     private final BaseUseCase<Provincia, Long> provinciaInputPort;
     private final BaseQueryUseCase<Departamento, Long> departamentoInputPort;
     private final BaseUseCase<Localidad, Long> localidadInputPort;
+    private final StudentUseCase studentUseCase;
     
-    public StudentApi(BaseUseCase<Student, Long> studentInputPort,
+    public StudentApi(StudentUseCase studentInputPort,
                       BaseUseCase<Provincia, Long> provinciaInputPort,
                       BaseQueryUseCase<Departamento, Long> departamentoInputPort,
                       BaseUseCase<Localidad, Long> localidadInputPort) {
         super(studentInputPort);
+        this.studentUseCase = studentInputPort;
         this.provinciaInputPort = provinciaInputPort;
         this.departamentoInputPort = departamentoInputPort;
         this.localidadInputPort = localidadInputPort;
+    }
+
+    @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<Student> searchStudents(
+            @RequestParam(required = false) Integer dni,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String firstName,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        logger.info("Searching students by dni: {}, lastName: {}, firstName: {}", dni, lastName, firstName);
+        return studentUseCase.searchStudents(dni, lastName, firstName, page, size);
     }
 
     @GetMapping(value = "provincias", produces = MediaType.APPLICATION_JSON_VALUE)

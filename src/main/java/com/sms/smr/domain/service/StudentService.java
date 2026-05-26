@@ -1,22 +1,17 @@
 package com.sms.smr.domain.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Student;
-import com.sms.smr.domain.ports.in.BaseUseCase;
+import com.sms.smr.domain.ports.in.StudentUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
-import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
+import com.sms.smr.domain.ports.out.StudentQueryPersistenceOutputPort;
 import com.sms.smr.infra.exception.InternalServerErrorException;
-import com.sms.smr.infra.input.QueryResult;
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.ouput.persistence.student.StudentQueryAdapter;
 
 import lombok.RequiredArgsConstructor;
-
 
 /*
  * In this class we connect inputport with outputport.
@@ -24,14 +19,10 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-public class StudentService implements BaseUseCase<Student, Long> {
+public class StudentService implements StudentUseCase {
     private final CrudPersistenceOutputPort<Student, Long> crudOutputPort;
-    private final QueryPersistenceOutputPort<Student, Long> studentQueryJpaRepository;
+    private final StudentQueryPersistenceOutputPort studentQueryJpaRepository;
 
-
-   /* public StudentUseCase(CrudOutputPort<Student, Long> crudOutputPort) {
-        this.crudOutputPort = crudOutputPort;
-    } */  
     @Override
     public Student create(Student student) {
         return crudOutputPort.save(student);
@@ -45,6 +36,11 @@ public class StudentService implements BaseUseCase<Student, Long> {
     @Override
     public Page<Student> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
         return studentQueryJpaRepository.getAll(offset, limit, queryFilters, sortings, loperator);
+    }
+
+    @Override
+    public Page<Student> searchStudents(Integer dni, String lastName, String firstName, int page, int size) {
+        return studentQueryJpaRepository.searchStudents(dni, lastName, firstName, page, size);
     }
 
     @Override
