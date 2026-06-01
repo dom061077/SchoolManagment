@@ -14,9 +14,27 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
+import java.text.Normalizer;
 
 public class BaseSpecificationBuilder<T> {
     private static final Logger logger = LoggerFactory.getLogger(BaseSpecificationBuilder.class);
+
+    private String stripAccents(String input) {
+    if (input == null) return null;
+    
+        // 1. Lowercase
+        input = input.toLowerCase();
+        
+        // 2. Remove accents
+        input = Normalizer.normalize(input, Normalizer.Form.NFD)
+                .replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+                
+        // 3. Replace symbols with spaces
+        input = input.replaceAll("[^a-zA-Z0-9\s]", " ");
+    
+    return input;
+    }
+
     public Specification<T> build(List<QueryDto> filters, String globalOperator) {
         logger.info("Building Specification with filters: " + filters + " and global operator: " + globalOperator);
         return (root, query, cb) -> {
@@ -62,9 +80,15 @@ public class BaseSpecificationBuilder<T> {
     }
 
     private Predicate createPredicate(Path<?> path, Object value, String op, CriteriaBuilder cb) {
+        String keyWord = stripAccents(value.toString());    
+        String sources = "ÀÁÂÃÄÅàáâãäåÈÉÊËèéêëÌÍÎÏìíîïÒÓÔÕÖØòóôõöøÙÚÛÜùúûüÑñÇç";
+        String targets = "AAAAAAaaaaaaEEEEeeeeIIIIiiiiOOOOOOooooooUUUUuuuuNnCc";     
+
+        Expression<String> translatedPath = cb.function("translate", String.class, cb.lower(path.as(String.class)), cb.literal(sources), cb.literal(targets));    
+
         return switch (op) {
             case "eq" -> cb.equal(path, value);
-            case "like" -> cb.like(cb.lower(path.as(String.class)), "%" + value.toString().toLowerCase() + "%");
+            case "like" -> cb.like(translatedPath, "%" + keyWord.toLowerCase() + "%");
             case "gt" -> cb.greaterThan((Expression<Comparable>) path, (Comparable) value);
             case "lt" -> cb.lessThan((Expression<Comparable>) path, (Comparable) value);
             default -> cb.equal(path, value);
