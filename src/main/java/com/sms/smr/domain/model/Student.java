@@ -31,6 +31,7 @@ public class Student extends BasePersonDomain {
     private EstudioEnum estudioPrimarioTutor;
     private EstudioEnum estudioSecundarioTutor;
     private EstudioEnum estudioTerUnivTutor;
+    private EstudioEnum estudio;
 
     private int dniTutor;
     private String cuilTutor;
