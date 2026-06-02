@@ -49,6 +49,8 @@ public class StudentEntity extends BasePersonEntity {
     private EstudioEnum estudioSecundarioTutor;
     @Enumerated(EnumType.STRING)
     private EstudioEnum estudioTerUnivTutor;
+    @Enumerated(EnumType.STRING)
+    private EstudioEnum estudio;
     
     private int dniTutor;
     private String cuilTutor;
