@@ -1319,7 +1319,7 @@
     "fromDisplayName" : "Alibou",
     "user" : "your_user@gmail.com"
   },
-  "loginTheme" : "keycloak",
+  "loginTheme" : "schoolmanagement",
   "accountTheme" : "keycloak.v3",
   "adminTheme" : "keycloak.v2",
   "emailTheme" : "keycloak",
