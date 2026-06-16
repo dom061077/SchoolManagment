@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.sms.smr.domain.model.BaseDomain;
 
+import jakarta.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,11 +25,14 @@ public class SchoolExam extends BaseDomain {
     private String description;
     private LocalDate date;
 
+    @NotNull
     private Long tipoExamenId;
     private String tipoExamenName;
 
+    @NotNull
     private Long academicPeriodId;
 
+    @NotNull
     private Long subjectId;
     private String subjectName;
 
