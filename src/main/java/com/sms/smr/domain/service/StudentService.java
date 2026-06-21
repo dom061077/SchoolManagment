@@ -2,7 +2,7 @@ package com.sms.smr.domain.service;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Student;
@@ -34,12 +34,12 @@ public class StudentService implements StudentUseCase {
     }
 
     @Override
-    public Page<Student> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
+    public PageResponse<Student> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
         return studentQueryJpaRepository.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 
     @Override
-    public Page<Student> searchStudents(Integer dni, String lastName, String firstName, int page, int size) {
+    public PageResponse<Student> searchStudents(Integer dni, String lastName, String firstName, int page, int size) {
         return studentQueryJpaRepository.searchStudents(dni, lastName, firstName, page, size);
     }
 

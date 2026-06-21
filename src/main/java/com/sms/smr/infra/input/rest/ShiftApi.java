@@ -1,6 +1,6 @@
 package com.sms.smr.infra.input.rest;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +21,7 @@ public class ShiftApi extends BaseApi<Shift, Long> {
     }
 
     @GetMapping(value = "/grade-level/{gradeLevelId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Shift> getShiftByGradeLevelId(@PathVariable("gradeLevelId") Long gradeLevelId,
+    public PageResponse<Shift> getShiftByGradeLevelId(@PathVariable("gradeLevelId") Long gradeLevelId,
             @RequestParam int offset, @RequestParam int limit,
             @RequestParam(required = false, defaultValue = "[]") String qfilters,
             @RequestParam(required = false, defaultValue = "[]") String sorts,

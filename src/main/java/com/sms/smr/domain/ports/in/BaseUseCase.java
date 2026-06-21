@@ -2,7 +2,7 @@ package com.sms.smr.domain.ports.in;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 
 
 public interface BaseUseCase<T, ID> {
@@ -10,5 +10,5 @@ public interface BaseUseCase<T, ID> {
     Optional<T> getById(ID id);
     T update(ID id, T domain);
     boolean delete(ID id);
-    Page<T> getAll(int offset, int limit, String queryFilters, String sortings, String loperator);
+    PageResponse<T> getAll(int offset, int limit, String queryFilters, String sortings, String loperator);
 }

@@ -2,7 +2,7 @@ package com.sms.smr.domain.service;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +47,7 @@ public class StudentRegistrationService implements BaseUseCase<StudentRegistrati
     }
 
     @Override
-    public Page<StudentRegistration> getAll(int offset, int limit, String queryFilters, String sortings,
+    public PageResponse<StudentRegistration> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
         // throw new UnsupportedOperationException("Unimplemented method 'getAll'");
         return queryRepository.getAll(offset, limit, queryFilters, sortings, loperator);

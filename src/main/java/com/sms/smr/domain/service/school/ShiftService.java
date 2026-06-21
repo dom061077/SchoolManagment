@@ -2,7 +2,7 @@ package com.sms.smr.domain.service.school;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Shift;
@@ -48,7 +48,7 @@ public class ShiftService implements BaseUseCase<Shift, Long> {
     }
 
     @Override
-    public Page<Shift> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
+    public PageResponse<Shift> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
         return queryOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 }

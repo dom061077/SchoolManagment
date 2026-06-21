@@ -2,7 +2,7 @@ package com.sms.smr.domain.service.school;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.School;
@@ -54,7 +54,7 @@ public class SchoolService implements BaseUseCase<School, Long> {
     }
 
     @Override
-    public Page<School> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
+    public PageResponse<School> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
         return queryOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 

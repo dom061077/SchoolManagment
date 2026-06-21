@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.management.Query;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Departamento;
@@ -65,7 +65,7 @@ public class LocalidadService implements BaseUseCase<Localidad, Long> {
 
 
     @Override
-    public Page<Localidad> getAll(int offset, int limit, String queryFilters, String sortings,
+    public PageResponse<Localidad> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
         return localidadQueryAdapter.getAll(offset, limit, queryFilters, sortings, loperator);
     }

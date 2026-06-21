@@ -3,7 +3,7 @@ package com.sms.smr.domain.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Provincia;
@@ -46,7 +46,7 @@ public class ProvinciaService implements BaseUseCase<Provincia, Long>{
     }
 
     @Override
-    public Page<Provincia> getAll(int offset, int limit, String queryFilters, String sortings,
+    public PageResponse<Provincia> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
         return provinciaQueryAdapter.getAll(offset, limit, queryFilters, sortings, loperator);
     }

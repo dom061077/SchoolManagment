@@ -2,7 +2,7 @@ package com.sms.smr.infra.input.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,7 +32,7 @@ public abstract class BaseApi<T, ID> {
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<T> getAll(@RequestParam int offset, @RequestParam int limit,
+    public PageResponse<T> getAll(@RequestParam int offset, @RequestParam int limit,
             @RequestParam(required = false, defaultValue = "[]") String qfilters,
             @RequestParam(required = false, defaultValue = "[]") String sorts,
             @RequestParam(required = false, defaultValue = "AND") String loperator) {

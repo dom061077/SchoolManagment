@@ -2,7 +2,7 @@ package com.sms.smr.infra.input.rest;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +25,7 @@ public class SectionApi extends BaseApi<Section, Long> {
     }
 
     @GetMapping(value = "/grade-level/{gradeLevelId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Section> getSectionsByGradeLevelId(
+    public PageResponse<Section> getSectionsByGradeLevelId(
             @PathVariable("gradeLevelId") Long gradeLevelId,
             @RequestParam int offset,
             @RequestParam int limit,

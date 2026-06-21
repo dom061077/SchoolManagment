@@ -2,7 +2,7 @@ package com.sms.smr.domain.service.academic;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +44,7 @@ public class SchoolExamService implements BaseUseCase<SchoolExam, Long> {
     }
 
     @Override
-    public Page<SchoolExam> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
+    public PageResponse<SchoolExam> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
         return queryRepository.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 }

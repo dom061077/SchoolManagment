@@ -2,7 +2,7 @@ package com.sms.smr.infra.input.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +29,7 @@ public class LocalidadApi extends BaseApi<Localidad, Long> {
     }
 
     @GetMapping(value = "departamentos-por-provincia/{idProvincia}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Departamento> getDepartamentoByProvincia(@PathVariable Long idProvincia) {
+    public PageResponse<Departamento> getDepartamentoByProvincia(@PathVariable Long idProvincia) {
         logger.info("departamentos-por-provincia, idProvincia: {}", idProvincia);
         int offset = 0;
         int limit = 10;
@@ -40,7 +40,7 @@ public class LocalidadApi extends BaseApi<Localidad, Long> {
     }
 
     @GetMapping(value = "localidades-por-departamento/{idDepartamento}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Localidad> getLocalidadByDepartamento(@PathVariable Long idDepartamento) {
+    public PageResponse<Localidad> getLocalidadByDepartamento(@PathVariable Long idDepartamento) {
         logger.info("localidades-por-departamento, idDepartamento: {}", idDepartamento);
         int offset = 0;
         int limit = 10;

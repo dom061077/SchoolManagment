@@ -11,7 +11,7 @@ import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +61,7 @@ public class StudentApi extends BaseApi<Student, Long> {
     }
 
     @GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Student> searchStudents(
+    public PageResponse<Student> searchStudents(
             @RequestParam(required = false) Integer dni,
             @RequestParam(required = false) String lastName,
             @RequestParam(required = false) String firstName,
@@ -72,21 +72,21 @@ public class StudentApi extends BaseApi<Student, Long> {
     }
 
     @GetMapping(value = "provincias", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Provincia> getAllProvincias(@RequestParam int offset, @RequestParam int limit
+    public PageResponse<Provincia> getAllProvincias(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts,@RequestParam String loperator){
         logger.info("Filters: "+qfilters);
         return provinciaInputPort.getAll(offset, limit, qfilters,sorts,loperator);      
     }
 
     @GetMapping(value = "departamentos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Departamento> getDepartamentoByProvincia(@RequestParam int offset, @RequestParam int limit
+    public PageResponse<Departamento> getDepartamentoByProvincia(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator){
         logger.info("Filters: "+qfilters);
         return departamentoInputPort.getAll(offset, limit, qfilters,sorts,loperator);
     }
 
     @GetMapping(value = "localidades", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Localidad> getLocalidadByDepartamento(@RequestParam int offset, @RequestParam int limit
+    public PageResponse<Localidad> getLocalidadByDepartamento(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator){
         logger.info("Filters: "+qfilters);
         return localidadInputPort.getAll(0, limit, qfilters,sorts,QueryPersistenceOutputPort.AND_OPERATOR);

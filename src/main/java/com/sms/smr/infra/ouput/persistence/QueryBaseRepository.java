@@ -2,21 +2,16 @@ package com.sms.smr.infra.ouput.persistence;
 
 import java.util.List;
 
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import com.sms.smr.infra.utils.Utils;
-
-
-
-
-
 
 public abstract class QueryBaseRepository<T, ID,E , R extends JpaRepository<E, ID> & JpaSpecificationExecutor<E>> implements QueryPersistenceOutputPort<T, ID> {
     private final R repository;
@@ -32,11 +27,8 @@ public abstract class QueryBaseRepository<T, ID,E , R extends JpaRepository<E, I
     }
 
 
-
-
-
     @Override
-    public Page<T> getAll(int offset, int limit, String queryFilters, String sortingFilters, String globalOperator) {
+    public PageResponse<T> getAll(int offset, int limit, String queryFilters, String sortingFilters, String globalOperator) {
         List<QueryDto> qDtoFilters = Utils.stringToQueryFilterDto(queryFilters);
         List<QueryDto> qDtoSorts = Utils.stringToQueryFilterDto(sortingFilters);
 
@@ -53,9 +45,14 @@ public abstract class QueryBaseRepository<T, ID,E , R extends JpaRepository<E, I
         pageRequest = PageRequest.of(offset / limit, limit, sort);
         Page<E> page = repository.findAll(spec, pageRequest);
         
-        return page.map(entity->{
-            return mapper.toDomain(entity, new CycleAvoidingMappingContext());
-        });
+        List<T> content = page.getContent().stream()
+                .map(entity -> mapper.toDomain(entity, new CycleAvoidingMappingContext()))
+                .toList();
+
+        return PageResponse.<T>builder()
+                .content(content)
+                .totalElements(page.getTotalElements())
+                .build();
     }
 
 }

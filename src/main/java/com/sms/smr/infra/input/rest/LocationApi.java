@@ -1,6 +1,6 @@
 package com.sms.smr.infra.input.rest;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ public class LocationApi {
     }
 
     @GetMapping(value = "localidades", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Localidad> getLocalidadByDepartamento(@RequestParam int offset, @RequestParam int limit
+    public PageResponse<Localidad> getLocalidadByDepartamento(@RequestParam int offset, @RequestParam int limit
         ,@RequestParam String qfilters, @RequestParam String sorts, @RequestParam String loperator){
         logger.info("Filters: "+qfilters);
         //List<QueryDto> queryFilters = Utils.stringToQueryFilterDto(qfilters);

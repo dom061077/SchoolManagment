@@ -2,7 +2,7 @@ package com.sms.smr.domain.service.academic;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.academic.AcademicYear;
@@ -48,7 +48,7 @@ public class AcademicYearService implements BaseUseCase<AcademicYear, Long> {
     }
 
     @Override
-    public Page<AcademicYear> getAll(int offset, int limit, String queryFilters, String sortings,
+    public PageResponse<AcademicYear> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
         return queryOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }

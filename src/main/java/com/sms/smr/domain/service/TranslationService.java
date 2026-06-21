@@ -2,7 +2,7 @@ package com.sms.smr.domain.service;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Translation;
@@ -38,7 +38,7 @@ public class TranslationService implements BaseUseCase<Translation,Long> {
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
     @Override
-    public Page<Translation> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
+    public PageResponse<Translation> getAll(int offset, int limit, String queryFilters, String sortings, String loperator) {
         return queryPersistenceOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 

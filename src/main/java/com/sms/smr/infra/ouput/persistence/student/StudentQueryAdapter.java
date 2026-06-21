@@ -1,5 +1,7 @@
 package com.sms.smr.infra.ouput.persistence.student;
 
+import java.util.List;
+import com.sms.smr.domain.model.PageResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -24,8 +26,14 @@ public class StudentQueryAdapter extends QueryBaseRepository<Student, Long, Stud
     }
 
     @Override
-    public Page<Student> searchStudents(Integer dni, String lastName, String firstName, int page, int size) {
-        return studentJpaRepository.searchStudents(dni, lastName, firstName, PageRequest.of(page, size))
-                .map(entity -> mapper.toDomain(entity, new CycleAvoidingMappingContext()));
+    public PageResponse<Student> searchStudents(Integer dni, String lastName, String firstName, int page, int size) {
+        Page<StudentEntity> resultPage = studentJpaRepository.searchStudents(dni, lastName, firstName, PageRequest.of(page, size));
+        List<Student> content = resultPage.getContent().stream()
+                .map(entity -> mapper.toDomain(entity, new CycleAvoidingMappingContext()))
+                .toList();
+        return PageResponse.<Student>builder()
+                .content(content)
+                .totalElements(resultPage.getTotalElements())
+                .build();
     }
 }
