@@ -1,0 +1,12 @@
+package com.sms.smr.infra.outputadapter.repositoryadapter.user;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
+
+import com.sms.smr.infra.ouput.persistence.db.UserEntity;
+
+//@Component
+public interface SpringDataUserRepository { //extends JpaRepository<UserEntity,Long> { 
+    Optional<UserEntity> findByEmail(String email);
+}

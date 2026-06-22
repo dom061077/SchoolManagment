@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sms.smr</groupId>
 	<artifactId>schoolmanagement</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>SchoolManagement</name>
 	<description>School Managment System</description>
 	<properties>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.24</version>
+			<version>1.18.40</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -103,8 +103,14 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>  
-
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
 
     <dependency>
 			<groupId>org.springframework.data</groupId>
@@ -169,7 +175,38 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>			
+            </plugin>	
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.40</version>
+						</path>					
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>0.2.0</version>
+						</path>						
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+
+
+					</annotationProcessorPaths>
+					<compilerArgs>
+						<arg>-Amapstruct.verbose=true</arg>
+						<arg>-Amapstruct.suppressGeneratorTimestamp=false</arg>
+						<arg>-Amapstruct.suppressGeneratorVersionInfoComment=false</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>					
 		</plugins>
 	</build>
 

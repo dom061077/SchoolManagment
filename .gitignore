@@ -33,3 +33,9 @@ build/
 .vscode/
 nginx_logs/
 .env
+src/main/resources/application.yml
+SMR.code-workspace
+
+### Gemini ###
+compile_out.txt
+compile.log

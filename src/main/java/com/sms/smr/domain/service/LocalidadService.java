@@ -1,0 +1,73 @@
+package com.sms.smr.domain.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.management.Query;
+
+import com.sms.smr.domain.model.PageResponse;
+import org.springframework.stereotype.Service;
+
+import com.sms.smr.domain.model.Departamento;
+import com.sms.smr.domain.model.Localidad;
+import com.sms.smr.domain.ports.in.BaseUseCase;
+import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
+import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
+import com.sms.smr.infra.input.QueryResult;
+import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
+import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
+import com.sms.smr.infra.ouput.persistence.departamento.DepartamentoQueryAdapter;
+import com.sms.smr.infra.ouput.persistence.localidad.LocalidadQueryAdapter;
+
+import lombok.RequiredArgsConstructor;
+
+
+@Service
+@RequiredArgsConstructor
+public class LocalidadService implements BaseUseCase<Localidad, Long> {
+    private final QueryPersistenceOutputPort<Localidad, Long> localidadQueryAdapter;
+    private final QueryPersistenceOutputPort<Departamento, Long>departamentoQueryAdapter;
+
+
+
+
+
+    @Override
+    public Localidad create(Localidad entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'create'");
+    }
+
+
+
+    @Override
+    public Optional<Localidad> getById(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+    }
+
+
+
+    @Override
+    public Localidad update(Long id, Localidad domain) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+
+
+    @Override
+    public boolean delete(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+
+
+    @Override
+    public PageResponse<Localidad> getAll(int offset, int limit, String queryFilters, String sortings,
+            String loperator) {
+        return localidadQueryAdapter.getAll(offset, limit, queryFilters, sortings, loperator);
+    }
+
+}

@@ -43,6 +43,9 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     //private final AuthenticationProvider authenticationProvider;
     //private final LogoutHandler logoutHandler;
 
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
+
     @Value("${application.cors.origins:*}")
     private List<String> allowedOrigin;    
 
@@ -63,14 +66,18 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                                 "/configuration/security",
                                 "/swagger-ui/**",
                                 "/webjars/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/api/v1/translation/messages/**"
                         )
                             .permitAll()
                         .anyRequest()
                             .authenticated()
-        )
-        .oauth2ResourceServer(auth ->
-                auth.jwt(token -> token.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
+        ).oauth2ResourceServer(oauth2 -> oauth2
+            .authenticationEntryPoint(authenticationEntryPoint) // ✅ <--- THIS IS THE FIX
+            .jwt(jwt -> jwt.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter()))
+        ).exceptionHandling(ex -> ex
+            .accessDeniedHandler(accessDeniedHandler) // Only useful for 403s
+        );
                 
 
         return http.build();

@@ -1,0 +1,1 @@
+alter table detalle_examenes_escolares add constraint UK_school_exam_detail_student_registration unique (id_inscripcion_alumno, id_examen_escolar);
