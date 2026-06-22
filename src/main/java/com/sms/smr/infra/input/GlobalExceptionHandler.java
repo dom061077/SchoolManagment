@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sms.smr.infra.exception.ApiException;
 import com.sms.smr.infra.exception.InternalServerErrorException;
+import com.sms.smr.domain.exception.EntityNotFoundException;
 
 import jakarta.validation.ConstraintViolationException;
 
@@ -137,6 +138,14 @@ public class GlobalExceptionHandler    {
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleInternalServerErrorException(InternalServerErrorException e){
         return new ResponseEntity<>(createErrorResponse(e), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e) {
+        logger.error("Entity not found exception", e);
+        Map<String, String> fieldErrors = new HashMap<>();
+        Map<String, Object> errorDetails = createErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value(), fieldErrors);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidBearerTokenException.class)

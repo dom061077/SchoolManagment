@@ -9,7 +9,7 @@ import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.ports.in.StudentUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.domain.ports.out.StudentQueryPersistenceOutputPort;
-import com.sms.smr.infra.exception.InternalServerErrorException;
+import com.sms.smr.domain.exception.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,7 +50,7 @@ public class StudentService implements StudentUseCase {
             return crudOutputPort.update(id,student).get(); 
         }
             
-        throw new InternalServerErrorException("Student with id "+id+" not found");
+        throw new EntityNotFoundException("Student with id "+id+" not found");
     }
 
     @Override
@@ -59,6 +59,6 @@ public class StudentService implements StudentUseCase {
             return crudOutputPort.delete(id).isPresent();
         }
 
-        throw new InternalServerErrorException("Student with id: "+id+" not found");
+        throw new EntityNotFoundException("Student with id: "+id+" not found");
     }
 }
