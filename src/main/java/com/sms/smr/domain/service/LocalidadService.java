@@ -3,7 +3,7 @@ package com.sms.smr.domain.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.management.Query;
+
 
 import com.sms.smr.domain.model.PageResponse;
 import org.springframework.stereotype.Service;
@@ -11,11 +11,8 @@ import org.springframework.stereotype.Service;
 import com.sms.smr.domain.model.Departamento;
 import com.sms.smr.domain.model.Localidad;
 import com.sms.smr.domain.ports.in.BaseUseCase;
-import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
-import com.sms.smr.infra.input.QueryResult;
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
+
 import com.sms.smr.infra.ouput.persistence.departamento.DepartamentoQueryAdapter;
 import com.sms.smr.infra.ouput.persistence.localidad.LocalidadQueryAdapter;
 
