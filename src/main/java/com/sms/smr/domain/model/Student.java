@@ -14,7 +14,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student extends BasePersonDomain {

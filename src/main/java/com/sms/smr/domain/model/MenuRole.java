@@ -12,7 +12,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class MenuRole extends BaseDomain {
 
 

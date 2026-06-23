@@ -14,7 +14,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "translation")

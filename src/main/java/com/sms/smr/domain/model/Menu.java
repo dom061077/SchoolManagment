@@ -8,7 +8,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

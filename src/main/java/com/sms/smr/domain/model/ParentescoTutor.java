@@ -12,8 +12,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ParentescoTutor extends BaseDomain {
-    private Long id;
     private String descripcion;
 }

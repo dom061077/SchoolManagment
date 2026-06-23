@@ -17,7 +17,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder   
-@Builder
 @Table(name="provincia")
 public class ProvinciaEntity extends BaseEntity {
 

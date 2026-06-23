@@ -21,7 +21,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Builder
 public class SubjectEntity extends BaseEntity {
     private String name;
     @ManyToOne

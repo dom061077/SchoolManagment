@@ -14,7 +14,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class SchoolExamDetail extends BaseDomain {

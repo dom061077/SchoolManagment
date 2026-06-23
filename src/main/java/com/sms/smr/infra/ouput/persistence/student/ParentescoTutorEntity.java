@@ -16,7 +16,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@Builder
 @Entity
 @Table(name="parentesco_tutor")
 public class ParentescoTutorEntity extends BaseEntity {
