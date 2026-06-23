@@ -1,18 +1,17 @@
 package com.sms.smr.domain.model;
 
-import java.time.LocalDateTime;
-
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-
-@Builder
 @Getter
 @Setter
-public class Person {
-
-    private Long id;
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Person extends BaseDomain {
     
     private String apellido;
     private String nombre;
@@ -34,18 +33,8 @@ public class Person {
     private String nombreMatrimonio;
     private String otrasNotas;
 
-
     String apellidoMadrinaBaut;
-
     String nombreMadrinaBaut;
-
     String apellidoMadrinaConf;
-
     String nombreMadrinaConf;    
-    private LocalDateTime createDate;
-    
-    private LocalDateTime lastModified;
-    private String createdBy;
-    private String lastModifiedBy;           
-
 }
