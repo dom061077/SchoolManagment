@@ -1,7 +1,5 @@
 package com.sms.smr.domain.model;
 
-import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

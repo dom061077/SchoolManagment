@@ -1,6 +1,5 @@
 package com.sms.smr.domain.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
@@ -8,18 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.Provincia;
 import com.sms.smr.domain.ports.in.BaseUseCase;
-import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
-import com.sms.smr.infra.input.QueryResult;
-import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
-import com.sms.smr.infra.ouput.persistence.provincia.ProvinciaQueryAdapter;
+import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ProvinciaService implements BaseUseCase<Provincia, Long>{
-    private final ProvinciaQueryAdapter provinciaQueryAdapter;
-    
+    private final QueryPersistenceOutputPort<Provincia, Long> queryOutputPort;
 
     @Override
     public Provincia create(Provincia entity) {
@@ -48,7 +43,8 @@ public class ProvinciaService implements BaseUseCase<Provincia, Long>{
     @Override
     public PageResponse<Provincia> getAll(int offset, int limit, String queryFilters, String sortings,
             String loperator) {
-        return provinciaQueryAdapter.getAll(offset, limit, queryFilters, sortings, loperator);
+        return queryOutputPort.getAll(offset, limit, queryFilters, sortings, loperator);
     }
 
 }
+
