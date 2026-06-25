@@ -9,7 +9,7 @@ import com.sms.smr.domain.model.GradeLevel;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
-import com.sms.smr.infra.exception.InternalServerErrorException;
+import com.sms.smr.domain.exception.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,7 +36,7 @@ public class GradeLevelService implements BaseUseCase<GradeLevel, Long> {
             domain.setId(id);
             return crudOutputPort.update(id, domain).get();
         }
-        throw new InternalServerErrorException("Grade level with id " + id + " not found");
+        throw new EntityNotFoundException("Grade level with id " + id + " not found");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class GradeLevelService implements BaseUseCase<GradeLevel, Long> {
         if (crudOutputPort.getById(id).isPresent()) {
             return crudOutputPort.delete(id).isPresent();
         }
-        throw new InternalServerErrorException("Grade level with id " + id + " not found");
+        throw new EntityNotFoundException("Grade level with id " + id + " not found");
     }
 
     @Override

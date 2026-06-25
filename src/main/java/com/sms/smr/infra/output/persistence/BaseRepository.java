@@ -54,7 +54,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>> i
             return Optional.of(mapper.toDomain(regEntOpt.get(), new CycleAvoidingMappingContext()));
         }
         else
-            throw new InternalServerErrorException("El registro no existe. Registro con Id: "+id+" no existe");
+            return Optional.empty();
         
     }
 
@@ -87,7 +87,7 @@ public abstract class BaseRepository<T, ID, E, R extends JpaRepository<E, ID>> i
         if(regEntOpt.isPresent())
             return  Optional.of(mapper.toDomain(regEntOpt.get(), new CycleAvoidingMappingContext()));
         else
-            throw new InternalServerErrorException("Registro con Id: "+id+" no existe");
+            return Optional.empty();
     }
 
 

@@ -9,7 +9,7 @@ import com.sms.smr.domain.model.Shift;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
-import com.sms.smr.infra.exception.InternalServerErrorException;
+import com.sms.smr.domain.exception.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,7 +38,7 @@ public class ShiftService implements BaseUseCase<Shift, Long> {
         //    domain.setId(id);
         //    return crudOutputPort.update(id, domain).get();
         //}
-        throw new InternalServerErrorException("Shift with id " + id + " not found");
+        throw new EntityNotFoundException("Shift with id " + id + " not found");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ShiftService implements BaseUseCase<Shift, Long> {
         //if (crudOutputPort.getById(id).isPresent()) {
         //    return crudOutputPort.delete(id).isPresent();
         //}
-        throw new InternalServerErrorException("Shift with id " + id + " not found");
+        throw new EntityNotFoundException("Shift with id " + id + " not found");
     }
 
     @Override
