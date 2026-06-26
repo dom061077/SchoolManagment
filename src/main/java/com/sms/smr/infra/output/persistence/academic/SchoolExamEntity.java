@@ -1,5 +1,6 @@
 package com.sms.smr.infra.ouput.persistence.academic;
 
+import com.sms.smr.infra.ouput.persistence.academic.teacher.TeacherEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

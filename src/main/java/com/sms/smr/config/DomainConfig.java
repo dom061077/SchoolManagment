@@ -16,6 +16,7 @@ import com.sms.smr.domain.model.StudentRegistration;
 import com.sms.smr.domain.model.Translation;
 import com.sms.smr.domain.model.academic.AcademicYear;
 import com.sms.smr.domain.model.academic.SchoolExam;
+import com.sms.smr.domain.model.academic.Teacher;
 import com.sms.smr.domain.ports.in.BaseQueryUseCase;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.in.StudentUseCase;
@@ -34,6 +35,7 @@ import com.sms.smr.domain.service.StudentService;
 import com.sms.smr.domain.service.TranslationService;
 import com.sms.smr.domain.service.academic.AcademicYearService;
 import com.sms.smr.domain.service.academic.SchoolExamService;
+import com.sms.smr.domain.service.academic.TeacherService;
 import com.sms.smr.domain.service.school.GradeLevelService;
 import com.sms.smr.domain.service.school.SchoolService;
 import com.sms.smr.domain.service.school.SectionService;
@@ -53,6 +55,13 @@ public class DomainConfig {
             CrudPersistenceOutputPort<AcademicYear, Long> crudOutputPort,
             QueryPersistenceOutputPort<AcademicYear, Long> queryOutputPort) {
         return new AcademicYearService(crudOutputPort, queryOutputPort);
+    }
+
+    @Bean
+    public BaseUseCase<Teacher, Long> teacherUseCase(
+            CrudPersistenceOutputPort<Teacher, Long> crudOutputPort,
+            QueryPersistenceOutputPort<Teacher, Long> queryOutputPort) {
+        return new TeacherService(crudOutputPort, queryOutputPort);
     }
 
     @Bean
