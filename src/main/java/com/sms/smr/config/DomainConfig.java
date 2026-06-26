@@ -38,13 +38,13 @@ import com.sms.smr.domain.service.school.GradeLevelService;
 import com.sms.smr.domain.service.school.SchoolService;
 import com.sms.smr.domain.service.school.SectionService;
 import com.sms.smr.domain.service.school.ShiftService;
-import com.sms.smr.infra.inputport.EnumValuesInputPort;
+import com.sms.smr.domain.ports.in.EnumValuesUseCase;
 
 @Configuration
 public class DomainConfig {
 
     @Bean
-    public EnumValuesInputPort enumValuesInputPort() {
+    public EnumValuesUseCase enumValuesUseCase() {
         return new EnumValuesService();
     }
 

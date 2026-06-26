@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.smr.domain.model.EstudioEnum;
 import com.sms.smr.infra.inputadapter.dto.enumeration.EstudioEnumDto;
-import com.sms.smr.infra.inputport.EnumValuesInputPort;
+import com.sms.smr.domain.ports.in.EnumValuesUseCase;
 
 @RestController
 @RequestMapping(value="/api/v1/enum")
 public class EnumApi {
-    private final EnumValuesInputPort enumValuesInputPort;
-    public  EnumApi(EnumValuesInputPort enumValuesInputPort){
-        this.enumValuesInputPort=enumValuesInputPort;
+    private final EnumValuesUseCase enumValuesUseCase;
+    public  EnumApi(EnumValuesUseCase enumValuesUseCase){
+        this.enumValuesUseCase=enumValuesUseCase;
     }
 
     
     @GetMapping("/list")
     public QueryResult<EstudioEnumDto> getEstudioEnumValues(){
-        List<EstudioEnumDto> enumValues=enumValuesInputPort.getEstudioEnumValues()
+        List<EstudioEnumDto> enumValues=enumValuesUseCase.getEstudioEnumValues()
             .stream()
             .map((EstudioEnum e)->{
                 return EstudioEnumDto.builder()
