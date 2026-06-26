@@ -4,15 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
-import org.springframework.stereotype.Service;
-
 import com.sms.smr.domain.model.Departamento;
 import com.sms.smr.domain.ports.in.BaseQueryUseCase;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class DepartamentoService implements BaseQueryUseCase<Departamento, Long> {
     private final QueryPersistenceOutputPort<Departamento, Long> queryPersistenceOutputPort;

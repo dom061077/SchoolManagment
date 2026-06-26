@@ -3,7 +3,6 @@ package com.sms.smr.domain.service;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.smr.domain.model.StudentRegistration;
@@ -12,7 +11,6 @@ import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
 import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class StudentRegistrationService implements BaseUseCase<StudentRegistration, Long> {
     public final CrudPersistenceOutputPort<StudentRegistration, Long> crudOutputPort;

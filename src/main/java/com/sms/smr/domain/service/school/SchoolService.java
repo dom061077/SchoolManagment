@@ -3,8 +3,6 @@ package com.sms.smr.domain.service.school;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
-import org.springframework.stereotype.Service;
-
 import com.sms.smr.domain.model.School;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
@@ -14,7 +12,6 @@ import com.sms.smr.domain.exception.DomainException;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class SchoolService implements BaseUseCase<School, Long> {
 

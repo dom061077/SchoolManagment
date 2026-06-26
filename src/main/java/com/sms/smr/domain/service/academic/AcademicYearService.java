@@ -3,7 +3,6 @@ package com.sms.smr.domain.service.academic;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
-import org.springframework.stereotype.Service;
 
 import com.sms.smr.domain.model.academic.AcademicYear;
 import com.sms.smr.domain.ports.in.BaseUseCase;
@@ -13,7 +12,6 @@ import com.sms.smr.domain.exception.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class AcademicYearService implements BaseUseCase<AcademicYear, Long> {
 

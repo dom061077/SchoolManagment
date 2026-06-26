@@ -3,8 +3,6 @@ package com.sms.smr.domain.service;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
-import org.springframework.stereotype.Service;
-
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.ports.in.StudentUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
@@ -17,7 +15,6 @@ import lombok.RequiredArgsConstructor;
  * In this class we connect inputport with outputport.
  * 
  */
-@Service
 @RequiredArgsConstructor
 public class StudentService implements StudentUseCase {
     private final CrudPersistenceOutputPort<Student, Long> crudOutputPort;

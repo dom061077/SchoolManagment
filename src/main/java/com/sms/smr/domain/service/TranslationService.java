@@ -3,8 +3,6 @@ package com.sms.smr.domain.service;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
-import org.springframework.stereotype.Service;
-
 import com.sms.smr.domain.model.Translation;
 import com.sms.smr.domain.ports.in.BaseUseCase;
 import com.sms.smr.domain.ports.out.CrudPersistenceOutputPort;
@@ -12,7 +10,6 @@ import com.sms.smr.domain.ports.out.QueryPersistenceOutputPort;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class TranslationService implements BaseUseCase<Translation,Long> {
     private final CrudPersistenceOutputPort<Translation,Long> crudPersistenceOutputPort;
