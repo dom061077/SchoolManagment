@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.section;
+package com.sms.smr.infra.output.persistence.section;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

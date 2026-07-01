@@ -1,6 +1,6 @@
-package com.sms.smr.infra.ouput.persistence.academic;
+package com.sms.smr.infra.output.persistence.academic;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

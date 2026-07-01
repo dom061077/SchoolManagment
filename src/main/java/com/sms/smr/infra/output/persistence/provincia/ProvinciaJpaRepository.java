@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.provincia;
+package com.sms.smr.infra.output.persistence.provincia;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

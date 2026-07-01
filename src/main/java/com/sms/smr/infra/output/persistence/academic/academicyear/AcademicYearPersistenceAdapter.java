@@ -1,11 +1,11 @@
-package com.sms.smr.infra.ouput.persistence.academic.academicyear;
+package com.sms.smr.infra.output.persistence.academic.academicyear;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.model.academic.AcademicYear;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.BaseRepository;
 
 @Component
 public class AcademicYearPersistenceAdapter

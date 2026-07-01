@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence;
+package com.sms.smr.infra.output.persistence;
 
 import com.sms.smr.infra.inputadapter.dto.query.QueryDto;
 import jakarta.persistence.criteria.CriteriaBuilder;

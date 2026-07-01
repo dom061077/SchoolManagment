@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.academic.teacher;
+package com.sms.smr.infra.output.persistence.academic.teacher;
 
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.model.academic.Teacher;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.BaseRepository;
 
 @Component
 public class TeacherPersistenceAdapter

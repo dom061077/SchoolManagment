@@ -1,8 +1,8 @@
-package com.sms.smr.infra.ouput.persistence.academic;
+package com.sms.smr.infra.output.persistence.academic;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
-import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
-import com.sms.smr.infra.ouput.persistence.academic.teacher.TeacherEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.gradelevel.GradeLevelEntity;
+import com.sms.smr.infra.output.persistence.academic.teacher.TeacherEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

@@ -1,10 +1,10 @@
-package com.sms.smr.infra.ouput.persistence.studentregistration;
+package com.sms.smr.infra.output.persistence.studentregistration;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.StudentRegistration;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
-import com.sms.smr.infra.ouput.persistence.academic.StudentRegistrationEntity;
+import com.sms.smr.infra.output.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.academic.StudentRegistrationEntity;
 
 @Repository
 public class StudentRegistrationPersistenceAdapter extends BaseRepository<StudentRegistration, Long, StudentRegistrationEntity, StudentRegistrationJpaRepository>{

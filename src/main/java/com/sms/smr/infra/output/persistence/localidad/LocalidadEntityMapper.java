@@ -1,14 +1,14 @@
-package com.sms.smr.infra.ouput.persistence.localidad;
+package com.sms.smr.infra.output.persistence.localidad;
 
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 
 import com.sms.smr.domain.model.Departamento;
 import com.sms.smr.domain.model.Localidad;
-import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.departamento.DepartamentoEntity;
-import com.sms.smr.infra.ouput.persistence.departamento.DepartamentoEntityMapper;
+import com.sms.smr.infra.output.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.output.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.departamento.DepartamentoEntity;
+import com.sms.smr.infra.output.persistence.departamento.DepartamentoEntityMapper;
 
 @Mapper(componentModel="spring",uses = {DepartamentoEntityMapper.class})
 public interface LocalidadEntityMapper extends EntityMapper<Localidad, LocalidadEntity>{

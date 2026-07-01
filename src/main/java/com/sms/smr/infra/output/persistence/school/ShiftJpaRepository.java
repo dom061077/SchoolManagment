@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.school;
+package com.sms.smr.infra.output.persistence.school;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

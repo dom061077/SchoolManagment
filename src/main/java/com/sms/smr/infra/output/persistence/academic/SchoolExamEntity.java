@@ -1,6 +1,6 @@
-package com.sms.smr.infra.ouput.persistence.academic;
+package com.sms.smr.infra.output.persistence.academic;
 
-import com.sms.smr.infra.ouput.persistence.academic.teacher.TeacherEntity;
+import com.sms.smr.infra.output.persistence.academic.teacher.TeacherEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

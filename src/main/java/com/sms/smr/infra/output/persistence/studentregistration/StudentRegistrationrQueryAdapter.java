@@ -1,11 +1,11 @@
-package com.sms.smr.infra.ouput.persistence.studentregistration;
+package com.sms.smr.infra.output.persistence.studentregistration;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.StudentRegistration;
-import com.sms.smr.infra.ouput.persistence.BaseSpecificationBuilder;
-import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
-import com.sms.smr.infra.ouput.persistence.academic.StudentRegistrationEntity;
+import com.sms.smr.infra.output.persistence.BaseSpecificationBuilder;
+import com.sms.smr.infra.output.persistence.QueryBaseRepository;
+import com.sms.smr.infra.output.persistence.academic.StudentRegistrationEntity;
 
 @Repository
 public class StudentRegistrationrQueryAdapter extends QueryBaseRepository<StudentRegistration, Long, StudentRegistrationEntity, StudentRegistrationJpaRepository> {

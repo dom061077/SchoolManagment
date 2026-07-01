@@ -3,7 +3,6 @@ package com.sms.smr.domain.service;
 import java.util.Optional;
 
 import com.sms.smr.domain.model.PageResponse;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.smr.domain.model.StudentRegistration;
 import com.sms.smr.domain.ports.in.BaseUseCase;

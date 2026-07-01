@@ -1,7 +1,7 @@
-package com.sms.smr.infra.ouput.persistence.localidad;
+package com.sms.smr.infra.output.persistence.localidad;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
-import com.sms.smr.infra.ouput.persistence.departamento.DepartamentoEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.departamento.DepartamentoEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

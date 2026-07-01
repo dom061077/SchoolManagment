@@ -1,6 +1,6 @@
-package com.sms.smr.infra.ouput.persistence.provincia;
+package com.sms.smr.infra.output.persistence.provincia;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

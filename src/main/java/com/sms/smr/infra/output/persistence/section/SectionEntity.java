@@ -1,6 +1,6 @@
-package com.sms.smr.infra.ouput.persistence.section;
+package com.sms.smr.infra.output.persistence.section;
 
-import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
+import com.sms.smr.infra.output.persistence.gradelevel.GradeLevelEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.academic.teacher;
+package com.sms.smr.infra.output.persistence.academic.teacher;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

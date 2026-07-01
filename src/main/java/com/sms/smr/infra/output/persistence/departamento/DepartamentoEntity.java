@@ -1,8 +1,8 @@
-package com.sms.smr.infra.ouput.persistence.departamento;
+package com.sms.smr.infra.output.persistence.departamento;
 
 import java.util.List;
 
-import com.sms.smr.infra.ouput.persistence.provincia.ProvinciaEntity;
+import com.sms.smr.infra.output.persistence.provincia.ProvinciaEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.student;
+package com.sms.smr.infra.output.persistence.student;
 
 //https://manerajona.medium.com/mapping-bidirectional-object-associations-using-mapstruct-ce49b1857604
 
@@ -8,8 +8,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import com.sms.smr.domain.model.Student;
-import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.output.persistence.EntityMapper;
 
 @Mapper(componentModel = "spring", uses = StudentReferenceMapper.class)
 

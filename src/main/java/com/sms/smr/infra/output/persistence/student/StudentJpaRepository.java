@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.student;
+package com.sms.smr.infra.output.persistence.student;
 
 import java.util.List;
 

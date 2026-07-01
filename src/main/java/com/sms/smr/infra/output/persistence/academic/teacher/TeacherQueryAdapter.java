@@ -1,10 +1,10 @@
-package com.sms.smr.infra.ouput.persistence.academic.teacher;
+package com.sms.smr.infra.output.persistence.academic.teacher;
 
 import org.springframework.stereotype.Component;
 
 import com.sms.smr.domain.model.academic.Teacher;
-import com.sms.smr.infra.ouput.persistence.BaseSpecificationBuilder;
-import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
+import com.sms.smr.infra.output.persistence.BaseSpecificationBuilder;
+import com.sms.smr.infra.output.persistence.QueryBaseRepository;
 
 @Component
 public class TeacherQueryAdapter

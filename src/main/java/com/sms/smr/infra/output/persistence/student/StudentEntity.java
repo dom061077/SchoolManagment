@@ -1,12 +1,12 @@
-package com.sms.smr.infra.ouput.persistence.student;
+package com.sms.smr.infra.output.persistence.student;
 
 import java.beans.Transient;
 import java.time.LocalDate;
 import java.time.Period;
 
 import com.sms.smr.domain.model.EstudioEnum;
-import com.sms.smr.infra.ouput.persistence.BasePersonEntity;
-import com.sms.smr.infra.ouput.persistence.localidad.LocalidadEntity;
+import com.sms.smr.infra.output.persistence.BasePersonEntity;
+import com.sms.smr.infra.output.persistence.localidad.LocalidadEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

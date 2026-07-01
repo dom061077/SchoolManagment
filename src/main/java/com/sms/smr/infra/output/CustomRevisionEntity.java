@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput;
+package com.sms.smr.infra.output;
 
 import org.hibernate.envers.DefaultTrackingModifiedEntitiesRevisionEntity;
 import org.hibernate.envers.RevisionEntity;

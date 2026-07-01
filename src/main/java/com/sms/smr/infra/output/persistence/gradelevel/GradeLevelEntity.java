@@ -1,10 +1,10 @@
-package com.sms.smr.infra.ouput.persistence.gradelevel;
+package com.sms.smr.infra.output.persistence.gradelevel;
 /*
 Este es el curso
  */
 
-import com.sms.smr.infra.ouput.persistence.school.ShiftEntity;
-import com.sms.smr.infra.ouput.persistence.section.SectionEntity;
+import com.sms.smr.infra.output.persistence.school.ShiftEntity;
+import com.sms.smr.infra.output.persistence.section.SectionEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.student;
+package com.sms.smr.infra.output.persistence.student;
 
 import java.util.List;
 import com.sms.smr.domain.model.PageResponse;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.ports.out.StudentQueryPersistenceOutputPort;
-import com.sms.smr.infra.ouput.persistence.BaseSpecificationBuilder;
-import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
+import com.sms.smr.infra.output.persistence.BaseSpecificationBuilder;
+import com.sms.smr.infra.output.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.output.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.QueryBaseRepository;
 
 @Repository
 public class StudentQueryAdapter extends QueryBaseRepository<Student, Long, StudentEntity, StudentJpaRepository> implements StudentQueryPersistenceOutputPort {

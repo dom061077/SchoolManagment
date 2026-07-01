@@ -1,13 +1,13 @@
-package com.sms.smr.infra.ouput.persistence.section;
+package com.sms.smr.infra.output.persistence.section;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.Section;
-import com.sms.smr.infra.ouput.persistence.BaseSpecificationBuilder;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
+import com.sms.smr.infra.output.persistence.BaseSpecificationBuilder;
+import com.sms.smr.infra.output.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.QueryBaseRepository;
 
 import org.springframework.stereotype.Component;
 

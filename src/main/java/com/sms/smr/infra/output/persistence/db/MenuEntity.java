@@ -1,8 +1,8 @@
-package com.sms.smr.infra.ouput.persistence.db;
+package com.sms.smr.infra.output.persistence.db;
 
 
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
 
 import jakarta.persistence.Entity;
 

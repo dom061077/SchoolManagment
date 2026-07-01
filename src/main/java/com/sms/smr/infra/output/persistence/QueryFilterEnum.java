@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence;
+package com.sms.smr.infra.output.persistence;
 
 import lombok.Getter;
 

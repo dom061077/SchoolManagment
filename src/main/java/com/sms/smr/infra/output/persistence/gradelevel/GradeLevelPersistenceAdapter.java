@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.gradelevel;
+package com.sms.smr.infra.output.persistence.gradelevel;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.GradeLevel;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.BaseRepository;
 
 @Repository
 public class GradeLevelPersistenceAdapter

@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.academic;
+package com.sms.smr.infra.output.persistence.academic;
 
 import java.time.LocalDate;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
-import com.sms.smr.infra.ouput.persistence.academic.academicyear.AcademicYearEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.academic.academicyear.AcademicYearEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

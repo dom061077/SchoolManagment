@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.provincia;
+package com.sms.smr.infra.output.persistence.provincia;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.Provincia;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.BaseRepository;
 
 @Repository
 public class ProvinciaRepositoryAdapter extends BaseRepository<Provincia, Long, ProvinciaEntity, ProvinciaJpaRepository>{

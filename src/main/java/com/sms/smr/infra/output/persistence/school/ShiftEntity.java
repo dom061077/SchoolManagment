@@ -1,8 +1,8 @@
-package com.sms.smr.infra.ouput.persistence.school;
+package com.sms.smr.infra.output.persistence.school;
 
 import org.hibernate.annotations.ManyToAny;
 
-import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
+import com.sms.smr.infra.output.persistence.gradelevel.GradeLevelEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

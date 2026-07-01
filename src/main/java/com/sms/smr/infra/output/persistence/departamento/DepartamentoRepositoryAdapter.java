@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.departamento;
+package com.sms.smr.infra.output.persistence.departamento;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.Departamento;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.BaseRepository;
 
 @Repository
 public class DepartamentoRepositoryAdapter

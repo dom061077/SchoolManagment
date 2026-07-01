@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.schoolexam;
+package com.sms.smr.infra.output.persistence.schoolexam;
 
 import org.mapstruct.TargetType;
 import org.springframework.stereotype.Component;

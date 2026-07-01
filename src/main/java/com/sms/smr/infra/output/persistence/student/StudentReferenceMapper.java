@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.student;
+package com.sms.smr.infra.output.persistence.student;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
-import com.sms.smr.infra.ouput.persistence.localidad.LocalidadEntity;
+import com.sms.smr.infra.output.persistence.localidad.LocalidadEntity;
 
 @Mapper(componentModel = "spring")
 public interface StudentReferenceMapper {

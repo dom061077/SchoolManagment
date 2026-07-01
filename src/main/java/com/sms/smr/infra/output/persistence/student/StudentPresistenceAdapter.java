@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.student;
+package com.sms.smr.infra.output.persistence.student;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.Student;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.BaseRepository;
 
 @Repository
 public class StudentPresistenceAdapter extends BaseRepository<Student, Long, StudentEntity, StudentJpaRepository>{

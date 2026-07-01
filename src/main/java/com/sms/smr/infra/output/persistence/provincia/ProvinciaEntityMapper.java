@@ -1,11 +1,11 @@
-package com.sms.smr.infra.ouput.persistence.provincia;
+package com.sms.smr.infra.output.persistence.provincia;
 
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 
 import com.sms.smr.domain.model.Provincia;
-import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.output.persistence.EntityMapper;
 
 @Mapper(componentModel = "spring")
 public interface ProvinciaEntityMapper extends EntityMapper<Provincia, ProvinciaEntity> {

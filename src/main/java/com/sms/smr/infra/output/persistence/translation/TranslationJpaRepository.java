@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.translation;
+package com.sms.smr.infra.output.persistence.translation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

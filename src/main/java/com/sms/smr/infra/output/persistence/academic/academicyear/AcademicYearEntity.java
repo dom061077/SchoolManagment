@@ -1,8 +1,8 @@
-package com.sms.smr.infra.ouput.persistence.academic.academicyear;
+package com.sms.smr.infra.output.persistence.academic.academicyear;
 
 import org.hibernate.validator.constraints.EAN;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

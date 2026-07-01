@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.studentregistration;
+package com.sms.smr.infra.output.persistence.studentregistration;
 
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
@@ -8,9 +8,9 @@ import org.mapstruct.Named;
 
 import com.sms.smr.domain.model.Student;
 import com.sms.smr.domain.model.StudentRegistration;
-import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.academic.StudentRegistrationEntity;
+import com.sms.smr.infra.output.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.output.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.academic.StudentRegistrationEntity;
 
 @Mapper(componentModel = "spring", uses = StudentRegistrationReferenceMapper.class)
 public interface StudentRegistrationMapper

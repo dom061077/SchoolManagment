@@ -1,11 +1,11 @@
-package com.sms.smr.infra.ouput.persistence.academic;
+package com.sms.smr.infra.output.persistence.academic;
 
-import com.sms.smr.infra.ouput.persistence.BaseEntity;
-import com.sms.smr.infra.ouput.persistence.academic.academicyear.AcademicYearEntity;
-import com.sms.smr.infra.ouput.persistence.gradelevel.GradeLevelEntity;
-import com.sms.smr.infra.ouput.persistence.school.ShiftEntity;
-import com.sms.smr.infra.ouput.persistence.section.SectionEntity;
-import com.sms.smr.infra.ouput.persistence.student.StudentEntity;
+import com.sms.smr.infra.output.persistence.BaseEntity;
+import com.sms.smr.infra.output.persistence.academic.academicyear.AcademicYearEntity;
+import com.sms.smr.infra.output.persistence.gradelevel.GradeLevelEntity;
+import com.sms.smr.infra.output.persistence.school.ShiftEntity;
+import com.sms.smr.infra.output.persistence.section.SectionEntity;
+import com.sms.smr.infra.output.persistence.student.StudentEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

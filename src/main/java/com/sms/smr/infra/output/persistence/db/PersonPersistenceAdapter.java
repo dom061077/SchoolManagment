@@ -1,9 +1,9 @@
-package com.sms.smr.infra.ouput.persistence.db;
+package com.sms.smr.infra.output.persistence.db;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.Person;
-import com.sms.smr.infra.ouput.persistence.BaseRepository;
+import com.sms.smr.infra.output.persistence.BaseRepository;
 
 @Repository
 public class PersonPersistenceAdapter extends BaseRepository<Person, Long, PersonEntity, PersonJpaRepository> {

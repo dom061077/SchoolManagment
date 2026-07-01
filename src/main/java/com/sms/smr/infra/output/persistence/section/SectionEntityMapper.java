@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.section;
+package com.sms.smr.infra.output.persistence.section;
 
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
@@ -8,8 +8,8 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.sms.smr.domain.model.Section;
-import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.output.persistence.EntityMapper;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface SectionEntityMapper extends EntityMapper<Section, SectionEntity> {

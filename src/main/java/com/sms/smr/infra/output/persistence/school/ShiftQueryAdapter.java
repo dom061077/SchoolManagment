@@ -1,11 +1,11 @@
-package com.sms.smr.infra.ouput.persistence.school;
+package com.sms.smr.infra.output.persistence.school;
 
 import org.springframework.stereotype.Repository;
 
 import com.sms.smr.domain.model.Shift;
-import com.sms.smr.infra.ouput.persistence.BaseSpecificationBuilder;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.QueryBaseRepository;
+import com.sms.smr.infra.output.persistence.BaseSpecificationBuilder;
+import com.sms.smr.infra.output.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.QueryBaseRepository;
 
 @Repository
 public class ShiftQueryAdapter extends QueryBaseRepository<Shift, Long, ShiftEntity, ShiftJpaRepository> {

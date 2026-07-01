@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.gradelevel;
+package com.sms.smr.infra.output.persistence.gradelevel;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.JpaRepository;

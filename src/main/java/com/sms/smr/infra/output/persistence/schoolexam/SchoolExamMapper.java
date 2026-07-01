@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.schoolexam;
+package com.sms.smr.infra.output.persistence.schoolexam;
 
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Context;
@@ -8,10 +8,10 @@ import org.mapstruct.MappingTarget;
 
 import com.sms.smr.domain.model.academic.SchoolExam;
 import com.sms.smr.domain.model.academic.SchoolExamDetail;
-import com.sms.smr.infra.ouput.persistence.CycleAvoidingMappingContext;
-import com.sms.smr.infra.ouput.persistence.EntityMapper;
-import com.sms.smr.infra.ouput.persistence.academic.SchoolExamDetailEntity;
-import com.sms.smr.infra.ouput.persistence.academic.SchoolExamEntity;
+import com.sms.smr.infra.output.persistence.CycleAvoidingMappingContext;
+import com.sms.smr.infra.output.persistence.EntityMapper;
+import com.sms.smr.infra.output.persistence.academic.SchoolExamDetailEntity;
+import com.sms.smr.infra.output.persistence.academic.SchoolExamEntity;
 
 /*
 The SchoolExamDetailEntity has a @ManyToOne relationship with SchoolExamEntity where schoolExam is annotated with @NotNull. 

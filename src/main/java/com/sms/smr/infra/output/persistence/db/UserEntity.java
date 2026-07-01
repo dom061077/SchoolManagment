@@ -1,4 +1,4 @@
-package com.sms.smr.infra.ouput.persistence.db;
+package com.sms.smr.infra.output.persistence.db;
 
 import java.util.Collection;
 import java.util.List;
