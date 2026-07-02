@@ -3,7 +3,7 @@ package com.sms.smr.infra.output;
 import org.hibernate.envers.DefaultTrackingModifiedEntitiesRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
-import com.sms.smr.infra.outputadapter.listener.CustomRevisionListener;
+import com.sms.smr.infra.output.listener.CustomRevisionListener;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @RevisionEntity(CustomRevisionListener.class)
 @Getter
 @Setter
-public class CustomRevisionEntity extends DefaultTrackingModifiedEntitiesRevisionEntity{
+public class CustomRevisionEntity extends DefaultTrackingModifiedEntitiesRevisionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

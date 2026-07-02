@@ -1,4 +1,4 @@
-package com.sms.smr.infra.outputadapter.listener;
+package com.sms.smr.infra.output.listener;
 
 import org.hibernate.envers.RevisionListener;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +10,7 @@ public class CustomRevisionListener implements RevisionListener {
     @Override
     public void newRevision(Object revisionEntity) {
         CustomRevisionEntity revEntity = (CustomRevisionEntity) revisionEntity;
-        
+
         // Retrieve the authenticated user from Keycloak
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 
