@@ -24,12 +24,12 @@ logging:
               BasicBinder: TRACE
 spring:
   datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/schoolmanagement
-    password: postgres123
+    username: ${DB_USER:postgres}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:schoolmanagement}
+    password: ${DB_PASSWORD:postgres123}
   sql:
     init:
-      mode: always
+      mode: ${SPRING_SQL_INIT_MODE:always}
   jpa:
     properties:
       javax:
@@ -43,22 +43,26 @@ spring:
         check_nullability: 'true'
     defer-datasource-initialization: 'false' #This is useful for scenarios where schema.sql or data.sql scripts should run after Hibernate's schema generation. It must be set false for run flyway
     hibernate:
-      ddl-auto: validate
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:validate}
     show-sql: 'true'
   flyway:
     baseline-on-migrate: true
-    enabled: true
-    user: postgres
-    password: postgres123
+    enabled: ${SPRING_FLYWAY_ENABLED:true}
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres123}
     baseline-description: "init"
     baseline-version: 0
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: "http://keycloak-sm:8080/realms/book-social-network"
+          issuer-uri: ${KEYCLOAK:http://keycloak-sm:8080/realms/book-social-network}
   cors:
-    allowed-origins: "http://localhost:4200, https://warriorit.site, http://localhost:8081, http://localhost"
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200, https://warriorit.site, http://localhost:8081, http://localhost}
 server:
-    port: 8088
-    forward-headers-strategy: native
+    port: ${PORT:8088}
+    forward-headers-strategy: ${SERVER_FORWARD_HEADERS_STRATEGY:native}
+
+application:
+  cors:
+    origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200, https://warriorit.site, http://localhost:8081, http://localhost}

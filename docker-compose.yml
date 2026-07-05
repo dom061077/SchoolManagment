@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: schoolmanagement
+      POSTGRES_DB: ${DB_NAME}
       PGDATA: /data/postgres
     ports:
       - "5432:5432"
@@ -55,6 +55,11 @@ services:
     image: dom061077/sm-api:1.0.1
     environment:
       KEYCLOAK: http://keycloak-sm:8080/realms/book-social-network
+      DB_HOST: postgres
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      PORT: 8088
     ports:
       - "8088:8088"
     networks:
