@@ -107,8 +107,9 @@ public class DomainConfig {
 
     @Bean
     public BaseUseCase<Shift, Long> shiftUseCase(
+            CrudPersistenceOutputPort<Shift, Long> crudOutputPort,
             QueryPersistenceOutputPort<Shift, Long> queryOutputPort) {
-        return new ShiftService(queryOutputPort);
+        return new ShiftService(crudOutputPort, queryOutputPort);
     }
 
     @Bean
