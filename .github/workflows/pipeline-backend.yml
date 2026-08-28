@@ -78,6 +78,8 @@ jobs:
     name: Build Docker image
     runs-on: self-hosted
     needs: [build]
+    outputs:
+      version: ${{ steps.extract_version.outputs.VERSION }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -143,6 +145,7 @@ jobs:
           mkdir -p ci-cd
           echo "DB_USER=${{ secrets.DB_USER }}" > ci-cd/.env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ci-cd/.env
+          echo "SM_API_VERSION=${{ needs.build-image.outputs.version }}" >> ci-cd/.env
           cd ci-cd
           docker compose --env-file .env down
           docker compose --env-file .env pull -q

@@ -52,7 +52,7 @@ services:
       
   sm-api:
     container_name: sm-api
-    image: dom061077/sm-api:1.0.1
+    image: dom061077/sm-api:${SM_API_VERSION:-latest}
     environment:
       KEYCLOAK: http://keycloak-sm:8080/realms/book-social-network
       DB_HOST: postgres
