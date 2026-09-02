@@ -48,8 +48,9 @@ services:
       - "--spi-theme-cache-templates=false"
     extra_hosts:
       - "keycloak-sm:127.0.0.1"
-      
-      
+    volumes:
+      - ./docker/keycloak-theme/schoolmanagement:/opt/keycloak/themes/schoolmanagement
+
   sm-api:
     container_name: sm-api
     image: dom061077/sm-api:${SM_API_VERSION:-latest}
